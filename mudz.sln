@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mudz.Cli", "mudz.Cli\mudz.Cli.csproj", "{026F1C60-6CFF-401E-84E3-3D4920C6635D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mudz.Core", "mudz.Core\mudz.Core.csproj", "{A0253F43-6889-42C9-9FFE-238C92864EDE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{026F1C60-6CFF-401E-84E3-3D4920C6635D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{026F1C60-6CFF-401E-84E3-3D4920C6635D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{026F1C60-6CFF-401E-84E3-3D4920C6635D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{026F1C60-6CFF-401E-84E3-3D4920C6635D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0253F43-6889-42C9-9FFE-238C92864EDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0253F43-6889-42C9-9FFE-238C92864EDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0253F43-6889-42C9-9FFE-238C92864EDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0253F43-6889-42C9-9FFE-238C92864EDE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
