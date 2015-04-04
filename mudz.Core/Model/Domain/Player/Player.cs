@@ -1,19 +1,30 @@
-﻿namespace mudz.Core.Model.Domain.Player
+﻿using System;
+
+namespace mudz.Core.Model.Domain.Player
 {
     public abstract class Player : BaseGameObject, IPlayer
     {
-        public Player(string name)
+        protected Player(string name)
         {
             Name = name;
             GameObjectType = GameObjectTypes.Player;
         }
 
-        public Player()
+        protected Player() : this("")
         {
-            GameObjectType = GameObjectTypes.Player;
+            
         }
 
         public PlayerTypes PlayerType { get; set; }
+
+        public int Experience { get; set; }
+
+        public int Level { get; set; }
+
+        public void Inspect()
+        {
+            throw new NotImplementedException();
+        }
 
         public abstract void Repair();
 

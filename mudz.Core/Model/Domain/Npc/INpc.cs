@@ -1,11 +1,11 @@
 ﻿namespace mudz.Core.Model.Domain.Npc
 {
-    public interface INpc
+    public interface INpc : IGameObject
     {
         NpcTypes NpcType { get; set; }
 
-        void Greet();
+        string Greet();
+        string Respond();
         void ProcessCommand();
-        void Respond();
     }
 }

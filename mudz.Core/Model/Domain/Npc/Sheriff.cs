@@ -8,14 +8,20 @@
             NpcType = NpcTypes.Sheriff;
         }
 
-        public override void TakeDamage(double dmg)
+        public override string Greet()
         {
             throw new System.NotImplementedException();
         }
 
-        public override void Heal(double health)
+        public override void ProcessCommand()
         {
             throw new System.NotImplementedException();
         }
+
+        public override string Respond()
+        {
+            throw new System.NotImplementedException();
+        }
+
     }
 }

@@ -4,48 +4,33 @@ namespace mudz.Core.Model.Domain.Npc
 {
     public abstract class Npc : BaseGameObject, INpc
     {
-        //TO DO: Reserach constructor chaining!
-        public Npc(string name)
+        protected Npc(string name)
         {
             Name = name;
             GameObjectType = GameObjectTypes.NPC;
+            HitPoints = 100;
         }
 
-        public Npc()
+        protected Npc() : this("")
         {
-            GameObjectType = GameObjectTypes.NPC;
         }
 
         public NpcTypes NpcType { get; set; }
 
-        // TO DO: Mark Abstract. Thanks Madeofcandy!
+        public abstract string Greet();
 
-        public void Greet()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract void ProcessCommand();
 
-        public void ProcessCommand()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Respond()
-        {
-            throw new NotImplementedException();
-        }
-
-        // TO DO: Put in default functionality for NPCs. While we want players to vary greatly that might not be the case here. 
-        // Thanks Madeofcandy!
+        public abstract string Respond();
 
         public override void TakeDamage(double dmg)
         {
-            throw new NotImplementedException();
+            HitPoints = HitPoints - dmg;
         }
 
         public override void Heal(double health)
         {
-            throw new NotImplementedException();
+            HitPoints = HitPoints + health;
         }
     }
 }

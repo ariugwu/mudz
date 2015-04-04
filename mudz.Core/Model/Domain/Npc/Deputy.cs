@@ -7,5 +7,19 @@
            NpcType = NpcTypes.Deputy;
         }
 
+        public override string Greet()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void ProcessCommand()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override string Respond()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

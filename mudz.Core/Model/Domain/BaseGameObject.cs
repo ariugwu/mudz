@@ -4,9 +4,9 @@
     {
         public string Name { get; set; }
 
-        public double Dexterity { get; private set; }
+        public double Dexterity { get; set; }
 
-        public double HitPoints { get; private set; }
+        public double HitPoints { get; set; }
 
         public GameObjectTypes GameObjectType { get; set; }
 

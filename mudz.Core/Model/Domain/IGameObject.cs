@@ -10,5 +10,9 @@
         GameObjectTypes GameObjectType { get;}
 
         bool IsDestructible { get; }
+
+        void TakeDamage(double dmg);
+
+        void Heal(double health);
     }
 }

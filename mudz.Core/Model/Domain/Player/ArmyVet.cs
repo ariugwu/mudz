@@ -1,18 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace mudz.Core.Model.Domain.Player
 {
     public class ArmyVet : Player
     {
-        public ArmyVet()
-        {
-
-        }
-
         public ArmyVet(string name) : base(name)
         {
             PlayerType = PlayerTypes.ArmyVet;
