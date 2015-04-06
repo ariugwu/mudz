@@ -1,5 +1,5 @@
 # mudz
-Game we're making with the skills we cover in the live stream. Text adventure. Zombie survival.
+Game we're making with the skills we cover in the live stream (http://www.twitch.tv/ariugwu). Text adventure. Zombie survival. Tribute to MajorMud.
 
 ## Milestones
 _I'll do my best to mark which commits line up with which code katas (from the twitch sessions)._
