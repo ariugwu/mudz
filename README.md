@@ -10,9 +10,9 @@ _I'll do my best to mark which commits line up with which code katas (from the t
 * Bridge Pattern _(Strutural Pattern)_:  Start getting some of our code organized.
 
 #### Phase II - Building out our world and fine tuning interactions with that world.
-* Builder Pattern_(Creational Pattern)_: Help create our world (Environment).
+* Builder Pattern _(Creational Pattern)_: Help create our world (Environment).
 * State Pattern _(Behavorial Pattern)_: Add some more complexity to our game Actors (Players/Monsters).
-* Decorator Pattern_(Strutural Pattern)_: Organize the various things that can impact actions and attributes for our Actors.
+* Decorator Pattern _(Strutural Pattern)_: Organize the various things that can impact actions and attributes for our Actors.
 
 #### Phase III - *(TBD)* The game engine is the god of our world and will enforce all of our laws.
 * CQRS Pattern:
@@ -25,4 +25,4 @@ _I'll do my best to mark which commits line up with which code katas (from the t
 * Unit of Work:
 * Repository:
 
-### Phase V ### - *(TBD)* Explore Advanced Patterns via https://msdn.microsoft.com/en-us/library/dn600223.aspx
+#### Phase V - *(TBD)* Explore Advanced Patterns via https://msdn.microsoft.com/en-us/library/dn600223.aspx
