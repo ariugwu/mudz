@@ -2,7 +2,7 @@
 
 namespace mudz.Core.Model.Domain.Player
 {
-    public class Medic : Player
+    public class Medic : BasePlayer
     {
         public Medic(string name)
         {

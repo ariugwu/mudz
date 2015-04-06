@@ -1,9 +1,11 @@
 ﻿
 namespace mudz.Core.Model.Domain.Player
 {
-    public interface IPlayer : IGameObject
+    public interface IPlayer : IActor
     {
         PlayerTypes PlayerType { get; set; }
+
+        BaseActor Statistics { get; set; }
 
         int Experience { get; set; }
 
@@ -13,12 +15,7 @@ namespace mudz.Core.Model.Domain.Player
 
         void Repair();
 
-        void Attack();
-
-        void Heal();
-
         void Negotiate();
 
-        void Move();
     }
 }

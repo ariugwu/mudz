@@ -7,7 +7,7 @@ namespace mudz.Core.Model.Domain.Npc
         protected Npc(string name)
         {
             Name = name;
-            GameObjectType = GameObjectTypes.NPC;
+            GameObjectType = GameObjectTypes.Npc;
             HitPoints = 100;
         }
 

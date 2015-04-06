@@ -2,7 +2,7 @@
 
 namespace mudz.Core.Model.Domain.Player
 {
-    public class Mechanic : Player
+    public class Mechanic : BasePlayer
     {
         public Mechanic(string name) : base(name)
         {

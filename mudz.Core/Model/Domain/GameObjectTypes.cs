@@ -3,7 +3,7 @@
     public enum GameObjectTypes
     {
         Player,
-        NPC,
+        Npc,
         Monster,
         InventoryItem,
         EnvironmentObject

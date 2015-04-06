@@ -2,20 +2,22 @@
 
 namespace mudz.Core.Model.Domain.Player
 {
-    public abstract class Player : BaseGameObject, IPlayer
+    public abstract class BasePlayer : BaseActor, IPlayer
     {
-        protected Player(string name)
+        protected BasePlayer(string name)
         {
             Name = name;
             GameObjectType = GameObjectTypes.Player;
         }
 
-        protected Player() : this("")
+        protected BasePlayer() : this("")
         {
             
         }
 
         public PlayerTypes PlayerType { get; set; }
+
+        public BaseActor Statistics { get; set; }
 
         public int Experience { get; set; }
 
@@ -28,12 +30,7 @@ namespace mudz.Core.Model.Domain.Player
 
         public abstract void Repair();
 
-        public abstract void Attack();
-
-        public abstract void Heal();
-
         public abstract void Negotiate();
 
-        public abstract void Move();
     }
 }

@@ -2,7 +2,7 @@
 
 namespace mudz.Core.Model.Domain.Player
 {
-    public class ArmyVet : Player
+    public class ArmyVet : BasePlayer
     {
         public ArmyVet(string name) : base(name)
         {
