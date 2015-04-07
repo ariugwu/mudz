@@ -6,11 +6,12 @@ _I'll do my best to mark which commits line up with which code katas (from the t
 
 #### Phase I - The foundation of our game mechanics.
 * Factory Pattern _(Creational Pattern)_:  Get us off the ground and create some objects.
-* Strategy Pattern _(Behavorial Pattern)_: Help deal with some granular complexity..
+* Strategy Pattern _(Behavorial Pattern)_: Help deal with some granular complexity of our players. This pattern has a lot in common with the Bridge Pattern and is often confused. The key difference we're high lighting is that our behavior in a Strategy Pattern is coupled witht he context (player)
 * Bridge Pattern _(Strutural Pattern)_:  Start getting some of our code organized.
 
 #### Phase II - Building out our world and fine tuning interactions with that world.
 * Builder Pattern _(Creational Pattern)_: Help create our world (Environment).
+* Abstract Factory _(Creational Pattern)_: Take advantage of our builder pattern to create a clean api (i.e - MonsterFactory.Create(MonsterType.Foo)), and also show how we can implement a wide range of diversity in monsters without needless code or performance hits (i.e. - a 'boss' might have a ton of complexity where as a trivial monster would not. So there's not need to have _all_ monsters implement a complexity that only the smallest percentage utilize). 
 * State Pattern _(Behavorial Pattern)_: Add some more complexity to our game Actors (Players/Monsters).
 * Decorator Pattern _(Strutural Pattern)_: Organize the various things that can impact actions and attributes for our Actors.
 
