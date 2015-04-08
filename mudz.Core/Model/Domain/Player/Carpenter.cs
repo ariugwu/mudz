@@ -2,44 +2,39 @@
 
 namespace mudz.Core.Model.Domain.Player
 {
-    public class Carpenter : BasePlayer
+    public class Carpenter : IPlayerActionStrategy
     {
-        public Carpenter(string name) : base(name)
-        {
-            PlayerType = PlayerTypes.Carpenter;
-        }
-
-        public override void Repair()
+        public void Attack()
         {
             throw new NotImplementedException();
         }
 
-        public override void Attack()
+        public void Move()
         {
             throw new NotImplementedException();
         }
 
-        public override void Heal()
+        public void Inspect()
         {
             throw new NotImplementedException();
         }
 
-        public override void Negotiate()
+        public void Repair()
         {
             throw new NotImplementedException();
         }
 
-        public override void Move()
+        public void Negotiate()
         {
             throw new NotImplementedException();
         }
 
-        public override void TakeDamage(double dmg)
+        public void TakeDamage(double dmg)
         {
             throw new NotImplementedException();
         }
 
-        public override void Heal(double health)
+        public void Heal(double health)
         {
             throw new NotImplementedException();
         }

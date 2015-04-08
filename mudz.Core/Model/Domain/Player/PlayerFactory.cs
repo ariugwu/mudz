@@ -9,15 +9,15 @@ namespace mudz.Core.Model.Domain.Player
             switch (playerType)
             {
                 case PlayerTypes.ArmyVet:
-                    return new ArmyVet(name);
+                    return new Player(name, playerType, new ArmyVet());
                 case PlayerTypes.Carpenter:
-                    return new Carpenter(name);
+                    return new Player(name, playerType, new Carpenter());
                 case PlayerTypes.Mechanic:
-                    return new Mechanic(name);
+                    return new Player(name, playerType, new Mechanic());
                 case PlayerTypes.Medic:
-                    return new Medic(name);
+                    return new Player(name, playerType, new Medic());
                 case PlayerTypes.Politician:
-                    return new Politician(name);
+                    return new Player(name, playerType, new Politician());
                 default:
                     throw new NotImplementedException("Sorry. This type is not supported.");
             }
