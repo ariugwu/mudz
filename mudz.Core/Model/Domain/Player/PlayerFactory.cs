@@ -1,26 +1,22 @@
-﻿using System;
+﻿using System.Collections.Generic;
 
 namespace mudz.Core.Model.Domain.Player
 {
-    public class PlayerFactory
+    public static class PlayerFactory
     {
         public static IPlayer Create(string name, PlayerTypes playerType)
         {
-            switch (playerType)
-            {
-                case PlayerTypes.ArmyVet:
-                    return new Player(name, playerType, new ArmyVet());
-                case PlayerTypes.Carpenter:
-                    return new Player(name, playerType, new Carpenter());
-                case PlayerTypes.Mechanic:
-                    return new Player(name, playerType, new Mechanic());
-                case PlayerTypes.Medic:
-                    return new Player(name, playerType, new Medic());
-                case PlayerTypes.Politician:
-                    return new Player(name, playerType, new Politician());
-                default:
-                    throw new NotImplementedException("Sorry. This type is not supported.");
-            }
+            return new Player(name, playerType, PlayerStrategyMap[playerType]);
         }
+
+        public static Dictionary<PlayerTypes, IPlayerActionStrategy> PlayerStrategyMap = 
+            new Dictionary<PlayerTypes, IPlayerActionStrategy>()
+            {
+                {PlayerTypes.ArmyVet, new ArmyVet()},
+                {PlayerTypes.Carpenter, new Carpenter()},
+                {PlayerTypes.Mechanic, new Mechanic()},
+                {PlayerTypes.Medic, new Medic()},
+                {PlayerTypes.Politician, new Politician()}
+            };
     }
 }

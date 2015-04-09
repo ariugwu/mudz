@@ -14,6 +14,6 @@
 
         public abstract void TakeDamage(double dmg);
 
-        public abstract void Heal(double health);
+        public abstract void RestoreHealth(double health);
     }
 }

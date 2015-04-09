@@ -3,21 +3,29 @@ using mudz.Core.Model.Domain.InventoryItem;
 
 namespace mudz.Core.Model.Domain.Monster
 {
-    public class BaseMonster : BaseActor, IMonster
+    public abstract class BaseMonster : BaseActor, IMonster
     {
+
+        public MonsterTypes MonsterType { get; set; }
+
         public override void TakeDamage(double dmg)
         {
             throw new System.NotImplementedException();
         }
 
-        public override void Heal(double health)
+        public override void RestoreHealth(double health)
         {
             throw new System.NotImplementedException();
         }
 
-        public override void Attack()
+        public override double Attack()
         {
-            throw new System.NotImplementedException();
+            return 33;
+        }
+
+        public override double Heal()
+        {
+            return 0;
         }
 
         public override void Move()

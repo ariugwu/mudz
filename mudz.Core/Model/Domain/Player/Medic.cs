@@ -4,9 +4,14 @@ namespace mudz.Core.Model.Domain.Player
 {
     public class Medic : IPlayerActionStrategy
     {
-        public void Attack()
+        public double Attack()
         {
             throw new NotImplementedException();
+        }
+
+        public double Heal()
+        {
+            return 20;
         }
 
         public void Move()

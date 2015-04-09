@@ -2,7 +2,8 @@
 {
     public interface IActor : IGameObject
     {
-        void Attack();
+        double Attack();
+        double Heal();
         void Move();
 
         double Health { get; set; }

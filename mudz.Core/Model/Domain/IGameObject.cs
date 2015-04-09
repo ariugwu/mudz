@@ -13,6 +13,6 @@
 
         void TakeDamage(double dmg);
 
-        void Heal(double health);
+        void RestoreHealth(double health);
     }
 }

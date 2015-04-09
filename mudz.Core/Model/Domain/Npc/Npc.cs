@@ -28,7 +28,7 @@ namespace mudz.Core.Model.Domain.Npc
             HitPoints = HitPoints - dmg;
         }
 
-        public override void Heal(double health)
+        public override void RestoreHealth(double health)
         {
             HitPoints = HitPoints + health;
         }

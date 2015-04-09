@@ -4,9 +4,14 @@ namespace mudz.Core.Model.Domain.Player
 {
     public class Mechanic : IPlayerActionStrategy
     {
-        public void Attack()
+        public double Attack()
         {
             throw new NotImplementedException();
+        }
+
+        public double Heal()
+        {
+            return 5;
         }
 
         public void Move()

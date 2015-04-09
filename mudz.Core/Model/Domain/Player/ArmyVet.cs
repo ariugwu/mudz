@@ -4,9 +4,14 @@ namespace mudz.Core.Model.Domain.Player
 {
     public class ArmyVet : IPlayerActionStrategy
     {
-        public void Attack()
+        public double Attack()
         {
             throw new NotImplementedException();
+        }
+
+        public double Heal()
+        {
+            return 10;
         }
 
         public void Move()

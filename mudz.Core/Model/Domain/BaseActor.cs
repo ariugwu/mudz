@@ -2,8 +2,8 @@
 {
     public abstract class BaseActor : BaseGameObject, IActor
     {
-
-        public abstract void Attack();
+        public abstract double Attack();
+        public abstract double Heal();
         public abstract void Move();
 
         public double Health { get; set; }

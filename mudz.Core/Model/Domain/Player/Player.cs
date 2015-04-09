@@ -27,6 +27,16 @@ namespace mudz.Core.Model.Domain.Player
 
         public int Level { get; set; }
 
+        public override double Attack()
+        {
+            return _actionStrategy.Attack();
+        }
+
+        public override double Heal()
+        {
+            return _actionStrategy.Heal();
+        }
+
         public void Inspect()
         {
             _actionStrategy.Inspect();
@@ -35,11 +45,6 @@ namespace mudz.Core.Model.Domain.Player
         public void Repair()
         {
             _actionStrategy.Repair();
-        }
-
-        public override void Attack()
-        {
-            _actionStrategy.Attack();
         }
 
         public override void Move()
@@ -57,7 +62,7 @@ namespace mudz.Core.Model.Domain.Player
             _actionStrategy.TakeDamage(dmg);
         }
 
-        public override void Heal(double health)
+        public override void RestoreHealth(double health)
         {
             _actionStrategy.Heal(health);
         }
