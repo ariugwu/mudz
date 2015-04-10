@@ -4,6 +4,18 @@ namespace mudz.Core.Model.Domain.Player
 {
     public class Carpenter : IPlayerActionStrategy
     {
+        public void SetStats(IPlayer player)
+        {
+            player.Health = 185;
+            player.Strength = 145;
+            player.Intellect = 80;
+            player.Wisdom = 65;
+            player.Agility = 145;
+            player.Willpower = 150;
+            player.Charm = 40;
+            player.Endurance = 165;
+        }
+
         public double Attack()
         {
             throw new NotImplementedException();

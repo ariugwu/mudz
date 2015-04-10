@@ -17,6 +17,7 @@ namespace mudz.Cli
             var deputy = NpcFactory.Create("SlowDraw", NpcTypes.Deputy);
 
             var zombie = MonsterFactory.Create(MonsterTypes.Zombie);
+            Console.WriteLine(gary.Health);
 
             Console.WriteLine("{0} says \"{1}\"", morgan.Name, morgan.Greet());
 

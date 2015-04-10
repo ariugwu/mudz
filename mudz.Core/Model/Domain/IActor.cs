@@ -7,6 +7,8 @@
         void Move();
 
         double Health { get; set; }
+        double Stamina { get; set; }
+
         double Strength { get; set; }
         double Intellect { get; set; }
         double Wisdom { get; set; }

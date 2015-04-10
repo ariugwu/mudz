@@ -3,7 +3,8 @@
     public interface IGameObject
     {
         string Name { get; }
-        
+        string Description { get; set; }
+
         double Dexterity { get; }
         double HitPoints { get; }
 

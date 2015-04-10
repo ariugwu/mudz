@@ -5,8 +5,6 @@ namespace mudz.Core.Model.Domain.Player
     {
         PlayerTypes PlayerType { get; set; }
 
-        BaseActor Statistics { get; set; }
-
         int Experience { get; set; }
 
         int Level { get; set; }

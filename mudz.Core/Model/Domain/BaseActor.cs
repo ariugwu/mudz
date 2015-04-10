@@ -7,6 +7,8 @@
         public abstract void Move();
 
         public double Health { get; set; }
+        public double Stamina { get; set; }
+
         public double Strength { get; set; }
         public double Intellect { get; set; }
         public double Wisdom { get; set; }

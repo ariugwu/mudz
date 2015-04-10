@@ -2,16 +2,19 @@
 {
     public interface IPlayerActionStrategy
     {
-        
+        void SetStats(IPlayer player);
+
         void Move();
-        void Inspect();
-        void Repair();
-        void Negotiate();
 
-        double Attack();
-        double Heal();
+        void Inspect(IPlayer player);
+        void Repair(IPlayer player);
+        void Negotiate(IPlayer player);
 
-        void Heal(double health);
-        void TakeDamage(double dmg);
+        double Attack(IPlayer player);
+        double Heal(IPlayer player);
+
+        void Heal(IPlayer playerm, double health);
+        void TakeDamage(IPlayer player, double dmg);
+
     }
 }

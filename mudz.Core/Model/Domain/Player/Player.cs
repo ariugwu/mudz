@@ -10,6 +10,7 @@ namespace mudz.Core.Model.Domain.Player
             PlayerType = playerType;
             GameObjectType = GameObjectTypes.Player;
             _actionStrategy = actionStrategy;
+            _actionStrategy.SetStats(this);
         }
 
         public Player() : this("", PlayerTypes.ArmyVet, new ArmyVet())
@@ -20,8 +21,6 @@ namespace mudz.Core.Model.Domain.Player
         private IPlayerActionStrategy _actionStrategy;
 
         public PlayerTypes PlayerType { get; set; }
-
-        public BaseActor Statistics { get; set; }
 
         public int Experience { get; set; }
 
