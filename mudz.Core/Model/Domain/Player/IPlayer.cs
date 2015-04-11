@@ -9,8 +9,6 @@ namespace mudz.Core.Model.Domain.Player
 
         int Level { get; set; }
 
-        void Inspect();
-
         void Repair();
 
         void Negotiate();

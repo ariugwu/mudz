@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace mudz.Core.Model.Domain.Player
+﻿namespace mudz.Core.Model.Domain.Player
 {
     public class Mechanic : IPlayerActionStrategy
     {
@@ -16,44 +14,43 @@ namespace mudz.Core.Model.Domain.Player
             player.Endurance = 165;
         }
 
-        public double Attack()
+        public double Attack(IPlayer player)
         {
-            throw new NotImplementedException();
+            AdjustStamina(player, 2);
+            return 7;
         }
 
-        public double Heal()
+        public double Heal(IPlayer player)
         {
+            AdjustStamina(player, 3);
             return 5;
         }
 
-        public void Move()
+        public double Repair(IPlayer player)
         {
-            throw new NotImplementedException();
+            AdjustStamina(player, 1);
+            return 10;
         }
 
-        public void Inspect()
+        public double Negotiate(IPlayer player)
         {
-            throw new NotImplementedException();
+            AdjustStamina(player, 2);
+            return 10;
         }
 
-        public void Repair()
+        public void TakeDamage(IPlayer player, double dmg)
         {
-            throw new NotImplementedException();
+            player.HitPoints = player.HitPoints - dmg;
         }
 
-        public void Negotiate()
+        public void RestoreHealth(IPlayer player, double healing)
         {
-            throw new NotImplementedException();
+            player.HitPoints = player.HitPoints + healing;
         }
 
-        public void TakeDamage(double dmg)
+        private void AdjustStamina(IPlayer player, int adjustment)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Heal(double health)
-        {
-            throw new NotImplementedException();
+            player.Stamina = player.Stamina - adjustment;
         }
     }
 }

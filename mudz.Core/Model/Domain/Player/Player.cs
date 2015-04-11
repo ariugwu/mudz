@@ -26,44 +26,34 @@ namespace mudz.Core.Model.Domain.Player
 
         public int Level { get; set; }
 
-        public override double Attack()
+        public override double Fight()
         {
-            return _actionStrategy.Attack();
+            return _actionStrategy.Attack(this);
         }
 
         public override double Heal()
         {
-            return _actionStrategy.Heal();
-        }
-
-        public void Inspect()
-        {
-            _actionStrategy.Inspect();
+            return _actionStrategy.Heal(this);
         }
 
         public void Repair()
         {
-            _actionStrategy.Repair();
-        }
-
-        public override void Move()
-        {
-            throw new NotImplementedException();
+            _actionStrategy.Repair(this);
         }
 
         public void Negotiate()
         {
-            _actionStrategy.Negotiate();
+            _actionStrategy.Negotiate(this);
         }
 
         public override void TakeDamage(double dmg)
         {
-            _actionStrategy.TakeDamage(dmg);
+            _actionStrategy.TakeDamage(this,dmg);
         }
 
         public override void RestoreHealth(double health)
         {
-            _actionStrategy.Heal(health);
+            _actionStrategy.RestoreHealth(this, health);
         }
     }
 }

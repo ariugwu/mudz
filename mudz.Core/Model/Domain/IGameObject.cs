@@ -6,7 +6,7 @@
         string Description { get; set; }
 
         double Dexterity { get; }
-        double HitPoints { get; }
+        double HitPoints { get; set; }
 
         GameObjectTypes GameObjectType { get;}
 

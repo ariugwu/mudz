@@ -18,7 +18,7 @@ namespace mudz.Core.Model.Domain.Monster
             throw new System.NotImplementedException();
         }
 
-        public override double Attack()
+        public override double Fight()
         {
             return 33;
         }
@@ -26,11 +26,6 @@ namespace mudz.Core.Model.Domain.Monster
         public override double Heal()
         {
             return 0;
-        }
-
-        public override void Move()
-        {
-            throw new System.NotImplementedException();
         }
 
         public BaseActor Statistics
