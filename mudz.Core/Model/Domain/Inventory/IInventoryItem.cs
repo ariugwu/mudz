@@ -1,4 +1,4 @@
-﻿namespace mudz.Core.Model.Domain.InventoryItem
+﻿namespace mudz.Core.Model.Domain.Inventory
 {
     public interface IInventoryItem : IGameObject
     {

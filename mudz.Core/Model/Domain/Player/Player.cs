@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using mudz.Core.Model.Domain.Player.Inventory;
 
 namespace mudz.Core.Model.Domain.Player
 {
@@ -25,6 +27,18 @@ namespace mudz.Core.Model.Domain.Player
         public int Experience { get; set; }
 
         public int Level { get; set; }
+
+        public IList<PlayerInventoryItem> Inventory { get; private set; }
+
+        public void AddInventoryItem(PlayerInventoryItem item)
+        {
+            Inventory.Add(item);
+        }
+
+        public void RemoveInventoryItem(int index)
+        {
+            Inventory.RemoveAt(index);
+        }
 
         public override double Fight()
         {

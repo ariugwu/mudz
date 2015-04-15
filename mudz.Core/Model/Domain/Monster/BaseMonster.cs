@@ -1,21 +1,22 @@
 ﻿using System.Collections.Generic;
-using mudz.Core.Model.Domain.InventoryItem;
+using mudz.Core.Model.Domain.Inventory;
 
 namespace mudz.Core.Model.Domain.Monster
 {
     public abstract class BaseMonster : BaseActor, IMonster
     {
+        private double _dropRate = 0.10;
 
         public MonsterTypes MonsterType { get; set; }
 
         public override void TakeDamage(double dmg)
         {
-            throw new System.NotImplementedException();
+            HitPoints = HitPoints - dmg;
         }
 
         public override void RestoreHealth(double health)
         {
-            throw new System.NotImplementedException();
+            HitPoints = HitPoints + health;
         }
 
         public override double Fight()
@@ -28,28 +29,27 @@ namespace mudz.Core.Model.Domain.Monster
             return 0;
         }
 
-        public BaseActor Statistics
-        {
-            get { throw new System.NotImplementedException(); }
-            set { throw new System.NotImplementedException(); }
-        }
-
         public IList<IInventoryItem> Inventory
         {
             get { throw new System.NotImplementedException(); }
             set { throw new System.NotImplementedException(); }
         }
 
-        public bool HasItem
+        IList<IInventoryItem> IMonster.Inventory
         {
-            get { throw new System.NotImplementedException(); }
-            set { throw new System.NotImplementedException(); }
+            get { return Inventory; }
+            set { Inventory = value; }
+        }
+
+        public bool HasItem(IInventoryItem item)
+        {
+            throw new System.NotImplementedException();
         }
 
         public double DropRate
         {
-            get { throw new System.NotImplementedException(); }
-            set { throw new System.NotImplementedException(); }
+            get { return _dropRate; }
+            set { _dropRate = value; }
         }
     }
 }

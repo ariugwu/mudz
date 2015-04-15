@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
-using mudz.Core.Model.Domain.InventoryItem;
+using mudz.Core.Model.Domain.Inventory;
 
 namespace mudz.Core.Model.Domain.Monster
 {
     public interface IMonster : IActor
     {
-        BaseActor Statistics { get; set; }
         IList<IInventoryItem> Inventory { get; set; }
-        bool HasItem { get; set; }
+        bool HasItem(IInventoryItem item);
         double DropRate { get; set; }
 
     }

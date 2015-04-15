@@ -9,7 +9,7 @@ namespace mudz.Core.Model.Domain.Monster
             switch (monsterType)
             {
                 case MonsterTypes.Zombie:
-                    return new Zombie();
+                    return new Zombie(){ HitPoints = 100};
                     break;
                 default:
                     throw new NotImplementedException("Sorry this type is not supported!");
