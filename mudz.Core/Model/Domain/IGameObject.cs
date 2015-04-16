@@ -11,6 +11,7 @@
         GameObjectTypes GameObjectType { get;}
 
         bool IsDestructible { get; }
+        bool IsAttainable { get; }
 
         void TakeDamage(double dmg);
 

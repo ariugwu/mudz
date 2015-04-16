@@ -14,6 +14,8 @@
 
         public bool IsDestructible { get; private set; }
 
+        public bool IsAttainable { get; set; }
+
         public abstract void TakeDamage(double dmg);
 
         public abstract void RestoreHealth(double health);

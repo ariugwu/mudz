@@ -11,12 +11,19 @@ namespace mudz.Core.Model.Domain.Player
 
         int Level { get; set; }
 
-        void Repair();
+        double Repair();
 
-        void Negotiate();
+        double Negotiate();
 
         IList<PlayerInventoryItem> Inventory { get; }
 
         void AddInventoryItem(PlayerInventoryItem item);
+
+        void RemoveInventoryItem(int index);
+
+        void EquipWeapon(PlayerWeapon weapon);
+
+        void EquipWearable(PlayerWearable wearable);
+
     }
 }

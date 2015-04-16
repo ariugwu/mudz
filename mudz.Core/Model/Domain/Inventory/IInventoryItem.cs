@@ -2,6 +2,6 @@
 {
     public interface IInventoryItem : IGameObject
     {
-
+        InventoryTypes InventoryType { get; }
     }
 }
