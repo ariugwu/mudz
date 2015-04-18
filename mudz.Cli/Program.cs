@@ -1,4 +1,5 @@
 ﻿using System;
+using mudz.Core.Model.Domain;
 using mudz.Core.Model.Domain.Monster;
 using mudz.Core.Model.Domain.Npc;
 using mudz.Core.Model.Domain.Player;
@@ -13,8 +14,8 @@ namespace mudz.Cli
         static void Main(string[] args)
         {
 
-            var gary = PlayerFactory.Create("Gary", PlayerTypes.Carpenter);
-            var beth = PlayerFactory.Create("Beth", PlayerTypes.ArmyVet);
+            var gary = PlayerFactory.Create("Gary", ActorGenderTypes.Male, PlayerTypes.Carpenter);
+            var beth = PlayerFactory.Create("Beth", ActorGenderTypes.Female, PlayerTypes.ArmyVet);
 
             var hammer = new TestHammer();
             var gloves = new TestGloves();
@@ -25,7 +26,7 @@ namespace mudz.Cli
 
             var dmg = gary.Fight();
 
-            Console.WriteLine("{0} attacks for {1} damage!", gary.Name, dmg);
+            Console.WriteLine("{0} attacks for {1} damage!", gary.GetName(), dmg);
             Console.ReadKey();
 
             gary.EquipWeapon(hammer);
@@ -33,13 +34,13 @@ namespace mudz.Cli
             gary.EquipWearable(hat);
             gary.AddInventoryItem(charm);
             
-            gary.AddInventoryItem(secondHammer);
+            gary.AddInventoryItem(secondHammer); 
             gary.AddInventoryItem(secondCharm);
 
-            Console.WriteLine("{0} puts on his sunday best.", gary.Name);
+            Console.WriteLine("{0} puts on his sunday best.", gary.GetName());
             dmg = gary.Fight();
 
-            Console.WriteLine("{0} attacks for {1} damage!", gary.Name, dmg);
+            Console.WriteLine("{0} attacks for {1} damage!", gary.GetName(), dmg);
             Console.ReadKey();
 
             var morgan = NpcFactory.Create("Morgan", NpcTypes.TownsPerson);
@@ -47,7 +48,7 @@ namespace mudz.Cli
 
             var zombie = MonsterFactory.Create(MonsterTypes.Zombie);
 
-            Console.WriteLine(gary.Health);
+            Console.WriteLine(gary.GetDescription());
 
             Console.WriteLine("{0} says \"{1}\"", morgan.Name, morgan.Greet());
 
@@ -65,20 +66,20 @@ namespace mudz.Cli
 
             double heal = beth.Heal();
 
-            Console.WriteLine("{0} moves to heal {1}", beth.Name, morgan.Name);
+            Console.WriteLine("{0} moves to heal {1}", beth.GetName(), morgan.Name);
 
             morgan.RestoreHealth(heal);
 
             Console.ReadKey();
-            Console.WriteLine("{0} heals {1} for {2} hit points!", beth.Name, morgan.Name, heal);
+            Console.WriteLine("{0} heals {1} for {2} hit points!", beth.GetName(), morgan.Name, heal);
             Console.ReadKey();
 
             heal = gary.Heal();
-            Console.WriteLine("{0} moves to heal {1}", gary.Name, morgan.Name);
+            Console.WriteLine("{0} moves to heal {1}", gary.GetName(), morgan.Name);
             Console.ReadKey();
 
             morgan.RestoreHealth(heal);
-            Console.WriteLine("{0} heals {1} for {2} hit points!", gary.Name, morgan.Name, heal);
+            Console.WriteLine("{0} heals {1} for {2} hit points!", gary.GetName(), morgan.Name, heal);
 
             Console.ReadKey();
 

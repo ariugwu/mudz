@@ -1,16 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using mudz.Core.Model.Domain.Inventory;
+using mudz.Core.Model.Domain.Player.Class;
 using mudz.Core.Model.Domain.Player.Inventory;
 using mudz.Core.Model.Domain.Player.Inventory.Item.Weapon;
 
 namespace mudz.Core.Model.Domain.Player
 {
-    public class Player : BaseActor, IPlayer
+    public sealed class Player : BaseActor, IPlayer
     {
-        public Player(string name, PlayerTypes playerType, IPlayerActionStrategy actionStrategy)
+        public Player(string name, ActorGenderTypes gender, PlayerTypes playerType, IPlayerActionStrategy actionStrategy)
         {
             Name = name;
+            Gender = gender;
             PlayerType = playerType;
             GameObjectType = GameObjectTypes.Player;
             _actionStrategy = actionStrategy;
@@ -22,7 +25,7 @@ namespace mudz.Core.Model.Domain.Player
             Weapon = new Fists();
         }
 
-        public Player() : this("", PlayerTypes.ArmyVet, new ArmyVet())
+        public Player() : this("", ActorGenderTypes.Wat, PlayerTypes.ArmyVet, new ArmyVet())
         {
             
         }
@@ -30,6 +33,8 @@ namespace mudz.Core.Model.Domain.Player
         private IPlayerActionStrategy _actionStrategy;
 
         public PlayerTypes PlayerType { get; set; }
+
+        public override ActorGenderTypes Gender { get; set; }
 
         public int Experience { get; set; }
 
@@ -61,64 +66,57 @@ namespace mudz.Core.Model.Domain.Player
             Outfit[wearable.Anatomy] = wearable;
         }
 
+        public string GetName()
+        {
+            return Name;
+        }
+
+        public string GetDescription()
+        {
+            return String.Format("{0} is a {1}. Health: {2}", Name, PlayerType, HitPoints);
+        }
+
         public override double Fight()
         {
-            // Find the weapon boost
-            var weaponBoost = (Weapon.HasAttackBoost) ? Weapon.CalcAttackBoost : 0;
+            var boost = CalculateActionBoostFromItems(InventoryAugmentEffect.Attack);
 
-            // Find the oufit boost
-            var outfitItemsWithBoost = Outfit.Where(x => x.Value.HasAttackBoost);
-            var outfitBoost = outfitItemsWithBoost.Sum(x => x.Value.CalcAttackBoost);
-
-            // Find the boost from keepsakes.
-            var inventoryItemsWithBoost = Inventory.Where(x => x.HasAttackBoost && x.InventoryType == InventoryTypes.PlayerKeepsake).Sum(x => x.CalcAttackBoost);
-
-            return _actionStrategy.Attack(this) + weaponBoost + outfitBoost + inventoryItemsWithBoost;
+            return _actionStrategy.Attack(this) + boost;
         }
 
         public override double Heal()
         {
-            // Find the weapon boost
-            var weaponBoost = (Weapon.HasHealBoost) ? Weapon.CalcHealBoost : 0;
+            var boost = CalculateActionBoostFromItems(InventoryAugmentEffect.Heal);
 
-            // Find the oufit boost
-            var outfitItemsWithBoost = Outfit.Where(x => x.Value.HasHealBoost);
-            var outfitBoost = outfitItemsWithBoost.Sum(x => x.Value.CalcHealBoost);
-
-            // Find the boost from keepsakes.
-            var inventoryItemsWithBoost = Inventory.Where(x => x.HasHealBoost && x.InventoryType == InventoryTypes.PlayerKeepsake).Sum(x => x.CalcHealBoost);
-
-            return _actionStrategy.Heal(this) + weaponBoost + outfitBoost + inventoryItemsWithBoost;
+            return _actionStrategy.Heal(this) + boost;
         }
 
         public double Repair()
         {
-            // Find the weapon boost
-            var weaponBoost = (Weapon.HasRepairBoost) ? Weapon.CalcRepairBoost : 0;
+            var boost = CalculateActionBoostFromItems(InventoryAugmentEffect.Repair);
 
-            // Find the oufit boost
-            var outfitItemsWithBoost = Outfit.Where(x => x.Value.HasRepairBoost);
-            var outfitBoost = outfitItemsWithBoost.Sum(x => x.Value.CalcRepairBoost);
-
-            // Find the boost from keepsakes.
-            var inventoryItemsWithBoost = Inventory.Where(x => x.HasRepairBoost && x.InventoryType == InventoryTypes.PlayerKeepsake).Sum(x => x.CalcRepairBoost);
-
-            return _actionStrategy.Repair(this) + weaponBoost + outfitBoost + inventoryItemsWithBoost;
+            return _actionStrategy.Repair(this) + boost;
         }
 
         public double Negotiate()
         {
+            var boost = CalculateActionBoostFromItems(InventoryAugmentEffect.Negotiate);
+
+            return _actionStrategy.Negotiate(this) + boost;
+        }
+
+        public double CalculateActionBoostFromItems(InventoryAugmentEffect effect)
+        {
             // Find the weapon boost
-            var weaponBoost = (Weapon.HasNegotiateBoost) ? Weapon.CalcNegotiateBoost : 0;
+            var weaponBoost = (Weapon.ActionEffect.ContainsKey(effect)) ? Weapon.ActionEffect[effect] : 0;
 
             // Find the oufit boost
-            var outfitItemsWithBoost = Outfit.Where(x => x.Value.HasNegotiateBoost);
-            var outfitBoost = outfitItemsWithBoost.Sum(x => x.Value.CalcNegotiateBoost);
+            var outfitItemsWithBoost = Outfit.Where(x => x.Value.ActionEffect.ContainsKey(effect));
+            var outfitBoost = outfitItemsWithBoost.Sum(x => x.Value.ActionEffect[effect]);
 
             // Find the boost from keepsakes.
-            var inventoryItemsWithBoost = Inventory.Where(x => x.HasNegotiateBoost && x.InventoryType == InventoryTypes.PlayerKeepsake).Sum(x => x.CalcNegotiateBoost);
+            var inventoryItemsWithBoost = Inventory.Where(x => x.ActionEffect.ContainsKey(effect) && x.InventoryType.Equals(InventoryTypes.PlayerKeepsake)).Sum(x => x.ActionEffect[effect]);
 
-            return _actionStrategy.Negotiate(this) + weaponBoost + outfitBoost + inventoryItemsWithBoost;;
+            return weaponBoost + outfitBoost + inventoryItemsWithBoost;
         }
 
         public override void TakeDamage(double dmg)

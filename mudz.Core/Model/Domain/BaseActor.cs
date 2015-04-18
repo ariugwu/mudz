@@ -3,8 +3,10 @@
     public abstract class BaseActor : BaseGameObject, IActor
     {
         #region Default Actions
+
         public abstract double Fight();
         public abstract double Heal();
+
         #endregion 
 
         #region Game Engine 
@@ -14,6 +16,8 @@
         #endregion
 
         #region Actor Stats
+
+        public abstract ActorGenderTypes Gender { get; set; }
 
         public double Health { get; set; }
         public double Strength { get; set; }

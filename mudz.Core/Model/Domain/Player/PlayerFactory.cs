@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
+using mudz.Core.Model.Domain.Player.Class;
 
 namespace mudz.Core.Model.Domain.Player
 {
     public static class PlayerFactory
     {
-        public static IPlayer Create(string name, PlayerTypes playerType)
+        public static IPlayer Create(string name, ActorGenderTypes gender, PlayerTypes playerType)
         {
-            var player = new Player(name, playerType, PlayerStrategyMap[playerType]);
+            var player = new Player(name, gender, playerType, PlayerStrategyMap[playerType]);
             
             player.HitPoints = 100*(player.Health/13.85); // Run out and you die.
             player.Dexterity = 100*((player.Strength/5) + (player.Endurance/15.44)); // This decides how much damage you take from physical attacks.

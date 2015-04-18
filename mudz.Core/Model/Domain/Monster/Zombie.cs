@@ -9,5 +9,11 @@
         }
 
         public Zombie() : this("Carl",MonsterTypes.Zombie) { }
+
+        public override ActorGenderTypes Gender
+        {
+            get { throw new System.NotImplementedException(); }
+            set { throw new System.NotImplementedException(); }
+        }
     }
 }

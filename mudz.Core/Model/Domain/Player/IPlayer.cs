@@ -1,21 +1,22 @@
-﻿using System.Collections.Generic;
-using mudz.Core.Model.Domain.Player.Inventory;
+﻿using mudz.Core.Model.Domain.Player.Inventory;
 
 namespace mudz.Core.Model.Domain.Player
 {
-    public interface IPlayer : IActor
+    public interface IPlayer
     {
         PlayerTypes PlayerType { get; set; }
 
-        int Experience { get; set; }
+        string GetName();
 
-        int Level { get; set; }
+        string GetDescription();
+
+        double Fight();
+
+        double Heal();
 
         double Repair();
 
         double Negotiate();
-
-        IList<PlayerInventoryItem> Inventory { get; }
 
         void AddInventoryItem(PlayerInventoryItem item);
 

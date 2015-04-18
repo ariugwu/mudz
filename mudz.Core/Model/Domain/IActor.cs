@@ -2,6 +2,8 @@
 {
     public interface IActor : IGameObject
     {
+        ActorGenderTypes Gender  { get; set; }
+
         double Fight();
         double Heal();
 
