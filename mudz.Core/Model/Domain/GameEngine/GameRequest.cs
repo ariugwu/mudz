@@ -2,7 +2,7 @@
 {
     public class GameRequest
     {
-        public EventTypes EventType { get; set; }
+        public GameActions GameAction { get; set; }
         public string TextResource { get; set; }
         public IGameObject Sender { get; set; }
         public IGameObject Target { get; set; }

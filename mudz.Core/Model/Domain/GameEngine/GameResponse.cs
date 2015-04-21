@@ -2,6 +2,6 @@
 {
     public class GameResponse
     {
-        public EventTypes EventType { get; set; }
+        public string Message { get; set; }
     }
 }

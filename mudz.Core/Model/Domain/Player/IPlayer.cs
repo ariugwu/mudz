@@ -2,7 +2,7 @@
 
 namespace mudz.Core.Model.Domain.Player
 {
-    public interface IPlayer
+    public interface IPlayer: IGameObject
     {
         PlayerTypes PlayerType { get; set; }
 

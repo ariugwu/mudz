@@ -1,5 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using mudz.Core.Model.Domain;
+using mudz.Core.Model.Domain.Environment.Map;
+using mudz.Core.Model.Domain.Environment.Map.Room;
+using mudz.Core.Model.Domain.GameEngine;
+using mudz.Core.Model.Domain.Inventory;
 using mudz.Core.Model.Domain.Monster;
 using mudz.Core.Model.Domain.Npc;
 using mudz.Core.Model.Domain.Player;
@@ -13,79 +19,109 @@ namespace mudz.Cli
     {
         static void Main(string[] args)
         {
+            var hiveMind = new HiveMind();
 
-            var gary = PlayerFactory.Create("Gary", ActorGenderTypes.Male, PlayerTypes.Carpenter);
-            var beth = PlayerFactory.Create("Beth", ActorGenderTypes.Female, PlayerTypes.ArmyVet);
+            var world = new Grid()
+            {
+                Rooms = new Dictionary<RoomKey, RoomContent>(),
+                Sheet = new int[10][]
+            };
 
-            var hammer = new TestHammer();
-            var gloves = new TestGloves();
-            var hat = new TestHat();
-            var charm = new TestCharm();
-            var secondHammer = new TestHammer();
-            var secondCharm = new TestCharm();
+            var roomKey = new RoomKey(1, 1);
 
-            var dmg = gary.Fight();
+            world.Rooms.Add(roomKey, new RoomContent(roomKey){ GameObjects = new List<IGameObject>()});
 
-            Console.WriteLine("{0} attacks for {1} damage!", gary.GetName(), dmg);
-            Console.ReadKey();
+            var room = world.Rooms[roomKey];   
 
-            gary.EquipWeapon(hammer);
-            gary.EquipWearable(gloves);
-            gary.EquipWearable(hat);
-            gary.AddInventoryItem(charm);
-            
-            gary.AddInventoryItem(secondHammer); 
-            gary.AddInventoryItem(secondCharm);
+            room.Title = 
+                "Test Chamber";
+            room.Description =
+                "The room is white with ripples of color rising up from a grey floor to form walls. When you focus on the color it seems to fade. You think you hear voices coming from the other side of the opaque walls but can't be certain.";
 
-            Console.WriteLine("{0} puts on his sunday best.", gary.GetName());
-            dmg = gary.Fight();
+            room.GameObjects.Add(PlayerFactory.Create("Gary", ActorGenderTypes.Male, PlayerTypes.Carpenter));
+            room.GameObjects.Add(PlayerFactory.Create("Beth", ActorGenderTypes.Female, PlayerTypes.ArmyVet));
+            room.GameObjects.Add(NpcFactory.Create("Morgan", NpcTypes.TownsPerson));
+            room.GameObjects.Add(NpcFactory.Create("SlowDraw", NpcTypes.Deputy));
+            room.GameObjects.Add(MonsterFactory.Create(MonsterTypes.Zombie));
+            room.GameObjects.Add(new TestHammer());
+            ////room.Items.Add();
+            ////room.Items.Add();
+            ////room.Items.Add();
+            ////room.Items.Add();
 
-            Console.WriteLine("{0} attacks for {1} damage!", gary.GetName(), dmg);
-            Console.ReadKey();
+            var gary = room.GameObjects.Where(x => x.Name == "Gary");
+            //var beth = room.Players.First(x => x.GetName() == "Beth");;
+            //var morgan = room.Npcs.First(x => x.Name == "Morgan");
+            //var deputy = room.Npcs.First(x => x.Name == "SlowDraw");
 
-            var morgan = NpcFactory.Create("Morgan", NpcTypes.TownsPerson);
-            var deputy = NpcFactory.Create("SlowDraw", NpcTypes.Deputy);
+            //var zombie = room.Monsters.First();
 
-            var zombie = MonsterFactory.Create(MonsterTypes.Zombie);
+            //var hammer = new TestHammer();
+            //var gloves = new TestGloves();
+            //var hat = new TestHat();
+            //var charm = new TestCharm();
+            //var secondHammer = new TestHammer();
+            //var secondCharm = new TestCharm();
 
-            Console.WriteLine(gary.GetDescription());
+            //var dmg = gary.Fight();
 
-            Console.WriteLine("{0} says \"{1}\"", morgan.Name, morgan.Greet());
+            //Console.WriteLine("{0} attacks for {1} damage!", gary.GetName(), dmg);
+            //Console.ReadKey();
 
-            Console.ReadKey();
+            //gary.EquipWeapon(hammer);
+            //gary.EquipWearable(gloves);
+            //gary.EquipWearable(hat);
+            //gary.AddInventoryItem(charm);
 
-            Console.WriteLine("{0} is a {1}. (S)He has {2} hit points.", morgan.Name, morgan.NpcType, morgan.HitPoints);
+            //gary.AddInventoryItem(secondHammer); 
+            //gary.AddInventoryItem(secondCharm);
 
-            dmg = zombie.Fight();
-            
-            morgan.TakeDamage(dmg);
+            //Console.WriteLine("{0} puts on his sunday best.", gary.GetName());
+            //dmg = gary.Fight();
 
-            Console.WriteLine("{0} takes {1} damage!", morgan.Name, dmg);
-            Console.WriteLine("{0} is a {1}. (S)He has {2} hit points.", morgan.Name, morgan.NpcType, morgan.HitPoints);
-            Console.ReadKey();
+            //Console.WriteLine("{0} attacks for {1} damage!", gary.GetName(), dmg);
+            //Console.ReadKey();
 
-            double heal = beth.Heal();
 
-            Console.WriteLine("{0} moves to heal {1}", beth.GetName(), morgan.Name);
 
-            morgan.RestoreHealth(heal);
+            //Console.WriteLine(gary.GetDescription());
 
-            Console.ReadKey();
-            Console.WriteLine("{0} heals {1} for {2} hit points!", beth.GetName(), morgan.Name, heal);
-            Console.ReadKey();
+            //Console.WriteLine("{0} says \"{1}\"", morgan.Name, morgan.Greet());
 
-            heal = gary.Heal();
-            Console.WriteLine("{0} moves to heal {1}", gary.GetName(), morgan.Name);
-            Console.ReadKey();
+            //Console.ReadKey();
 
-            morgan.RestoreHealth(heal);
-            Console.WriteLine("{0} heals {1} for {2} hit points!", gary.GetName(), morgan.Name, heal);
+            //Console.WriteLine("{0} is a {1}. (S)He has {2} hit points.", morgan.Name, morgan.NpcType, morgan.HitPoints);
 
-            Console.ReadKey();
+            //dmg = zombie.Fight();
 
-            Console.WriteLine("{0} is a {1}. (S)He has {2} hit points.", morgan.Name, morgan.NpcType, morgan.HitPoints);
+            //morgan.TakeDamage(dmg);
 
-            Console.ReadKey();
+            //Console.WriteLine("{0} takes {1} damage!", morgan.Name, dmg);
+            //Console.WriteLine("{0} is a {1}. (S)He has {2} hit points.", morgan.Name, morgan.NpcType, morgan.HitPoints);
+            //Console.ReadKey();
+
+            //double heal = beth.Heal();
+
+            //Console.WriteLine("{0} moves to heal {1}", beth.GetName(), morgan.Name);
+
+            //morgan.RestoreHealth(heal);
+
+            //Console.ReadKey();
+            //Console.WriteLine("{0} heals {1} for {2} hit points!", beth.GetName(), morgan.Name, heal);
+            //Console.ReadKey();
+
+            //heal = gary.Heal();
+            //Console.WriteLine("{0} moves to heal {1}", gary.GetName(), morgan.Name);
+            //Console.ReadKey();
+
+            //morgan.RestoreHealth(heal);
+            //Console.WriteLine("{0} heals {1} for {2} hit points!", gary.GetName(), morgan.Name, heal);
+
+            //Console.ReadKey();
+
+            //Console.WriteLine("{0} is a {1}. (S)He has {2} hit points.", morgan.Name, morgan.NpcType, morgan.HitPoints);
+
+            //Console.ReadKey();
         }
     }
 }

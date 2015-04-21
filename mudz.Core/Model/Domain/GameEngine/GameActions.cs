@@ -1,8 +1,8 @@
 ﻿namespace mudz.Core.Model.Domain.GameEngine
 {
-    public enum EventTypes
+    public enum GameActions
     {
-        Attack,
+        Fight,
         Heal,
         Repair,
         Negotiate

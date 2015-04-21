@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using mudz.Core.Model.Domain.Environment.Map.Room;
 
 namespace mudz.Core.Model.Domain.Environment.Map
 {
@@ -6,6 +7,6 @@ namespace mudz.Core.Model.Domain.Environment.Map
     {
         public int[][] Sheet { get;  set; }
 
-        public Dictionary<RoomKey, Room> Rooms { get; set; }  
+        public Dictionary<RoomKey, RoomContent> Rooms { get; set; }  
     }
 }
