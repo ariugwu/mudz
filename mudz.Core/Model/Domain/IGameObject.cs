@@ -1,6 +1,8 @@
-﻿namespace mudz.Core.Model.Domain
+﻿using mudz.Core.Model.Domain.GameEngine;
+
+namespace mudz.Core.Model.Domain
 {
-    public interface IGameObject
+    public interface IGameObject : IGameCommand
     {
         string Name { get; }
         string Description { get; set; }
@@ -13,8 +15,12 @@
         bool IsDestructible { get; }
         bool IsAttainable { get; }
 
-        void TakeDamage(double dmg);
+        double Fight();
+        double Heal();
+        double Repair();
+        double Negotiate();
 
+        void TakeDamage(double dmg);
         void RestoreHealth(double health);
     }
 }

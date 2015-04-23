@@ -90,14 +90,14 @@ namespace mudz.Core.Model.Domain.Player
             return _actionStrategy.Heal(this) + boost;
         }
 
-        public double Repair()
+        public override double Repair()
         {
             var boost = CalculateActionBoostFromItems(InventoryAugmentEffect.Repair);
 
             return _actionStrategy.Repair(this) + boost;
         }
 
-        public double Negotiate()
+        public override double Negotiate()
         {
             var boost = CalculateActionBoostFromItems(InventoryAugmentEffect.Negotiate);
 

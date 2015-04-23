@@ -1,4 +1,6 @@
-﻿namespace mudz.Core.Model.Domain
+﻿using mudz.Core.Model.Domain.GameEngine;
+
+namespace mudz.Core.Model.Domain
 {
     public abstract class BaseGameObject : IGameObject
     {
@@ -16,8 +18,15 @@
 
         public bool IsAttainable { get; set; }
 
+        public abstract double Fight();
+        public abstract double Heal();
+        public abstract double Repair();
+        public abstract double Negotiate();
+
         public abstract void TakeDamage(double dmg);
 
         public abstract void RestoreHealth(double health);
+
+        public abstract GameResponse Execute(GameRequest request);
     }
 }

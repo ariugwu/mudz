@@ -5,7 +5,6 @@ using mudz.Core.Model.Domain;
 using mudz.Core.Model.Domain.Environment.Map;
 using mudz.Core.Model.Domain.Environment.Map.Room;
 using mudz.Core.Model.Domain.GameEngine;
-using mudz.Core.Model.Domain.Inventory;
 using mudz.Core.Model.Domain.Monster;
 using mudz.Core.Model.Domain.Npc;
 using mudz.Core.Model.Domain.Player;
@@ -21,36 +20,19 @@ namespace mudz.Cli
         {
             var hiveMind = new HiveMind();
 
-            var world = new Grid()
-            {
-                Rooms = new Dictionary<RoomKey, RoomContent>(),
-                Sheet = new int[10][]
-            };
+            var room = hiveMind.World.Rooms.First().Value;
 
-            var roomKey = new RoomKey(1, 1);
+            var gary = (IPlayer)room.GameObjects.First(x => x.Name == "Gary");
 
-            world.Rooms.Add(roomKey, new RoomContent(roomKey){ GameObjects = new List<IGameObject>()});
+                gary.AddInventoryItem(new TestCharm());
 
-            var room = world.Rooms[roomKey];   
+            var beth = room.GameObjects.First(x => x.Name == "Beth");
 
-            room.Title = 
-                "Test Chamber";
-            room.Description =
-                "The room is white with ripples of color rising up from a grey floor to form walls. When you focus on the color it seems to fade. You think you hear voices coming from the other side of the opaque walls but can't be certain.";
+            var response = hiveMind.Execute(new GameRequest() {GameAction = GameActions.Heal, Sender = gary, Target = beth});
 
-            room.GameObjects.Add(PlayerFactory.Create("Gary", ActorGenderTypes.Male, PlayerTypes.Carpenter));
-            room.GameObjects.Add(PlayerFactory.Create("Beth", ActorGenderTypes.Female, PlayerTypes.ArmyVet));
-            room.GameObjects.Add(NpcFactory.Create("Morgan", NpcTypes.TownsPerson));
-            room.GameObjects.Add(NpcFactory.Create("SlowDraw", NpcTypes.Deputy));
-            room.GameObjects.Add(MonsterFactory.Create(MonsterTypes.Zombie));
-            room.GameObjects.Add(new TestHammer());
-            ////room.Items.Add();
-            ////room.Items.Add();
-            ////room.Items.Add();
-            ////room.Items.Add();
+            Console.WriteLine(response.Message);
+            Console.ReadKey();
 
-            var gary = room.GameObjects.Where(x => x.Name == "Gary");
-            //var beth = room.Players.First(x => x.GetName() == "Beth");;
             //var morgan = room.Npcs.First(x => x.Name == "Morgan");
             //var deputy = room.Npcs.First(x => x.Name == "SlowDraw");
 

@@ -4,9 +4,6 @@
     {
         ActorGenderTypes Gender  { get; set; }
 
-        double Fight();
-        double Heal();
-
         double Health { get; set; }
         double Stamina { get; set; }
 

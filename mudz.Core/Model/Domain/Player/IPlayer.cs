@@ -10,14 +10,6 @@ namespace mudz.Core.Model.Domain.Player
 
         string GetDescription();
 
-        double Fight();
-
-        double Heal();
-
-        double Repair();
-
-        double Negotiate();
-
         void AddInventoryItem(PlayerInventoryItem item);
 
         void RemoveInventoryItem(int index);
