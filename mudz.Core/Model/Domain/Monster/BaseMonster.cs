@@ -5,6 +5,11 @@ namespace mudz.Core.Model.Domain.Monster
 {
     public abstract class BaseMonster : BaseActor, IMonster
     {
+        protected BaseMonster()
+        {
+            GameObjectType = GameObjectTypes.Monster;
+        }
+
         private double _dropRate = 0.10;
 
         public MonsterTypes MonsterType { get; set; }
@@ -25,6 +30,16 @@ namespace mudz.Core.Model.Domain.Monster
         }
 
         public override double Heal()
+        {
+            return 0;
+        }
+
+        public override double Negotiate()
+        {
+            return 0;
+        }
+
+        public override double Repair()
         {
             return 0;
         }
@@ -51,5 +66,6 @@ namespace mudz.Core.Model.Domain.Monster
             get { return _dropRate; }
             set { _dropRate = value; }
         }
+
     }
 }

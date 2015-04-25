@@ -20,9 +20,12 @@ namespace mudz.Core.Model.Domain.GameEngine
                 Sheet = new int[10][]
             };
 
+            ResponseStack = new Stack<GameResponse>();
 
             SeedWorld();
         }
+
+        public Stack<GameResponse> ResponseStack { get; set; } 
 
         public Grid World { get; set; }
 
@@ -31,16 +34,30 @@ namespace mudz.Core.Model.Domain.GameEngine
             var actionType = request.GameAction;
             var sender = request.Sender;
             var target = request.Target;
+            GameResponse response;
 
             switch(actionType)
             {
                 case GameActions.Heal:
-                    var response = sender.Execute(request);
+                    response = sender.Execute(request);
                     target.RestoreHealth(response.Amount);
-                    return response;
+                    break;
+                case GameActions.Fight:
+                    response = sender.Execute(request);
+                    target.TakeDamage(response.Amount);
+                    break;
+                case GameActions.Repair:
+                    response = sender.Execute(request);
+                   throw new NotImplementedException("The repair request has not been implemented.");
+                case GameActions.Negotiate:
+                    throw new NotImplementedException("The negotiate request has not been implemented.");
                 default:
                     throw new NotImplementedException("The action requested is not available!");
             }
+
+            ResponseStack.Push(response);
+
+            return response;
         }
 
 

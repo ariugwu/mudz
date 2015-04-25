@@ -5,29 +5,6 @@ namespace mudz.Core.Model.Domain
 {
     public abstract class BaseActor : BaseGameObject, IActor
     {
-        #region Default Actions
-
-        public override double Fight()
-        {
-            return 0;
-        }
-        public override double Heal()
-        {
-            return 10;
-        }
-
-        public override double Negotiate()
-        {
-            return 0;
-        }
-
-        public override double Repair()
-        {
-            return 0;
-        }
-
-        #endregion 
-
         #region Game Engine 
         
         public double Stamina { get; set; }

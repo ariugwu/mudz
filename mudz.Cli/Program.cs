@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using mudz.Cli.Domain.GameEngine;
 using mudz.Core.Model.Domain;
 using mudz.Core.Model.Domain.Environment.Map;
 using mudz.Core.Model.Domain.Environment.Map.Room;
@@ -18,19 +19,27 @@ namespace mudz.Cli
     {
         static void Main(string[] args)
         {
+            // Create our new game engine
             var hiveMind = new HiveMind();
 
+            // Grab the first room from the seeded content. @SEE -> HiveMind.SeedWorld()
             var room = hiveMind.World.Rooms.First().Value;
 
+            // Create two players to test with.
             var gary = (IPlayer)room.GameObjects.First(x => x.Name == "Gary");
 
                 gary.AddInventoryItem(new TestCharm());
 
             var beth = room.GameObjects.First(x => x.Name == "Beth");
 
+            Render.DrawRoom(room);
+            Render.DrawStatusBar(gary);
+
+            // Test the command pattern.
             var response = hiveMind.Execute(new GameRequest() {GameAction = GameActions.Heal, Sender = gary, Target = beth});
 
             Console.WriteLine(response.Message);
+            Render.DrawStatusBar(gary);
             Console.ReadKey();
 
             //var morgan = room.Npcs.First(x => x.Name == "Morgan");
