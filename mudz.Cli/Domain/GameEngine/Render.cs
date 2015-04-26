@@ -53,6 +53,7 @@ namespace mudz.Cli.Domain.GameEngine
 
             Console.ResetColor();
             Console.WriteLine();
+            Console.
         }
 
         public static void DrawStatusBar(IPlayer player)
