@@ -10,7 +10,7 @@ _I'll do my best to mark which commits line up with which code katas (from the t
 * Bridge Pattern _(Strutural Pattern)_:  Start getting some of our monster code organized. We might do something similar with inventory items so this will be a good test.
 
 #### Phase II - Building out our world and fine tuning interactions with that world.
-* Command Pattern _(Behavioral Pattern)_:
+* Command Pattern _(Behavioral Pattern)_: Introduce a way to cleanly handle commands. Sets us up nicely for event-sourcing later.
 * State Pattern _(Behavorial Pattern)_: Add some more complexity to our game Actors (Players/Monsters) to deal with *temporary* changes to them (i.e - scared, excited, brunk, etc).
 * Flyweight Pattern _(Structural Pattern)_: Find ways to load our game assets and reuse them efficiently.
 
