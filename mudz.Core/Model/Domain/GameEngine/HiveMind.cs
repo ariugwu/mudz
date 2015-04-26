@@ -55,6 +55,7 @@ namespace mudz.Core.Model.Domain.GameEngine
                     throw new NotImplementedException("The action requested is not available!");
             }
 
+            response.Request = request;
             ResponseStack.Push(response);
 
             return response;

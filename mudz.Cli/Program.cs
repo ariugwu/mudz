@@ -38,8 +38,7 @@ namespace mudz.Cli
             // Test the command pattern.
             var response = hiveMind.Execute(new GameRequest() {GameAction = GameActions.Heal, Sender = gary, Target = beth});
 
-            Console.WriteLine(response.Message);
-            Render.DrawStatusBar(gary);
+            Render.DisplayCommand(response);
             Console.ReadKey();
 
             //var morgan = room.Npcs.First(x => x.Name == "Morgan");
