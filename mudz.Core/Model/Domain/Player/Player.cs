@@ -46,6 +46,11 @@ namespace mudz.Core.Model.Domain.Player
 
         public PlayerWeapon Weapon { get; set; }
 
+        public void SetState()
+        {
+            
+        }
+
         public void AddInventoryItem(PlayerInventoryItem item)
         {
             Inventory.Add(item);

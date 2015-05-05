@@ -1,17 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using mudz.Cli.Domain.GameEngine;
-using mudz.Core.Model.Domain;
-using mudz.Core.Model.Domain.Environment.Map;
-using mudz.Core.Model.Domain.Environment.Map.Room;
 using mudz.Core.Model.Domain.GameEngine;
-using mudz.Core.Model.Domain.Monster;
-using mudz.Core.Model.Domain.Npc;
 using mudz.Core.Model.Domain.Player;
 using mudz.Core.Model.Domain.Player.Inventory.Item.Keepsake;
-using mudz.Core.Model.Domain.Player.Inventory.Item.Weapon;
-using mudz.Core.Model.Domain.Player.Inventory.Item.Wearable;
 
 namespace mudz.Cli
 {

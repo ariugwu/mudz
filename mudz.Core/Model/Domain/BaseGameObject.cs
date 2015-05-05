@@ -14,6 +14,8 @@ namespace mudz.Core.Model.Domain
 
         public GameObjectTypes GameObjectType { get; set; }
 
+        public GameObjectStates GameObjectState { get; set; }
+
         public bool IsDestructible { get; private set; }
 
         public bool IsAttainable { get; set; }

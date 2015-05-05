@@ -17,6 +17,8 @@ namespace mudz.Core.Model.Domain.Inventory
 
         public GameObjectTypes GameObjectType { get { return GameObjectTypes.InventoryItem; } }
 
+        public GameObjectStates GameObjectState { get; set; }
+
         public abstract bool IsDestructible { get; }
 
         public abstract bool IsAttainable { get; }

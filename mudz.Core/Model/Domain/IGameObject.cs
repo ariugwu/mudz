@@ -11,6 +11,7 @@ namespace mudz.Core.Model.Domain
         double HitPoints { get; set; }
 
         GameObjectTypes GameObjectType { get;}
+        GameObjectStates GameObjectState { get; set; }
 
         bool IsDestructible { get; }
         bool IsAttainable { get; }
