@@ -18,5 +18,7 @@ namespace mudz.Core.Model.Domain.Player
 
         void EquipWearable(PlayerWearable wearable);
 
+        void SetState(ActorStates actorState);
+
     }
 }

@@ -64,10 +64,25 @@ namespace mudz.Cli.Domain.GameEngine
 
         public static void DisplayCommand(GameResponse response)
         {
+            if (!response.WasSuccessful)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                ReplaceLastLine(response.Message);
+                Console.ResetColor();
+
+                DrawStatusBar((IPlayer)response.Request.Sender);
+                return;
+            } 
+
             switch (response.Request.GameAction)
             {
                 case GameActions.Heal:
                     Console.ForegroundColor = ConsoleColor.Blue;
+                    ReplaceLastLine(response.Message);
+                    Console.ResetColor();
+                    break;
+                case GameActions.Fight:
+                    Console.ForegroundColor = ConsoleColor.Red;
                     ReplaceLastLine(response.Message);
                     Console.ResetColor();
                     break;

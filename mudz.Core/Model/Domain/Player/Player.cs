@@ -16,6 +16,10 @@ namespace mudz.Core.Model.Domain.Player
             Gender = gender;
             PlayerType = playerType;
             GameObjectType = GameObjectTypes.Player;
+            
+            GameObjectState = GameObjectStates.InPlay;
+            ActorState = ActorStates.Alive;
+
             _actionStrategy = actionStrategy;
             _actionStrategy.SetStats(this);
 
@@ -46,9 +50,9 @@ namespace mudz.Core.Model.Domain.Player
 
         public PlayerWeapon Weapon { get; set; }
 
-        public void SetState()
+        public void SetState(ActorStates actorState)
         {
-            
+            ActorState = actorState;
         }
 
         public void AddInventoryItem(PlayerInventoryItem item)

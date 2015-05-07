@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using mudz.Cli.Domain.GameEngine;
+using mudz.Core.Model.Domain;
 using mudz.Core.Model.Domain.GameEngine;
 using mudz.Core.Model.Domain.Player;
 using mudz.Core.Model.Domain.Player.Inventory.Item.Keepsake;
@@ -21,6 +22,7 @@ namespace mudz.Cli
             var gary = (IPlayer)room.GameObjects.First(x => x.Name == "Gary");
 
                 gary.AddInventoryItem(new TestCharm());
+                gary.SetState(ActorStates.Disabled);
 
             var beth = room.GameObjects.First(x => x.Name == "Beth");
 
@@ -29,7 +31,9 @@ namespace mudz.Cli
 
             // Test the command pattern.
             var response = hiveMind.Execute(new GameRequest() {GameAction = GameActions.Heal, Sender = gary, Target = beth});
+            Render.DisplayCommand(response);
 
+            response = hiveMind.Execute(new GameRequest() {GameAction = GameActions.Fight, Sender = gary, Target = beth});
             Render.DisplayCommand(response);
             Console.ReadKey();
 

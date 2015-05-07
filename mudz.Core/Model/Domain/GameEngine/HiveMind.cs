@@ -40,14 +40,13 @@ namespace mudz.Core.Model.Domain.GameEngine
             {
                 case GameActions.Heal:
                     response = sender.Execute(request);
-                    target.RestoreHealth(response.Amount);
+                    if (response.WasSuccessful) target.RestoreHealth(response.Amount);
                     break;
                 case GameActions.Fight:
                     response = sender.Execute(request);
-                    target.TakeDamage(response.Amount);
+                    if (response.WasSuccessful) target.TakeDamage(response.Amount);
                     break;
                 case GameActions.Repair:
-                    response = sender.Execute(request);
                    throw new NotImplementedException("The repair request has not been implemented.");
                 case GameActions.Negotiate:
                     throw new NotImplementedException("The negotiate request has not been implemented.");
