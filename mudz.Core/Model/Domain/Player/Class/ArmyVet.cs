@@ -14,36 +14,36 @@
             actor.Endurance = 165;
         }
 
-        public double Attack(IActor actor)
+        public int Attack(IActor actor)
         {
             AdjustStamina(actor, 1);
             return 20;
         }
 
-        public double Heal(IActor actor)
+        public int Heal(IActor actor)
         {
             AdjustStamina(actor, 3);
             return 10;
         }
 
-        public double Repair(IActor actor)
+        public int Repair(IActor actor)
         {
             AdjustStamina(actor, 3);
             return 10;
         }
 
-        public double Negotiate(IActor actor)
+        public int Negotiate(IActor actor)
         {
             AdjustStamina(actor, 3);
             return 10;
         }
 
-        public void TakeDamage(IActor actor, double dmg)
+        public void TakeDamage(IActor actor, int dmg)
         {
             actor.HitPoints = actor.HitPoints - dmg;
         }
 
-        public void RestoreHealth(IActor actor, double healing)
+        public void RestoreHealth(IActor actor, int healing)
         {
             actor.HitPoints = actor.HitPoints + healing;
         }

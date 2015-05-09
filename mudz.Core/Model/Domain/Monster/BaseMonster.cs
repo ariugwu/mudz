@@ -14,32 +14,32 @@ namespace mudz.Core.Model.Domain.Monster
 
         public MonsterTypes MonsterType { get; set; }
 
-        public override void TakeDamage(double dmg)
+        public override void TakeDamage(int dmg)
         {
             HitPoints = HitPoints - dmg;
         }
 
-        public override void RestoreHealth(double health)
+        public override void RestoreHealth(int health)
         {
             HitPoints = HitPoints + health;
         }
 
-        public override double Fight()
+        public override int Fight()
         {
             return 33;
         }
 
-        public override double Heal()
+        public override int Heal()
         {
             return 0;
         }
 
-        public override double Negotiate()
+        public override int Negotiate()
         {
             return 0;
         }
 
-        public override double Repair()
+        public override int Repair()
         {
             return 0;
         }

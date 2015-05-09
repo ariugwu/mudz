@@ -11,9 +11,9 @@ namespace mudz.Core.Model.Domain.Inventory
 
         public string Description { get; set; }
 
-        public double Dexterity { get; set; }
+        public int Dexterity { get; set; }
 
-        public double HitPoints { get; set; }
+        public int HitPoints { get; set; }
 
         public GameObjectTypes GameObjectType { get { return GameObjectTypes.InventoryItem; } }
 
@@ -25,33 +25,33 @@ namespace mudz.Core.Model.Domain.Inventory
 
         #region Default Actions
 
-        public virtual double Fight()
+        public virtual int Fight()
         {
             return 0;
         }
-        public virtual double Heal()
-        {
-            return 0;
-        }
-
-        public virtual double Negotiate()
+        public virtual int Heal()
         {
             return 0;
         }
 
-        public virtual double Repair()
+        public virtual int Negotiate()
+        {
+            return 0;
+        }
+
+        public virtual int Repair()
         {
             return 0;
         }
 
         #endregion
 
-        public void TakeDamage(double dmg)
+        public void TakeDamage(int dmg)
         {
 
         }
 
-        public void RestoreHealth(double health)
+        public void RestoreHealth(int health)
         {
 
         }
@@ -73,6 +73,11 @@ namespace mudz.Core.Model.Domain.Inventory
                 default:
                     throw new NotImplementedException("Game action not supported!");
             }
+        }
+
+        public virtual void CheckState()
+        {
+            // There is no base functionality for this method. Marked as virtual to prevent needless overrides.
         }
     }
 }

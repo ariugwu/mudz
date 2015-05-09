@@ -4,15 +4,15 @@
     {
         ActorGenderTypes Gender  { get; set; }
 
-        double Health { get; set; }
-        double Stamina { get; set; }
+        int Health { get; set; }
+        int Stamina { get; set; }
 
-        double Strength { get; set; }
-        double Intellect { get; set; }
-        double Wisdom { get; set; }
-        double Agility { get; set; }
-        double Willpower { get; set; }
-        double Charm { get; set; }
-        double Endurance { get; set; }
+        int Strength { get; set; }
+        int Intellect { get; set; }
+        int Wisdom { get; set; }
+        int Agility { get; set; }
+        int Willpower { get; set; }
+        int Charm { get; set; }
+        int Endurance { get; set; }
     }
 }

@@ -85,35 +85,35 @@ namespace mudz.Core.Model.Domain.Player
             return String.Format("{0} is a {1}. Health: {2}", Name, PlayerType, HitPoints);
         }
 
-        public override double Fight()
+        public override int Fight()
         {
             var boost = CalculateActionBoostFromItems(InventoryAugmentEffect.Attack);
 
             return _actionStrategy.Attack(this) + boost;
         }
 
-        public override double Heal()
+        public override int Heal()
         {
             var boost = CalculateActionBoostFromItems(InventoryAugmentEffect.Heal);
 
             return _actionStrategy.Heal(this) + boost;
         }
 
-        public override double Repair()
+        public override int Repair()
         {
             var boost = CalculateActionBoostFromItems(InventoryAugmentEffect.Repair);
 
             return _actionStrategy.Repair(this) + boost;
         }
 
-        public override double Negotiate()
+        public override int Negotiate()
         {
             var boost = CalculateActionBoostFromItems(InventoryAugmentEffect.Negotiate);
 
             return _actionStrategy.Negotiate(this) + boost;
         }
 
-        public double CalculateActionBoostFromItems(InventoryAugmentEffect effect)
+        public int CalculateActionBoostFromItems(InventoryAugmentEffect effect)
         {
             // Find the weapon boost
             var weaponBoost = (Weapon.ActionEffect.ContainsKey(effect)) ? Weapon.ActionEffect[effect] : 0;
@@ -128,12 +128,12 @@ namespace mudz.Core.Model.Domain.Player
             return weaponBoost + outfitBoost + inventoryItemsWithBoost;
         }
 
-        public override void TakeDamage(double dmg)
+        public override void TakeDamage(int dmg)
         {
             _actionStrategy.TakeDamage(this,dmg);
         }
 
-        public override void RestoreHealth(double health)
+        public override void RestoreHealth(int health)
         {
             _actionStrategy.RestoreHealth(this, health);
         }

@@ -7,8 +7,8 @@ namespace mudz.Core.Model.Domain
         string Name { get; }
         string Description { get; set; }
 
-        double Dexterity { get; }
-        double HitPoints { get; set; }
+        int Dexterity { get; }
+        int HitPoints { get; set; }
 
         GameObjectTypes GameObjectType { get;}
         GameObjectStates GameObjectState { get; set; }
@@ -16,12 +16,13 @@ namespace mudz.Core.Model.Domain
         bool IsDestructible { get; }
         bool IsAttainable { get; }
 
-        double Fight();
-        double Heal();
-        double Repair();
-        double Negotiate();
+        int Fight();
+        int Heal();
+        int Repair();
+        int Negotiate();
 
-        void TakeDamage(double dmg);
-        void RestoreHealth(double health);
+        void TakeDamage(int dmg);
+        void RestoreHealth(int health);
+
     }
 }

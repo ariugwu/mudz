@@ -35,6 +35,16 @@ namespace mudz.Cli
 
             response = hiveMind.Execute(new GameRequest() {GameAction = GameActions.Fight, Sender = gary, Target = beth});
             Render.DisplayCommand(response);
+
+            while (gary.HitPoints > 0)
+            {
+             response = hiveMind.Execute(new GameRequest(){ GameAction = GameActions.Fight, Sender = beth, Target = gary});
+             Render.DisplayCommand(response);
+            }
+
+            response = hiveMind.Execute(new GameRequest() { GameAction = GameActions.Fight, Sender = gary, Target = beth });
+            Render.DisplayCommand(response);
+
             Console.ReadKey();
 
             //var morgan = room.Npcs.First(x => x.Name == "Morgan");

@@ -7,7 +7,7 @@ namespace mudz.Core.Model.Domain
     {
         #region Game Engine 
         
-        public double Stamina { get; set; }
+        public int Stamina { get; set; }
         
         #endregion
 
@@ -16,27 +16,36 @@ namespace mudz.Core.Model.Domain
         public abstract ActorGenderTypes Gender { get; set; }
         public ActorStates ActorState { get; set; }
 
-        public double Health { get; set; }
-        public double Strength { get; set; }
-        public double Intellect { get; set; }
-        public double Wisdom { get; set; }
-        public double Agility { get; set; }
-        public double Willpower { get; set; }
-        public double Charm { get; set; }
-        public double Endurance { get; set; }
+        public int Health { get; set; }
+        public int Strength { get; set; }
+        public int Intellect { get; set; }
+        public int Wisdom { get; set; }
+        public int Agility { get; set; }
+        public int Willpower { get; set; }
+        public int Charm { get; set; }
+        public int Endurance { get; set; }
         
         #endregion
+
+        public override void CheckState()
+        {
+            if (this.HitPoints <= 0)
+            {
+                this.GameObjectState = GameObjectStates.OutOfPlay;
+                this.ActorState = ActorStates.Dead;
+            }
+        }
 
         public override GameResponse Execute(GameRequest request)
         {
             var actionType = request.GameAction;
             var gameResponse = new GameResponse(){ WasSuccessful = true};
-            Double amount = 0D;
+            int amount = 0;
 
             switch (actionType)
             {
                 case GameActions.Fight:
-                    if (ActorState.Name == "Disabled")
+                    if (ActorState == ActorStates.Disabled)
                     {
                         gameResponse.WasSuccessful = false;
                         gameResponse.Message = String.Format("{0} struggles move!", this.Name);

@@ -7,11 +7,11 @@ namespace mudz.Core.Model.Domain.Player.Inventory.Item.Weapon
     {
         public Fists()
         {
-            ActionEffect = new Dictionary<InventoryAugmentEffect, double> { { InventoryAugmentEffect.Attack, 1 } };
+            ActionEffect = new Dictionary<InventoryAugmentEffect, int> { { InventoryAugmentEffect.Attack, 1 } };
 
         }
 
-        public override sealed Dictionary<InventoryAugmentEffect, double> ActionEffect { get; set; }
+        public override sealed Dictionary<InventoryAugmentEffect, int> ActionEffect { get; set; }
 
     }
 }

@@ -4,14 +4,14 @@
     {
         void SetStats(IActor actor);
 
-        double Repair(IActor actor);
-        double Negotiate(IActor actor);
+        int Repair(IActor actor);
+        int Negotiate(IActor actor);
 
-        double Attack(IActor actor);
-        double Heal(IActor actor);
+        int Attack(IActor actor);
+        int Heal(IActor actor);
 
-        void RestoreHealth(IActor actor, double health);
-        void TakeDamage(IActor actor, double dmg);
+        void RestoreHealth(IActor actor, int health);
+        void TakeDamage(IActor actor, int dmg);
 
     }
 }

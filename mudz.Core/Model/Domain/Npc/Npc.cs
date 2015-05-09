@@ -24,33 +24,33 @@ namespace mudz.Core.Model.Domain.Npc
 
         public abstract string Respond();
 
-        public override void TakeDamage(double dmg)
+        public override void TakeDamage(int dmg)
         {
             HitPoints = HitPoints - dmg;
         }
 
-        public override void RestoreHealth(double health)
+        public override void RestoreHealth(int health)
         {
             HitPoints = HitPoints + health;
         }
 
         #region Default Actions
 
-        public override double Fight()
+        public override int Fight()
         {
             return 0;
         }
-        public override double Heal()
-        {
-            return 0;
-        }
-
-        public override double Negotiate()
+        public override int Heal()
         {
             return 0;
         }
 
-        public override double Repair()
+        public override int Negotiate()
+        {
+            return 0;
+        }
+
+        public override int Repair()
         {
             return 0;
         }
@@ -58,6 +58,11 @@ namespace mudz.Core.Model.Domain.Npc
         #endregion
 
         public override GameResponse Execute(GameRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void CheckState()
         {
             throw new NotImplementedException();
         }

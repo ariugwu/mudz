@@ -8,9 +8,9 @@ namespace mudz.Core.Model.Domain
 
         public string Description { get; set; }
 
-        public double Dexterity { get; set; }
+        public int Dexterity { get; set; }
 
-        public double HitPoints { get; set; }
+        public int HitPoints { get; set; }
 
         public GameObjectTypes GameObjectType { get; set; }
 
@@ -20,15 +20,17 @@ namespace mudz.Core.Model.Domain
 
         public bool IsAttainable { get; set; }
 
-        public abstract double Fight();
-        public abstract double Heal();
-        public abstract double Repair();
-        public abstract double Negotiate();
+        public abstract int Fight();
+        public abstract int Heal();
+        public abstract int Repair();
+        public abstract int Negotiate();
 
-        public abstract void TakeDamage(double dmg);
+        public abstract void TakeDamage(int dmg);
 
-        public abstract void RestoreHealth(double health);
+        public abstract void RestoreHealth(int health);
 
         public abstract GameResponse Execute(GameRequest request);
+
+        public abstract void CheckState();
     }
 }

@@ -11,7 +11,7 @@ namespace mudz.Core.Model.Domain.Player.Inventory
 
         public override bool IsAttainable { get { return true; } }
 
-        public abstract Dictionary<InventoryAugmentEffect, double> ActionEffect { get; set; } 
+        public abstract Dictionary<InventoryAugmentEffect, int> ActionEffect { get; set; } 
 
     }
 }
