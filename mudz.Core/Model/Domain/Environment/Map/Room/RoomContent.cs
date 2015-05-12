@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using mudz.Core.Model.Domain.Inventory;
-using mudz.Core.Model.Domain.Monster;
-using mudz.Core.Model.Domain.Npc;
-using mudz.Core.Model.Domain.Player;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace mudz.Core.Model.Domain.Environment.Map.Room
 {
@@ -17,5 +15,10 @@ namespace mudz.Core.Model.Domain.Environment.Map.Room
         public string Title { get; set; }
         public string Description { get; set; }
         public List<IGameObject> GameObjects { get; set; }
+
+        public IGameObject GetGameObject(Guid guid)
+        {
+            return GameObjects.First(x => x.GameObjectKey == guid);
+        }
     }
 }

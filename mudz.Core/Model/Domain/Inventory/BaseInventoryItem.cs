@@ -5,6 +5,8 @@ namespace mudz.Core.Model.Domain.Inventory
 {
     public abstract class BaseInventoryItem : IInventoryItem
     {
+        public Guid GameObjectKey { get; set; }
+
         public abstract InventoryTypes InventoryType { get; }
 
         public string Name { get; set; }

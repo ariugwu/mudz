@@ -6,10 +6,12 @@ namespace mudz.Core.Model.Domain.Monster
     {
         public static IMonster Create(MonsterTypes monsterType)
         {
+            var gameObjectKey = Guid.NewGuid();
+
             switch (monsterType)
             {
                 case MonsterTypes.Zombie:
-                    return new Zombie(){ HitPoints = 100};
+                    return new Zombie(){ HitPoints = 100, GameObjectKey = gameObjectKey};
                     break;
                 default:
                     throw new NotImplementedException("Sorry this type is not supported!");

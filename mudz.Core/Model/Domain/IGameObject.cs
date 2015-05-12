@@ -1,9 +1,12 @@
-﻿using mudz.Core.Model.Domain.GameEngine;
+﻿using System;
+using mudz.Core.Model.Domain.GameEngine;
 
 namespace mudz.Core.Model.Domain
 {
     public interface IGameObject : IGameCommand
     {
+        Guid GameObjectKey { get; set; }
+
         string Name { get; }
         string Description { get; set; }
 
