@@ -80,7 +80,7 @@ namespace mudz.Core.Model.Domain.Player
             return Name;
         }
 
-        public string GetDescription()
+        public override string GetDescription()
         {
             return String.Format("{0} is a {1}. Health: {2}", Name, PlayerType, HitPoints);
         }

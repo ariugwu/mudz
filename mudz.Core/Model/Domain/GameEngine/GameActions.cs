@@ -5,6 +5,7 @@
         Fight,
         Heal,
         Repair,
-        Negotiate
+        Negotiate,
+        Look
     }
 }

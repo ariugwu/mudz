@@ -24,7 +24,7 @@ namespace mudz.Core.Model.Domain
         public int Willpower { get; set; }
         public int Charm { get; set; }
         public int Endurance { get; set; }
-        
+
         #endregion
 
         public override void CheckState()
@@ -53,7 +53,7 @@ namespace mudz.Core.Model.Domain
                     else
                     {
                         amount = this.Fight();
-                        gameResponse.Message = String.Format("{0} attacks for {1}!", this.Name, amount);   
+                        gameResponse.Message = String.Format("{0} attacks for {1} damage!", this.Name, amount);   
                     }
 
                     gameResponse.Amount = amount;

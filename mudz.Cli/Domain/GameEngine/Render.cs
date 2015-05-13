@@ -86,13 +86,26 @@ namespace mudz.Cli.Domain.GameEngine
                     ReplaceLastLine(response.Message);
                     Console.ResetColor();
                     break;
+                case GameActions.Look:
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    ReplaceLastLine(response.Message);
+                    Console.ResetColor();
+                    break;
                 default:
                     throw new NotImplementedException();
             }
-            
-            DrawStatusBar((IPlayer)response.Request.Sender);
         }
 
+        public static void CommandPrompt(CommandParser commandParser, HiveMind hiveMind, RoomContent room, IPlayer player)
+        {
+            var command = Console.ReadLine();
+
+            commandParser.Execute(hiveMind, room, player, command);
+
+            CommandPrompt(commandParser, hiveMind, room, player);
+        }
+
+        #region Helper(s)
         private static void ReplaceLastLine(string str)
         {
                 Console.SetCursorPosition(0, Console.CursorTop); // Move to the start of the line.
@@ -100,5 +113,7 @@ namespace mudz.Cli.Domain.GameEngine
                 Console.SetCursorPosition(0, Console.CursorTop); // Move to the start of the line.
                 Console.WriteLine(str); // Replace line
         }
+
+        #endregion
     }
 }

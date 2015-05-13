@@ -70,6 +70,9 @@ namespace mudz.Core.Model.Domain.GameEngine
                    throw new NotImplementedException("The repair request has not been implemented.");
                 case GameActions.Negotiate:
                     throw new NotImplementedException("The negotiate request has not been implemented.");
+                case GameActions.Look:
+                    response = new GameResponse(){ Message = target.Description, WasSuccessful = true, Request = request};
+                    break;
                 default:
                     throw new NotImplementedException("The action requested is not available!");
             }

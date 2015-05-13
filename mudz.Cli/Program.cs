@@ -21,31 +21,38 @@ namespace mudz.Cli
             // Create two players to test with.
             var gary = (IPlayer)room.GameObjects.First(x => x.Name == "Gary");
 
-                gary.AddInventoryItem(new TestCharm());
-                gary.SetState(ActorStates.Disabled);
+                //gary.AddInventoryItem(new TestCharm());
+                //gary.SetState(ActorStates.Disabled);
 
-            var beth = room.GameObjects.First(x => x.Name == "Beth");
+            var commandParser = new CommandParser();
 
             Render.DrawRoom(room);
             Render.DrawStatusBar(gary);
+            Render.CommandPrompt(commandParser, hiveMind, room, gary);
 
-            // Test the command pattern.
-            var response = hiveMind.Execute(new GameRequest() {GameAction = GameActions.Heal, Sender = gary, Target = beth});
-            Render.DisplayCommand(response);
 
-            response = hiveMind.Execute(new GameRequest() {GameAction = GameActions.Fight, Sender = gary, Target = beth});
-            Render.DisplayCommand(response);
 
-            while (gary.HitPoints > 0)
-            {
-             response = hiveMind.Execute(new GameRequest(){ GameAction = GameActions.Fight, Sender = beth, Target = gary});
-             Render.DisplayCommand(response);
-            }
 
-            response = hiveMind.Execute(new GameRequest() { GameAction = GameActions.Fight, Sender = gary, Target = beth });
-            Render.DisplayCommand(response);
 
-            Console.ReadKey();
+
+            //var beth = room.GameObjects.First(x => x.Name == "Beth");
+            //// Test the command pattern.
+            //var response = hiveMind.Execute(new GameRequest() {GameAction = GameActions.Heal, Sender = gary, Target = beth});
+            //Render.DisplayCommand(response);
+
+            //response = hiveMind.Execute(new GameRequest() {GameAction = GameActions.Fight, Sender = gary, Target = beth});
+            //Render.DisplayCommand(response);
+
+            //while (gary.HitPoints > 0)
+            //{
+            // response = hiveMind.Execute(new GameRequest(){ GameAction = GameActions.Fight, Sender = beth, Target = gary});
+            // Render.DisplayCommand(response);
+            //}
+
+            //response = hiveMind.Execute(new GameRequest() { GameAction = GameActions.Fight, Sender = gary, Target = beth });
+            //Render.DisplayCommand(response);
+
+            //Console.ReadKey();
 
             //var morgan = room.Npcs.First(x => x.Name == "Morgan");
             //var deputy = room.Npcs.First(x => x.Name == "SlowDraw");

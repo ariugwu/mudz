@@ -9,7 +9,7 @@ namespace mudz.Core.Model.Domain
 
         public string Name { get; set; }
 
-        public string Description { get; set; }
+        public string Description { get { return GetDescription();} }
 
         public int Dexterity { get; set; }
 
@@ -35,5 +35,10 @@ namespace mudz.Core.Model.Domain
         public abstract GameResponse Execute(GameRequest request);
 
         public abstract void CheckState();
+
+        public virtual string GetDescription()
+        {
+            return "There is nothing to see here.";
+        }
     }
 }

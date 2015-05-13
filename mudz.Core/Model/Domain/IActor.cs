@@ -14,5 +14,7 @@
         int Willpower { get; set; }
         int Charm { get; set; }
         int Endurance { get; set; }
+
+        string GetDescription();
     }
 }

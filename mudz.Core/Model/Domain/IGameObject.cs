@@ -8,7 +8,7 @@ namespace mudz.Core.Model.Domain
         Guid GameObjectKey { get; set; }
 
         string Name { get; }
-        string Description { get; set; }
+        string Description { get; }
 
         int Dexterity { get; }
         int HitPoints { get; set; }
