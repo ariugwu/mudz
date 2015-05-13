@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A0253F43-6889-42C9-9FFE-238C92864EDE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>mudz.Core</RootNamespace>
+    <AssemblyName>mudz.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Model\Domain\ActorStates.cs" />
+    <Compile Include="Model\Domain\GameEngine\GameActions.cs" />
+    <Compile Include="Model\Domain\ActorGenderTypes.cs" />
+    <Compile Include="Model\Domain\BaseGameObject.cs" />
+    <Compile Include="Model\Domain\BaseActor.cs" />
+    <Compile Include="Model\Domain\Environment\Map\Grid.cs" />
+    <Compile Include="Model\Domain\Environment\Map\Room\RoomContent.cs" />
+    <Compile Include="Model\Domain\Environment\Map\Room\RoomKey.cs" />
+    <Compile Include="Model\Domain\GameEngine\GameEvent.cs" />
+    <Compile Include="Model\Domain\GameEngine\GameRequest.cs" />
+    <Compile Include="Model\Domain\GameEngine\GameResponse.cs" />
+    <Compile Include="Model\Domain\GameEngine\HiveMind.cs" />
+    <Compile Include="Model\Domain\GameEngine\IGameCommand.cs" />
+    <Compile Include="Model\Domain\GameObjectStates.cs" />
+    <Compile Include="Model\Domain\GameObjectTypes.cs" />
+    <Compile Include="Model\Domain\IActor.cs" />
+    <Compile Include="Model\Domain\IGameObject.cs" />
+    <Compile Include="Model\Domain\Inventory\IInventoryItem.cs" />
+    <Compile Include="Model\Domain\Inventory\InventoryAugmentEffect.cs" />
+    <Compile Include="Model\Domain\Inventory\InventoryTypes.cs" />
+    <Compile Include="Model\Domain\Monster\BaseMonster.cs" />
+    <Compile Include="Model\Domain\Monster\IMonster.cs" />
+    <Compile Include="Model\Domain\Monster\MonsterFactory.cs" />
+    <Compile Include="Model\Domain\Monster\MonsterTypes.cs" />
+    <Compile Include="Model\Domain\Monster\Zombie.cs" />
+    <Compile Include="Model\Domain\Npc\INpc.cs" />
+    <Compile Include="Model\Domain\Npc\Npc.cs" />
+    <Compile Include="Model\Domain\Npc\NpcFactory.cs" />
+    <Compile Include="Model\Domain\Npc\NpcTypes.cs" />
+    <Compile Include="Model\Domain\Npc\Deputy.cs" />
+    <Compile Include="Model\Domain\Npc\Sheriff.cs" />
+    <Compile Include="Model\Domain\Npc\ShopKeeper.cs" />
+    <Compile Include="Model\Domain\Npc\TownsPerson.cs" />
+    <Compile Include="Model\Domain\Player\Class\ArmyVet.cs" />
+    <Compile Include="Model\Domain\Player\Class\Carpenter.cs" />
+    <Compile Include="Model\Domain\Inventory\BaseInventoryItem.cs" />
+    <Compile Include="Model\Domain\Player\Inventory\Item\Keepsake\TestCharm.cs" />
+    <Compile Include="Model\Domain\Player\Inventory\Item\Wearable\TestGloves.cs" />
+    <Compile Include="Model\Domain\Player\Inventory\Item\Weapon\Fists.cs" />
+    <Compile Include="Model\Domain\Player\Inventory\Item\Weapon\TestHammer.cs" />
+    <Compile Include="Model\Domain\Player\Inventory\Item\Wearable\TestHat.cs" />
+    <Compile Include="Model\Domain\Player\Inventory\PlayerInventoryItem.cs" />
+    <Compile Include="Model\Domain\Player\Inventory\PlayerKeepsake.cs" />
+    <Compile Include="Model\Domain\Player\Inventory\PlayerWeapon.cs" />
+    <Compile Include="Model\Domain\Player\Inventory\PlayerWearable.cs" />
+    <Compile Include="Model\Domain\Player\IPlayer.cs" />
+    <Compile Include="Model\Domain\Player\IPlayerActionStrategy.cs" />
+    <Compile Include="Model\Domain\Player\Class\Mechanic.cs" />
+    <Compile Include="Model\Domain\Player\Class\Medic.cs" />
+    <Compile Include="Model\Domain\Player\Player.cs" />
+    <Compile Include="Model\Domain\Player\PlayerAnatomy.cs" />
+    <Compile Include="Model\Domain\Player\PlayerFactory.cs" />
+    <Compile Include="Model\Domain\Player\PlayerTypes.cs" />
+    <Compile Include="Model\Domain\Player\Class\Politician.cs" />
+    <Compile Include="Model\Domain\TextResources\Action.cs" />
+    <Compile Include="Model\Domain\TextResources\Message.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\Domain\Monster\Inventory\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
