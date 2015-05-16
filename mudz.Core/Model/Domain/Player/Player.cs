@@ -82,7 +82,9 @@ namespace mudz.Core.Model.Domain.Player
 
         public override string GetDescription()
         {
-            return String.Format("{0} is a {1}. Health: {2}", Name, PlayerType, HitPoints);
+            var physique = (this.Strength > 100) ? "Appears strongly built." : "Has a normal build";
+            var desc = String.Format("{0}. {1}.", physique, _actionStrategy.GetClassDescription());
+            return desc;
         }
 
         public override int Fight()

@@ -6,6 +6,7 @@
         Heal,
         Repair,
         Negotiate,
-        Look
+        Look,
+        None
     }
 }

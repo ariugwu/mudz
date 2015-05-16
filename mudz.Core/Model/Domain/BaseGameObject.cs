@@ -9,7 +9,13 @@ namespace mudz.Core.Model.Domain
 
         public string Name { get; set; }
 
-        public string Description { get { return GetDescription();} }
+        public string Description
+        {
+            get
+            {
+                return String.Format("You are looking at {0}. {1}. Health: {2}.", Name, GetDescription(), HitPoints);
+            }
+        }
 
         public int Dexterity { get; set; }
 

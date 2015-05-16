@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using mudz.Core.Model.Domain.Environment.Map.Room;
 using mudz.Core.Model.Domain.GameEngine;
 using mudz.Core.Model.Domain.Player;
@@ -16,7 +17,7 @@ namespace mudz.Cli.Domain.GameEngine
                 var targetName = command.Replace("fight", string.Empty).ToLower().Trim();
                 var target = room.GameObjects.First(x => x.Name.ToLower().Trim() == targetName);
                 response = hiveMind.Execute(new GameRequest() { GameAction = GameActions.Fight, Sender = player, Target = target });
-            } 
+            }
             else if (command.StartsWith("negotiate"))
             {
                 var targetName = command.Replace("negotiate", string.Empty).Trim();
@@ -47,10 +48,11 @@ namespace mudz.Cli.Domain.GameEngine
                 {
                     Message = "Sorry, no command matched your request.",
                     WasSuccessful = false,
-                    Request = new GameRequest()
+                    Request = new GameRequest() { GameAction = GameActions.None, Sender = player, Target = null}
                 };
             }
 
+            Render.ClearPreviousLine();
             Render.DisplayCommand(response);
             Render.DrawStatusBar((IPlayer)response.Request.Sender);
         }

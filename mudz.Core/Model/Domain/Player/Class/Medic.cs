@@ -43,6 +43,12 @@
             actor.HitPoints = actor.HitPoints - dmg;
         }
 
+        public string GetClassDescription()
+        {
+            return
+                "The medic appears ready for anything. You can only imagine the horrors they've had to respond to in this new world.";
+        }
+
         public void RestoreHealth(IActor actor, int healing)
         {
             actor.HitPoints = actor.HitPoints + healing;

@@ -13,5 +13,7 @@
         void RestoreHealth(IActor actor, int health);
         void TakeDamage(IActor actor, int dmg);
 
+        string GetClassDescription();
+
     }
 }

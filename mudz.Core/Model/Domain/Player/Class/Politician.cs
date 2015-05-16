@@ -43,6 +43,11 @@
             actor.HitPoints = actor.HitPoints - dmg;
         }
 
+        public string GetClassDescription()
+        {
+            return "The politician insists on wearing clean and pressed clothes. Standing out against the dead, dying, and destroyed background.";
+        }
+
         public void RestoreHealth(IActor actor, int healing)
         {
             actor.HitPoints = actor.HitPoints + healing;

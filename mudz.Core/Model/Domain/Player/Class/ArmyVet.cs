@@ -43,6 +43,11 @@
             actor.HitPoints = actor.HitPoints - dmg;
         }
 
+        public string GetClassDescription()
+        {
+            return "Army Vets are known for being tough. A wide array of tools and weapons can be seen attached to various belts and loops.";
+        }
+
         public void RestoreHealth(IActor actor, int healing)
         {
             actor.HitPoints = actor.HitPoints + healing;

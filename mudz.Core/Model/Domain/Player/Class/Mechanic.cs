@@ -43,6 +43,11 @@
             actor.HitPoints = actor.HitPoints - dmg;
         }
 
+        public string GetClassDescription()
+        {
+            return "The mechanic looks around carefully. Dirt and oil seem to cover all areas of visable skin.";
+        }
+
         public void RestoreHealth(IActor actor, int healing)
         {
             actor.HitPoints = actor.HitPoints + healing;

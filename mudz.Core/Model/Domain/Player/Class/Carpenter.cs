@@ -43,6 +43,11 @@
             actor.HitPoints = actor.HitPoints - dmg;
         }
 
+        public string GetClassDescription()
+        {
+            return "The carpenter has tough hands, and a worn toolbelt around their waist.";
+        }
+
         public void RestoreHealth(IActor actor, int healing)
         {
             actor.HitPoints = actor.HitPoints + healing;

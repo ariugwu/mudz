@@ -52,13 +52,12 @@ namespace mudz.Cli.Domain.GameEngine
             Console.WriteLine(string.Join(",", players.Select(x => x.Name)));
             
             Console.ResetColor();
-            Console.WriteLine();
         }
 
         public static void DrawStatusBar(IPlayer player)
         {
             Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.Write("[Health: {0} | Stamina: {1}]: ", player.HitPoints, "N/A");
+            Console.Write("[Health: {0} | Stamina: {1}]: ", player.HitPoints, player.Stamina);
             Console.ResetColor();
         }
 
@@ -67,10 +66,9 @@ namespace mudz.Cli.Domain.GameEngine
             if (!response.WasSuccessful)
             {
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
-                ReplaceLastLine(response.Message);
+                ReplaceLine(response.Message);
                 Console.ResetColor();
 
-                DrawStatusBar((IPlayer)response.Request.Sender);
                 return;
             } 
 
@@ -78,17 +76,17 @@ namespace mudz.Cli.Domain.GameEngine
             {
                 case GameActions.Heal:
                     Console.ForegroundColor = ConsoleColor.Blue;
-                    ReplaceLastLine(response.Message);
+                    ReplaceLine(response.Message);
                     Console.ResetColor();
                     break;
                 case GameActions.Fight:
                     Console.ForegroundColor = ConsoleColor.Red;
-                    ReplaceLastLine(response.Message);
+                    ReplaceLine(response.Message);
                     Console.ResetColor();
                     break;
                 case GameActions.Look:
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    ReplaceLastLine(response.Message);
+                    ReplaceLine(response.Message);
                     Console.ResetColor();
                     break;
                 default:
@@ -106,7 +104,7 @@ namespace mudz.Cli.Domain.GameEngine
         }
 
         #region Helper(s)
-        private static void ReplaceLastLine(string str)
+        private static void ReplaceLine(string str)
         {
                 Console.SetCursorPosition(0, Console.CursorTop); // Move to the start of the line.
                 Console.Write(new String(' ', Console.BufferWidth - 1)); // Replace with nothing.
@@ -114,6 +112,12 @@ namespace mudz.Cli.Domain.GameEngine
                 Console.WriteLine(str); // Replace line
         }
 
+        public static void ClearPreviousLine()
+        {
+            Console.SetCursorPosition(0, Console.CursorTop - 1);
+            Console.Write(new String(' ', Console.BufferWidth - 1)); // Replace with nothing.
+            Console.SetCursorPosition(0, Console.CursorTop); // Move to the start of the line.
+        }
         #endregion
     }
 }
