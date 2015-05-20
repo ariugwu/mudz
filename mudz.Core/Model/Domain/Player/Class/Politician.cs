@@ -1,7 +1,23 @@
-﻿namespace mudz.Core.Model.Domain.Player.Class
+﻿using System.Collections.Generic;
+using mudz.Core.Model.Domain.GameEngine;
+
+namespace mudz.Core.Model.Domain.Player.Class
 {
     public class Politician : IPlayerActionStrategy
     {
+        private Dictionary<GameActions, int> _actionStaminaCostMap = new Dictionary<GameActions, int>()
+        {
+            {GameActions.Fight, 3},
+            {GameActions.Heal, 3},
+            {GameActions.Repair, 3},
+            {GameActions.Negotiate, 1}
+        };
+
+        public Dictionary<GameActions, int> ActionStaminaCostMap
+        {
+            get { return _actionStaminaCostMap; }
+        } 
+
         public void SetStats(IActor actor)
         {
             actor.Health = 185;
@@ -16,25 +32,25 @@
 
         public int Attack(IActor actor)
         {
-            AdjustStamina(actor, 3);
+            AdjustStamina(actor, ActionStaminaCostMap[GameActions.Fight]);
             return 4;
         }
 
         public int Heal(IActor actor)
         {
-            AdjustStamina(actor, 3);
+            AdjustStamina(actor, ActionStaminaCostMap[GameActions.Heal]);
             return -4;
         }
 
         public int Repair(IActor actor)
         {
-            AdjustStamina(actor, 3);
+            AdjustStamina(actor, ActionStaminaCostMap[GameActions.Repair]);
             return 10;
         }
 
         public int Negotiate(IActor actor)
         {
-            AdjustStamina(actor, 1);
+            AdjustStamina(actor, ActionStaminaCostMap[GameActions.Negotiate]);
             return 20;
         }
 

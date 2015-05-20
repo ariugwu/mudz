@@ -7,6 +7,7 @@ namespace mudz.Core.Model.Domain.Player.Inventory.Item.Keepsake
     {
         public TestCharm()
         {
+            Name = "TestCharm";
             ActionEffect = new Dictionary<InventoryAugmentEffect, int> {{InventoryAugmentEffect.Attack, 3}};
 
         }

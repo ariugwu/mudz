@@ -7,6 +7,7 @@ namespace mudz.Core.Model.Domain.Player.Inventory.Item.Weapon
     {
         public TestHammer()
         {
+            Name = "TestHammer";
             ActionEffect = new Dictionary<InventoryAugmentEffect, int> { { InventoryAugmentEffect.Attack, 2 } };
         }
 

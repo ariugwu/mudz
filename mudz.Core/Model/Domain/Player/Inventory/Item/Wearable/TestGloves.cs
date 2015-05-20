@@ -7,6 +7,7 @@ namespace mudz.Core.Model.Domain.Player.Inventory.Item.Wearable
     {
         public TestGloves()
         {
+            Name = "TestGloves";
             ActionEffect = new Dictionary<InventoryAugmentEffect, int> { { InventoryAugmentEffect.Attack, 1 } };
         }
 

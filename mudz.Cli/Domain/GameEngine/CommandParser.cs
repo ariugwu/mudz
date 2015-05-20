@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using mudz.Core.Model.Domain;
 using mudz.Core.Model.Domain.Environment.Map.Room;
@@ -37,11 +38,21 @@ namespace mudz.Cli.Domain.GameEngine
                 var target = room.GameObjects.First(x => x.Name.ToLower().Trim() == targetName);
                 response = hiveMind.Execute(new GameRequest() { GameAction = GameActions.Heal, Sender = player, Target = target });
             }
+            else if (command.Trim().ToLower() == "look")
+            {
+                Render.ClearScreen();
+                Render.DrawRoom(room);
+                response = new GameResponse(){ Amount = 0, Message = String.Format("{0} looks around.", player.Name)};
+            }
             else if (command.StartsWith("look"))
             {
                 var targetName = command.Replace("look", string.Empty).Trim();
                 var target = room.GameObjects.First(x => x.Name.ToLower().Trim() == targetName);
                 response = hiveMind.Execute(new GameRequest() { GameAction = GameActions.Look, Sender = player, Target = target });
+            }
+            else if (command.StartsWith("get"))
+            {
+                throw new NotImplementedException();
             }
             else
             {
@@ -55,7 +66,7 @@ namespace mudz.Cli.Domain.GameEngine
 
             Render.ClearPreviousLine();
             Render.DisplayCommand(response);
-            Render.DrawStatusBar((IPlayer)response.Request.Sender);
+            Render.DrawStatusBar(player);
         }
 
         private Dictionary<string, GameActions> _commandActionMap = new Dictionary<string, GameActions>()

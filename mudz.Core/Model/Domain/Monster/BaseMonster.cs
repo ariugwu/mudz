@@ -24,6 +24,11 @@ namespace mudz.Core.Model.Domain.Monster
             HitPoints = HitPoints + health;
         }
 
+        public override int GetStaminaCostByActionType(GameEngine.GameActions gameAction)
+        {
+            throw new System.NotImplementedException("No monster should ever call this.");
+        }
+
         public override int Fight()
         {
             return 33;

@@ -22,7 +22,6 @@ namespace mudz.Cli
             var gary = (IPlayer)room.GameObjects.First(x => x.Name == "Gary");
 
                 //gary.AddInventoryItem(new TestCharm());
-                //gary.SetState(ActorStates.Disabled);
 
             var commandParser = new CommandParser();
 

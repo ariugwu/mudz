@@ -4,6 +4,7 @@ using System.Linq;
 using mudz.Core.Model.Domain;
 using mudz.Core.Model.Domain.Environment.Map.Room;
 using mudz.Core.Model.Domain.GameEngine;
+using mudz.Core.Model.Domain.Inventory;
 using mudz.Core.Model.Domain.Monster;
 using mudz.Core.Model.Domain.Player;
 
@@ -13,37 +14,52 @@ namespace mudz.Cli.Domain.GameEngine
     {
         public static void DrawRoom(RoomContent roomContent)
         {
+            // ##################################################
             // Output the title and description
+            // ##################################################
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(roomContent.Title);
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine(roomContent.Description);
             Console.ResetColor();
 
+            // ##################################################
             // Find all players and monsters
+            // ##################################################
             List<IPlayer> players = 
-                roomContent.GameObjects.Where(x => x.GameObjectType == GameObjectTypes.Player)
+                roomContent.GameObjects.Where(x => x.GameObjectType == GameObjectTypes.Player && x.GameObjectState == GameObjectStates.InPlay)
                     .Select(x => (IPlayer)x)
                     .ToList();
 
             List<IMonster> monsters =
-                roomContent.GameObjects.Where(x => x.GameObjectType == GameObjectTypes.Monster)
+                roomContent.GameObjects.Where(x => x.GameObjectType == GameObjectTypes.Monster && x.GameObjectState == GameObjectStates.InPlay)
                     .Select(x => (IMonster) x)
                     .ToList();
 
+            // ##################################################
+            // Find all inventory
+            // ##################################################
+            List<IInventoryItem> items =
+                roomContent.GameObjects.Where(x => x.GameObjectType == GameObjectTypes.InventoryItem)
+                    .Select(x => (IInventoryItem) x)
+                    .ToList();
+
+            // ##################################################
             // Output the monsters
+            // ##################################################
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.Write("Targets: ");
             Console.ForegroundColor = ConsoleColor.DarkGreen;
 
-            foreach (var m in monsters)
-            {
-                Console.Write(m.Name + ",");
-            }
+            Console.WriteLine(string.Join(",", monsters.Select(x => x.Name)));
+
             Console.ResetColor();
 
             Console.WriteLine();
 
+            // ##################################################
+            // Output the players
+            // ##################################################
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write("Also here: ");
 
@@ -52,6 +68,18 @@ namespace mudz.Cli.Domain.GameEngine
             Console.WriteLine(string.Join(",", players.Select(x => x.Name)));
             
             Console.ResetColor();
+
+            // ##################################################
+            // Output the inventory
+            // ##################################################
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.Write("On the ground: ");
+
+            Console.ForegroundColor = ConsoleColor.White;
+
+            Console.WriteLine(string.Join(",", items.Select(x => x.Name)));
+
+            Console.ResetColor();
         }
 
         public static void DrawStatusBar(IPlayer player)
@@ -59,6 +87,11 @@ namespace mudz.Cli.Domain.GameEngine
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.Write("[Health: {0} | Stamina: {1}]: ", player.HitPoints, player.Stamina);
             Console.ResetColor();
+        }
+
+        public static void ClearScreen()
+        {
+            Console.Clear();
         }
 
         public static void DisplayCommand(GameResponse response)

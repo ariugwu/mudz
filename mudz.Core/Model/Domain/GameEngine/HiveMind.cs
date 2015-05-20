@@ -5,6 +5,7 @@ using mudz.Core.Model.Domain.Environment.Map.Room;
 using mudz.Core.Model.Domain.Monster;
 using mudz.Core.Model.Domain.Npc;
 using mudz.Core.Model.Domain.Player;
+using mudz.Core.Model.Domain.Player.Inventory.Item.Keepsake;
 using mudz.Core.Model.Domain.Player.Inventory.Item.Weapon;
 using mudz.Core.Model.Domain.Player.Inventory.Item.Wearable;
 
@@ -52,9 +53,13 @@ namespace mudz.Core.Model.Domain.GameEngine
                     if (response.WasSuccessful) target.TakeDamage(response.Amount);
                     break;
                 case GameActions.Repair:
-                   throw new NotImplementedException("The repair request has not been implemented.");
+                    response = sender.Execute(request);
+                    if (response.WasSuccessful) target.Repair();
+                    break;
                 case GameActions.Negotiate:
-                    throw new NotImplementedException("The negotiate request has not been implemented.");
+                    response = sender.Execute(request);
+                    if (response.WasSuccessful) target.Negotiate();
+                    break;
                 case GameActions.Look:
                     response = new GameResponse(){ Message = target.Description, WasSuccessful = true, Request = request};
                     break;
@@ -107,6 +112,7 @@ namespace mudz.Core.Model.Domain.GameEngine
             room.GameObjects.Add(MonsterFactory.Create(MonsterTypes.Zombie));
             room.GameObjects.Add(new TestHammer());
             room.GameObjects.Add(new TestGloves());
+            room.GameObjects.Add(new TestCharm());
         }
     }
 }
