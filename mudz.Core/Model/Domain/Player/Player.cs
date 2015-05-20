@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using mudz.Core.Model.Domain.GameEngine;
 using mudz.Core.Model.Domain.Inventory;
 using mudz.Core.Model.Domain.Player.Class;
 using mudz.Core.Model.Domain.Player.Inventory;
@@ -85,6 +86,11 @@ namespace mudz.Core.Model.Domain.Player
             var physique = (this.Strength > 100) ? "Appears strongly built." : "Has a normal build";
             var desc = String.Format("{0}. {1}.", physique, _actionStrategy.GetClassDescription());
             return desc;
+        }
+
+        public override int GetStaminaCostByActionType(GameActions gameAction)
+        {
+            return _actionStrategy.ActionStaminaCostMap[gameAction];
         }
 
         public override int Fight()

@@ -9,5 +9,6 @@
         public static ActorStates Drunk = new ActorStates() { Name = "Drunk", Description = "" };
         public static ActorStates Angry = new ActorStates() { Name = "Angry", Description = "" };
         public static ActorStates Depressed = new ActorStates() { Name = "Depressed", Description = "" };
+        public static ActorStates Exhausted = new ActorStates() { Name = "Exhausted", Description = "With no stamina left it's difficult to do anything." };
     }
 }

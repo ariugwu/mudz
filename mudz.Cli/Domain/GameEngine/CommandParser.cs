@@ -1,5 +1,6 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Linq;
+using mudz.Core.Model.Domain;
 using mudz.Core.Model.Domain.Environment.Map.Room;
 using mudz.Core.Model.Domain.GameEngine;
 using mudz.Core.Model.Domain.Player;
@@ -7,7 +8,7 @@ using mudz.Core.Model.Domain.Player;
 namespace mudz.Cli.Domain.GameEngine
 {
     public class CommandParser
-    {
+    { 
         public void Execute(HiveMind hiveMind, RoomContent room, IPlayer player, string command)
         {
             GameResponse response;
@@ -56,5 +57,58 @@ namespace mudz.Cli.Domain.GameEngine
             Render.DisplayCommand(response);
             Render.DrawStatusBar((IPlayer)response.Request.Sender);
         }
+
+        private Dictionary<string, GameActions> _commandActionMap = new Dictionary<string, GameActions>()
+        {
+            {"fight", GameActions.Fight},
+            {"negotiate", GameActions.Negotiate},
+            {"repair", GameActions.Repair},
+            {"heal", GameActions.Heal},
+            {"look", GameActions.Look},
+            {"none", GameActions.None}
+        };
+
+        public GameResponse GetGameReponse(string command, HiveMind hiveMind, RoomContent room, IGameObject player)
+        {
+            GameResponse response;
+
+            string[] args = command.Split(' ');
+            GameActions gameAction = GetGameAction(args[0]);
+
+            if (args.Length > 1 || gameAction == GameActions.None)
+            {
+                response = NoSuitableCommand(player);
+            }
+            else
+            {
+                IGameObject targ = GetTarget(room, args[1]);
+                response = hiveMind.Execute(new GameRequest() { GameAction = gameAction, Sender = player, Target = targ });
+            }
+
+            return response;
+        }
+
+        public GameActions GetGameAction(string command)
+        {
+            command = command.Trim().ToLower();
+            return (_commandActionMap.ContainsKey(command))? _commandActionMap[command] : GameActions.None;
+        }
+
+        public IGameObject GetTarget(RoomContent room, string targetName)
+        {
+            return room.GameObjects.First(x => x.Name.ToLower().Trim() == targetName);
+        }
+
+        public GameResponse NoSuitableCommand(IGameObject player)
+        {
+            return new GameResponse()
+                {
+                    Message = "Sorry, no command matched your request.",
+                    WasSuccessful = false,
+                    Request = new GameRequest() { GameAction = GameActions.None, Sender = player, Target = null}
+                };
+        }
     }
+
+
 }

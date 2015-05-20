@@ -34,27 +34,12 @@ namespace mudz.Core.Model.Domain.GameEngine
             var actionType = request.GameAction;
             var sender = request.Sender;
             var target = request.Target;
+
             GameResponse response;
 
-            if (sender.GameObjectState == GameObjectStates.OutOfPlay)
-            {
-                return new GameResponse
-                {
-                    Request = request,
-                    WasSuccessful = false,
-                    Message = String.Format("Sorry, {0} is out of play!", sender.Name)
-                };
-            }
-            
-            if (target.GameObjectState == GameObjectStates.OutOfPlay)
-            {
-                return new GameResponse()
-                {
-                    Request = request,
-                    WasSuccessful = false,
-                    Message = String.Format("Sorry, {0} is out of play!", target.Name)
-                };
-            }
+            if (IsOutOfPlay(sender)) return OutOfPlayResponse(request, sender);
+
+            if (IsOutOfPlay(target)) return OutOfPlayResponse(request, target);
 
             switch(actionType)
             {
@@ -84,6 +69,22 @@ namespace mudz.Core.Model.Domain.GameEngine
             ResponseStack.Push(response);
 
             return response;
+        }
+
+
+        private bool IsOutOfPlay(IGameObject gameObject)
+        {
+            return (gameObject.GameObjectState == GameObjectStates.OutOfPlay);
+        }
+
+        private GameResponse OutOfPlayResponse(GameRequest request, IGameObject gameObject)
+        {
+            return new GameResponse()
+            {
+                Request = request,
+                WasSuccessful = false,
+                Message = String.Format("Sorry, {0} is out of play!", gameObject.Name)
+            };
         }
 
         private void SeedWorld()
