@@ -55,8 +55,6 @@ namespace mudz.Cli.Domain.GameEngine
 
             Console.ResetColor();
 
-            Console.WriteLine();
-
             // ##################################################
             // Output the players
             // ##################################################

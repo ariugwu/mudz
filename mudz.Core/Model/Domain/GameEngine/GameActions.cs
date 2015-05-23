@@ -7,6 +7,7 @@
         Repair,
         Negotiate,
         Look,
-        None
+        None,
+        Get
     }
 }
