@@ -1,5 +1,6 @@
 ﻿using System;
 using mudz.Core.Model.Domain.GameEngine;
+using mudz.Core.Model.Domain.Inventory;
 
 namespace mudz.Core.Model.Domain
 {
@@ -90,7 +91,7 @@ namespace mudz.Core.Model.Domain
 
         public abstract int GetStaminaCostByActionType(GameActions gameAction);
 
-        public override GameResponse Execute(GameRequest request)
+        public override GameResponse ExecuteAction(GameRequest request)
         {
             var actionType = request.GameAction;
             var gameResponse = new GameResponse() { WasSuccessful = true };
@@ -125,5 +126,19 @@ namespace mudz.Core.Model.Domain
                         throw new NotImplementedException("This action has not been implemented");
                 }
         }
+
+        public override GameResponse ProcessItem(IInventoryItem item)
+        {
+            AcceptItem(item);
+
+            return new GameResponse()
+            {
+                Request = new GameRequest(),
+                WasSuccessful = true,
+                Message = String.Format("{0} takes {1} and quickly hides it away.", this.Name, item.Name)
+            };
+        }
+
+        public abstract void AcceptItem(IInventoryItem item);
     }
 }

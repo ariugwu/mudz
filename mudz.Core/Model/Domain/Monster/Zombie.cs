@@ -1,4 +1,6 @@
-﻿namespace mudz.Core.Model.Domain.Monster
+﻿using mudz.Core.Model.Domain.Inventory;
+
+namespace mudz.Core.Model.Domain.Monster
 {
     public class Zombie : BaseMonster
     {
@@ -14,6 +16,11 @@
         {
             get { throw new System.NotImplementedException(); }
             set { throw new System.NotImplementedException(); }
+        }
+
+        public override void AcceptItem(IInventoryItem item)
+        {
+            throw new System.NotImplementedException();
         }
 
         public override string GetDescription()

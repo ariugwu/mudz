@@ -120,6 +120,11 @@ namespace mudz.Cli.Domain.GameEngine
                     ReplaceLine(response.Message);
                     Console.ResetColor();
                     break;
+                case GameActions.Get:
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    ReplaceLine(response.Message);
+                    Console.ResetColor();
+                    break;
                 default:
                     throw new NotImplementedException();
             }

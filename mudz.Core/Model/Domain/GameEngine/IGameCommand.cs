@@ -2,7 +2,8 @@
 {
     public interface IGameCommand
     {
-        GameResponse Execute(GameRequest request);
+        GameResponse ExecuteAction(GameRequest request);
+        GameResponse ProcessItem(Inventory.IInventoryItem item);
         void CheckState();
     }
 }

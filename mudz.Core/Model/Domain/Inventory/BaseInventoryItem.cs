@@ -58,7 +58,7 @@ namespace mudz.Core.Model.Domain.Inventory
 
         }
 
-        public virtual GameResponse Execute(GameRequest request)
+        public virtual GameResponse ExecuteAction(GameRequest request)
         {
             var actionType = request.GameAction;
 
@@ -75,6 +75,16 @@ namespace mudz.Core.Model.Domain.Inventory
                 default:
                     throw new NotImplementedException("Game action not supported!");
             }
+        }
+
+        public virtual GameResponse ProcessItem(IInventoryItem item)
+        {
+            return new GameResponse()
+            {
+                Request = new GameRequest(),
+                WasSuccessful = false,
+                Message = "Why would you want to do that?"
+            };
         }
 
         public virtual void CheckState()

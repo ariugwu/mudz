@@ -61,6 +61,11 @@ namespace mudz.Core.Model.Domain.Player
             Inventory.Add(item);
         }
 
+        public override void AcceptItem(IInventoryItem item)
+        {
+            AddInventoryItem((PlayerInventoryItem)item);
+        }
+
         public void RemoveInventoryItem(int index)
         {
             Inventory.RemoveAt(index);

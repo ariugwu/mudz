@@ -1,5 +1,6 @@
 ﻿using System;
 using mudz.Core.Model.Domain.GameEngine;
+using mudz.Core.Model.Domain.Inventory;
 
 namespace mudz.Core.Model.Domain
 {
@@ -38,13 +39,23 @@ namespace mudz.Core.Model.Domain
 
         public abstract void RestoreHealth(int health);
 
-        public abstract GameResponse Execute(GameRequest request);
+        public abstract GameResponse ExecuteAction(GameRequest request);
 
         public abstract void CheckState();
 
         public virtual string GetDescription()
         {
             return "There is nothing to see here.";
+        }
+
+        public virtual GameResponse ProcessItem(IInventoryItem item)
+        {
+            return new GameResponse()
+            {
+               Request = new GameRequest(),
+               WasSuccessful = false,
+               Message = "Why would you want to do that?"
+            };
         }
     }
 }

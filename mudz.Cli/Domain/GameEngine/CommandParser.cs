@@ -69,7 +69,7 @@ namespace mudz.Cli.Domain.GameEngine
             else
             {
                 IGameObject targ = GetTarget(room, args[1]);
-                response = hiveMind.Execute(new GameRequest() { GameAction = gameAction, Sender = player, Target = targ });
+                response = hiveMind.Execute(new GameRequest() { RoomKey = room.RoomKey, GameAction = gameAction, Sender = player, Target = targ });
             }
 
             return response;

@@ -36,19 +36,19 @@ namespace mudz.Cli
 
             //var beth = room.GameObjects.First(x => x.Name == "Beth");
             //// Test the command pattern.
-            //var response = hiveMind.Execute(new GameRequest() {GameAction = GameActions.Heal, Sender = gary, Target = beth});
+            //var response = hiveMind.ExecuteAction(new GameRequest() {GameAction = GameActions.Heal, Sender = gary, Target = beth});
             //Render.DisplayCommand(response);
 
-            //response = hiveMind.Execute(new GameRequest() {GameAction = GameActions.Fight, Sender = gary, Target = beth});
+            //response = hiveMind.ExecuteAction(new GameRequest() {GameAction = GameActions.Fight, Sender = gary, Target = beth});
             //Render.DisplayCommand(response);
 
             //while (gary.HitPoints > 0)
             //{
-            // response = hiveMind.Execute(new GameRequest(){ GameAction = GameActions.Fight, Sender = beth, Target = gary});
+            // response = hiveMind.ExecuteAction(new GameRequest(){ GameAction = GameActions.Fight, Sender = beth, Target = gary});
             // Render.DisplayCommand(response);
             //}
 
-            //response = hiveMind.Execute(new GameRequest() { GameAction = GameActions.Fight, Sender = gary, Target = beth });
+            //response = hiveMind.ExecuteAction(new GameRequest() { GameAction = GameActions.Fight, Sender = gary, Target = beth });
             //Render.DisplayCommand(response);
 
             //Console.ReadKey();

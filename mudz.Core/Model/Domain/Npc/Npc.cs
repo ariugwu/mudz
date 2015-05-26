@@ -57,7 +57,7 @@ namespace mudz.Core.Model.Domain.Npc
 
         #endregion
 
-        public override GameResponse Execute(GameRequest request)
+        public override GameResponse ExecuteAction(GameRequest request)
         {
             throw new NotImplementedException();
         }

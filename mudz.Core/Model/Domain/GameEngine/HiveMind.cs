@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using mudz.Core.Model.Domain.Environment.Map;
 using mudz.Core.Model.Domain.Environment.Map.Room;
+using mudz.Core.Model.Domain.Inventory;
 using mudz.Core.Model.Domain.Monster;
 using mudz.Core.Model.Domain.Npc;
 using mudz.Core.Model.Domain.Player;
@@ -39,29 +41,43 @@ namespace mudz.Core.Model.Domain.GameEngine
             GameResponse response;
 
             if (IsOutOfPlay(sender)) return OutOfPlayResponse(request, sender);
-
             if (IsOutOfPlay(target)) return OutOfPlayResponse(request, target);
+
+            if (!IsTargetPresent(request.RoomKey, target)) return NoTargetResponse(request, target);
 
             switch(actionType)
             {
                 case GameActions.Heal:
-                    response = sender.Execute(request);
+                    response = sender.ExecuteAction(request);
                     if (response.WasSuccessful) target.RestoreHealth(response.Amount);
                     break;
                 case GameActions.Fight:
-                    response = sender.Execute(request);
+                    response = sender.ExecuteAction(request);
                     if (response.WasSuccessful) target.TakeDamage(response.Amount);
                     break;
                 case GameActions.Repair:
-                    response = sender.Execute(request);
+                    response = sender.ExecuteAction(request);
                     if (response.WasSuccessful) target.Repair();
                     break;
                 case GameActions.Negotiate:
-                    response = sender.Execute(request);
+                    response = sender.ExecuteAction(request);
                     if (response.WasSuccessful) target.Negotiate();
                     break;
                 case GameActions.Look:
                     response = new GameResponse(){ Message = target.Description, WasSuccessful = true, Request = request};
+                    break;
+                case GameActions.Get:
+                    if (target.GameObjectType != GameObjectTypes.InventoryItem)
+                    {
+                        response = InvalidTargetResponse(request, target);
+                        break;
+                    }
+
+                    var item = (IInventoryItem)World.Rooms[request.RoomKey].GetGameObject(target.GameObjectKey);
+                    response = sender.ProcessItem(item);
+
+                    if (response.WasSuccessful) World.Rooms[request.RoomKey].GameObjects.Remove(item);
+
                     break;
                 default:
                     throw new NotImplementedException("The action requested is not available!");
@@ -82,6 +98,11 @@ namespace mudz.Core.Model.Domain.GameEngine
             return (gameObject.GameObjectState == GameObjectStates.OutOfPlay);
         }
 
+        private bool IsTargetPresent(RoomKey roomKey, IGameObject gameObject)
+        {
+            return World.Rooms[roomKey].GameObjects.Exists(x => x.GameObjectKey == gameObject.GameObjectKey);
+        }
+
         private GameResponse OutOfPlayResponse(GameRequest request, IGameObject gameObject)
         {
             return new GameResponse()
@@ -89,6 +110,26 @@ namespace mudz.Core.Model.Domain.GameEngine
                 Request = request,
                 WasSuccessful = false,
                 Message = String.Format("Sorry, {0} is out of play!", gameObject.Name)
+            };
+        }
+
+        private GameResponse NoTargetResponse(GameRequest request, IGameObject gameObject)
+        {
+            return new GameResponse()
+            {
+                Request = request,
+                WasSuccessful = false,
+                Message = String.Format("Sorry, there doesn't seem to be '{0}' here.", gameObject.Name)
+            };
+        }
+
+        private GameResponse InvalidTargetResponse(GameRequest request, IGameObject gameObject)
+        {
+            return new GameResponse()
+            {
+                Request = request,
+                WasSuccessful = false,
+                Message = String.Format("That doesn't make any sense. '{0}' is not a valid target for this command.", gameObject.Name)
             };
         }
 
