@@ -16,7 +16,7 @@ _I'll do my best to mark which commits line up with which code katas (from the t
 * State Pattern _(Behavioral Pattern)_ [[Video(s)]](https://www.youtube.com/playlist?list=PLpYfe60H9lRvl5DeE5AOAw2-kYsd_xrMX): Add some more complexity to our game Actors (Players/Monsters) to deal with *temporary* changes to them (i.e - scared, excited, brunk, etc).
 * Flyweight Pattern _(Structural Pattern)_ [[Video(s)]](https://www.youtube.com/playlist?list=PLpYfe60H9lRte4o8Ld_fTpG7iaJlSpV_B): Find ways to load our game assets and reuse them efficiently.
 
-##### Bonus:
+##### Bonus [[Video(s)]](https://www.youtube.com/playlist?list=PLpYfe60H9lRu9yxvQfaMO6Avp15kkXfJt):
 * Adapter Pattern _(Structural)_: We use this but never did a kata for it because it's so similar to our core 6.
 * Interpreter Pattern _(Behavioral Pattern)_: We use this but never did a kata for it because it's so similar to our core 6.
 
