@@ -7,14 +7,32 @@ _I'll do my best to mark which commits line up with which code katas (from the t
 ### First 'Semester' ###
 
 #### Phase I - Let's build a prototype game logic engine with a text ui for testing.
-* Week 1 - Factory Pattern _(Creational Pattern)_ [[Video(s)]](https://www.youtube.com/watch?v=IlWQk2WRS3g):  Get us off the ground and create some objects.
-* Strategy Pattern _(Behavioral Pattern)_ [[Video(s)]](https://www.youtube.com/watch?v=obRmu-qJVRE): Help deal with some granular complexity of our players. This pattern has a lot in common with the Bridge Pattern and is often confused. The key difference we're high lighting is that our behavior in a Strategy Pattern is coupled witht he context (player)
-* Bridge Pattern _(Structural Pattern)_ [[Video(s)]](https://www.youtube.com/playlist?list=PLpYfe60H9lRsrrMbj_hsx-cRNL-C-z4kW):  Start getting some of our monster code organized. We might do something similar with inventory items so this will be a good test.
+* Week 1 - Factory Pattern _(Creational Pattern)_: 
+  * **Description:** _Get us off the ground and create some objects_
+  * [[Video(s)]](https://www.youtube.com/watch?v=IlWQk2WRS3g)
+  * Commit:
+* Strategy Pattern _(Behavioral Pattern)_:
+  * **Description:** _Help deal with some granular complexity of our players. This pattern has a lot in common with the Bridge Pattern and is often confused. The key difference we're high lighting is that our behavior in a Strategy Pattern is coupled witht he context (player)_
+  * [[Video(s)]](https://www.youtube.com/watch?v=obRmu-qJVRE)
+  * **Commit:**
+* Bridge Pattern _(Structural Pattern)_:
+  * **Description:** Start getting some of our monster code organized. We might do something similar with inventory items so this will be a good test.
+  * [[Video(s)]](https://www.youtube.com/playlist?list=PLpYfe60H9lRsrrMbj_hsx-cRNL-C-z4kW)
+  * **Commit:**
 
 #### Phase II - Building out our world and fine tuning interactions with that world.
-* Command Pattern _(Behavioral Pattern)_ [[Video(s)]](https://www.youtube.com/playlist?list=PLpYfe60H9lRuFpmif1JiZTa-Cx-1UJKGf): Introduce a way to cleanly handle commands. Sets us up nicely for event-sourcing later.
-* State Pattern _(Behavioral Pattern)_ [[Video(s)]](https://www.youtube.com/playlist?list=PLpYfe60H9lRvl5DeE5AOAw2-kYsd_xrMX): Add some more complexity to our game Actors (Players/Monsters) to deal with *temporary* changes to them (i.e - scared, excited, brunk, etc).
-* Flyweight Pattern _(Structural Pattern)_ [[Video(s)]](https://www.youtube.com/playlist?list=PLpYfe60H9lRte4o8Ld_fTpG7iaJlSpV_B): Find ways to load our game assets and reuse them efficiently.
+* Command Pattern _(Behavioral Pattern)_:
+  * **Description:** Introduce a way to cleanly handle commands. Sets us up nicely for event-sourcing later.
+  * [[Video(s)]](https://www.youtube.com/playlist?list=PLpYfe60H9lRuFpmif1JiZTa-Cx-1UJKGf)
+  * **Commit:**
+* State Pattern _(Behavioral Pattern)_:
+  * **Description:**
+  * [[Video(s)]](https://www.youtube.com/playlist?list=PLpYfe60H9lRvl5DeE5AOAw2-kYsd_xrMX): Add some more complexity to our game Actors (Players/Monsters) to deal with *temporary* changes to them (i.e - scared, excited, brunk, etc).
+  * **Commit:**
+* Flyweight Pattern _(Structural Pattern)_:
+  * **Description:** Find ways to load our game assets and reuse them efficiently.
+  * [[Video(s)]](https://www.youtube.com/playlist?list=PLpYfe60H9lRte4o8Ld_fTpG7iaJlSpV_B)
+  * **Commit:**
 
 ##### Bonus [[Video(s)]](https://www.youtube.com/playlist?list=PLpYfe60H9lRu9yxvQfaMO6Avp15kkXfJt):
 * Adapter Pattern _(Structural)_: We use this but never did a kata for it because it's so similar to our core 6.
