@@ -4,31 +4,56 @@ Game we're making with the skills we cover in the live stream (http://www.twitch
 ## Milestones
 _I'll do my best to mark which commits line up with which code katas (from the twitch sessions)._
 
-#### Phase I - The foundation of our game mechanics.
-* Factory Pattern _(Creational Pattern)_:  Get us off the ground and create some objects.
-* Strategy Pattern _(Behavioral Pattern)_: Help deal with some granular complexity of our players. This pattern has a lot in common with the Bridge Pattern and is often confused. The key difference we're high lighting is that our behavior in a Strategy Pattern is coupled witht he context (player)
-* Bridge Pattern _(Structural Pattern)_:  Start getting some of our monster code organized. We might do something similar with inventory items so this will be a good test.
+### First 'Semester' ###
+
+#### Phase I - Let's build a prototype game logic engine with a text ui for testing.
+* **Week 1 - Factory Pattern _(Creational Pattern)_:** 
+  * **Description:** _Get us off the ground and create some objects_
+  * [[Video(s)]](https://www.youtube.com/watch?v=IlWQk2WRS3g)
+  * Commit: https://github.com/ariugwu/mudz/tree/e588cdaf6838c4d59c0cbcff30d8c25aba77439e
+* **Week 2 - Strategy Pattern _(Behavioral Pattern)_:**
+  * **Description:** _Help deal with some granular complexity of our players. This pattern has a lot in common with the Bridge Pattern and is often confused. The key difference we're high lighting is that our behavior in a Strategy Pattern is coupled witht he context (player)_
+  * [[Video(s)]](https://www.youtube.com/watch?v=obRmu-qJVRE)
+  * **Commit:**
+* **Week 3 - Bridge Pattern _(Structural Pattern)_:**
+  * **Description:** Start getting some of our monster code organized. We might do something similar with inventory items so this will be a good test.
+  * [[Video(s)]](https://www.youtube.com/playlist?list=PLpYfe60H9lRsrrMbj_hsx-cRNL-C-z4kW)
+  * **Commit:**
 
 #### Phase II - Building out our world and fine tuning interactions with that world.
-* Command Pattern _(Behavioral Pattern)_: Introduce a way to cleanly handle commands. Sets us up nicely for event-sourcing later.
-* State Pattern _(Behavioral Pattern)_: Add some more complexity to our game Actors (Players/Monsters) to deal with *temporary* changes to them (i.e - scared, excited, brunk, etc).
-* Flyweight Pattern _(Structural Pattern)_: Find ways to load our game assets and reuse them efficiently.
+* **Week 4 - Command Pattern _(Behavioral Pattern)_:**
+  * **Description:** Introduce a way to cleanly handle commands. Sets us up nicely for event-sourcing later.
+  * [[Video(s)]](https://www.youtube.com/playlist?list=PLpYfe60H9lRuFpmif1JiZTa-Cx-1UJKGf)
+  * **Commit:**
+* **Week 5 - State Pattern _(Behavioral Pattern)_:**
+  * **Description:**
+  * [[Video(s)]](https://www.youtube.com/playlist?list=PLpYfe60H9lRvl5DeE5AOAw2-kYsd_xrMX): Add some more complexity to our game Actors (Players/Monsters) to deal with *temporary* changes to them (i.e - scared, excited, brunk, etc).
+  * **Commit:**
+* ** Week 6 - Flyweight Pattern _(Structural Pattern)_:**
+  * **Description:** Find ways to load our game assets and reuse them efficiently.
+  * [[Video(s)]](https://www.youtube.com/playlist?list=PLpYfe60H9lRte4o8Ld_fTpG7iaJlSpV_B)
+  * **Commit:**
 
-#### Phase III - Take another look at some of our patterns and see where we can expand/refine
-* Adapter Pattern _(Structural)_:
-* Chain of Responsibility _(Behavioral Pattern)_:
-* Interpreter Pattern _(Behavioral Pattern)_:
+##### Week 7 & 8 - Bonus [[Video(s)]](https://www.youtube.com/playlist?list=PLpYfe60H9lRu9yxvQfaMO6Avp15kkXfJt):
+* Adapter Pattern _(Structural)_: We use this but never did a kata for it because it's so similar to our core 6.
+* Interpreter Pattern _(Behavioral Pattern)_: We use this but never did a kata for it because it's so similar to our core 6.
+
+### Second 'Semester ###
+#### Phase III - First things first: Build a TCP Server and Client to start playing our game with other people.
+* Singleton _(Creational)_: Since we have tcp sockets and connections flying around we want to make sure that our game engine is only created once.
 * Decorator Pattern _(Structural Pattern)_: Organize the various things that can impact actions and attributes for our Actors and have them be applied in a uniform way. For example: A _drunk_ player of type _medic_ who tries to _heal_ will need to have all three things factor into how well they peform that action.
+* Chain of Responsibility _(Behavorial Pattern)_:
 
 #### Phase IV - *(TBD)* The game engine is the god of our world and will enforce all of our laws.
-* CQRS Pattern:
-* Event Sourcing:
+* CQRS Pattern: We have a lot going on and while we've done a bit to structure our commands we might want to make things a bit more formal.
+* Event Sourcing: 
 * Observer _(Behavorial Pattern)_:
-* Chain of Responsibility _(Behavorial Pattern)_:
-* Command Pattern _(Behavorial Pattern)_:
+* Proxy _()_:
 
-#### Phase IV - *(TBD)* Storage and Retrival
+### Summer School ###
+
+#### Phase V - *(TBD)* Storage and Retrival
 * Unit of Work:
 * Repository:
 
-#### Phase V - *(TBD)* Explore Advanced Patterns via https://msdn.microsoft.com/en-us/library/dn600223.aspx
+#### Phase VI - *(TBD)* Explore Advanced Patterns via https://msdn.microsoft.com/en-us/library/dn600223.aspx
