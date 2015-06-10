@@ -1,25 +1,21 @@
 ﻿using easyTcp.Common.Model;
 using easyTcp.Common.Model.Client.Parse;
-using mudz.Cli.Domain.GameEngine;
-using mudz.Core.Model.Domain.GameEngine;
+using mudz.Common.Domain.easytcp;
 
 namespace mudz.Cli.Domain.easytcp
 {
     public class ParseStrategy : IParseStrategy
     {
+        public string CommandPrompt()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public Request Parse(string command)
         {
-            var commandParser = new CommandParser();
+            ConsoleRequest consoleRequest = new ConsoleRequest(){ Command = command, PlayerName = null};
 
-            GameRequest gameRequest = new GameRequest();
-
-            string[] args = command.Split(' ');
-
-            GameActions gameAction = commandParser.GetGameAction(args[0]);
-
-            gameRequest = new GameRequest() {GameAction = gameAction, Target = args[1]};
-
-            return new Request() {Payload = gameRequest, Type = typeof (GameRequest)};
+            return new Request() {Payload = consoleRequest, Type = typeof (ConsoleRequest)};
         }
     }
 }

@@ -55,6 +55,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\mudz.Common\mudz.Common.csproj">
+      <Project>{dc295436-7628-4228-844a-e24123444de5}</Project>
+      <Name>mudz.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\mudz.Core\mudz.Core.csproj">
       <Project>{a0253f43-6889-42c9-9ffe-238c92864ede}</Project>
       <Name>mudz.Core</Name>

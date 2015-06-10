@@ -90,7 +90,7 @@ namespace mudz.Core.Model.Domain.GameEngine
                     response = sender.ExecuteAction(request);
                     if (response.WasSuccessful) target.Negotiate();
                     break;
-                case GameActions.Look:
+                case GameActions.LookAt:
                     response = new GameResponse(){ Message = target.Description, WasSuccessful = true, Request = request};
                     break;
                 case GameActions.Get:
@@ -104,6 +104,15 @@ namespace mudz.Core.Model.Domain.GameEngine
                     response = sender.ProcessItem(item);
 
                     if (response.WasSuccessful) World.Rooms[request.RoomKey].GameObjects.Remove(item);
+
+                    break;
+                case GameActions.None:
+                    response = new GameResponse()
+                    {
+                        Message = "Sorry, no command matched your request.",
+                        WasSuccessful = false,
+                        Request = new GameRequest() { GameAction = GameActions.None, Sender = sender, Target = null }
+                    };
 
                     break;
                 default:

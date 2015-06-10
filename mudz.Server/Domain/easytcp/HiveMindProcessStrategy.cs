@@ -1,5 +1,10 @@
-﻿using easyTcp.Common.Model;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using easyTcp.Common.Model;
 using easyTcp.Common.Model.Server;
+using mudz.Core.Model.Domain;
+using mudz.Core.Model.Domain.Environment.Map.Room;
 using mudz.Core.Model.Domain.GameEngine;
 
 namespace mudz.Server.Domain.easytcp
@@ -8,13 +13,85 @@ namespace mudz.Server.Domain.easytcp
     {
         public Response ProcessRequest(Request request)
         {
-            var gameRequest = (Core.Model.Domain.GameEngine.GameRequest)request.Payload;
+            var consoleRequest = (ConsoleRequest)request.Payload;
 
-            var gameResponse = Core.Model.Domain.GameEngine.HiveMind.Instance.Execute(gameRequest);
+            GameResponse gameResponse;
 
-            var response = new Response() {Payload = gameResponse, Type = typeof (GameResponse)};
+            try
+            {
+                gameResponse = GetGameReponse(consoleRequest.Command, consoleRequest.PlayerName);
+            }
+            catch (Exception ex)
+            {
+                gameResponse = new GameResponse()
+                {
+                    Message = "Whoops! Something went hella wrong. Please try again.",
+                    WasSuccessful = false,
+                    Request = new GameRequest() { GameAction = GameActions.None, Target = null }
+                };
+            }
+
+            var response = new Response() { Payload = gameResponse, Type = typeof(GameResponse) };
 
             return response;
+        }
+
+        private Dictionary<string, GameActions> _commandActionMap = new Dictionary<string, GameActions>()
+        {
+            {"fight", GameActions.Fight},
+            {"attack", GameActions.Fight},
+            {"negotiate", GameActions.Negotiate},
+            {"repair", GameActions.Repair},
+            {"heal", GameActions.Heal},
+            {"look", GameActions.LookAt},
+            {"none", GameActions.None},
+            {"get", GameActions.Get}
+        };
+
+        public GameResponse GetGameReponse(string command, string playerName)
+        {
+            GameResponse response;
+            GameActions gameAction;
+
+            if (playerName == null)
+            {
+                response = new GameResponse()
+                {
+                    Message = "Please login",
+                    WasSuccessful = false
+                };
+            }
+            else
+            {
+                var room = HiveMind.Instance.World.Rooms.First(x => x.Value.GameObjects.Exists(y => y.Name.ToLower().Equals(playerName.ToLower()))).Value;
+
+                var player = room.GameObjects.First(x => x.Name.ToLower().Equals(playerName.ToLower()));
+
+                string[] args = command.Split(' ');
+
+                gameAction = GetGameAction(args[0]);
+
+                if (args.Length > 2) gameAction = GameActions.None;
+
+                IGameObject targ = GetTarget(room, args[1]);
+
+                response = HiveMind.Instance.Execute(new GameRequest() { RoomKey = room.RoomKey, GameAction = gameAction, Sender = player, Target = targ });
+
+            }
+
+            return response;
+        }
+
+        private GameActions GetGameAction(string command)
+        {
+            command = command.Trim().ToLower();
+
+            return (_commandActionMap.ContainsKey(command)) ? _commandActionMap[command] : GameActions.None;
+        }
+
+        private IGameObject GetTarget(RoomContent room, string targetName)
+        {
+            return room.GameObjects.First(x => x.Name.ToLower().Trim() == targetName);
         }
     }
 }

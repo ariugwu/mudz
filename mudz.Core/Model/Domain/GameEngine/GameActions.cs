@@ -6,8 +6,10 @@
         Heal,
         Repair,
         Negotiate,
-        Look,
+        LookAt,
+        LookAround,
         None,
-        Get
+        Get,
+        Login
     }
 }

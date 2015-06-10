@@ -10,7 +10,7 @@ using mudz.Core.Model.Domain.Player;
 
 namespace mudz.Cli.Domain.GameEngine
 {
-    public class Render
+    public static class Render
     {
         public static void DrawRoom(RoomContent roomContent)
         {
@@ -115,7 +115,7 @@ namespace mudz.Cli.Domain.GameEngine
                     ReplaceLine(response.Message);
                     Console.ResetColor();
                     break;
-                case GameActions.Look:
+                case GameActions.LookAt:
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     ReplaceLine(response.Message);
                     Console.ResetColor();

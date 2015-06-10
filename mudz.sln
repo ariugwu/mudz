@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mudz.Core", "mudz.Core\mudz
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mudz.Server", "mudz.Server\mudz.Server.csproj", "{DE454258-C04F-4210-93F8-24C20F82610F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mudz.Common", "mudz.Common\mudz.Common.csproj", "{DC295436-7628-4228-844A-E24123444DE5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{DE454258-C04F-4210-93F8-24C20F82610F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE454258-C04F-4210-93F8-24C20F82610F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE454258-C04F-4210-93F8-24C20F82610F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC295436-7628-4228-844A-E24123444DE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC295436-7628-4228-844A-E24123444DE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC295436-7628-4228-844A-E24123444DE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC295436-7628-4228-844A-E24123444DE5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
