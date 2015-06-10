@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using mudz.Core.Model.Domain.Environment.Map;
 using mudz.Core.Model.Domain.Environment.Map.Room;
 using mudz.Core.Model.Domain.Inventory;
@@ -15,22 +14,50 @@ namespace mudz.Core.Model.Domain.GameEngine
 {
     public class HiveMind
     {
-        public HiveMind()
+        private static readonly HiveMind _hiveMind = new HiveMind();
+
+        static HiveMind()
         {
-            World = new Grid()
-            {
-                Rooms = new Dictionary<RoomKey, RoomContent>(),
-                Sheet = new int[10][]
-            };
-
-            ResponseStack = new Stack<GameResponse>();
-
-            SeedWorld();
+            
         }
 
-        public Stack<GameResponse> ResponseStack { get; set; } 
+        private HiveMind()
+        {
+        }
 
-        public Grid World { get; set; }
+
+        public static HiveMind Instance
+        {
+            get { return _hiveMind; }
+        }
+
+        private Stack<GameResponse> _responseStack;
+
+        public Stack<GameResponse> ResponseStack
+        {
+            get { return _responseStack ?? (_responseStack = new Stack<GameResponse>()); }
+        }
+
+
+        private Grid _world;
+
+        public Grid World
+        {
+            get
+            {
+                if (_world != null) return _world;
+
+                _world = new Grid()
+                {
+                    Rooms = new Dictionary<RoomKey, RoomContent>(),
+                    Sheet = new int[10][]
+                };
+
+                SeedWorld();
+
+                return _world;
+            }
+        }
 
         public GameResponse Execute(GameRequest request)
         {

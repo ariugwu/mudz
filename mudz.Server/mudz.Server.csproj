@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{026F1C60-6CFF-401E-84E3-3D4920C6635D}</ProjectGuid>
+    <ProjectGuid>{DE454258-C04F-4210-93F8-24C20F82610F}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>mudz.Cli</RootNamespace>
-    <AssemblyName>mudz.Cli</AssemblyName>
+    <RootNamespace>mudz.Server</RootNamespace>
+    <AssemblyName>mudz.Server</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -32,7 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="easyTcp.Common">
+    <Reference Include="easyTcp.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Assemblies\easyTcp.Common.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -44,10 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Domain\easytcp\ParseStrategy.cs" />
-    <Compile Include="Domain\easytcp\RenderStrategy.cs" />
-    <Compile Include="Domain\GameEngine\CommandParser.cs" />
-    <Compile Include="Domain\GameEngine\Render.cs" />
+    <Compile Include="Domain\easytcp\HiveMindProcessStrategy.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
