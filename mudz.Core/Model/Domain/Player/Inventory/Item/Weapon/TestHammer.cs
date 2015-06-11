@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
-using mudz.Core.Model.Domain.Inventory;
+﻿using System;
+using System.Collections.Generic;
+using mudz.Common.Domain.Inventory;
 
 namespace mudz.Core.Model.Domain.Player.Inventory.Item.Weapon
 {
+    [Serializable]
     public class TestHammer : PlayerWeapon
     {
         public TestHammer()

@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using mudz.Core.Model.Domain.GameEngine;
-using mudz.Core.Model.Domain.Inventory;
+using mudz.Common.Domain;
+using mudz.Common.Domain.GameEngine;
+using mudz.Common.Domain.Inventory;
+using mudz.Common.Domain.Player;
+using mudz.Common.Domain.Player.Inventory;
 using mudz.Core.Model.Domain.Player.Class;
-using mudz.Core.Model.Domain.Player.Inventory;
 using mudz.Core.Model.Domain.Player.Inventory.Item.Weapon;
 
 namespace mudz.Core.Model.Domain.Player
 {
+    [Serializable]
     public sealed class Player : BaseActor, IPlayer
     {
         public Player(string name, ActorGenderTypes gender, PlayerTypes playerType, IPlayerActionStrategy actionStrategy)
@@ -25,8 +28,8 @@ namespace mudz.Core.Model.Domain.Player
             _actionStrategy.SetStats(this);
 
             // New up Inventory stores
-            Inventory = new List<PlayerInventoryItem>();
-            Outfit = new Dictionary<PlayerAnatomy, PlayerWearable>();
+            Inventory = new List<IPlayerInventoryItem>();
+            Outfit = new Dictionary<PlayerAnatomy, IPlayerWearable>();
             Weapon = new Fists();
         }
 
@@ -45,25 +48,25 @@ namespace mudz.Core.Model.Domain.Player
 
         public int Level { get; set; }
 
-        public IList<PlayerInventoryItem> Inventory { get; private set; }
+        public IList<IPlayerInventoryItem> Inventory { get; private set; }
 
-        public Dictionary<PlayerAnatomy, PlayerWearable> Outfit { get; private set; }
+        public Dictionary<PlayerAnatomy, IPlayerWearable> Outfit { get; private set; }
 
-        public PlayerWeapon Weapon { get; set; }
+        public IPlayerWeapon Weapon { get; set; }
 
         public void SetState(ActorStates actorState)
         {
             ActorState = actorState;
         }
 
-        public void AddInventoryItem(PlayerInventoryItem item)
+        public void AddInventoryItem(IPlayerInventoryItem item)
         {
             Inventory.Add(item);
         }
 
         public override void AcceptItem(IInventoryItem item)
         {
-            AddInventoryItem((PlayerInventoryItem)item);
+            AddInventoryItem((IPlayerInventoryItem)item);
         }
 
         public void RemoveInventoryItem(int index)
@@ -71,12 +74,12 @@ namespace mudz.Core.Model.Domain.Player
             Inventory.RemoveAt(index);
         }
 
-        public void EquipWeapon(PlayerWeapon weapon)
+        public void EquipWeapon(IPlayerWeapon weapon)
         {
             Weapon = weapon;
         }
 
-        public void EquipWearable(PlayerWearable wearable)
+        public void EquipWearable(IPlayerWearable wearable)
         {
             Outfit[wearable.Anatomy] = wearable;
         }

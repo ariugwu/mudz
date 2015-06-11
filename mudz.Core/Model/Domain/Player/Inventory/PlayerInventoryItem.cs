@@ -1,9 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using mudz.Common.Domain.Inventory;
+using mudz.Common.Domain.Player.Inventory;
 using mudz.Core.Model.Domain.Inventory;
 
 namespace mudz.Core.Model.Domain.Player.Inventory
 {
-    public abstract class PlayerInventoryItem : BaseInventoryItem
+    [Serializable]
+    public abstract class PlayerInventoryItem : BaseInventoryItem, IPlayerInventoryItem
     {
         public override InventoryTypes InventoryType { get { return InventoryTypes.InventoryItem; } }
 

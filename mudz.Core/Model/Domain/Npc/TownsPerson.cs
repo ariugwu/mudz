@@ -1,5 +1,9 @@
-﻿namespace mudz.Core.Model.Domain.Npc
+﻿using System;
+using mudz.Common.Domain.Npc;
+
+namespace mudz.Core.Model.Domain.Npc
 {
+        [Serializable]
     public class TownsPerson : Npc
     {
         public TownsPerson(string name)

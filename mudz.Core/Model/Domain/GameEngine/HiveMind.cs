@@ -1,8 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using mudz.Core.Model.Domain.Environment.Map;
-using mudz.Core.Model.Domain.Environment.Map.Room;
-using mudz.Core.Model.Domain.Inventory;
+using System.Linq;
+using mudz.Common.Domain;
+using mudz.Common.Domain.Environment.Map;
+using mudz.Common.Domain.Environment.Map.Room;
+using mudz.Common.Domain.GameEngine;
+using mudz.Common.Domain.Inventory;
+using mudz.Common.Domain.Monster;
+using mudz.Common.Domain.Npc;
+using mudz.Common.Domain.Player;
 using mudz.Core.Model.Domain.Monster;
 using mudz.Core.Model.Domain.Npc;
 using mudz.Core.Model.Domain.Player;
@@ -67,13 +73,30 @@ namespace mudz.Core.Model.Domain.GameEngine
 
             GameResponse response;
 
-            if (IsOutOfPlay(sender)) return OutOfPlayResponse(request, sender);
-            if (IsOutOfPlay(target)) return OutOfPlayResponse(request, target);
+            if (request.GameAction != GameActions.Login)
+            {
+                if (IsOutOfPlay(sender)) return OutOfPlayResponse(request, sender);
+                if (IsOutOfPlay(target)) return OutOfPlayResponse(request, target);
 
-            if (!IsTargetPresent(request.RoomKey, target)) return NoTargetResponse(request, target);
+                if (!IsTargetPresent(request.RoomKey, target)) return NoTargetResponse(request, target);
+            }
 
             switch(actionType)
             {
+                case GameActions.Login:
+                    var player = GetPlayerByName(sender.Name);
+
+                    if (player == null)
+                    {
+                        response = new GameResponse(){ Message = "Sorry. No Player by that name!", WasSuccessful = false, Request = request};
+                    }
+                    else
+                    {
+                        var room = GetRoomByPlayerName(sender.Name);
+                        response = new GameResponse(){ Player = (IPlayer)player, WasSuccessful = true, RoomContent = room,Request = request};
+                    }
+                    
+                    break;
                 case GameActions.Heal:
                     response = sender.ExecuteAction(request);
                     if (response.WasSuccessful) target.RestoreHealth(response.Amount);
@@ -119,10 +142,14 @@ namespace mudz.Core.Model.Domain.GameEngine
                     throw new NotImplementedException("The action requested is not available!");
             }
 
-            sender.CheckState();
-            target.CheckState();
+            if (request.GameAction != GameActions.Login)
+            {
+                sender.CheckState();
+                target.CheckState();
 
-            response.Request = request;
+                response.Request = request;
+            }
+
             ResponseStack.Push(response);
 
             return response;
@@ -137,6 +164,19 @@ namespace mudz.Core.Model.Domain.GameEngine
         private bool IsTargetPresent(RoomKey roomKey, IGameObject gameObject)
         {
             return World.Rooms[roomKey].GameObjects.Exists(x => x.GameObjectKey == gameObject.GameObjectKey);
+        }
+
+        private IGameObject GetPlayerByName(string playerName)
+        {
+            var room = GetRoomByPlayerName(playerName);
+            var player = (room != null)? room.GameObjects.First(x => x.Name.ToLower().Equals(playerName.ToLower())) : null;
+
+            return player;
+        }
+
+        private RoomContent GetRoomByPlayerName(string playerName)
+        {
+            return HiveMind.Instance.World.Rooms.FirstOrDefault(x => x.Value.GameObjects.Exists(y => y.Name.ToLower().Equals(playerName.ToLower()))).Value;
         }
 
         private GameResponse OutOfPlayResponse(GameRequest request, IGameObject gameObject)

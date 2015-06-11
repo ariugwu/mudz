@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using mudz.Common.Domain;
+using mudz.Common.Domain.Player;
 using mudz.Core.Model.Domain.Player.Class;
 
 namespace mudz.Core.Model.Domain.Player

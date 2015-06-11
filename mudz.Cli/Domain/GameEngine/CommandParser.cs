@@ -1,13 +1,13 @@
 ﻿using System;
-using mudz.Core.Model.Domain.Environment.Map.Room;
-using mudz.Core.Model.Domain.GameEngine;
-using mudz.Core.Model.Domain.Player;
+using mudz.Common.Domain.Environment.Map.Room;
+using mudz.Common.Domain.GameEngine;
+using mudz.Common.Domain.Player;
 
 namespace mudz.Cli.Domain.GameEngine
 {
     public class CommandParser
     {
-        public void Execute(HiveMind hiveMind, RoomContent room, IPlayer player, string command)
+        public void Execute(RoomContent room, IPlayer player, string command)
         {
             GameResponse response;
 

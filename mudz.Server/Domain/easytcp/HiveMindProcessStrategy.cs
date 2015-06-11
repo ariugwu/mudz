@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using easyTcp.Common.Model;
 using easyTcp.Common.Model.Server;
-using mudz.Core.Model.Domain;
-using mudz.Core.Model.Domain.Environment.Map.Room;
+using mudz.Common.Domain;
+using mudz.Common.Domain.easytcp;
+using mudz.Common.Domain.Environment.Map.Room;
+using mudz.Common.Domain.GameEngine;
 using mudz.Core.Model.Domain.GameEngine;
+using mudz.Core.Model.Domain.Player;
 
 namespace mudz.Server.Domain.easytcp
 {
@@ -45,7 +48,8 @@ namespace mudz.Server.Domain.easytcp
             {"heal", GameActions.Heal},
             {"look", GameActions.LookAt},
             {"none", GameActions.None},
-            {"get", GameActions.Get}
+            {"get", GameActions.Get},
+            {"login", GameActions.Login}
         };
 
         public GameResponse GetGameReponse(string command, string playerName)
@@ -55,17 +59,13 @@ namespace mudz.Server.Domain.easytcp
 
             if (playerName == null)
             {
-                response = new GameResponse()
-                {
-                    Message = "Please login",
-                    WasSuccessful = false
-                };
+                response = HiveMind.Instance.Execute(new GameRequest(){ GameAction = GameActions.Login, Sender = new Player(){ Name = command} });
             }
             else
             {
                 var room = HiveMind.Instance.World.Rooms.First(x => x.Value.GameObjects.Exists(y => y.Name.ToLower().Equals(playerName.ToLower()))).Value;
 
-                var player = room.GameObjects.First(x => x.Name.ToLower().Equals(playerName.ToLower()));
+                var player = GetPlayerByRoom(room, playerName);
 
                 string[] args = command.Split(' ');
 
@@ -92,6 +92,11 @@ namespace mudz.Server.Domain.easytcp
         private IGameObject GetTarget(RoomContent room, string targetName)
         {
             return room.GameObjects.First(x => x.Name.ToLower().Trim() == targetName);
+        }
+
+        private IGameObject GetPlayerByRoom(RoomContent room, string playerName)
+        {
+            return room.GameObjects.First(x => x.Name.ToLower().Equals(playerName.ToLower()));
         }
     }
 }

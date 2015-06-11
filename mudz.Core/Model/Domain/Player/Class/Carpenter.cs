@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
-using mudz.Core.Model.Domain.GameEngine;
+﻿using System;
+using System.Collections.Generic;
+using mudz.Common.Domain;
+using mudz.Common.Domain.GameEngine;
+using mudz.Common.Domain.Player;
 
 namespace mudz.Core.Model.Domain.Player.Class
 {
+    [Serializable]
     public class Carpenter : IPlayerActionStrategy
     {
         private Dictionary<GameActions, int> _actionStaminaCostMap = new Dictionary<GameActions, int>()

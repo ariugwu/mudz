@@ -1,4 +1,6 @@
 ﻿using System;
+using mudz.Common.Domain;
+using mudz.Common.Domain.Monster;
 
 namespace mudz.Core.Model.Domain.Monster
 {

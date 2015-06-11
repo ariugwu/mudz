@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
-using mudz.Core.Model.Domain.Inventory;
+﻿using System;
+using System.Collections.Generic;
+using mudz.Common.Domain.Inventory;
 
 namespace mudz.Core.Model.Domain.Player.Inventory.Item.Keepsake
 {
+    [Serializable]
     public class TestCharm : PlayerKeepsake
     {
         public TestCharm()

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using mudz.Core.Model.Domain;
-using mudz.Core.Model.Domain.Environment.Map.Room;
-using mudz.Core.Model.Domain.GameEngine;
-using mudz.Core.Model.Domain.Inventory;
-using mudz.Core.Model.Domain.Monster;
-using mudz.Core.Model.Domain.Player;
+using mudz.Common.Domain;
+using mudz.Common.Domain.Environment.Map.Room;
+using mudz.Common.Domain.GameEngine;
+using mudz.Common.Domain.Inventory;
+using mudz.Common.Domain.Monster;
+using mudz.Common.Domain.Player;
 
 namespace mudz.Cli.Domain.GameEngine
 {
@@ -116,6 +116,7 @@ namespace mudz.Cli.Domain.GameEngine
                     Console.ResetColor();
                     break;
                 case GameActions.LookAt:
+                case GameActions.Login:
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     ReplaceLine(response.Message);
                     Console.ResetColor();
@@ -130,13 +131,13 @@ namespace mudz.Cli.Domain.GameEngine
             }
         }
 
-        public static void CommandPrompt(CommandParser commandParser, HiveMind hiveMind, RoomContent room, IPlayer player)
+        public static void CommandPrompt(CommandParser commandParser, RoomContent room, IPlayer player)
         {
             var command = Console.ReadLine();
 
-            commandParser.Execute(hiveMind, room, player, command);
+            commandParser.Execute(room, player, command);
 
-            CommandPrompt(commandParser, hiveMind, room, player);
+            CommandPrompt(commandParser, room, player);
         }
 
         #region Helper(s)

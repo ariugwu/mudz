@@ -1,7 +1,12 @@
-﻿using mudz.Core.Model.Domain.Inventory;
+﻿using System;
+using mudz.Common.Domain;
+using mudz.Common.Domain.Inventory;
+using mudz.Common.Domain.Monster;
+using mudz.Core.Model.Domain.Inventory;
 
 namespace mudz.Core.Model.Domain.Monster
 {
+    [Serializable]
     public class Zombie : BaseMonster
     {
         public Zombie(string name, MonsterTypes monsterType)
@@ -10,7 +15,7 @@ namespace mudz.Core.Model.Domain.Monster
             MonsterType = monsterType;
         }
 
-        public Zombie() : this("Carl",MonsterTypes.Zombie) { }
+        public Zombie() : this("Carl", MonsterTypes.Zombie) { }
 
         public override ActorGenderTypes Gender
         {

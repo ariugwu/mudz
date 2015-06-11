@@ -1,8 +1,11 @@
-﻿using mudz.Core.Model.Domain.Inventory;
+﻿using System;
+using mudz.Common.Domain.Inventory;
+using mudz.Common.Domain.Player.Inventory;
 
 namespace mudz.Core.Model.Domain.Player.Inventory
 {
-    public abstract class PlayerWeapon : PlayerInventoryItem
+    [Serializable]
+    public abstract class PlayerWeapon : PlayerInventoryItem, IPlayerWeapon
     {
         public override InventoryTypes InventoryType { get { return InventoryTypes.PlayerWeapon; } }
     }

@@ -1,8 +1,11 @@
 ﻿using System;
-using mudz.Core.Model.Domain.GameEngine;
+using mudz.Common.Domain;
+using mudz.Common.Domain.GameEngine;
+using mudz.Common.Domain.Inventory;
 
 namespace mudz.Core.Model.Domain.Inventory
 {
+    [Serializable]
     public abstract class BaseInventoryItem : IInventoryItem
     {
         public Guid GameObjectKey { get; set; }

@@ -1,8 +1,13 @@
-﻿using System.Collections.Generic;
-using mudz.Core.Model.Domain.Inventory;
+﻿using System;
+using System.Collections.Generic;
+using mudz.Common.Domain;
+using mudz.Common.Domain.GameEngine;
+using mudz.Common.Domain.Inventory;
+using mudz.Common.Domain.Monster;
 
 namespace mudz.Core.Model.Domain.Monster
 {
+        [Serializable]
     public abstract class BaseMonster : BaseActor, IMonster
     {
         protected BaseMonster()
@@ -24,7 +29,7 @@ namespace mudz.Core.Model.Domain.Monster
             HitPoints = HitPoints + health;
         }
 
-        public override int GetStaminaCostByActionType(GameEngine.GameActions gameAction)
+        public override int GetStaminaCostByActionType(GameActions gameAction)
         {
             throw new System.NotImplementedException("No monster should ever call this.");
         }
