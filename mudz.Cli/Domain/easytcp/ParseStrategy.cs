@@ -15,12 +15,8 @@ namespace mudz.Cli.Domain.easytcp
                 System.Console.Write("> ");
                 return System.Console.ReadLine();
             }
-            else
-            {
-                System.Console.WriteLine("Welcome to game {0}!", PlayerOne.Instance.GetName());
-                System.Console.Write("Please enter a command: ");
-                return System.Console.ReadLine();
-            }
+
+            return System.Console.ReadLine();
         }
 
         public Request Parse(string command)
@@ -29,13 +25,13 @@ namespace mudz.Cli.Domain.easytcp
 
             if (PlayerOne.Instance == null)
             {
-                consoleRequest = new ConsoleRequest(){ Command = command, PlayerName = null};
-                return new Request() { Payload = consoleRequest, Type = typeof(ConsoleRequest)};
+                consoleRequest = new ConsoleRequest() { Command = command, PlayerName = null };
+                return new Request() { Payload = consoleRequest, Type = typeof(ConsoleRequest) };
             }
             else
             {
                 consoleRequest = new ConsoleRequest() { Command = command, PlayerName = PlayerOne.Instance.GetName() };
-                return new Request() { Payload = consoleRequest, Type = typeof(ConsoleRequest) };           
+                return new Request() { Payload = consoleRequest, Type = typeof(ConsoleRequest) };
             }
 
         }

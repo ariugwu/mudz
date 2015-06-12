@@ -105,6 +105,13 @@ namespace mudz.Cli.Domain.GameEngine
 
             switch (response.Request.GameAction)
             {
+                case GameActions.LookAround:
+                    ClearScreen();
+                    DrawRoom(response.RoomContent);
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    ReplaceLine(response.Message);
+                    Console.ResetColor();
+                    break;
                 case GameActions.Heal:
                     Console.ForegroundColor = ConsoleColor.Blue;
                     ReplaceLine(response.Message);
@@ -129,15 +136,6 @@ namespace mudz.Cli.Domain.GameEngine
                 default:
                     throw new NotImplementedException();
             }
-        }
-
-        public static void CommandPrompt(CommandParser commandParser, RoomContent room, IPlayer player)
-        {
-            var command = Console.ReadLine();
-
-            commandParser.Execute(room, player, command);
-
-            CommandPrompt(commandParser, room, player);
         }
 
         #region Helper(s)

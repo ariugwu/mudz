@@ -116,6 +116,9 @@ namespace mudz.Core.Model.Domain.GameEngine
                 case GameActions.LookAt:
                     response = new GameResponse(){ Message = target.Description, WasSuccessful = true, Request = request};
                     break;
+                case GameActions.LookAround:
+                    response = new GameResponse() { Message = String.Format("{0} looks around.", sender.Name), WasSuccessful = false, Request = request };
+                    break;
                 case GameActions.Get:
                     if (target.GameObjectType != GameObjectTypes.InventoryItem)
                     {

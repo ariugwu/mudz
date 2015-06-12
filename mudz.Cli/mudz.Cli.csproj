@@ -46,7 +46,6 @@
   <ItemGroup>
     <Compile Include="Domain\easytcp\ParseStrategy.cs" />
     <Compile Include="Domain\easytcp\RenderStrategy.cs" />
-    <Compile Include="Domain\GameEngine\CommandParser.cs" />
     <Compile Include="Domain\GameEngine\Render.cs" />
     <Compile Include="Domain\Player\PlayerOne.cs" />
     <Compile Include="Program.cs" />
