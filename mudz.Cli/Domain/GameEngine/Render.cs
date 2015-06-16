@@ -27,7 +27,7 @@ namespace mudz.Cli.Domain.GameEngine
             // Find all players and monsters
             // ##################################################
             List<IPlayer> players = 
-                roomContent.GameObjects.Where(x => x.GameObjectType == GameObjectTypes.Player && x.GameObjectState == GameObjectStates.InPlay)
+                roomContent.GameObjects.Where(x => x.GameObjectType == GameObjectTypes.Player && x.GameObjectState.ToString() == GameObjectStates.InPlay.ToString())
                     .Select(x => (IPlayer)x)
                     .ToList();
 

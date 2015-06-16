@@ -91,7 +91,7 @@ namespace mudz.Server.Domain.easytcp
 
         private IGameObject GetTarget(RoomContent room, string targetName)
         {
-            return room.GameObjects.First(x => x.Name.ToLower().Trim() == targetName);
+            return room.GameObjects.First(x => x.Name.ToLower().Trim() == targetName.ToString().ToLower());
         }
 
         private IGameObject GetPlayerByRoom(RoomContent room, string playerName)

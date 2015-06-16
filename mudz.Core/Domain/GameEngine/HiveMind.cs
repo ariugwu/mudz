@@ -129,6 +129,8 @@ namespace mudz.Core.Model.Domain.GameEngine
                     var item = (IInventoryItem)World.Rooms[request.RoomKey].GetGameObject(target.GameObjectKey);
                     response = sender.ProcessItem(item);
 
+                    response.Player = (IPlayer)sender;
+
                     if (response.WasSuccessful) World.Rooms[request.RoomKey].GameObjects.Remove(item);
 
                     break;
