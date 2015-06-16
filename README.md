@@ -41,6 +41,8 @@ _I'll do my best to mark which commits line up with which code katas (from the t
 ### Second 'Semester ###
 #### Phase III - First things first: Build a TCP Server and Client to start playing our game with other people.
 * Singleton _(Creational)_: Since we have tcp sockets and connections flying around we want to make sure that our game engine is only created once.
+* [[Video(s)]]:
+* **Commit:** https://github.com/ariugwu/mudz/tree/e033c4ffe156cf8bc33bd35688ab5bfa7824cc27
 * Decorator Pattern _(Structural Pattern)_: Organize the various things that can impact actions and attributes for our Actors and have them be applied in a uniform way. For example: A _drunk_ player of type _medic_ who tries to _heal_ will need to have all three things factor into how well they peform that action.
 * Chain of Responsibility _(Behavorial Pattern)_:
 
