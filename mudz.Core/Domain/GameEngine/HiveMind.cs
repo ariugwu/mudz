@@ -67,9 +67,12 @@ namespace mudz.Core.Model.Domain.GameEngine
 
         public GameResponse Execute(GameRequest request)
         {
-            var actionType = request.GameAction;
-            var sender = request.Sender;
-            var target = request.Target;
+            GameActions actionType = request.GameAction;
+            IGameObject sender = request.Sender;
+            IGameObject target = null;
+
+            var room = GetRoomByPlayerName(sender.Name);
+            IGameObject player = null;
 
             GameResponse response;
 
@@ -84,7 +87,7 @@ namespace mudz.Core.Model.Domain.GameEngine
             switch(actionType)
             {
                 case GameActions.Login:
-                    var player = GetPlayerByName(sender.Name);
+                    player = GetPlayerByName(sender.Name);
 
                     if (player == null)
                     {
@@ -92,8 +95,7 @@ namespace mudz.Core.Model.Domain.GameEngine
                     }
                     else
                     {
-                        var room = GetRoomByPlayerName(sender.Name);
-                        response = new GameResponse(){ Player = (IPlayer)player, WasSuccessful = true, RoomContent = room,Request = request};
+                        response = new GameResponse(){ Player = (IPlayer)player, WasSuccessful = true,Request = request};
                     }
                     
                     break;
@@ -126,12 +128,10 @@ namespace mudz.Core.Model.Domain.GameEngine
                         break;
                     }
 
-                    var item = (IInventoryItem)World.Rooms[request.RoomKey].GetGameObject(target.GameObjectKey);
+                    var item = (IInventoryItem)(room.GetGameObject(target.GameObjectKey));
                     response = sender.ProcessItem(item);
 
-                    response.Player = (IPlayer)sender;
-
-                    if (response.WasSuccessful) World.Rooms[request.RoomKey].GameObjects.Remove(item);
+                    if (response.WasSuccessful) room.GameObjects.Remove(item);
 
                     break;
                 case GameActions.None:
@@ -150,10 +150,14 @@ namespace mudz.Core.Model.Domain.GameEngine
             if (request.GameAction != GameActions.Login)
             {
                 sender.CheckState();
-                target.CheckState();
+                if(target != null) target.CheckState();
 
                 response.Request = request;
             }
+
+            // Ensure the GameResponse is properly populated.
+            response.Player = player != null? (IPlayer)player : (IPlayer)sender;
+            response.RoomContent = room;
 
             ResponseStack.Push(response);
 

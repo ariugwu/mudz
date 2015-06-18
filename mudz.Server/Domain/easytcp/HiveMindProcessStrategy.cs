@@ -46,7 +46,8 @@ namespace mudz.Server.Domain.easytcp
             {"negotiate", GameActions.Negotiate},
             {"repair", GameActions.Repair},
             {"heal", GameActions.Heal},
-            {"look", GameActions.LookAt},
+            {"look", GameActions.LookAround},
+            {"inspect", GameActions.LookAt},
             {"none", GameActions.None},
             {"get", GameActions.Get},
             {"login", GameActions.Login}
@@ -54,8 +55,12 @@ namespace mudz.Server.Domain.easytcp
 
         public GameResponse GetGameReponse(string command, string playerName)
         {
+            GameRequest gameRequest = new GameRequest();
             GameResponse response;
             GameActions gameAction;
+            IGameObject targ = null;
+
+
 
             if (playerName == null)
             {
@@ -73,7 +78,7 @@ namespace mudz.Server.Domain.easytcp
 
                 if (args.Length > 2) gameAction = GameActions.None;
 
-                IGameObject targ = GetTarget(room, args[1]);
+                if (args.Length == 2) targ = GetTarget(room, args[1]);
 
                 response = HiveMind.Instance.Execute(new GameRequest() { RoomKey = room.RoomKey, GameAction = gameAction, Sender = player, Target = targ });
 

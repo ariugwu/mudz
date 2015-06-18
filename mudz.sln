@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mudz.Server", "mudz.Server\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mudz.Common", "mudz.Common\mudz.Common.csproj", "{DC295436-7628-4228-844A-E24123444DE5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{01D3D06C-3F8D-4D4F-8917-36E3FEDB3243}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain Logic", "Domain Logic", "{2B04557C-0A61-4E09-8568-D20691C8A51E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +40,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{026F1C60-6CFF-401E-84E3-3D4920C6635D} = {01D3D06C-3F8D-4D4F-8917-36E3FEDB3243}
+		{A0253F43-6889-42C9-9FFE-238C92864EDE} = {2B04557C-0A61-4E09-8568-D20691C8A51E}
 	EndGlobalSection
 EndGlobal
