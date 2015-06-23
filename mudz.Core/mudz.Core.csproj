@@ -41,6 +41,10 @@
   <ItemGroup>
     <Compile Include="Domain\BaseGameObject.cs" />
     <Compile Include="Domain\BaseActor.cs" />
+    <Compile Include="Domain\GameEngine\Handler\BaseHandler.cs" />
+    <Compile Include="Domain\GameEngine\Handler\CommandHandler.cs" />
+    <Compile Include="Domain\GameEngine\Handler\FinalizeHandler.cs" />
+    <Compile Include="Domain\GameEngine\Handler\LoginHandler.cs" />
     <Compile Include="Domain\GameEngine\HiveMind.cs" />
     <Compile Include="Domain\Monster\BaseMonster.cs" />
     <Compile Include="Domain\Monster\MonsterFactory.cs" />

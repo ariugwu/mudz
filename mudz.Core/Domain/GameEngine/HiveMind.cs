@@ -9,6 +9,7 @@ using mudz.Common.Domain.Inventory;
 using mudz.Common.Domain.Monster;
 using mudz.Common.Domain.Npc;
 using mudz.Common.Domain.Player;
+using mudz.Core.Domain.GameEngine.Handler;
 using mudz.Core.Model.Domain.Monster;
 using mudz.Core.Model.Domain.Npc;
 using mudz.Core.Model.Domain.Player;
@@ -24,13 +25,21 @@ namespace mudz.Core.Model.Domain.GameEngine
 
         static HiveMind()
         {
-            
+            var loginHandler = new LoginHandler();
+            var commandHandler = new CommandHandler();
+            var finalizeHandler = new FinalizeHandler();
+
+            loginHandler.SetSuccessor(commandHandler);
+            commandHandler.SetSuccessor(finalizeHandler);
+
+            _requestHandler = loginHandler;
         }
 
         private HiveMind()
         {
         }
 
+        private static BaseHandler _requestHandler;
 
         public static HiveMind Instance
         {
@@ -67,14 +76,13 @@ namespace mudz.Core.Model.Domain.GameEngine
 
         public GameResponse Execute(GameRequest request)
         {
-            GameActions actionType = request.GameAction;
-            IGameObject sender = request.Sender;
-            IGameObject target = null;
+            var response = new GameResponse();
+            response.Request = request;
+        
+            _requestHandler.Process(response);
+
 
             var room = GetRoomByPlayerName(sender.Name);
-            IGameObject player = null;
-
-            GameResponse response;
 
             if (request.GameAction != GameActions.Login)
             {
@@ -87,17 +95,9 @@ namespace mudz.Core.Model.Domain.GameEngine
             switch(actionType)
             {
                 case GameActions.Login:
-                    player = GetPlayerByName(sender.Name);
-
-                    if (player == null)
-                    {
-                        response = new GameResponse(){ Message = "Sorry. No Player by that name!", WasSuccessful = false, Request = request};
-                    }
-                    else
-                    {
-                        response = new GameResponse(){ Player = (IPlayer)player, WasSuccessful = true,Request = request};
-                    }
                     
+
+
                     break;
                 case GameActions.Heal:
                     response = sender.ExecuteAction(request);
@@ -175,18 +175,7 @@ namespace mudz.Core.Model.Domain.GameEngine
             return World.Rooms[roomKey].GameObjects.Exists(x => x.GameObjectKey == gameObject.GameObjectKey);
         }
 
-        private IGameObject GetPlayerByName(string playerName)
-        {
-            var room = GetRoomByPlayerName(playerName);
-            var player = (room != null)? room.GameObjects.First(x => x.Name.ToLower().Equals(playerName.ToLower())) : null;
 
-            return player;
-        }
-
-        private RoomContent GetRoomByPlayerName(string playerName)
-        {
-            return HiveMind.Instance.World.Rooms.FirstOrDefault(x => x.Value.GameObjects.Exists(y => y.Name.ToLower().Equals(playerName.ToLower()))).Value;
-        }
 
         private GameResponse OutOfPlayResponse(GameRequest request, IGameObject gameObject)
         {
