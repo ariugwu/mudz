@@ -1,4 +1,5 @@
 ﻿using mudz.Common.Domain.GameEngine;
+using mudz.Common.Domain.Player;
 
 namespace mudz.Core.Domain.GameEngine.Handler
 {
@@ -6,8 +7,13 @@ namespace mudz.Core.Domain.GameEngine.Handler
     {
         public override GameResponse HandleRequest(GameResponse gameResponse)
         {
-            //TODO: Finalize logic
+            if (gameResponse.Request.GameAction == GameActions.Login) return gameResponse;
 
+            gameResponse.Request.Sender.CheckState();
+
+            if (gameResponse.Request.Target != null) gameResponse.Request.Target.CheckState();
+
+            return gameResponse;
         }
     }
 }

@@ -4,7 +4,7 @@ using mudz.Common.Domain.Player;
 
 namespace mudz.Core.Domain.GameEngine.Handler
 {
-    public class LoginHandler : BaseHandler
+    public class AuthHandler : BaseHandler
     {
         public override GameResponse HandleRequest(GameResponse gameResponse)
         {
@@ -14,7 +14,6 @@ namespace mudz.Core.Domain.GameEngine.Handler
             {
                 gameResponse.Message = "Sorry. No Player by that name!";
                 gameResponse.WasSuccessful = false;
-
             }
             else
             {

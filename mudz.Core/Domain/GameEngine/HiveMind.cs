@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using mudz.Common.Domain;
 using mudz.Common.Domain.Environment.Map;
 using mudz.Common.Domain.Environment.Map.Room;
 using mudz.Common.Domain.GameEngine;
-using mudz.Common.Domain.Inventory;
 using mudz.Common.Domain.Monster;
 using mudz.Common.Domain.Npc;
 using mudz.Common.Domain.Player;
@@ -25,14 +22,14 @@ namespace mudz.Core.Model.Domain.GameEngine
 
         static HiveMind()
         {
-            var loginHandler = new LoginHandler();
+            var authHandler = new AuthHandler();
             var commandHandler = new CommandHandler();
             var finalizeHandler = new FinalizeHandler();
 
-            loginHandler.SetSuccessor(commandHandler);
+            authHandler.SetSuccessor(commandHandler);
             commandHandler.SetSuccessor(finalizeHandler);
 
-            _requestHandler = loginHandler;
+            _requestHandler = authHandler;
         }
 
         private HiveMind()
@@ -78,133 +75,12 @@ namespace mudz.Core.Model.Domain.GameEngine
         {
             var response = new GameResponse();
             response.Request = request;
-        
-            _requestHandler.Process(response);
-
-
-            var room = GetRoomByPlayerName(sender.Name);
-
-            if (request.GameAction != GameActions.Login)
-            {
-                if (IsOutOfPlay(sender)) return OutOfPlayResponse(request, sender);
-                if (IsOutOfPlay(target)) return OutOfPlayResponse(request, target);
-
-                if (!IsTargetPresent(request.RoomKey, target)) return NoTargetResponse(request, target);
-            }
-
-            switch(actionType)
-            {
-                case GameActions.Login:
-                    
-
-
-                    break;
-                case GameActions.Heal:
-                    response = sender.ExecuteAction(request);
-                    if (response.WasSuccessful) target.RestoreHealth(response.Amount);
-                    break;
-                case GameActions.Fight:
-                    response = sender.ExecuteAction(request);
-                    if (response.WasSuccessful) target.TakeDamage(response.Amount);
-                    break;
-                case GameActions.Repair:
-                    response = sender.ExecuteAction(request);
-                    if (response.WasSuccessful) target.Repair();
-                    break;
-                case GameActions.Negotiate:
-                    response = sender.ExecuteAction(request);
-                    if (response.WasSuccessful) target.Negotiate();
-                    break;
-                case GameActions.LookAt:
-                    response = new GameResponse(){ Message = target.Description, WasSuccessful = true, Request = request};
-                    break;
-                case GameActions.LookAround:
-                    response = new GameResponse() { Message = String.Format("{0} looks around.", sender.Name), WasSuccessful = false, Request = request };
-                    break;
-                case GameActions.Get:
-                    if (target.GameObjectType != GameObjectTypes.InventoryItem)
-                    {
-                        response = InvalidTargetResponse(request, target);
-                        break;
-                    }
-
-                    var item = (IInventoryItem)(room.GetGameObject(target.GameObjectKey));
-                    response = sender.ProcessItem(item);
-
-                    if (response.WasSuccessful) room.GameObjects.Remove(item);
-
-                    break;
-                case GameActions.None:
-                    response = new GameResponse()
-                    {
-                        Message = "Sorry, no command matched your request.",
-                        WasSuccessful = false,
-                        Request = new GameRequest() { GameAction = GameActions.None, Sender = sender, Target = null }
-                    };
-
-                    break;
-                default:
-                    throw new NotImplementedException("The action requested is not available!");
-            }
-
-            if (request.GameAction != GameActions.Login)
-            {
-                sender.CheckState();
-                if(target != null) target.CheckState();
-
-                response.Request = request;
-            }
-
-            // Ensure the GameResponse is properly populated.
-            response.Player = player != null? (IPlayer)player : (IPlayer)sender;
-            response.RoomContent = room;
+            
+            response = _requestHandler.Process(response);
 
             ResponseStack.Push(response);
 
             return response;
-        }
-
-
-        private bool IsOutOfPlay(IGameObject gameObject)
-        {
-            return (gameObject.GameObjectState == GameObjectStates.OutOfPlay);
-        }
-
-        private bool IsTargetPresent(RoomKey roomKey, IGameObject gameObject)
-        {
-            return World.Rooms[roomKey].GameObjects.Exists(x => x.GameObjectKey == gameObject.GameObjectKey);
-        }
-
-
-
-        private GameResponse OutOfPlayResponse(GameRequest request, IGameObject gameObject)
-        {
-            return new GameResponse()
-            {
-                Request = request,
-                WasSuccessful = false,
-                Message = String.Format("Sorry, {0} is out of play!", gameObject.Name)
-            };
-        }
-
-        private GameResponse NoTargetResponse(GameRequest request, IGameObject gameObject)
-        {
-            return new GameResponse()
-            {
-                Request = request,
-                WasSuccessful = false,
-                Message = String.Format("Sorry, there doesn't seem to be '{0}' here.", gameObject.Name)
-            };
-        }
-
-        private GameResponse InvalidTargetResponse(GameRequest request, IGameObject gameObject)
-        {
-            return new GameResponse()
-            {
-                Request = request,
-                WasSuccessful = false,
-                Message = String.Format("That doesn't make any sense. '{0}' is not a valid target for this command.", gameObject.Name)
-            };
         }
 
         private void SeedWorld()
