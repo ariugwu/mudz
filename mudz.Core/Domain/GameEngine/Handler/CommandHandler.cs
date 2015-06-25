@@ -13,11 +13,11 @@ namespace mudz.Core.Domain.GameEngine.Handler
 				if (!gameResponse.WasSuccessful) return gameResponse;
 				else
 				{
-					gameResponse.RoomContent = GetRoomByPlayerName(gameResponse.Player.Name);
+					gameResponse.RoomContent = GetRoomByPlayerName(gameResponse.Player);
 					return gameResponse;
 				}
 
-			var room = GetRoomByPlayerName(gameResponse.Player.Name);
+			var room = GetRoomByPlayerName(gameResponse.Player);
 
 			if (gameResponse.Request.GameAction != GameActions.Login)
 			{

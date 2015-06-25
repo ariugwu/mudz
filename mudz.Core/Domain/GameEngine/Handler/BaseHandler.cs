@@ -1,4 +1,5 @@
-﻿using mudz.Common.Domain;
+﻿using mudz.Common;
+using mudz.Common.Domain;
 using mudz.Common.Domain.Environment.Map.Room;
 using mudz.Common.Domain.GameEngine;
 using mudz.Common.Domain.Player;
@@ -28,19 +29,17 @@ namespace mudz.Core.Domain.GameEngine.Handler
             return Successor != null ? Successor.HandleRequest(gameResponse) : gameResponse;
         }
 
-        #region Helper Function(s)
+		#region Helper Function(s)
 
-        protected IPlayer GetPlayerByName(string playerName)
+		protected IPlayer GetPlayerByName(IPlayer player)
+		{
+			var room = GetRoomByPlayerName(player);
+			return (room != null) ? room.GameObjects.OfType<IPlayer>().FirstMatching(player, PlayerEqualityComparer.Instance) : null;
+		}
+
+        protected RoomContent GetRoomByPlayerName(IPlayer player)
         {
-            var room = GetRoomByPlayerName(playerName);
-            var player = (room != null) ? room.GameObjects.OfType<IPlayer>().First(x => x.Name.ToLower().Equals(playerName.ToLower())) : null;
-
-            return player;
-        }
-
-        protected RoomContent GetRoomByPlayerName(string playerName)
-        {
-            return HiveMind.Instance.World.Rooms.FirstOrDefault(x => x.Value.GameObjects.Exists(y => y.Name.ToLower().Equals(playerName.ToLower()))).Value;
+			return HiveMind.Instance.World.Rooms.Containing(player);
         }
 
         protected bool IsOutOfPlay(IGameObject gameObject)

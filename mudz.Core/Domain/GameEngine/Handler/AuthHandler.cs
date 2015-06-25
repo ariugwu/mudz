@@ -6,7 +6,7 @@ namespace mudz.Core.Domain.GameEngine.Handler
     {
         public override GameResponse HandleRequest(GameResponse gameResponse)
         {
-            var player = GetPlayerByName(gameResponse.Request.Sender.Name);
+            var player = GetPlayerByName(gameResponse.Request.Sender);
 
             if (player == null)
             {
