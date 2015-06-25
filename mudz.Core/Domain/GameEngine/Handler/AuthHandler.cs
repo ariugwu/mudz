@@ -16,7 +16,7 @@ namespace mudz.Core.Domain.GameEngine.Handler
             }
             else
             {
-                gameResponse.Player = (IPlayer) player;
+                gameResponse.Player = player;
                 gameResponse.WasSuccessful = true;
             }
 
