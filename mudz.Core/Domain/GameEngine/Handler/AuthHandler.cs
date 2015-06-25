@@ -1,5 +1,4 @@
-﻿using mudz.Common.Domain;
-using mudz.Common.Domain.GameEngine;
+﻿using mudz.Common.Domain.GameEngine;
 using mudz.Common.Domain.Player;
 
 namespace mudz.Core.Domain.GameEngine.Handler
@@ -8,7 +7,7 @@ namespace mudz.Core.Domain.GameEngine.Handler
     {
         public override GameResponse HandleRequest(GameResponse gameResponse)
         {
-            IGameObject player = GetPlayerByName(gameResponse.Request.Sender.Name);
+            var player = GetPlayerByName(gameResponse.Request.Sender.Name);
 
             if (player == null)
             {

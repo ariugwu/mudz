@@ -1,9 +1,10 @@
-﻿using System;
-using System.Linq;
-using mudz.Common.Domain;
+﻿using mudz.Common.Domain;
 using mudz.Common.Domain.Environment.Map.Room;
 using mudz.Common.Domain.GameEngine;
+using mudz.Common.Domain.Player;
 using mudz.Core.Model.Domain.GameEngine;
+using System;
+using System.Linq;
 
 namespace mudz.Core.Domain.GameEngine.Handler
 {
@@ -29,10 +30,10 @@ namespace mudz.Core.Domain.GameEngine.Handler
 
         #region Helper Function(s)
 
-        protected IGameObject GetPlayerByName(string playerName)
+        protected IPlayer GetPlayerByName(string playerName)
         {
             var room = GetRoomByPlayerName(playerName);
-            var player = (room != null) ? room.GameObjects.First(x => x.Name.ToLower().Equals(playerName.ToLower())) : null;
+            var player = (room != null) ? room.GameObjects.OfType<IPlayer>().First(x => x.Name.ToLower().Equals(playerName.ToLower())) : null;
 
             return player;
         }
