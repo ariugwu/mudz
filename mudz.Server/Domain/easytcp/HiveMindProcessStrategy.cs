@@ -69,20 +69,15 @@ namespace mudz.Server.Domain.easytcp
             }
             else
             {
-                var room = HiveMind.Instance.World.Rooms.First(x => x.Value.GameObjects.Exists(y => y.Name.ToLower().Equals(playerName.ToLower()))).Value;
-
+                var room = HiveMind.Instance.World.Rooms.Containing(playerName);
                 var player = GetPlayerByRoom(room, playerName);
 
                 string[] args = command.Split(' ');
-
                 gameAction = GetGameAction(args[0]);
-
                 if (args.Length > 2) gameAction = GameActions.None;
-
                 if (args.Length == 2) targ = GetTarget(room, args[1]);
 
                 response = HiveMind.Instance.Execute(new GameRequest() { RoomKey = room.RoomKey, GameAction = gameAction, Sender = player, Target = targ });
-
             }
 
             return response;
@@ -97,12 +92,12 @@ namespace mudz.Server.Domain.easytcp
 
         private IGameObject GetTarget(RoomContent room, string targetName)
         {
-            return room.GameObjects.First(x => x.Name.ToLower().Trim() == targetName.ToString().ToLower());
+            return room.GameObjects.First(x => x.Name.Trim().Equals(targetName, StringComparison.InvariantCultureIgnoreCase));
         }
 
         private IPlayer GetPlayerByRoom(RoomContent room, string playerName)
         {
-            return room.GameObjects.OfType<IPlayer>().First(x => x.Name.ToLower().Equals(playerName.ToLower()));
+            return room.GameObjects.OfType<IPlayer>().First(x => x.Name.Equals(playerName, StringComparison.InvariantCultureIgnoreCase));
         }
     }
 }
