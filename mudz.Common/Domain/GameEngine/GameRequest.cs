@@ -1,5 +1,6 @@
 ﻿using System;
 using mudz.Common.Domain.Environment.Map.Room;
+using mudz.Common.Domain.Player;
 
 namespace mudz.Common.Domain.GameEngine
 {
@@ -8,7 +9,7 @@ namespace mudz.Common.Domain.GameEngine
     {
         public GameActions GameAction { get; set; }
         public RoomKey RoomKey { get; set; }
-        public IGameObject Sender { get; set; }
+        public IPlayer Sender { get; set; }
         public IGameObject Target { get; set; }
     }
 }

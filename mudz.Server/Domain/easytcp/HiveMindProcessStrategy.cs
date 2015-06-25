@@ -9,6 +9,7 @@ using mudz.Common.Domain.Environment.Map.Room;
 using mudz.Common.Domain.GameEngine;
 using mudz.Core.Model.Domain.GameEngine;
 using mudz.Core.Model.Domain.Player;
+using mudz.Common.Domain.Player;
 
 namespace mudz.Server.Domain.easytcp
 {
@@ -99,9 +100,9 @@ namespace mudz.Server.Domain.easytcp
             return room.GameObjects.First(x => x.Name.ToLower().Trim() == targetName.ToString().ToLower());
         }
 
-        private IGameObject GetPlayerByRoom(RoomContent room, string playerName)
+        private IPlayer GetPlayerByRoom(RoomContent room, string playerName)
         {
-            return room.GameObjects.First(x => x.Name.ToLower().Equals(playerName.ToLower()));
+            return room.GameObjects.OfType<IPlayer>().First(x => x.Name.ToLower().Equals(playerName.ToLower()));
         }
     }
 }
