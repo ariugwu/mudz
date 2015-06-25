@@ -14,7 +14,7 @@ namespace mudz.Core.Domain.GameEngine.Handler
 
         public void SetSuccessor(BaseHandler successor)
         {
-            this.Successor = successor;
+            Successor = successor;
         }
 
         public abstract GameResponse HandleRequest(GameResponse gameResponse);
@@ -22,7 +22,7 @@ namespace mudz.Core.Domain.GameEngine.Handler
         public GameResponse Process(GameResponse gameResponse)
         {
             // Do whatever internal logic is required.
-            gameResponse = this.HandleRequest(gameResponse);
+            gameResponse = HandleRequest(gameResponse);
 
             // If there is a Successor set then fire that. Otherwise return the game response.
             return Successor != null ? Successor.HandleRequest(gameResponse) : gameResponse;
@@ -82,6 +82,7 @@ namespace mudz.Core.Domain.GameEngine.Handler
                 Message = String.Format("That doesn't make any sense. '{0}' is not a valid target for this command.", gameObject.Name)
             };
         }
+
         #endregion
     }
 }
