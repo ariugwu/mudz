@@ -24,7 +24,7 @@ namespace mudz.Server.Domain.easytcp
             {
                 gameResponse = GetGameReponse(consoleRequest.Command, consoleRequest.PlayerName);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 gameResponse = new GameResponse()
                 {
