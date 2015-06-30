@@ -153,5 +153,5 @@ namespace mudz.Core.Model.Domain.Player
         {
             _actionStrategy.RestoreHealth(this, health);
         }
-    }
+	}
 }

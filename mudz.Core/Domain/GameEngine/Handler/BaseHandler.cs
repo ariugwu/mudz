@@ -1,9 +1,11 @@
-﻿using System;
-using System.Linq;
+﻿using mudz.Common;
 using mudz.Common.Domain;
 using mudz.Common.Domain.Environment.Map.Room;
 using mudz.Common.Domain.GameEngine;
+using mudz.Common.Domain.Player;
 using mudz.Core.Model.Domain.GameEngine;
+using System;
+using System.Linq;
 
 namespace mudz.Core.Domain.GameEngine.Handler
 {
@@ -13,7 +15,7 @@ namespace mudz.Core.Domain.GameEngine.Handler
 
         public void SetSuccessor(BaseHandler successor)
         {
-            this.Successor = successor;
+            Successor = successor;
         }
 
         public abstract GameResponse HandleRequest(GameResponse gameResponse);
@@ -21,25 +23,23 @@ namespace mudz.Core.Domain.GameEngine.Handler
         public GameResponse Process(GameResponse gameResponse)
         {
             // Do whatever internal logic is required.
-            gameResponse = this.HandleRequest(gameResponse);
+            gameResponse = HandleRequest(gameResponse);
 
             // If there is a Successor set then fire that. Otherwise return the game response.
             return Successor != null ? Successor.HandleRequest(gameResponse) : gameResponse;
         }
 
-        #region Helper Function(s)
+		#region Helper Function(s)
 
-        protected IGameObject GetPlayerByName(string playerName)
+		protected IPlayer GetPlayerByName(IPlayer player)
+		{
+			var room = GetRoomByPlayerName(player);
+			return (room != null) ? room.GameObjects.OfType<IPlayer>().FirstMatching(player, PlayerEqualityComparer.Instance) : null;
+		}
+
+        protected RoomContent GetRoomByPlayerName(IPlayer player)
         {
-            var room = GetRoomByPlayerName(playerName);
-            var player = (room != null) ? room.GameObjects.First(x => x.Name.ToLower().Equals(playerName.ToLower())) : null;
-
-            return player;
-        }
-
-        protected RoomContent GetRoomByPlayerName(string playerName)
-        {
-            return HiveMind.Instance.World.Rooms.FirstOrDefault(x => x.Value.GameObjects.Exists(y => y.Name.ToLower().Equals(playerName.ToLower()))).Value;
+			return HiveMind.Instance.World.Rooms.Containing(player);
         }
 
         protected bool IsOutOfPlay(IGameObject gameObject)
@@ -81,6 +81,7 @@ namespace mudz.Core.Domain.GameEngine.Handler
                 Message = String.Format("That doesn't make any sense. '{0}' is not a valid target for this command.", gameObject.Name)
             };
         }
+
         #endregion
     }
 }

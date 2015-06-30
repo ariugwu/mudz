@@ -9,6 +9,7 @@ using mudz.Common.Domain.Environment.Map.Room;
 using mudz.Common.Domain.GameEngine;
 using mudz.Core.Model.Domain.GameEngine;
 using mudz.Core.Model.Domain.Player;
+using mudz.Common.Domain.Player;
 
 namespace mudz.Server.Domain.easytcp
 {
@@ -24,7 +25,7 @@ namespace mudz.Server.Domain.easytcp
             {
                 gameResponse = GetGameReponse(consoleRequest.Command, consoleRequest.PlayerName);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 gameResponse = new GameResponse()
                 {
@@ -60,28 +61,23 @@ namespace mudz.Server.Domain.easytcp
             GameActions gameAction;
             IGameObject targ = null;
 
-
-
             if (playerName == null)
             {
                 response = HiveMind.Instance.Execute(new GameRequest(){ GameAction = GameActions.Login, Sender = new Player(){ Name = command} });
             }
             else
             {
-                var room = HiveMind.Instance.World.Rooms.First(x => x.Value.GameObjects.Exists(y => y.Name.ToLower().Equals(playerName.ToLower()))).Value;
-
+				// This is always round tripped, similar examples exist elsewhere (BaseHandler for example)
+				// TODO : Contemplate a pattern to determine RoomContent and PlayerName without interlacing the two
+                var room = HiveMind.Instance.World.Rooms.Containing(playerName);
                 var player = GetPlayerByRoom(room, playerName);
 
                 string[] args = command.Split(' ');
-
                 gameAction = GetGameAction(args[0]);
-
                 if (args.Length > 2) gameAction = GameActions.None;
-
                 if (args.Length == 2) targ = GetTarget(room, args[1]);
 
                 response = HiveMind.Instance.Execute(new GameRequest() { RoomKey = room.RoomKey, GameAction = gameAction, Sender = player, Target = targ });
-
             }
 
             return response;
@@ -96,12 +92,12 @@ namespace mudz.Server.Domain.easytcp
 
         private IGameObject GetTarget(RoomContent room, string targetName)
         {
-            return room.GameObjects.First(x => x.Name.ToLower().Trim() == targetName.ToString().ToLower());
+            return room.GameObjects.First(x => x.Name.Trim().Equals(targetName, StringComparison.InvariantCultureIgnoreCase));
         }
 
-        private IGameObject GetPlayerByRoom(RoomContent room, string playerName)
+        private IPlayer GetPlayerByRoom(RoomContent room, string playerName)
         {
-            return room.GameObjects.First(x => x.Name.ToLower().Equals(playerName.ToLower()));
+            return room.GameObjects.OfType<IPlayer>().First(x => x.Name.Equals(playerName, StringComparison.InvariantCultureIgnoreCase));
         }
     }
 }

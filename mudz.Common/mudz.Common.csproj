@@ -43,6 +43,7 @@
     <Compile Include="Domain\ActorStates.cs" />
     <Compile Include="Domain\easytcp\ConsoleRequest.cs" />
     <Compile Include="Domain\Environment\Map\Grid.cs" />
+    <Compile Include="Domain\Environment\Map\Room\RoomCollection.cs" />
     <Compile Include="Domain\Environment\Map\Room\RoomContent.cs" />
     <Compile Include="Domain\Environment\Map\Room\RoomKey.cs" />
     <Compile Include="Domain\GameEngine\GameActions.cs" />
@@ -68,7 +69,10 @@
     <Compile Include="Domain\Player\IPlayer.cs" />
     <Compile Include="Domain\Player\IPlayerActionStrategy.cs" />
     <Compile Include="Domain\Player\PlayerAnatomy.cs" />
+    <Compile Include="Domain\Player\PlayerEqualityComparer.cs" />
     <Compile Include="Domain\Player\PlayerTypes.cs" />
+    <Compile Include="Domain\Singleton.cs" />
+    <Compile Include="EqualityComparisonHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

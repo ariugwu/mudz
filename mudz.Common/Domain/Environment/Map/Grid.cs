@@ -7,6 +7,6 @@ namespace mudz.Common.Domain.Environment.Map
     {
         public int[][] Sheet { get;  set; }
 
-        public Dictionary<RoomKey, RoomContent> Rooms { get; set; }  
+        public RoomCollection Rooms { get; set; }  
     }
 }

@@ -1,6 +1,4 @@
-﻿using mudz.Common.Domain;
-using mudz.Common.Domain.GameEngine;
-using mudz.Common.Domain.Player;
+﻿using mudz.Common.Domain.GameEngine;
 
 namespace mudz.Core.Domain.GameEngine.Handler
 {
@@ -8,7 +6,7 @@ namespace mudz.Core.Domain.GameEngine.Handler
     {
         public override GameResponse HandleRequest(GameResponse gameResponse)
         {
-            IGameObject player = GetPlayerByName(gameResponse.Request.Sender.Name);
+            var player = GetPlayerByName(gameResponse.Request.Sender);
 
             if (player == null)
             {
@@ -17,7 +15,7 @@ namespace mudz.Core.Domain.GameEngine.Handler
             }
             else
             {
-                gameResponse.Player = (IPlayer) player;
+                gameResponse.Player = player;
                 gameResponse.WasSuccessful = true;
             }
 

@@ -61,7 +61,7 @@ namespace mudz.Core.Model.Domain.GameEngine
 
                 _world = new Grid()
                 {
-                    Rooms = new Dictionary<RoomKey, RoomContent>(),
+                    Rooms = new RoomCollection(),
                     Sheet = new int[10][]
                 };
 
