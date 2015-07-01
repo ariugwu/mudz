@@ -13,7 +13,7 @@ using mudz.Common.Domain.Player;
 
 namespace mudz.Server.Domain.easytcp
 {
-    public class HiveMindProcessStrategy : IProcessStrategy
+    public class ConsoleProcessStrategy : IProcessStrategy
     {
         public Response ProcessRequest(Request request)
         {

@@ -10,7 +10,7 @@ namespace mudz.Server
     {
         static void Main(string[] args)
         {
-            var wat = new AsyncListener(new HiveMindProcessStrategy()) { Connections = new List<StateObject>() };
+            var wat = new AsyncListener(new ConsoleProcessStrategy()) { Connections = new List<StateObject>() };
             wat.StartListening(IPAddress.Parse("127.0.0.1"), 4000);
         }
     }

@@ -73,69 +73,69 @@ namespace mudz.Core.Model.Domain
             return ActorState == ActorStates.Disabled;
         }
 
-        private GameResponse CannotRespond(GameResponse gameResponse)
+        private ActionItem CannotRespond(ActionContext actionContext)
         {
-
-            gameResponse.WasSuccessful = false;
-            gameResponse.Message = String.Format("{0} begins to move and then collapses!", this.Name);
-
-            return gameResponse;
+            return new ActionItem()
+            {
+                WasSuccessful = false,
+                Message = String.Format("{0} begins to move and then collapses!", this.Name),
+            };
         }
 
-        private GameResponse NotEnoughStamina(GameResponse gameResponse)
+        private ActionItem NotEnoughStamina(ActionContext actionContext)
         {
+            return new ActionItem()
+            {
+                WasSuccessful = false,
+                Message = String.Format("{0} does not have enough stamina (turns) to complete this action!", this.Name),
+            };
 
-            gameResponse.WasSuccessful = false;
-            gameResponse.Message = String.Format("{0} does not have enough stamina (turns) to complete this action!", this.Name);
-
-            return gameResponse;
         }
 
         public abstract int GetStaminaCostByActionType(GameActions gameAction);
 
-        public override GameResponse ExecuteAction(GameRequest request)
+        public override ActionItem ExecuteAction(ActionContext actionContext)
         {
-            var actionType = request.GameAction;
-            var gameResponse = new GameResponse() { WasSuccessful = true };
+            if (IsExhausted() || IsDisabled()) return CannotRespond(actionContext);
+            if (!HasEnoughStaminaForAction(actionContext.CurrentAction)) return NotEnoughStamina(actionContext);
+
+            var actionItem = new ActionItem();
             int amount = 0;
 
-            if (IsExhausted() || IsDisabled()) return CannotRespond(gameResponse);
-            if (!HasEnoughStaminaForAction(actionType)) return NotEnoughStamina(gameResponse);
-
-                switch (actionType)
-                {
-                    case GameActions.Fight:
-                        amount = this.Fight();
-                        gameResponse.Message = String.Format("{0} attacks for {1} damage!", this.Name, amount);
-                        gameResponse.Amount = amount;
-                        return gameResponse;
-                    case GameActions.Repair:
-                        amount = this.Repair();
-                        gameResponse.Message = String.Format("{0} repairs for {1} hit points!", this.Name, amount);
-                        gameResponse.Amount = amount;
-                        return gameResponse;
-                    case GameActions.Negotiate:
-                        amount = this.Negotiate();
-                        gameResponse.Message = String.Format("{0} negotiates for points!", this.Name, amount);
-                        gameResponse.Amount = amount;
-                        return gameResponse;
-                    case GameActions.Heal:
-                        amount = this.Heal();
-                        gameResponse.Message = String.Format("{0} heals {1} for {2} damage!", request.Sender.Name, request.Target.Name, amount);
-                        gameResponse.Amount = amount;
-                        return gameResponse;
-                    default:
-                        throw new NotImplementedException("This action has not been implemented");
-                }
+            switch (actionContext.CurrentAction)
+            {
+                case GameActions.Fight:
+                    amount = this.Fight();
+                    actionItem.WasSuccessful = true;
+                    actionItem.Message = String.Format("{0} attacks for {1} damage!", this.Name, amount);
+                    actionItem.Amount = amount;
+                    return actionItem;
+                case GameActions.Repair:
+                    amount = this.Repair();
+                    actionItem.Message = String.Format("{0} repairs for {1} hit points!", this.Name, amount);
+                    actionItem.Amount = amount;
+                    return actionItem;
+                case GameActions.Negotiate:
+                    amount = this.Negotiate();
+                    actionItem.Message = String.Format("{0} negotiates for points!", this.Name, amount);
+                    actionItem.Amount = amount;
+                    return actionItem;
+                case GameActions.Heal:
+                    amount = this.Heal();
+                    actionItem.Message = String.Format("{0} heals {1} for {2} damage!", actionContext.Player.Name, actionContext.Target.Name, amount);
+                    actionItem.Amount = amount;
+                    return actionItem;
+                default:
+                    throw new NotImplementedException("This action has not been implemented");
+            }
         }
 
-        public override GameResponse ProcessItem(IInventoryItem item)
+        public override ActionItem ProcessItem(ActionContext actionContext, IInventoryItem item)
         {
             AcceptItem(item);
 
-            return new GameResponse()
+            return new ActionItem()
             {
-                Request = new GameRequest(),
                 WasSuccessful = true,
                 Message = String.Format("{0} takes {1} and quickly hides it away.", this.Name, item.Name)
             };

@@ -2,6 +2,7 @@
 using mudz.Common.Domain;
 using mudz.Common.Domain.GameEngine;
 using mudz.Common.Domain.Inventory;
+using mudz.Core.Model.Domain.GameEngine;
 
 namespace mudz.Core.Domain.GameEngine.Handler
 {
@@ -9,6 +10,8 @@ namespace mudz.Core.Domain.GameEngine.Handler
 	{
 		public override GameResponse HandleRequest(GameResponse gameResponse)
 		{
+		    var actionContext = HiveMind.Instance.ActionContext;
+
 			if (gameResponse.Request.GameAction == GameActions.Login)
 				if (!gameResponse.WasSuccessful) return gameResponse;
 				else
@@ -30,19 +33,19 @@ namespace mudz.Core.Domain.GameEngine.Handler
 			switch (gameResponse.Request.GameAction)
 			{
 				case GameActions.Heal:
-					gameResponse = gameResponse.Request.Sender.ExecuteAction(gameResponse.Request);
+                    actionContext.ActionItems.Add(gameResponse.Request.Sender.ExecuteAction(actionContext));
 					if (gameResponse.WasSuccessful) gameResponse.Request.Target.RestoreHealth(gameResponse.Amount);
 					break;
 				case GameActions.Fight:
-					gameResponse = gameResponse.Request.Sender.ExecuteAction(gameResponse.Request);
+                    actionContext.ActionItems.Add(gameResponse.Request.Sender.ExecuteAction(actionContext));
 					if (gameResponse.WasSuccessful) gameResponse.Request.Target.TakeDamage(gameResponse.Amount);
 					break;
 				case GameActions.Repair:
-					gameResponse = gameResponse.Request.Sender.ExecuteAction(gameResponse.Request);
+                    actionContext.ActionItems.Add(gameResponse.Request.Sender.ExecuteAction(actionContext));
 					if (gameResponse.WasSuccessful) gameResponse.Request.Target.Repair();
 					break;
 				case GameActions.Negotiate:
-					gameResponse = gameResponse.Request.Sender.ExecuteAction(gameResponse.Request);
+                    actionContext.ActionItems.Add(gameResponse.Request.Sender.ExecuteAction(actionContext));
 					if (gameResponse.WasSuccessful) gameResponse.Request.Target.Negotiate();
 					break;
 				case GameActions.LookAt:
@@ -59,7 +62,7 @@ namespace mudz.Core.Domain.GameEngine.Handler
 					}
 
 					var item = (IInventoryItem)(room.GetGameObject(gameResponse.Request.Target.GameObjectKey));
-					gameResponse = gameResponse.Request.Sender.ProcessItem(item);
+                    actionContext.ActionItems.Add(gameResponse.Request.Sender.ProcessItem(actionContext, item));
 
 					if (gameResponse.WasSuccessful) room.GameObjects.Remove(item);
 

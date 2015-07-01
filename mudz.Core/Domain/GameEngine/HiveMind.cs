@@ -22,6 +22,7 @@ namespace mudz.Core.Model.Domain.GameEngine
 
         static HiveMind()
         {
+
             var authHandler = new AuthHandler();
             var commandHandler = new CommandHandler();
             var finalizeHandler = new FinalizeHandler();
@@ -34,6 +35,7 @@ namespace mudz.Core.Model.Domain.GameEngine
 
         private HiveMind()
         {
+            ActionContext = new ActionContext();
         }
 
         private static BaseHandler _requestHandler;
@@ -50,6 +52,7 @@ namespace mudz.Core.Model.Domain.GameEngine
             get { return _responseStack ?? (_responseStack = new Stack<GameResponse>()); }
         }
 
+        public ActionContext ActionContext { get; set; }
 
         private Grid _world;
 
@@ -73,9 +76,8 @@ namespace mudz.Core.Model.Domain.GameEngine
 
         public GameResponse Execute(GameRequest request)
         {
-            var response = new GameResponse();
-            response.Request = request;
-            
+            var response = new GameResponse {Request = request};
+
             response = _requestHandler.Process(response);
 
             ResponseStack.Push(response);

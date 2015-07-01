@@ -41,7 +41,7 @@ namespace mudz.Core.Model.Domain
 
         public abstract void RestoreHealth(int health);
 
-        public abstract GameResponse ExecuteAction(GameRequest request);
+        public abstract ActionItem ExecuteAction(ActionContext actionContext);
 
         public abstract void CheckState();
 
@@ -50,11 +50,10 @@ namespace mudz.Core.Model.Domain
             return "There is nothing to see here.";
         }
 
-        public virtual GameResponse ProcessItem(IInventoryItem item)
+        public virtual ActionItem ProcessItem(ActionContext actionContext, IInventoryItem item)
         {
-            return new GameResponse()
+            return new ActionItem()
             {
-               Request = new GameRequest(),
                WasSuccessful = false,
                Message = "Why would you want to do that?"
             };

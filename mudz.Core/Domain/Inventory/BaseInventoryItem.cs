@@ -61,33 +61,27 @@ namespace mudz.Core.Model.Domain.Inventory
 
         }
 
-        public virtual GameResponse ExecuteAction(GameRequest request)
+        public virtual ActionItem ExecuteAction(ActionContext actionContext)
         {
-            var actionType = request.GameAction;
 
-            switch (actionType)
+            switch (actionContext.CurrentAction)
             {
                 case GameActions.Heal:
-                    return new GameResponse(){ Message = "Items can't be healed!"};
+                    return new ActionItem(){ WasSuccessful = false, Message = "Items can't be healed!"};
                 case GameActions.Negotiate:
-                    return new GameResponse(){ Message = "You'd have better luck convincing yourself!"};
+                    return new ActionItem() { WasSuccessful = false, Message = "You'd have better luck convincing yourself!" };
                 case GameActions.Repair:
-                    return new GameResponse(){ Message = "How would that work exactly?"};
+                    return new ActionItem() { WasSuccessful = false, Message = "How would that work exactly?" };
                 case GameActions.Fight:
-                    return new GameResponse(){ Message = "So like...a heavy bag? Or..."};
+                    return new ActionItem() { WasSuccessful = false, Message = "So like...a heavy bag? Or..." };
                 default:
                     throw new NotImplementedException("Game action not supported!");
             }
         }
 
-        public virtual GameResponse ProcessItem(IInventoryItem item)
+        public virtual ActionItem ProcessItem(ActionContext actionContext, IInventoryItem item)
         {
-            return new GameResponse()
-            {
-                Request = new GameRequest(),
-                WasSuccessful = false,
-                Message = "Why would you want to do that?"
-            };
+            return new ActionItem() { WasSuccessful = false, Message = "Why would you want to do that?" };
         }
 
         public virtual void CheckState()
