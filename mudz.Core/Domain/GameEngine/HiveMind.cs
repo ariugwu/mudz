@@ -24,10 +24,12 @@ namespace mudz.Core.Model.Domain.GameEngine
         {
 
             var authHandler = new AuthHandler();
+            var dependencyHandler = new DependencyHandler();
             var commandHandler = new CommandHandler();
             var finalizeHandler = new FinalizeHandler();
 
-            authHandler.SetSuccessor(commandHandler);
+            authHandler.SetSuccessor(dependencyHandler);
+            dependencyHandler.SetSuccessor(commandHandler);
             commandHandler.SetSuccessor(finalizeHandler);
 
             _requestHandler = authHandler;
@@ -35,7 +37,6 @@ namespace mudz.Core.Model.Domain.GameEngine
 
         private HiveMind()
         {
-            ActionContext = new ActionContext();
         }
 
         private static BaseHandler _requestHandler;
@@ -76,9 +77,22 @@ namespace mudz.Core.Model.Domain.GameEngine
 
         public GameResponse Execute(GameRequest request)
         {
-            var response = new GameResponse {Request = request};
+            var actionContext = new ActionContext
+            {
+                CurrentAction = request.GameAction, 
+                Player = request.Sender, Target = request.Target, 
+                ActionItems = new List<ActionResult>()
+            };
+            
+            
+            var response = new GameResponse();
 
-            response = _requestHandler.Process(response);
+            // Send the action context through the chain of responsibility.
+            actionContext = _requestHandler.Process(actionContext);
+
+            // Build our response.
+            response.ActionItems = actionContext.ActionItems;
+            response.RoomContent = actionContext.Room;
 
             ResponseStack.Push(response);
 

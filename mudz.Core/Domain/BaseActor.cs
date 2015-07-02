@@ -73,18 +73,18 @@ namespace mudz.Core.Model.Domain
             return ActorState == ActorStates.Disabled;
         }
 
-        private ActionItem CannotRespond(ActionContext actionContext)
+        private ActionResult CannotRespond(ActionContext actionContext)
         {
-            return new ActionItem()
+            return new ActionResult()
             {
                 WasSuccessful = false,
                 Message = String.Format("{0} begins to move and then collapses!", this.Name),
             };
         }
 
-        private ActionItem NotEnoughStamina(ActionContext actionContext)
+        private ActionResult NotEnoughStamina(ActionContext actionContext)
         {
-            return new ActionItem()
+            return new ActionResult()
             {
                 WasSuccessful = false,
                 Message = String.Format("{0} does not have enough stamina (turns) to complete this action!", this.Name),
@@ -94,12 +94,12 @@ namespace mudz.Core.Model.Domain
 
         public abstract int GetStaminaCostByActionType(GameActions gameAction);
 
-        public override ActionItem ExecuteAction(ActionContext actionContext)
+        public override ActionResult ExecuteAction(ActionContext actionContext)
         {
             if (IsExhausted() || IsDisabled()) return CannotRespond(actionContext);
             if (!HasEnoughStaminaForAction(actionContext.CurrentAction)) return NotEnoughStamina(actionContext);
 
-            var actionItem = new ActionItem();
+            var actionItem = new ActionResult();
             int amount = 0;
 
             switch (actionContext.CurrentAction)
@@ -130,11 +130,11 @@ namespace mudz.Core.Model.Domain
             }
         }
 
-        public override ActionItem ProcessItem(ActionContext actionContext, IInventoryItem item)
+        public override ActionResult ProcessItem(ActionContext actionContext, IInventoryItem item)
         {
             AcceptItem(item);
 
-            return new ActionItem()
+            return new ActionResult()
             {
                 WasSuccessful = true,
                 Message = String.Format("{0} takes {1} and quickly hides it away.", this.Name, item.Name)

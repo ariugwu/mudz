@@ -4,22 +4,25 @@ namespace mudz.Core.Domain.GameEngine.Handler
 {
     public class AuthHandler : BaseHandler
     {
-        public override GameResponse HandleRequest(GameResponse gameResponse)
+        public override ActionContext HandleRequest(ActionContext actionContext)
         {
-            var player = GetPlayerByName(gameResponse.Request.Sender);
+            var player = GetPlayerByName(actionContext.Player);
+            var actionResult = new ActionResult();
 
             if (player == null)
             {
-                gameResponse.Message = "Sorry. No Player by that name!";
-                gameResponse.WasSuccessful = false;
+                actionResult.Message = "Sorry. No Player by that name!";
+                actionResult.WasSuccessful = false;
             }
             else
             {
-                gameResponse.Player = player;
-                gameResponse.WasSuccessful = true;
+                actionContext.Player = player;
+                actionResult.Message = "Welcome back!";
+                actionResult.WasSuccessful = true;
             }
 
-            return gameResponse;
+            actionContext.ActionItems.Add(actionResult);
+            return actionContext;
         }
     }
 }

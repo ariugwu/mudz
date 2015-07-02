@@ -25,6 +25,8 @@ namespace mudz.Cli.Domain.easytcp
 
             if (PlayerOne.Instance == null)
             {
+                PlayerOne.Instance = new Core.Model.Domain.Player.Player(){ Name = command};
+
                 consoleRequest = new ConsoleRequest() { Command = command, PlayerName = null };
                 return new Request() { Payload = consoleRequest, Type = typeof(ConsoleRequest) };
             }

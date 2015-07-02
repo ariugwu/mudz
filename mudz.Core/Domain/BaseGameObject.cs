@@ -41,7 +41,7 @@ namespace mudz.Core.Model.Domain
 
         public abstract void RestoreHealth(int health);
 
-        public abstract ActionItem ExecuteAction(ActionContext actionContext);
+        public abstract ActionResult ExecuteAction(ActionContext actionContext);
 
         public abstract void CheckState();
 
@@ -50,9 +50,9 @@ namespace mudz.Core.Model.Domain
             return "There is nothing to see here.";
         }
 
-        public virtual ActionItem ProcessItem(ActionContext actionContext, IInventoryItem item)
+        public virtual ActionResult ProcessItem(ActionContext actionContext, IInventoryItem item)
         {
-            return new ActionItem()
+            return new ActionResult()
             {
                WasSuccessful = false,
                Message = "Why would you want to do that?"

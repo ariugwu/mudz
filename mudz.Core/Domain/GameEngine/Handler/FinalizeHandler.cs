@@ -4,15 +4,15 @@ namespace mudz.Core.Domain.GameEngine.Handler
 {
     public class FinalizeHandler : BaseHandler
     {
-        public override GameResponse HandleRequest(GameResponse gameResponse)
+        public override ActionContext HandleRequest(ActionContext actionContext)
         {
-            if (gameResponse.Request.GameAction == GameActions.Login) return gameResponse;
+            if (actionContext.CurrentAction == GameActions.Login) return actionContext;
 
-            gameResponse.Request.Sender.CheckState();
+            actionContext.Player.CheckState();
 
-            if (gameResponse.Request.Target != null) gameResponse.Request.Target.CheckState();
+            if (actionContext.Target != null) actionContext.Target.CheckState();
 
-            return gameResponse;
+            return actionContext;
         }
     }
 }

@@ -47,7 +47,7 @@
     <Compile Include="Domain\Environment\Map\Room\RoomContent.cs" />
     <Compile Include="Domain\Environment\Map\Room\RoomKey.cs" />
     <Compile Include="Domain\GameEngine\ActionContext.cs" />
-    <Compile Include="Domain\GameEngine\ActionItem.cs" />
+    <Compile Include="Domain\GameEngine\ActionResult.cs" />
     <Compile Include="Domain\GameEngine\GameActions.cs" />
     <Compile Include="Domain\GameEngine\GameEvent.cs" />
     <Compile Include="Domain\GameEngine\GameRequest.cs" />

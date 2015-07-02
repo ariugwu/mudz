@@ -2,85 +2,93 @@
 using mudz.Common.Domain;
 using mudz.Common.Domain.GameEngine;
 using mudz.Common.Domain.Inventory;
-using mudz.Core.Model.Domain.GameEngine;
 
 namespace mudz.Core.Domain.GameEngine.Handler
 {
 	public class CommandHandler : BaseHandler
 	{
-		public override GameResponse HandleRequest(GameResponse gameResponse)
+		public override ActionContext HandleRequest(ActionContext actionContext)
 		{
-		    var actionContext = HiveMind.Instance.ActionContext;
 
-			if (gameResponse.Request.GameAction == GameActions.Login)
-				if (!gameResponse.WasSuccessful) return gameResponse;
-				else
-				{
-					gameResponse.RoomContent = GetRoomByPlayerName(gameResponse.Player);
-					return gameResponse;
-				}
+		    if (actionContext.CurrentAction == GameActions.Login)
+		    {
+                return actionContext;
+		    }
 
-			var room = GetRoomByPlayerName(gameResponse.Player);
+		    if (IsOutOfPlay(actionContext.Player))
+		    {
+		        actionContext.ActionItems.Add(OutOfPlayResult(actionContext.Player));
+		        return actionContext;
+		    }
 
-			if (gameResponse.Request.GameAction != GameActions.Login)
-			{
-				if (IsOutOfPlay(gameResponse.Request.Sender)) return OutOfPlayResponse(gameResponse.Request, gameResponse.Request.Sender);
-				if (IsOutOfPlay(gameResponse.Request.Target)) return OutOfPlayResponse(gameResponse.Request, gameResponse.Request.Target);
+		    if (IsOutOfPlay(actionContext.Target))
+		    {
+		        actionContext.ActionItems.Add(OutOfPlayResult(actionContext.Target));
+                return actionContext;
+		    }
 
-				if (!IsTargetPresent(gameResponse.Request.RoomKey, gameResponse.Request.Target)) return NoTargetResponse(gameResponse.Request, gameResponse.Request.Target);
-			}
+		    if (!IsTargetPresent(actionContext.Room.RoomKey, actionContext.Target))
+		    {
+		        actionContext.ActionItems.Add(NoTargetResponse(actionContext.Target));
+                return actionContext;
+		    }
 
-			switch (gameResponse.Request.GameAction)
+		    var actionResult = new ActionResult();
+
+			switch (actionContext.CurrentAction)
 			{
 				case GameActions.Heal:
-                    actionContext.ActionItems.Add(gameResponse.Request.Sender.ExecuteAction(actionContext));
-					if (gameResponse.WasSuccessful) gameResponse.Request.Target.RestoreHealth(gameResponse.Amount);
+			        actionResult = actionContext.Player.ExecuteAction(actionContext);
+					if (actionResult.WasSuccessful) actionContext.Target.RestoreHealth(actionResult.Amount);
+                    actionContext.ActionItems.Add(actionResult);
 					break;
 				case GameActions.Fight:
-                    actionContext.ActionItems.Add(gameResponse.Request.Sender.ExecuteAction(actionContext));
-					if (gameResponse.WasSuccessful) gameResponse.Request.Target.TakeDamage(gameResponse.Amount);
+                    actionResult = actionContext.Player.ExecuteAction(actionContext);
+					if (actionResult.WasSuccessful) actionContext.Target.TakeDamage(actionResult.Amount);
+                    actionContext.ActionItems.Add(actionResult);
 					break;
 				case GameActions.Repair:
-                    actionContext.ActionItems.Add(gameResponse.Request.Sender.ExecuteAction(actionContext));
-					if (gameResponse.WasSuccessful) gameResponse.Request.Target.Repair();
+                    actionResult = actionContext.Player.ExecuteAction(actionContext);
+					if (actionResult.WasSuccessful) actionContext.Target.Repair();
+                    actionContext.ActionItems.Add(actionResult);
 					break;
 				case GameActions.Negotiate:
-                    actionContext.ActionItems.Add(gameResponse.Request.Sender.ExecuteAction(actionContext));
-					if (gameResponse.WasSuccessful) gameResponse.Request.Target.Negotiate();
+                    actionResult = actionContext.Player.ExecuteAction(actionContext);
+					if (actionResult.WasSuccessful) actionContext.Target.Negotiate();
+                    actionContext.ActionItems.Add(actionResult);
 					break;
 				case GameActions.LookAt:
-					gameResponse = new GameResponse() { Message = gameResponse.Request.Target.Description, WasSuccessful = true, Request = gameResponse.Request };
+			        actionResult.Message = actionContext.Target.Description;
+			        actionResult.WasSuccessful = true;
 					break;
 				case GameActions.LookAround:
-					gameResponse = new GameResponse() { Message = String.Format("{0} looks around.", gameResponse.Player.Name), WasSuccessful = false, Request = gameResponse.Request };
+			        actionResult.Message = String.Format("{0} looks around.", actionContext.Player.Name);
+                    actionResult.WasSuccessful = true;
 					break;
 				case GameActions.Get:
-					if (gameResponse.Request.Target.GameObjectType != GameObjectTypes.InventoryItem)
+					if (actionContext.Target.GameObjectType != GameObjectTypes.InventoryItem)
 					{
-						gameResponse = InvalidTargetResponse(gameResponse.Request, gameResponse.Request.Target);
+						actionResult = InvalidTargetResponse(actionContext.Target);
+                        actionContext.ActionItems.Add(actionResult);
 						break;
 					}
 
-					var item = (IInventoryItem)(room.GetGameObject(gameResponse.Request.Target.GameObjectKey));
-                    actionContext.ActionItems.Add(gameResponse.Request.Sender.ProcessItem(actionContext, item));
+					var item = (IInventoryItem)(actionContext.Room.GetGameObject(actionContext.Target.GameObjectKey));
+                    actionContext.ActionItems.Add(actionContext.Player.ProcessItem(actionContext, item));
 
-					if (gameResponse.WasSuccessful) room.GameObjects.Remove(item);
-
+					if (actionResult.WasSuccessful) actionContext.Room.GameObjects.Remove(item);
+                    actionContext.ActionItems.Add(actionResult);
 					break;
 				case GameActions.None:
-					gameResponse = new GameResponse()
-					{
-						Message = "Sorry, no command matched your request.",
-						WasSuccessful = false,
-						Request = new GameRequest() { GameAction = GameActions.None, Sender = gameResponse.Request.Sender, Target = null }
-					};
-
+			        actionResult.Message = "Sorry, no command matched your request.";
+			        actionResult.WasSuccessful = false;
+                    actionContext.ActionItems.Add(actionResult);
 					break;
 				default:
 					throw new NotImplementedException("The action requested is not available!");
 			}
 
-			return gameResponse;
+			return actionContext;
 		}
 	}
 }

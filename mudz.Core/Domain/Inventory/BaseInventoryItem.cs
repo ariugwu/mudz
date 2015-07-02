@@ -61,27 +61,27 @@ namespace mudz.Core.Model.Domain.Inventory
 
         }
 
-        public virtual ActionItem ExecuteAction(ActionContext actionContext)
+        public virtual ActionResult ExecuteAction(ActionContext actionContext)
         {
 
             switch (actionContext.CurrentAction)
             {
                 case GameActions.Heal:
-                    return new ActionItem(){ WasSuccessful = false, Message = "Items can't be healed!"};
+                    return new ActionResult(){ WasSuccessful = false, Message = "Items can't be healed!"};
                 case GameActions.Negotiate:
-                    return new ActionItem() { WasSuccessful = false, Message = "You'd have better luck convincing yourself!" };
+                    return new ActionResult() { WasSuccessful = false, Message = "You'd have better luck convincing yourself!" };
                 case GameActions.Repair:
-                    return new ActionItem() { WasSuccessful = false, Message = "How would that work exactly?" };
+                    return new ActionResult() { WasSuccessful = false, Message = "How would that work exactly?" };
                 case GameActions.Fight:
-                    return new ActionItem() { WasSuccessful = false, Message = "So like...a heavy bag? Or..." };
+                    return new ActionResult() { WasSuccessful = false, Message = "So like...a heavy bag? Or..." };
                 default:
                     throw new NotImplementedException("Game action not supported!");
             }
         }
 
-        public virtual ActionItem ProcessItem(ActionContext actionContext, IInventoryItem item)
+        public virtual ActionResult ProcessItem(ActionContext actionContext, IInventoryItem item)
         {
-            return new ActionItem() { WasSuccessful = false, Message = "Why would you want to do that?" };
+            return new ActionResult() { WasSuccessful = false, Message = "Why would you want to do that?" };
         }
 
         public virtual void CheckState()

@@ -27,12 +27,15 @@ namespace mudz.Server.Domain.easytcp
             }
             catch (Exception)
             {
-                gameResponse = new GameResponse()
+                gameResponse = new GameResponse(){ActionItems = new List<ActionResult>()};
+                
+                var actionResult = new ActionResult()
                 {
                     Message = "Whoops! Something went hella wrong. Please try again.",
-                    WasSuccessful = false,
-                    Request = new GameRequest() { GameAction = GameActions.None, Target = null }
+                    WasSuccessful = false
                 };
+
+                gameResponse.ActionItems.Add(actionResult);
             }
 
             var response = new Response() { Payload = gameResponse, Type = typeof(GameResponse) };

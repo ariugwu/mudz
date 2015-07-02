@@ -92,45 +92,44 @@ namespace mudz.Cli.Domain.GameEngine
             Console.Clear();
         }
 
-        public static void DisplayCommand(GameResponse response)
+        public static void DisplayCommand(ActionResult actionResult)
         {
-            if (!response.WasSuccessful)
+            if (!actionResult.WasSuccessful)
             {
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
-                ReplaceLine(response.Message);
+                ReplaceLine(actionResult.Message);
                 Console.ResetColor();
 
                 return;
-            } 
+            }
 
-            switch (response.Request.GameAction)
+            switch (actionResult.GameAction)
             {
                 case GameActions.LookAround:
                     ClearScreen();
-                    DrawRoom(response.RoomContent);
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    ReplaceLine(response.Message);
+                    ReplaceLine(actionResult.Message);
                     Console.ResetColor();
                     break;
                 case GameActions.Heal:
                     Console.ForegroundColor = ConsoleColor.Blue;
-                    ReplaceLine(response.Message);
+                    ReplaceLine(actionResult.Message);
                     Console.ResetColor();
                     break;
                 case GameActions.Fight:
                     Console.ForegroundColor = ConsoleColor.Red;
-                    ReplaceLine(response.Message);
+                    ReplaceLine(actionResult.Message);
                     Console.ResetColor();
                     break;
                 case GameActions.LookAt:
                 case GameActions.Login:
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    ReplaceLine(response.Message);
+                    ReplaceLine(actionResult.Message);
                     Console.ResetColor();
                     break;
                 case GameActions.Get:
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    ReplaceLine(response.Message);
+                    ReplaceLine(actionResult.Message);
                     Console.ResetColor();
                     break;
                 default:

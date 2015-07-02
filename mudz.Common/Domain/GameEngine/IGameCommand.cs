@@ -2,8 +2,8 @@
 {
     public interface IGameCommand
     {
-        ActionItem ExecuteAction(ActionContext actionContext);
-        ActionItem ProcessItem(ActionContext actionContext, Inventory.IInventoryItem item);
+        ActionResult ExecuteAction(ActionContext actionContext);
+        ActionResult ProcessItem(ActionContext actionContext, Inventory.IInventoryItem item);
         void CheckState();
     }
 }

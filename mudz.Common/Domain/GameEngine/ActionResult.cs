@@ -2,7 +2,8 @@
 
 namespace mudz.Common.Domain.GameEngine
 {
-    public class ActionItem
+    [Serializable]
+    public class ActionResult
     {
         public GameActions GameAction { get; set; }
         public string Message { get; set; }

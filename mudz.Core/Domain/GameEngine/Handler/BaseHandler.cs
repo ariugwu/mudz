@@ -18,15 +18,15 @@ namespace mudz.Core.Domain.GameEngine.Handler
             Successor = successor;
         }
 
-        public abstract GameResponse HandleRequest(GameResponse gameResponse);
+        public abstract ActionContext HandleRequest(ActionContext actionContext);
 
-        public GameResponse Process(GameResponse gameResponse)
+        public ActionContext Process(ActionContext actionContext)
         {
             // Do whatever internal logic is required.
-            gameResponse = HandleRequest(gameResponse);
+            actionContext = HandleRequest(actionContext);
 
             // If there is a Successor set then fire that. Otherwise return the game response.
-            return Successor != null ? Successor.HandleRequest(gameResponse) : gameResponse;
+            return Successor != null ? Successor.HandleRequest(actionContext) : actionContext;
         }
 
 		#region Helper Function(s)
@@ -52,31 +52,28 @@ namespace mudz.Core.Domain.GameEngine.Handler
             return HiveMind.Instance.World.Rooms[roomKey].GameObjects.Exists(x => x.GameObjectKey == gameObject.GameObjectKey);
         }
 
-        protected GameResponse OutOfPlayResponse(GameRequest request, IGameObject gameObject)
+        protected ActionResult OutOfPlayResult(IGameObject gameObject)
         {
-            return new GameResponse()
+            return new ActionResult()
             {
-                Request = request,
                 WasSuccessful = false,
                 Message = String.Format("Sorry, {0} is out of play!", gameObject.Name)
             };
         }
 
-        protected GameResponse NoTargetResponse(GameRequest request, IGameObject gameObject)
+        protected ActionResult NoTargetResponse(IGameObject gameObject)
         {
-            return new GameResponse()
+            return new ActionResult()
             {
-                Request = request,
                 WasSuccessful = false,
                 Message = String.Format("Sorry, there doesn't seem to be '{0}' here.", gameObject.Name)
             };
         }
 
-        protected GameResponse InvalidTargetResponse(GameRequest request, IGameObject gameObject)
+        protected ActionResult InvalidTargetResponse(IGameObject gameObject)
         {
-            return new GameResponse()
+            return new ActionResult()
             {
-                Request = request,
                 WasSuccessful = false,
                 Message = String.Format("That doesn't make any sense. '{0}' is not a valid target for this command.", gameObject.Name)
             };
