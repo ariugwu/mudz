@@ -2,7 +2,7 @@
 using mudz.Common.Domain.Inventory;
 using mudz.Common.Domain.Player;
 
-namespace mudz.Core.Model.Domain.Player.Inventory
+namespace mudz.Core.Domain.Player.Inventory
 {
     [Serializable]
     public abstract class PlayerWearable : PlayerInventoryItem

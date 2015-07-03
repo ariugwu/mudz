@@ -63,7 +63,7 @@ namespace mudz.Core.Model.Domain
             return this.Stamina >= GetStaminaCostByActionType(gameAction);
         }
 
-        private bool IsAlive()
+        public bool IsAlive()
         {
             return this.HitPoints > 0;
         }
@@ -99,36 +99,70 @@ namespace mudz.Core.Model.Domain
             if (IsExhausted() || IsDisabled()) return CannotRespond(actionContext);
             if (!HasEnoughStaminaForAction(actionContext.CurrentAction)) return NotEnoughStamina(actionContext);
 
-            var actionItem = new ActionResult();
+            var actionResult = new ActionResult();
             int amount = 0;
 
             switch (actionContext.CurrentAction)
             {
                 case GameActions.Fight:
-                    amount = this.Fight();
-                    actionItem.WasSuccessful = true;
-                    actionItem.Message = String.Format("{0} attacks for {1} damage!", this.Name, amount);
-                    actionItem.Amount = amount;
-                    return actionItem;
+                    amount = this.CalculateGameAction(actionContext.CurrentAction);
+                    actionResult.WasSuccessful = true;
+                    actionResult.Message = String.Format("{0} attacks for {1} damage!", this.Name, amount);
+                    actionResult.Amount = amount;
+                    return actionResult;
                 case GameActions.Repair:
-                    amount = this.Repair();
-                    actionItem.Message = String.Format("{0} repairs for {1} hit points!", this.Name, amount);
-                    actionItem.Amount = amount;
-                    return actionItem;
+                    amount = this.CalculateGameAction(actionContext.CurrentAction);
+                    actionResult.Message = String.Format("{0} repairs for {1} hit points!", this.Name, amount);
+                    actionResult.Amount = amount;
+                    return actionResult;
                 case GameActions.Negotiate:
-                    amount = this.Negotiate();
-                    actionItem.Message = String.Format("{0} negotiates for points!", this.Name, amount);
-                    actionItem.Amount = amount;
-                    return actionItem;
+                    amount = this.CalculateGameAction(actionContext.CurrentAction);
+                    actionResult.Message = String.Format("{0} negotiates for points!", this.Name, amount);
+                    actionResult.Amount = amount;
+                    return actionResult;
                 case GameActions.Heal:
-                    amount = this.Heal();
-                    actionItem.Message = String.Format("{0} heals {1} for {2} damage!", actionContext.Player.Name, actionContext.Target.Name, amount);
-                    actionItem.Amount = amount;
-                    return actionItem;
+                    amount = this.CalculateGameAction(actionContext.CurrentAction);
+                    actionResult.Message = String.Format("{0} heals {1} for {2} damage!", actionContext.Player.Name, actionContext.Target.Name, amount);
+                    actionResult.Amount = amount;
+                    return actionResult;
                 default:
                     throw new NotImplementedException("This action has not been implemented");
             }
         }
+
+        public override ActionResult RecieveGameActionResult(GameActions gameAction, ActionResult actionResult)
+        {
+            var returnResult = new ActionResult();
+
+            switch (gameAction)
+            {
+                case GameActions.Fight:
+                    returnResult.WasSuccessful = true;
+                    returnResult.Message = String.Format("{0} attacks you for {1} damage!", "[Need context!]", actionResult.Amount);
+                    returnResult.Amount = actionResult.Amount;
+                    return returnResult;
+                case GameActions.Repair:
+                    returnResult.WasSuccessful = false;
+                    returnResult.Message = String.Format("{0} tries to wrap you in duct tape but you wiggle free!", "[Need context!]");
+                    return returnResult;
+                case GameActions.Negotiate:
+                    returnResult.WasSuccessful = true;
+                    returnResult.Message = String.Format("{0} negotiates with you for {1} points!", "[Need context!]", actionResult.Amount);
+                    returnResult.Amount = actionResult.Amount;
+                    return returnResult;
+                case GameActions.Heal:
+                    returnResult.WasSuccessful = true;
+                    returnResult.Message = String.Format("{0} heals you for {1} damage!", "[Need context!]", actionResult.Amount);
+                    returnResult.Amount = actionResult.Amount;
+                    return returnResult;
+                default:
+                    throw new NotImplementedException("This action has not been implemented");
+            }
+        }
+
+        public abstract void TakeDamage(int dmg);
+
+        public abstract void RestoreHealth(int health);
 
         public override ActionResult ProcessItem(ActionContext actionContext, IInventoryItem item)
         {

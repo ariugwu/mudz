@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using mudz.Common.Domain.Inventory;
 
-namespace mudz.Core.Model.Domain.Player.Inventory.Item.Keepsake
+namespace mudz.Core.Domain.Player.Inventory.Item.Keepsake
 {
     [Serializable]
     public class TestCharm : PlayerKeepsake

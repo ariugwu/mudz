@@ -7,14 +7,14 @@ using mudz.Common.Domain.Monster;
 using mudz.Common.Domain.Npc;
 using mudz.Common.Domain.Player;
 using mudz.Core.Domain.GameEngine.Handler;
-using mudz.Core.Model.Domain.Monster;
-using mudz.Core.Model.Domain.Npc;
-using mudz.Core.Model.Domain.Player;
-using mudz.Core.Model.Domain.Player.Inventory.Item.Keepsake;
-using mudz.Core.Model.Domain.Player.Inventory.Item.Weapon;
-using mudz.Core.Model.Domain.Player.Inventory.Item.Wearable;
+using mudz.Core.Domain.Monster;
+using mudz.Core.Domain.Npc;
+using mudz.Core.Domain.Player;
+using mudz.Core.Domain.Player.Inventory.Item.Keepsake;
+using mudz.Core.Domain.Player.Inventory.Item.Weapon;
+using mudz.Core.Domain.Player.Inventory.Item.Wearable;
 
-namespace mudz.Core.Model.Domain.GameEngine
+namespace mudz.Core.Domain.GameEngine
 {
     public class HiveMind
     {
@@ -23,16 +23,16 @@ namespace mudz.Core.Model.Domain.GameEngine
         static HiveMind()
         {
 
-            var authHandler = new AuthHandler();
             var dependencyHandler = new DependencyHandler();
+            var authHandler = new AuthHandler();
             var commandHandler = new CommandHandler();
             var finalizeHandler = new FinalizeHandler();
 
-            authHandler.SetSuccessor(dependencyHandler);
-            dependencyHandler.SetSuccessor(commandHandler);
+            dependencyHandler.SetSuccessor(authHandler);
+            authHandler.SetSuccessor(commandHandler);
             commandHandler.SetSuccessor(finalizeHandler);
 
-            _requestHandler = authHandler;
+            _requestHandler = dependencyHandler;
         }
 
         private HiveMind()
@@ -83,14 +83,14 @@ namespace mudz.Core.Model.Domain.GameEngine
                 Player = request.Sender, Target = request.Target, 
                 ActionItems = new List<ActionResult>()
             };
-            
-            
+                     
             var response = new GameResponse();
 
             // Send the action context through the chain of responsibility.
             actionContext = _requestHandler.Process(actionContext);
 
             // Build our response.
+            response.CurrentAction = actionContext.CurrentAction;
             response.ActionItems = actionContext.ActionItems;
             response.RoomContent = actionContext.Room;
 

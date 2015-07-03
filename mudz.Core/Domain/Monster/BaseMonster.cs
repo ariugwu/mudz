@@ -4,10 +4,11 @@ using mudz.Common.Domain;
 using mudz.Common.Domain.GameEngine;
 using mudz.Common.Domain.Inventory;
 using mudz.Common.Domain.Monster;
+using mudz.Core.Model.Domain;
 
-namespace mudz.Core.Model.Domain.Monster
+namespace mudz.Core.Domain.Monster
 {
-        [Serializable]
+    [Serializable]
     public abstract class BaseMonster : BaseActor, IMonster
     {
         protected BaseMonster()
@@ -34,24 +35,9 @@ namespace mudz.Core.Model.Domain.Monster
             throw new System.NotImplementedException("No monster should ever call this.");
         }
 
-        public override int Fight()
+        public override int CalculateGameAction(GameActions gameAction)
         {
-            return 33;
-        }
-
-        public override int Heal()
-        {
-            return 0;
-        }
-
-        public override int Negotiate()
-        {
-            return 0;
-        }
-
-        public override int Repair()
-        {
-            return 0;
+            return 10;
         }
 
         public IList<IInventoryItem> Inventory

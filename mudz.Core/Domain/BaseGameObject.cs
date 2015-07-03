@@ -32,16 +32,11 @@ namespace mudz.Core.Model.Domain
 
         public bool IsAttainable { get; set; }
 
-        public abstract int Fight();
-        public abstract int Heal();
-        public abstract int Repair();
-        public abstract int Negotiate();
-
-        public abstract void TakeDamage(int dmg);
-
-        public abstract void RestoreHealth(int health);
+        public abstract ActionResult RecieveGameActionResult(GameActions gameAction, ActionResult actionResult);
 
         public abstract ActionResult ExecuteAction(ActionContext actionContext);
+
+        public abstract int CalculateGameAction(GameActions gameAction);
 
         public abstract void CheckState();
 

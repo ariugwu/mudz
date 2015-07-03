@@ -1,10 +1,11 @@
 ﻿using System;
+using mudz.Common.Domain.GameEngine;
 using mudz.Common.Domain.Npc;
 
 namespace mudz.Core.Model.Domain.Npc
 {
-        [Serializable]
-    public class TownsPerson : Npc
+    [Serializable]
+    public class TownsPerson : Core.Domain.Npc.Npc
     {
         public TownsPerson(string name)
             : base(name)
@@ -27,5 +28,9 @@ namespace mudz.Core.Model.Domain.Npc
             throw new System.NotImplementedException();
         }
 
+        public override ActionResult RecieveGameActionResult(GameActions gameAction, ActionResult actionResult)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -19,13 +19,9 @@ namespace mudz.Common.Domain
         bool IsDestructible { get; }
         bool IsAttainable { get; }
 
-        int Fight();
-        int Heal();
-        int Repair();
-        int Negotiate();
+        int CalculateGameAction(GameActions gameAction);
 
-        void TakeDamage(int dmg);
-        void RestoreHealth(int health);
+        ActionResult RecieveGameActionResult(GameActions gameAction, ActionResult actionResult);
 
     }
 }

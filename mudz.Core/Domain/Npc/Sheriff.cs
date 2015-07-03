@@ -1,7 +1,7 @@
 ﻿using System;
 using mudz.Common.Domain.Npc;
 
-namespace mudz.Core.Model.Domain.Npc
+namespace mudz.Core.Domain.Npc
 {
         [Serializable]
     public class Sheriff : Npc

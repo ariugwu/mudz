@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using mudz.Common.Domain.Inventory;
 using mudz.Common.Domain.Player;
 
-namespace mudz.Core.Model.Domain.Player.Inventory.Item.Wearable
+namespace mudz.Core.Domain.Player.Inventory.Item.Wearable
 {
     [Serializable]
     public class TestHat : PlayerWearable

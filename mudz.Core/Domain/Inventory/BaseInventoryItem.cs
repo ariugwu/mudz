@@ -51,14 +51,18 @@ namespace mudz.Core.Model.Domain.Inventory
 
         #endregion
 
-        public void TakeDamage(int dmg)
+        public int CalculateGameAction(GameActions gameAction)
         {
-
+            return 0;
         }
 
-        public void RestoreHealth(int health)
+        public ActionResult RecieveGameActionResult(GameActions gameActions, ActionResult actionResult)
         {
-
+            return new ActionResult()
+            {
+                Message = "Why would an item ever be apart of this?",
+                WasSuccessful = false
+            };
         }
 
         public virtual ActionResult ExecuteAction(ActionContext actionContext)

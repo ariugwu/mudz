@@ -6,23 +6,25 @@ namespace mudz.Core.Domain.GameEngine.Handler
     {
         public override ActionContext HandleRequest(ActionContext actionContext)
         {
-            var player = GetPlayerByName(actionContext.Player);
+            
             var actionResult = new ActionResult();
 
-            if (player == null)
+            if (actionContext.Player == null && actionContext.CurrentAction == GameActions.Login)
             {
                 actionResult.Message = "Sorry. No Player by that name!";
                 actionResult.WasSuccessful = false;
+
+                actionContext.ActionItems.Add(actionResult);
             }
-            else
+            else if (actionContext.Player != null && actionContext.CurrentAction == GameActions.Login)
             {
-                actionContext.Player = player;
                 actionResult.Message = "Welcome back!";
                 actionResult.WasSuccessful = true;
+
+                actionContext.ActionItems.Add(actionResult);
             }
 
-            actionContext.ActionItems.Add(actionResult);
-            return actionContext;
+            return PassToSucessor(actionContext);
         }
     }
 }

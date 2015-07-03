@@ -8,7 +8,12 @@ namespace mudz.Core.Domain.GameEngine.Handler
         {
             actionContext.Room = GetRoomByPlayerName(actionContext.Player);
 
-            return actionContext;
+            if (actionContext.Room != null)
+            {
+                actionContext.Player = GetPlayerByName(actionContext.Room, actionContext.Player);
+            }
+
+            return PassToSucessor(actionContext);
         }
     }
 }

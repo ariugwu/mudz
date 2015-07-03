@@ -16,13 +16,14 @@ namespace mudz.Cli.Domain.easytcp
         {
             var gameResponse = (GameResponse)response.Payload;
 
-            var player = gameResponse.RoomContent.GameObjects.Where(x => x.GameObjectType == GameObjectTypes.Player && x.GameObjectState.ToString() == GameObjectStates.InPlay.ToString())
-                    .Select(x => (IPlayer)x).FirstOrDefault(x => x.Name.Equals(PlayerOne.Instance.Name, StringComparison.InvariantCultureIgnoreCase));
-
-            if (PlayerOne.Instance != null || player != null)
+            if (gameResponse.RoomContent != null)
             {
-                PlayerOne.Instance = player;
-                GameEngine.Render.DrawRoom(gameResponse.RoomContent);
+                LoadPlayerFromGameResponse(gameResponse); // Load the one we got back.
+
+                if (gameResponse.CurrentAction == GameActions.Login || gameResponse.CurrentAction == GameActions.LookAround)
+                {
+                    GameEngine.Render.DrawRoom(gameResponse.RoomContent);
+                }
 
                 DisplayActionItems(gameResponse.ActionItems);
 
@@ -30,12 +31,17 @@ namespace mudz.Cli.Domain.easytcp
                 return;
             }
 
-            // We assume the login command is coming back
-            if (PlayerOne.Instance == null)
+            DisplayActionItems(gameResponse.ActionItems); // Login failed and we should have a message.
+            if (gameResponse.CurrentAction != GameActions.Login)
             {
-                DisplayActionItems(gameResponse.ActionItems); // Login failed and we should have a message.
-                return;
+                GameEngine.Render.DrawStatusBar(PlayerOne.Instance);
             }
+        }
+
+        public void LoadPlayerFromGameResponse(GameResponse gameResponse)
+        {
+            PlayerOne.Instance = gameResponse.RoomContent.GameObjects.Where(x => x.GameObjectType == GameObjectTypes.Player && x.GameObjectState.ToString() == GameObjectStates.InPlay.ToString())
+        .Select(x => (IPlayer)x).FirstOrDefault(x => x.Name.Equals(PlayerOne.Instance.Name, StringComparison.InvariantCultureIgnoreCase));
         }
 
         public void DisplayActionItems(List<ActionResult> actionItems)

@@ -3,7 +3,6 @@ using mudz.Common.Domain;
 using mudz.Common.Domain.Environment.Map.Room;
 using mudz.Common.Domain.GameEngine;
 using mudz.Common.Domain.Player;
-using mudz.Core.Model.Domain.GameEngine;
 using System;
 using System.Linq;
 
@@ -15,25 +14,28 @@ namespace mudz.Core.Domain.GameEngine.Handler
 
         public void SetSuccessor(BaseHandler successor)
         {
-            Successor = successor;
+            this.Successor = successor;
         }
 
         public abstract ActionContext HandleRequest(ActionContext actionContext);
 
         public ActionContext Process(ActionContext actionContext)
         {
-            // Do whatever internal logic is required.
-            actionContext = HandleRequest(actionContext);
+            // Do whatever internal logic is required. Each Call should also fire "PassToSuccessor" as it's final call.
+            return HandleRequest(actionContext);
+   
+        }
 
+        public ActionContext PassToSucessor(ActionContext actionContext)
+        {
             // If there is a Successor set then fire that. Otherwise return the game response.
-            return Successor != null ? Successor.HandleRequest(actionContext) : actionContext;
+            return this.Successor != null ? this.Successor.HandleRequest(actionContext) : actionContext;
         }
 
 		#region Helper Function(s)
 
-		protected IPlayer GetPlayerByName(IPlayer player)
+		protected IPlayer GetPlayerByName(RoomContent room, IPlayer player)
 		{
-			var room = GetRoomByPlayerName(player);
 			return (room != null) ? room.GameObjects.OfType<IPlayer>().FirstMatching(player, PlayerEqualityComparer.Instance) : null;
 		}
 

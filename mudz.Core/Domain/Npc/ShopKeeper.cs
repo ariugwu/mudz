@@ -1,14 +1,16 @@
 ﻿using System;
+using mudz.Common.Domain.GameEngine;
 using mudz.Common.Domain.Npc;
 
 namespace mudz.Core.Model.Domain.Npc
 {
-        [Serializable]
-    public class ShopKeeper : Npc
+    [Serializable]
+    public class ShopKeeper : Core.Domain.Npc.Npc
     {
-        public ShopKeeper(string name): base(name)
+        public ShopKeeper(string name)
+            : base(name)
         {
-           NpcType = NpcTypes.ShopKeeper;
+            NpcType = NpcTypes.ShopKeeper;
         }
 
         public override string Greet()

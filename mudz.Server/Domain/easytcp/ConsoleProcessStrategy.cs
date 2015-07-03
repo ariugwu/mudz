@@ -7,9 +7,9 @@ using mudz.Common.Domain;
 using mudz.Common.Domain.easytcp;
 using mudz.Common.Domain.Environment.Map.Room;
 using mudz.Common.Domain.GameEngine;
-using mudz.Core.Model.Domain.GameEngine;
-using mudz.Core.Model.Domain.Player;
 using mudz.Common.Domain.Player;
+using mudz.Core.Domain.GameEngine;
+using mudz.Core.Domain.Player;
 
 namespace mudz.Server.Domain.easytcp
 {

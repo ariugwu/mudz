@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using mudz.Common.Domain.Inventory;
 
-namespace mudz.Core.Model.Domain.Player.Inventory.Item.Weapon
+namespace mudz.Core.Domain.Player.Inventory.Item.Weapon
 {
     [Serializable]
     public class Fists : PlayerWeapon

@@ -2,11 +2,11 @@
 using mudz.Common.Domain;
 using mudz.Common.Domain.GameEngine;
 using mudz.Common.Domain.Npc;
-using mudz.Core.Model.Domain.GameEngine;
+using mudz.Core.Model.Domain;
 
-namespace mudz.Core.Model.Domain.Npc
+namespace mudz.Core.Domain.Npc
 {
-        [Serializable]
+    [Serializable]
     public abstract class Npc : BaseGameObject, INpc
     {
         protected Npc(string name)
@@ -16,7 +16,8 @@ namespace mudz.Core.Model.Domain.Npc
             HitPoints = 100;
         }
 
-        protected Npc() : this("")
+        protected Npc()
+            : this("")
         {
         }
 
@@ -28,35 +29,26 @@ namespace mudz.Core.Model.Domain.Npc
 
         public abstract string Respond();
 
-        public override void TakeDamage(int dmg)
+        public void TakeDamage(int dmg)
         {
             HitPoints = HitPoints - dmg;
         }
 
-        public override void RestoreHealth(int health)
+        public void RestoreHealth(int health)
         {
             HitPoints = HitPoints + health;
         }
 
         #region Default Actions
 
-        public override int Fight()
-        {
-            return 0;
-        }
-        public override int Heal()
+        public override int CalculateGameAction(GameActions gameAction)
         {
             return 0;
         }
 
-        public override int Negotiate()
+        public override ActionResult RecieveGameActionResult(GameActions gameAction, ActionResult actionResult)
         {
-            return 0;
-        }
-
-        public override int Repair()
-        {
-            return 0;
+            throw new NotImplementedException();
         }
 
         #endregion

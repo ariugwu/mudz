@@ -6,10 +6,11 @@ using mudz.Common.Domain.GameEngine;
 using mudz.Common.Domain.Inventory;
 using mudz.Common.Domain.Player;
 using mudz.Common.Domain.Player.Inventory;
+using mudz.Core.Domain.Player.Inventory.Item.Weapon;
+using mudz.Core.Model.Domain;
 using mudz.Core.Model.Domain.Player.Class;
-using mudz.Core.Model.Domain.Player.Inventory.Item.Weapon;
 
-namespace mudz.Core.Model.Domain.Player
+namespace mudz.Core.Domain.Player
 {
     [Serializable]
     public sealed class Player : BaseActor, IPlayer
@@ -101,32 +102,22 @@ namespace mudz.Core.Model.Domain.Player
             return _actionStrategy.ActionStaminaCostMap[gameAction];
         }
 
-        public override int Fight()
+
+        public override int CalculateGameAction(GameActions gameAction)
         {
-            var boost = CalculateActionBoostFromItems(InventoryAugmentEffect.Attack);
-
-            return _actionStrategy.Attack(this) + boost;
-        }
-
-        public override int Heal()
-        {
-            var boost = CalculateActionBoostFromItems(InventoryAugmentEffect.Heal);
-
-            return _actionStrategy.Heal(this) + boost;
-        }
-
-        public override int Repair()
-        {
-            var boost = CalculateActionBoostFromItems(InventoryAugmentEffect.Repair);
-
-            return _actionStrategy.Repair(this) + boost;
-        }
-
-        public override int Negotiate()
-        {
-            var boost = CalculateActionBoostFromItems(InventoryAugmentEffect.Negotiate);
-
-            return _actionStrategy.Negotiate(this) + boost;
+            switch (gameAction)
+            {
+                case GameActions.Fight:
+                    return _actionStrategy.Attack(this) + CalculateActionBoostFromItems(InventoryAugmentEffect.Attack);
+                case GameActions.Heal:
+                    return _actionStrategy.Heal(this) + CalculateActionBoostFromItems(InventoryAugmentEffect.Heal);
+                case GameActions.Repair:
+                    return _actionStrategy.Repair(this) + CalculateActionBoostFromItems(InventoryAugmentEffect.Repair);
+                case GameActions.Negotiate:
+                    return _actionStrategy.Negotiate(this) + CalculateActionBoostFromItems(InventoryAugmentEffect.Negotiate);
+                default:
+                    throw new NotSupportedException("The action requested is not supported.");
+            }
         }
 
         public int CalculateActionBoostFromItems(InventoryAugmentEffect effect)
