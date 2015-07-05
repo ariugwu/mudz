@@ -33,12 +33,25 @@ namespace mudz.Core.Domain.GameEngine.Handler
                 return actionContext;
             }
 
-            var actionResult = new ActionResult();
+            var actionResult = new ActionResult() { GameAction = actionContext.CurrentAction};
 
             switch (actionContext.CurrentAction)
             {
-                case GameActions.Heal:
                 case GameActions.Fight:
+                    actionResult = actionContext.Player.ExecuteAction(actionContext);
+                    actionContext.ActionItems.Add(actionResult);
+                    if (actionResult.WasSuccessful)
+                    {
+                        actionContext.ActionItems.Add(actionContext.Target.RecieveGameActionResult(actionContext.CurrentAction, actionResult));
+
+                        if (actionContext.Target.HitPoints <= 0)
+                        {
+                            var deathResult = new ActionResult(){ GameAction = GameActions.Die, Message = string.Format("{0} falls to the ground lifeless", actionContext.Target.Name), WasSuccessful = true};
+                            actionContext.ActionItems.Add(deathResult);
+                        }
+                    }
+                    break;
+                case GameActions.Heal:
                 case GameActions.Repair:
                 case GameActions.Negotiate:
                     actionResult = actionContext.Player.ExecuteAction(actionContext);

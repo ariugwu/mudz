@@ -80,7 +80,8 @@ namespace mudz.Core.Domain.GameEngine
             var actionContext = new ActionContext
             {
                 CurrentAction = request.GameAction, 
-                Player = request.Sender, Target = request.Target, 
+                Player = request.Sender, 
+                Target = request.Target, 
                 ActionItems = new List<ActionResult>()
             };
                      

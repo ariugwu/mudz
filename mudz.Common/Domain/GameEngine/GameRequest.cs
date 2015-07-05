@@ -8,7 +8,6 @@ namespace mudz.Common.Domain.GameEngine
     public class GameRequest
     {
         public GameActions GameAction { get; set; }
-        public RoomKey RoomKey { get; set; }
         public IPlayer Sender { get; set; }
         public IGameObject Target { get; set; }
     }

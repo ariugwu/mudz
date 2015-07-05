@@ -7,7 +7,7 @@ namespace mudz.Core.Domain.GameEngine.Handler
         public override ActionContext HandleRequest(ActionContext actionContext)
         {
             
-            var actionResult = new ActionResult();
+            var actionResult = new ActionResult(){ GameAction = actionContext.CurrentAction};
 
             if (actionContext.Player == null && actionContext.CurrentAction == GameActions.Login)
             {

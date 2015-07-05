@@ -22,6 +22,7 @@ namespace mudz.Cli.Domain.easytcp
 
                 if (gameResponse.CurrentAction == GameActions.Login || gameResponse.CurrentAction == GameActions.LookAround)
                 {
+                    GameEngine.Render.ClearScreen();
                     GameEngine.Render.DrawRoom(gameResponse.RoomContent);
                 }
 

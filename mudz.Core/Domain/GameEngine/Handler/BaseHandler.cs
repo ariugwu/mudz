@@ -44,6 +44,11 @@ namespace mudz.Core.Domain.GameEngine.Handler
 			return HiveMind.Instance.World.Rooms.Containing(player);
         }
 
+        protected IPlayer GetPlayerByRoom(RoomContent room, string playerName)
+        {
+            return room.GameObjects.OfType<IPlayer>().First(x => x.Name.Equals(playerName, StringComparison.InvariantCultureIgnoreCase));
+        }
+
         protected bool IsOutOfPlay(IGameObject gameObject)
         {
             return (gameObject.GameObjectState == GameObjectStates.OutOfPlay);
@@ -52,6 +57,11 @@ namespace mudz.Core.Domain.GameEngine.Handler
         protected bool IsTargetPresent(RoomKey roomKey, IGameObject gameObject)
         {
             return HiveMind.Instance.World.Rooms[roomKey].GameObjects.Exists(x => x.GameObjectKey == gameObject.GameObjectKey);
+        }
+
+        protected IGameObject GetTarget(RoomContent room, string targetName)
+        {
+            return room.GameObjects.First(x => x.Name.Trim().Equals(targetName, StringComparison.InvariantCultureIgnoreCase));
         }
 
         protected ActionResult OutOfPlayResult(IGameObject gameObject)

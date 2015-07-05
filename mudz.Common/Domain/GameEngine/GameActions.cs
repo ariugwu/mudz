@@ -10,6 +10,7 @@
         LookAround,
         None,
         Get,
-        Login
+        Login,
+        Die
     }
 }

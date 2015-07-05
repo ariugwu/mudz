@@ -137,6 +137,7 @@ namespace mudz.Core.Model.Domain
             switch (gameAction)
             {
                 case GameActions.Fight:
+                    TakeDamage(actionResult.Amount);
                     returnResult.WasSuccessful = true;
                     returnResult.Message = String.Format("{0} attacks you for {1} damage!", "[Need context!]", actionResult.Amount);
                     returnResult.Amount = actionResult.Amount;
@@ -151,6 +152,7 @@ namespace mudz.Core.Model.Domain
                     returnResult.Amount = actionResult.Amount;
                     return returnResult;
                 case GameActions.Heal:
+                    RestoreHealth(actionResult.Amount);
                     returnResult.WasSuccessful = true;
                     returnResult.Message = String.Format("{0} heals you for {1} damage!", "[Need context!]", actionResult.Amount);
                     returnResult.Amount = actionResult.Amount;

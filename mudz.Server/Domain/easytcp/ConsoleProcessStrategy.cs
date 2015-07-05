@@ -66,23 +66,27 @@ namespace mudz.Server.Domain.easytcp
 
             if (playerName == null)
             {
-                response = HiveMind.Instance.Execute(new GameRequest(){ GameAction = GameActions.Login, Sender = new Player(){ Name = command} });
+                gameRequest.GameAction = GameActions.Login;
+                gameRequest.Sender = new Player() {Name = command}; 
             }
             else
             {
 				// This is always round tripped, similar examples exist elsewhere (BaseHandler for example)
 				// TODO : Contemplate a pattern to determine RoomContent and PlayerName without interlacing the two
                 var room = HiveMind.Instance.World.Rooms.Containing(playerName);
-                var player = GetPlayerByRoom(room, playerName);
 
                 string[] args = command.Split(' ');
                 gameAction = GetGameAction(args[0]);
                 if (args.Length > 2) gameAction = GameActions.None;
                 if (args.Length == 2) targ = GetTarget(room, args[1]);
 
-                response = HiveMind.Instance.Execute(new GameRequest() { RoomKey = room.RoomKey, GameAction = gameAction, Sender = player, Target = targ });
+                gameRequest.Sender = new Player() { Name = playerName }; 
+                gameRequest.GameAction = gameAction;
+                gameRequest.Target = targ;
             }
 
+
+            response = HiveMind.Instance.Execute(gameRequest);
             return response;
         }
 

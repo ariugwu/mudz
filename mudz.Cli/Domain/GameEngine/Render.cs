@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using mudz.Cli.Domain.Player;
 using mudz.Common.Domain;
 using mudz.Common.Domain.Environment.Map.Room;
 using mudz.Common.Domain.GameEngine;
@@ -28,11 +29,12 @@ namespace mudz.Cli.Domain.GameEngine
             // ##################################################
             List<IPlayer> players = 
                 roomContent.GameObjects.Where(x => x.GameObjectType == GameObjectTypes.Player && x.GameObjectState.ToString() == GameObjectStates.InPlay.ToString())
+                    .Where(x => x.Name != PlayerOne.Instance.Name)
                     .Select(x => (IPlayer)x)
                     .ToList();
 
             List<IMonster> monsters =
-                roomContent.GameObjects.Where(x => x.GameObjectType == GameObjectTypes.Monster && x.GameObjectState == GameObjectStates.InPlay)
+                roomContent.GameObjects.Where(x => x.GameObjectType == GameObjectTypes.Monster && x.GameObjectState.ToString() == GameObjectStates.InPlay.ToString())
                     .Select(x => (IMonster) x)
                     .ToList();
 
@@ -106,7 +108,6 @@ namespace mudz.Cli.Domain.GameEngine
             switch (actionResult.GameAction)
             {
                 case GameActions.LookAround:
-                    ClearScreen();
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     ReplaceLine(actionResult.Message);
                     Console.ResetColor();
@@ -129,6 +130,11 @@ namespace mudz.Cli.Domain.GameEngine
                     break;
                 case GameActions.Get:
                     Console.ForegroundColor = ConsoleColor.Yellow;
+                    ReplaceLine(actionResult.Message);
+                    Console.ResetColor();
+                    break;
+                case GameActions.Die:
+                    Console.ForegroundColor = ConsoleColor.Green;
                     ReplaceLine(actionResult.Message);
                     Console.ResetColor();
                     break;
