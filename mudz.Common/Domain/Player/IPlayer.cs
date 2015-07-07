@@ -5,6 +5,7 @@ namespace mudz.Common.Domain.Player
     public interface IPlayer: IGameObject
     {
         PlayerTypes PlayerType { get; set; }
+        
         int Stamina { get; set; }
 
         string GetName();

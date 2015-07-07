@@ -8,9 +8,11 @@ namespace mudz.Core.Domain.GameEngine.Handler
         {
             actionContext.Room = GetRoomByPlayerName(actionContext.Player);
 
-            if (actionContext.Room != null)
+            actionContext.Player = actionContext.Room != null ? GetPlayerByName(actionContext.Room, actionContext.Player) : null; // Either we get the room...meaning we found the player. Or we set the player to null which singles a bad login/auth.
+
+            if (actionContext.GameRequest.HasTarget)
             {
-                actionContext.Player = GetPlayerByName(actionContext.Room, actionContext.Player);
+                actionContext.Target = GetTarget(actionContext.Room, actionContext.GameRequest.TargetName);
             }
 
             return PassToSucessor(actionContext);

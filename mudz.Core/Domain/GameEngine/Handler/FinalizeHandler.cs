@@ -6,7 +6,7 @@ namespace mudz.Core.Domain.GameEngine.Handler
     {
         public override ActionContext HandleRequest(ActionContext actionContext)
         {
-            if (actionContext.CurrentAction == GameActions.Login) return actionContext;
+            if (actionContext.GameRequest.GameAction == GameActions.Login) return actionContext;
 
             actionContext.Player.CheckState();
 

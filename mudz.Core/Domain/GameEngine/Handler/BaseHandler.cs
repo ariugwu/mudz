@@ -23,7 +23,6 @@ namespace mudz.Core.Domain.GameEngine.Handler
         {
             // Do whatever internal logic is required. Each Call should also fire "PassToSuccessor" as it's final call.
             return HandleRequest(actionContext);
-   
         }
 
         public ActionContext PassToSucessor(ActionContext actionContext)

@@ -68,7 +68,7 @@ namespace mudz.Core.Model.Domain.Inventory
         public virtual ActionResult ExecuteAction(ActionContext actionContext)
         {
 
-            switch (actionContext.CurrentAction)
+            switch (actionContext.GameRequest.GameAction)
             {
                 case GameActions.Heal:
                     return new ActionResult(){ WasSuccessful = false, Message = "Items can't be healed!"};

@@ -42,6 +42,7 @@
     <Compile Include="Domain\ActorGenderTypes.cs" />
     <Compile Include="Domain\ActorStates.cs" />
     <Compile Include="Domain\easytcp\ConsoleRequest.cs" />
+    <Compile Include="Domain\easytcp\Interpreter\AbstractExpression.cs" />
     <Compile Include="Domain\Environment\Map\Grid.cs" />
     <Compile Include="Domain\Environment\Map\Room\RoomCollection.cs" />
     <Compile Include="Domain\Environment\Map\Room\RoomContent.cs" />

@@ -1,4 +1,5 @@
-﻿using mudz.Common.Domain.GameEngine;
+﻿using mudz.Common.Domain;
+using mudz.Common.Domain.GameEngine;
 
 namespace mudz.Core.Domain.GameEngine.Handler
 {
@@ -6,18 +7,19 @@ namespace mudz.Core.Domain.GameEngine.Handler
     {
         public override ActionContext HandleRequest(ActionContext actionContext)
         {
-            
-            var actionResult = new ActionResult(){ GameAction = actionContext.CurrentAction};
 
-            if (actionContext.Player == null && actionContext.CurrentAction == GameActions.Login)
+            var actionResult = new ActionResult() { GameAction = actionContext.GameRequest.GameAction};
+
+            if (actionContext.Player == null && actionContext.GameRequest.GameAction == GameActions.Login)
             {
                 actionResult.Message = "Sorry. No Player by that name!";
                 actionResult.WasSuccessful = false;
 
                 actionContext.ActionItems.Add(actionResult);
             }
-            else if (actionContext.Player != null && actionContext.CurrentAction == GameActions.Login)
+            else if (actionContext.Player != null && actionContext.GameRequest.GameAction == GameActions.Login)
             {
+                actionContext.Player.GameObjectState = GameObjectStates.InPlay; // Remember we're using the flyweight pattern so even here we're still making changes to the object in the Hivemind dictionary. This is true until it's returned to the client.
                 actionResult.Message = "Welcome back!";
                 actionResult.WasSuccessful = true;
 

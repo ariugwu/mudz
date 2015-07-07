@@ -22,7 +22,6 @@ namespace mudz.Core.Domain.GameEngine
 
         static HiveMind()
         {
-
             var dependencyHandler = new DependencyHandler();
             var authHandler = new AuthHandler();
             var commandHandler = new CommandHandler();
@@ -79,9 +78,7 @@ namespace mudz.Core.Domain.GameEngine
         {
             var actionContext = new ActionContext
             {
-                CurrentAction = request.GameAction, 
-                Player = request.Sender, 
-                Target = request.Target, 
+                GameRequest = request,
                 ActionItems = new List<ActionResult>()
             };
                      
@@ -91,7 +88,7 @@ namespace mudz.Core.Domain.GameEngine
             actionContext = _requestHandler.Process(actionContext);
 
             // Build our response.
-            response.CurrentAction = actionContext.CurrentAction;
+            response.CurrentAction = actionContext.GameRequest.GameAction;
             response.ActionItems = actionContext.ActionItems;
             response.RoomContent = actionContext.Room;
 

@@ -16,11 +16,12 @@ namespace mudz.Cli.Domain.easytcp
         {
             var gameResponse = (GameResponse)response.Payload;
 
-            if (gameResponse.RoomContent != null)
+            if (gameResponse.RoomContent != null) // If we have room content then we have a player
             {
                 LoadPlayerFromGameResponse(gameResponse); // Load the one we got back.
 
-                if (gameResponse.CurrentAction == GameActions.Login || gameResponse.CurrentAction == GameActions.LookAround)
+                if (gameResponse.CurrentAction == GameActions.Login ||
+                    gameResponse.CurrentAction == GameActions.LookAround)
                 {
                     GameEngine.Render.ClearScreen();
                     GameEngine.Render.DrawRoom(gameResponse.RoomContent);
@@ -29,14 +30,12 @@ namespace mudz.Cli.Domain.easytcp
                 DisplayActionItems(gameResponse.ActionItems);
 
                 GameEngine.Render.DrawStatusBar(PlayerOne.Instance);
-                return;
             }
-
-            DisplayActionItems(gameResponse.ActionItems); // Login failed and we should have a message.
-            if (gameResponse.CurrentAction != GameActions.Login)
+            else
             {
-                GameEngine.Render.DrawStatusBar(PlayerOne.Instance);
-            }
+                PlayerOne.Instance = null; // clear the player on a failed login
+                DisplayActionItems(gameResponse.ActionItems); // Login failed and we should have a message.
+            } 
         }
 
         public void LoadPlayerFromGameResponse(GameResponse gameResponse)

@@ -97,31 +97,31 @@ namespace mudz.Core.Model.Domain
         public override ActionResult ExecuteAction(ActionContext actionContext)
         {
             if (IsExhausted() || IsDisabled()) return CannotRespond(actionContext);
-            if (!HasEnoughStaminaForAction(actionContext.CurrentAction)) return NotEnoughStamina(actionContext);
+            if (!HasEnoughStaminaForAction(actionContext.GameRequest.GameAction)) return NotEnoughStamina(actionContext);
 
             var actionResult = new ActionResult();
             int amount = 0;
 
-            switch (actionContext.CurrentAction)
+            switch (actionContext.GameRequest.GameAction)
             {
                 case GameActions.Fight:
-                    amount = this.CalculateGameAction(actionContext.CurrentAction);
+                    amount = this.CalculateGameAction(actionContext.GameRequest.GameAction);
                     actionResult.WasSuccessful = true;
                     actionResult.Message = String.Format("{0} attacks for {1} damage!", this.Name, amount);
                     actionResult.Amount = amount;
                     return actionResult;
                 case GameActions.Repair:
-                    amount = this.CalculateGameAction(actionContext.CurrentAction);
+                    amount = this.CalculateGameAction(actionContext.GameRequest.GameAction);
                     actionResult.Message = String.Format("{0} repairs for {1} hit points!", this.Name, amount);
                     actionResult.Amount = amount;
                     return actionResult;
                 case GameActions.Negotiate:
-                    amount = this.CalculateGameAction(actionContext.CurrentAction);
+                    amount = this.CalculateGameAction(actionContext.GameRequest.GameAction);
                     actionResult.Message = String.Format("{0} negotiates for points!", this.Name, amount);
                     actionResult.Amount = amount;
                     return actionResult;
                 case GameActions.Heal:
-                    amount = this.CalculateGameAction(actionContext.CurrentAction);
+                    amount = this.CalculateGameAction(actionContext.GameRequest.GameAction);
                     actionResult.Message = String.Format("{0} heals {1} for {2} damage!", actionContext.Player.Name, actionContext.Target.Name, amount);
                     actionResult.Amount = amount;
                     return actionResult;

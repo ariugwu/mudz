@@ -10,7 +10,7 @@ namespace mudz.Core.Domain.GameEngine.Handler
         public override ActionContext HandleRequest(ActionContext actionContext)
         {
 
-            if (actionContext.CurrentAction == GameActions.Login)
+            if (actionContext.GameRequest.GameAction == GameActions.Login)
             {
                 return actionContext;
             }
@@ -33,16 +33,16 @@ namespace mudz.Core.Domain.GameEngine.Handler
                 return actionContext;
             }
 
-            var actionResult = new ActionResult() { GameAction = actionContext.CurrentAction};
+            var actionResult = new ActionResult() { GameAction = actionContext.GameRequest.GameAction };
 
-            switch (actionContext.CurrentAction)
+            switch (actionContext.GameRequest.GameAction)
             {
                 case GameActions.Fight:
                     actionResult = actionContext.Player.ExecuteAction(actionContext);
                     actionContext.ActionItems.Add(actionResult);
                     if (actionResult.WasSuccessful)
                     {
-                        actionContext.ActionItems.Add(actionContext.Target.RecieveGameActionResult(actionContext.CurrentAction, actionResult));
+                        actionContext.ActionItems.Add(actionContext.Target.RecieveGameActionResult(actionContext.GameRequest.GameAction, actionResult));
 
                         if (actionContext.Target.HitPoints <= 0)
                         {
@@ -58,7 +58,7 @@ namespace mudz.Core.Domain.GameEngine.Handler
                     actionContext.ActionItems.Add(actionResult);
                     if (actionResult.WasSuccessful)
                     {
-                        actionContext.ActionItems.Add(actionContext.Target.RecieveGameActionResult(actionContext.CurrentAction, actionResult));
+                        actionContext.ActionItems.Add(actionContext.Target.RecieveGameActionResult(actionContext.GameRequest.GameAction, actionResult));
                     }
                     break;
                 case GameActions.LookAt:

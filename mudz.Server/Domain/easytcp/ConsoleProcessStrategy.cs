@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using easyTcp.Common.Model;
 using easyTcp.Common.Model.Server;
-using mudz.Common.Domain;
 using mudz.Common.Domain.easytcp;
-using mudz.Common.Domain.Environment.Map.Room;
 using mudz.Common.Domain.GameEngine;
-using mudz.Common.Domain.Player;
 using mudz.Core.Domain.GameEngine;
-using mudz.Core.Domain.Player;
 
 namespace mudz.Server.Domain.easytcp
 {
@@ -43,68 +38,14 @@ namespace mudz.Server.Domain.easytcp
             return response;
         }
 
-        private Dictionary<string, GameActions> _commandActionMap = new Dictionary<string, GameActions>()
-        {
-            {"fight", GameActions.Fight},
-            {"attack", GameActions.Fight},
-            {"negotiate", GameActions.Negotiate},
-            {"repair", GameActions.Repair},
-            {"heal", GameActions.Heal},
-            {"look", GameActions.LookAround},
-            {"inspect", GameActions.LookAt},
-            {"none", GameActions.None},
-            {"get", GameActions.Get},
-            {"login", GameActions.Login}
-        };
-
         public GameResponse GetGameReponse(string command, string playerName)
         {
-            GameRequest gameRequest = new GameRequest();
-            GameResponse response;
-            GameActions gameAction;
-            IGameObject targ = null;
+            var gameRequest = new GameRequest(playerName);
 
-            if (playerName == null)
-            {
-                gameRequest.GameAction = GameActions.Login;
-                gameRequest.Sender = new Player() {Name = command}; 
-            }
-            else
-            {
-				// This is always round tripped, similar examples exist elsewhere (BaseHandler for example)
-				// TODO : Contemplate a pattern to determine RoomContent and PlayerName without interlacing the two
-                var room = HiveMind.Instance.World.Rooms.Containing(playerName);
+            gameRequest.Interpret(command);
 
-                string[] args = command.Split(' ');
-                gameAction = GetGameAction(args[0]);
-                if (args.Length > 2) gameAction = GameActions.None;
-                if (args.Length == 2) targ = GetTarget(room, args[1]);
-
-                gameRequest.Sender = new Player() { Name = playerName }; 
-                gameRequest.GameAction = gameAction;
-                gameRequest.Target = targ;
-            }
-
-
-            response = HiveMind.Instance.Execute(gameRequest);
-            return response;
+            return HiveMind.Instance.Execute(gameRequest);
         }
 
-        private GameActions GetGameAction(string command)
-        {
-            command = command.Trim().ToLower();
-
-            return (_commandActionMap.ContainsKey(command)) ? _commandActionMap[command] : GameActions.None;
-        }
-
-        private IGameObject GetTarget(RoomContent room, string targetName)
-        {
-            return room.GameObjects.First(x => x.Name.Trim().Equals(targetName, StringComparison.InvariantCultureIgnoreCase));
-        }
-
-        private IPlayer GetPlayerByRoom(RoomContent room, string playerName)
-        {
-            return room.GameObjects.OfType<IPlayer>().First(x => x.Name.Equals(playerName, StringComparison.InvariantCultureIgnoreCase));
-        }
     }
 }

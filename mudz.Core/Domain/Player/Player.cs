@@ -22,7 +22,7 @@ namespace mudz.Core.Domain.Player
             PlayerType = playerType;
             GameObjectType = GameObjectTypes.Player;
             
-            GameObjectState = GameObjectStates.InPlay;
+            GameObjectState = GameObjectStates.OutOfPlay;
             ActorState = ActorStates.Alive;
 
             _actionStrategy = actionStrategy;
