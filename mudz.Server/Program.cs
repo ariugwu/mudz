@@ -2,9 +2,9 @@
 using System.Net;
 using easyTcp.Common.Model;
 using easyTcp.Common.Model.Server;
-using mudz.Server.Domain.easytcp;
+using Mudz.Server.Domain.EasyTcp;
 
-namespace mudz.Server
+namespace Mudz.Server
 {
     class Program
     {

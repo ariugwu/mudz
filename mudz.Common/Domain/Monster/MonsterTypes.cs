@@ -1,4 +1,4 @@
-﻿namespace mudz.Common.Domain.Monster
+﻿namespace Mudz.Common.Domain.Monster
 {
     public enum MonsterTypes
     {

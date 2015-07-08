@@ -1,6 +1,6 @@
-﻿using mudz.Common.Domain.GameEngine;
+﻿using Mudz.Common.Domain.GameEngine;
 
-namespace mudz.Core.Domain.GameEngine.Handler
+namespace Mudz.Core.Domain.GameEngine.Handler
 {
     public class DependencyHandler : BaseHandler
     {

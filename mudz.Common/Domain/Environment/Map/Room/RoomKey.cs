@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace mudz.Common.Domain.Environment.Map.Room
+namespace Mudz.Common.Domain.Environment.Map.Room
 {
     [Serializable]
     public class RoomKey

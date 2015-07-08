@@ -1,7 +1,7 @@
 ﻿using System;
-using mudz.Common.Domain.GameEngine;
+using Mudz.Common.Domain.GameEngine;
 
-namespace mudz.Common.Domain.easytcp.Interpreter
+namespace Mudz.Common.Domain.EasyTcp.Interpreter
 {
     [Serializable]
     public abstract class AbstractExpression

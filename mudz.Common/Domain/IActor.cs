@@ -1,4 +1,4 @@
-﻿namespace mudz.Common.Domain
+﻿namespace Mudz.Common.Domain
 {
     public interface IActor : IGameObject
     {

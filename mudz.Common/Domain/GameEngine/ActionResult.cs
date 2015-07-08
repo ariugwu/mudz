@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace mudz.Common.Domain.GameEngine
+namespace Mudz.Common.Domain.GameEngine
 {
     [Serializable]
     public class ActionResult

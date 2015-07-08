@@ -1,6 +1,6 @@
-﻿using mudz.Common.Domain.Player.Inventory;
+﻿using Mudz.Common.Domain.Player.Inventory;
 
-namespace mudz.Common.Domain.Player
+namespace Mudz.Common.Domain.Player
 {
     public interface IPlayer: IGameObject
     {

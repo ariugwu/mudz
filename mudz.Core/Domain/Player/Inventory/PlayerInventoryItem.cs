@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using mudz.Common.Domain.Inventory;
-using mudz.Common.Domain.Player.Inventory;
-using mudz.Core.Model.Domain.Inventory;
+using Mudz.Common.Domain.Inventory;
+using Mudz.Common.Domain.Player.Inventory;
+using Mudz.Core.Model.Domain.Inventory;
 
-namespace mudz.Core.Domain.Player.Inventory
+namespace Mudz.Core.Domain.Player.Inventory
 {
     [Serializable]
     public abstract class PlayerInventoryItem : BaseInventoryItem, IPlayerInventoryItem

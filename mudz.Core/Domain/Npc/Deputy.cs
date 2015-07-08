@@ -1,7 +1,7 @@
 ﻿using System;
-using mudz.Common.Domain.Npc;
+using Mudz.Common.Domain.Npc;
 
-namespace mudz.Core.Domain.Npc
+namespace Mudz.Core.Domain.Npc
 {
         [Serializable]
     public class Deputy : Npc

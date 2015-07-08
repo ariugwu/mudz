@@ -1,4 +1,4 @@
-# mudz
+# Mudz
 Game we're making with the skills we cover in the live stream (http://www.twitch.tv/ariugwu). Text adventure. Zombie survival. Tribute to MajorMud.
 
 ## Milestones
@@ -10,7 +10,7 @@ _I'll do my best to mark which commits line up with which code katas (from the t
 * **Week 1 - Factory Pattern _(Creational Pattern)_:** 
   * **Description:** _Get us off the ground and create some objects_
   * [[Video(s)]](https://www.youtube.com/watch?v=IlWQk2WRS3g)
-  * Commit: https://github.com/ariugwu/mudz/tree/e588cdaf6838c4d59c0cbcff30d8c25aba77439e
+  * Commit: https://github.com/ariugwu/Mudz/tree/e588cdaf6838c4d59c0cbcff30d8c25aba77439e
 * **Week 2 - Strategy Pattern _(Behavioral Pattern)_:**
   * **Description:** _Help deal with some granular complexity of our players. This pattern has a lot in common with the Bridge Pattern and is often confused. The key difference we're high lighting is that our behavior in a Strategy Pattern is coupled witht he context (player)_
   * [[Video(s)]](https://www.youtube.com/watch?v=obRmu-qJVRE)
@@ -42,7 +42,7 @@ _I'll do my best to mark which commits line up with which code katas (from the t
 #### Phase III - First things first: Build a TCP Server and Client to start playing our game with other people.
 * Singleton _(Creational)_: Since we have tcp sockets and connections flying around we want to make sure that our game engine is only created once.
 * [[Video(s)]]:
-* **Commit:** https://github.com/ariugwu/mudz/tree/e033c4ffe156cf8bc33bd35688ab5bfa7824cc27
+* **Commit:** https://github.com/ariugwu/Mudz/tree/e033c4ffe156cf8bc33bd35688ab5bfa7824cc27
 * Decorator Pattern _(Structural Pattern)_: Organize the various things that can impact actions and attributes for our Actors and have them be applied in a uniform way. For example: A _drunk_ player of type _medic_ who tries to _heal_ will need to have all three things factor into how well they peform that action.
 * Chain of Responsibility _(Behavorial Pattern)_:
 

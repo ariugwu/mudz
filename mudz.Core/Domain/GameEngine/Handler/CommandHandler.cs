@@ -1,9 +1,9 @@
 ﻿using System;
-using mudz.Common.Domain;
-using mudz.Common.Domain.GameEngine;
-using mudz.Common.Domain.Inventory;
+using Mudz.Common.Domain;
+using Mudz.Common.Domain.GameEngine;
+using Mudz.Common.Domain.Inventory;
 
-namespace mudz.Core.Domain.GameEngine.Handler
+namespace Mudz.Core.Domain.GameEngine.Handler
 {
     public class CommandHandler : BaseHandler
     {

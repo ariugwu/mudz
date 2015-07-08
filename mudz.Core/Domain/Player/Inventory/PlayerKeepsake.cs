@@ -1,7 +1,7 @@
 ﻿using System;
-using mudz.Common.Domain.Inventory;
+using Mudz.Common.Domain.Inventory;
 
-namespace mudz.Core.Domain.Player.Inventory
+namespace Mudz.Core.Domain.Player.Inventory
 {
     [Serializable]
     public abstract class PlayerKeepsake : PlayerInventoryItem

@@ -1,7 +1,7 @@
 ﻿
-using mudz.Common.Domain.Player;
+using Mudz.Common.Domain.Player;
 
-namespace mudz.Cli.Domain.Player
+namespace Mudz.Cli.Domain.Player
 {
     public static class PlayerOne
     {

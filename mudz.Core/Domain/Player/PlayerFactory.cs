@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using mudz.Common.Domain;
-using mudz.Common.Domain.Player;
-using mudz.Core.Model.Domain.Player.Class;
+using Mudz.Common.Domain;
+using Mudz.Common.Domain.Player;
+using Mudz.Core.Model.Domain.Player.Class;
 
-namespace mudz.Core.Domain.Player
+namespace Mudz.Core.Domain.Player
 {
     public static class PlayerFactory
     {

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using easyTcp.Common.Model;
 using easyTcp.Common.Model.Client.Render;
-using mudz.Cli.Domain.Player;
-using mudz.Common.Domain;
-using mudz.Common.Domain.GameEngine;
-using mudz.Common.Domain.Player;
+using Mudz.Cli.Domain.Player;
+using Mudz.Common.Domain;
+using Mudz.Common.Domain.GameEngine;
+using Mudz.Common.Domain.Player;
 
-namespace mudz.Cli.Domain.easytcp
+namespace Mudz.Cli.Domain.EasyTcp
 {
     public class RenderStrategy : IRenderStrategy
     {

@@ -1,9 +1,9 @@
-﻿using mudz.Common.Domain.Player;
+﻿using Mudz.Common.Domain.Player;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace mudz.Common.Domain.Environment.Map.Room
+namespace Mudz.Common.Domain.Environment.Map.Room
 {
 	public sealed class RoomCollection : Dictionary<RoomKey, RoomContent>
 	{

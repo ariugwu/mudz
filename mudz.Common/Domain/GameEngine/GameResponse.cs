@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using mudz.Common.Domain.Environment.Map.Room;
+using Mudz.Common.Domain.Environment.Map.Room;
 
-namespace mudz.Common.Domain.GameEngine
+namespace Mudz.Common.Domain.GameEngine
 {
     [Serializable]
     public class GameResponse

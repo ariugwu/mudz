@@ -1,12 +1,12 @@
-﻿using mudz.Common;
-using mudz.Common.Domain;
-using mudz.Common.Domain.Environment.Map.Room;
-using mudz.Common.Domain.GameEngine;
-using mudz.Common.Domain.Player;
+﻿using Mudz.Common;
+using Mudz.Common.Domain;
+using Mudz.Common.Domain.Environment.Map.Room;
+using Mudz.Common.Domain.GameEngine;
+using Mudz.Common.Domain.Player;
 using System;
 using System.Linq;
 
-namespace mudz.Core.Domain.GameEngine.Handler
+namespace Mudz.Core.Domain.GameEngine.Handler
 {
     public abstract class BaseHandler
     {

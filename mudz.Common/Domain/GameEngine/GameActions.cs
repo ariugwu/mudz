@@ -1,4 +1,4 @@
-﻿namespace mudz.Common.Domain.GameEngine
+﻿namespace Mudz.Common.Domain.GameEngine
 {
     public enum GameActions
     {

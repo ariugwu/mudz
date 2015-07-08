@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using mudz.Common.Domain;
-using mudz.Common.Domain.GameEngine;
-using mudz.Common.Domain.Player;
+using Mudz.Common.Domain;
+using Mudz.Common.Domain.GameEngine;
+using Mudz.Common.Domain.Player;
 
-namespace mudz.Core.Model.Domain.Player.Class
+namespace Mudz.Core.Model.Domain.Player.Class
 {
     [Serializable]
     public class Politician : IPlayerActionStrategy

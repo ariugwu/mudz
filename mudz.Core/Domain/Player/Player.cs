@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using mudz.Common.Domain;
-using mudz.Common.Domain.GameEngine;
-using mudz.Common.Domain.Inventory;
-using mudz.Common.Domain.Player;
-using mudz.Common.Domain.Player.Inventory;
-using mudz.Core.Domain.Player.Inventory.Item.Weapon;
-using mudz.Core.Model.Domain;
-using mudz.Core.Model.Domain.Player.Class;
+using Mudz.Common.Domain;
+using Mudz.Common.Domain.GameEngine;
+using Mudz.Common.Domain.Inventory;
+using Mudz.Common.Domain.Player;
+using Mudz.Common.Domain.Player.Inventory;
+using Mudz.Core.Domain.Player.Inventory.Item.Weapon;
+using Mudz.Core.Model.Domain;
+using Mudz.Core.Model.Domain.Player.Class;
 
-namespace mudz.Core.Domain.Player
+namespace Mudz.Core.Domain.Player
 {
     [Serializable]
     public sealed class Player : BaseActor, IPlayer

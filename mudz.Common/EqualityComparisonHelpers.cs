@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace mudz.Common
+namespace Mudz.Common
 {
 	public static class EqualityComparisonHelpers
 	{

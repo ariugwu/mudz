@@ -1,4 +1,4 @@
-﻿namespace mudz.Common.Domain.Inventory
+﻿namespace Mudz.Common.Domain.Inventory
 {
     public enum InventoryAugmentEffect
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using mudz.Common.Domain.Inventory;
+using Mudz.Common.Domain.Inventory;
 
-namespace mudz.Common.Domain.Monster
+namespace Mudz.Common.Domain.Monster
 {
     public interface IMonster : IActor
     {

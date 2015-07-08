@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using easyTcp.Common.Model;
 using easyTcp.Common.Model.Server;
-using mudz.Common.Domain.easytcp;
-using mudz.Common.Domain.GameEngine;
-using mudz.Core.Domain.GameEngine;
+using Mudz.Common.Domain.EasyTcp;
+using Mudz.Common.Domain.GameEngine;
+using Mudz.Core.Domain.GameEngine;
 
-namespace mudz.Server.Domain.easytcp
+namespace Mudz.Server.Domain.EasyTcp
 {
     public class ConsoleProcessStrategy : IProcessStrategy
     {

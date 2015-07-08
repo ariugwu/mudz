@@ -1,8 +1,8 @@
 ﻿using System;
-using mudz.Common.Domain.Npc;
-using mudz.Core.Model.Domain.Npc;
+using Mudz.Common.Domain.Npc;
+using Mudz.Core.Model.Domain.Npc;
 
-namespace mudz.Core.Domain.Npc
+namespace Mudz.Core.Domain.Npc
 {
     public class NpcFactory
     {

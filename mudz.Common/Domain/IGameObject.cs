@@ -1,7 +1,7 @@
 ﻿using System;
-using mudz.Common.Domain.GameEngine;
+using Mudz.Common.Domain.GameEngine;
 
-namespace mudz.Common.Domain
+namespace Mudz.Common.Domain
 {
     public interface IGameObject : IGameCommand
     {

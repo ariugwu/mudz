@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using mudz.Cli.Domain.Player;
-using mudz.Common.Domain;
-using mudz.Common.Domain.Environment.Map.Room;
-using mudz.Common.Domain.GameEngine;
-using mudz.Common.Domain.Inventory;
-using mudz.Common.Domain.Monster;
-using mudz.Common.Domain.Player;
+using Mudz.Cli.Domain.Player;
+using Mudz.Common.Domain;
+using Mudz.Common.Domain.Environment.Map.Room;
+using Mudz.Common.Domain.GameEngine;
+using Mudz.Common.Domain.Inventory;
+using Mudz.Common.Domain.Monster;
+using Mudz.Common.Domain.Player;
 
-namespace mudz.Cli.Domain.GameEngine
+namespace Mudz.Cli.Domain.GameEngine
 {
     public static class Render
     {

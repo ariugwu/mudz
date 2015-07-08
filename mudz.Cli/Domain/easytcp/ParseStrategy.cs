@@ -1,10 +1,10 @@
 ﻿using easyTcp.Common.Model;
 using easyTcp.Common.Model.Client.Parse;
-using mudz.Cli.Domain.Player;
-using mudz.Common.Domain;
-using mudz.Common.Domain.easytcp;
+using Mudz.Cli.Domain.Player;
+using Mudz.Common.Domain;
+using Mudz.Common.Domain.EasyTcp;
 
-namespace mudz.Cli.Domain.easytcp
+namespace Mudz.Cli.Domain.EasyTcp
 {
     public class ParseStrategy : IParseStrategy
     {

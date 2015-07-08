@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using mudz.Common.Domain.Environment.Map.Room;
+using Mudz.Common.Domain.Environment.Map.Room;
 
-namespace mudz.Common.Domain.Environment.Map
+namespace Mudz.Common.Domain.Environment.Map
 {
     public class Grid
     {

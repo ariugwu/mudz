@@ -1,9 +1,9 @@
 ﻿using System;
-using mudz.Common.Domain;
-using mudz.Common.Domain.Inventory;
-using mudz.Common.Domain.Monster;
+using Mudz.Common.Domain;
+using Mudz.Common.Domain.Inventory;
+using Mudz.Common.Domain.Monster;
 
-namespace mudz.Core.Domain.Monster
+namespace Mudz.Core.Domain.Monster
 {
     [Serializable]
     public class Zombie : BaseMonster

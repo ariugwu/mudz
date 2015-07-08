@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using mudz.Common.Domain.easytcp.Interpreter;
+using Mudz.Common.Domain.EasyTcp.Interpreter;
 
-namespace mudz.Common.Domain.GameEngine
+namespace Mudz.Common.Domain.GameEngine
 {
     [Serializable]
     public class GameRequest : AbstractExpression

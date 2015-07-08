@@ -1,6 +1,6 @@
-﻿using mudz.Common.Domain.Inventory;
+﻿using Mudz.Common.Domain.Inventory;
 
-namespace mudz.Common.Domain.Player.Inventory
+namespace Mudz.Common.Domain.Player.Inventory
 {
     public interface IPlayerWearable : IPlayerInventoryItem
     {

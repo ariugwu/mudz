@@ -1,20 +1,20 @@
 ﻿using System.Collections.Generic;
-using mudz.Common.Domain;
-using mudz.Common.Domain.Environment.Map;
-using mudz.Common.Domain.Environment.Map.Room;
-using mudz.Common.Domain.GameEngine;
-using mudz.Common.Domain.Monster;
-using mudz.Common.Domain.Npc;
-using mudz.Common.Domain.Player;
-using mudz.Core.Domain.GameEngine.Handler;
-using mudz.Core.Domain.Monster;
-using mudz.Core.Domain.Npc;
-using mudz.Core.Domain.Player;
-using mudz.Core.Domain.Player.Inventory.Item.Keepsake;
-using mudz.Core.Domain.Player.Inventory.Item.Weapon;
-using mudz.Core.Domain.Player.Inventory.Item.Wearable;
+using Mudz.Common.Domain;
+using Mudz.Common.Domain.Environment.Map;
+using Mudz.Common.Domain.Environment.Map.Room;
+using Mudz.Common.Domain.GameEngine;
+using Mudz.Common.Domain.Monster;
+using Mudz.Common.Domain.Npc;
+using Mudz.Common.Domain.Player;
+using Mudz.Core.Domain.GameEngine.Handler;
+using Mudz.Core.Domain.Monster;
+using Mudz.Core.Domain.Npc;
+using Mudz.Core.Domain.Player;
+using Mudz.Core.Domain.Player.Inventory.Item.Keepsake;
+using Mudz.Core.Domain.Player.Inventory.Item.Weapon;
+using Mudz.Core.Domain.Player.Inventory.Item.Wearable;
 
-namespace mudz.Core.Domain.GameEngine
+namespace Mudz.Core.Domain.GameEngine
 {
     public class HiveMind
     {

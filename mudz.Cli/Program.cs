@@ -1,7 +1,7 @@
 ﻿using System.Net;
-using mudz.Cli.Domain.easytcp;
+using Mudz.Cli.Domain.EasyTcp;
 
-namespace mudz.Cli
+namespace Mudz.Cli
 {
     class Program
     {

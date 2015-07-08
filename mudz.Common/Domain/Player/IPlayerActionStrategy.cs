@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using mudz.Common.Domain.GameEngine;
+using Mudz.Common.Domain.GameEngine;
 
-namespace mudz.Common.Domain.Player
+namespace Mudz.Common.Domain.Player
 {
     public interface IPlayerActionStrategy
     {

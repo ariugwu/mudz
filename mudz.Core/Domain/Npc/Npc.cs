@@ -1,10 +1,10 @@
 ﻿using System;
-using mudz.Common.Domain;
-using mudz.Common.Domain.GameEngine;
-using mudz.Common.Domain.Npc;
-using mudz.Core.Model.Domain;
+using Mudz.Common.Domain;
+using Mudz.Common.Domain.GameEngine;
+using Mudz.Common.Domain.Npc;
+using Mudz.Core.Model.Domain;
 
-namespace mudz.Core.Domain.Npc
+namespace Mudz.Core.Domain.Npc
 {
     [Serializable]
     public abstract class Npc : BaseGameObject, INpc

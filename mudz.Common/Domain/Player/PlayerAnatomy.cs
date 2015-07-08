@@ -1,4 +1,4 @@
-﻿namespace mudz.Common.Domain.Player
+﻿namespace Mudz.Common.Domain.Player
 {
     public enum PlayerAnatomy
     {

@@ -1,4 +1,4 @@
-﻿namespace mudz.Common.Domain.Npc
+﻿namespace Mudz.Common.Domain.Npc
 {
     public enum NpcTypes
     {

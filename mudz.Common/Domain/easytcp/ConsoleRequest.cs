@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace mudz.Common.Domain.easytcp
+namespace Mudz.Common.Domain.EasyTcp
 {
     [Serializable]
     public class ConsoleRequest

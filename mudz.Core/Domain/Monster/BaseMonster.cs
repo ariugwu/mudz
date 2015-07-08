@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using mudz.Common.Domain;
-using mudz.Common.Domain.GameEngine;
-using mudz.Common.Domain.Inventory;
-using mudz.Common.Domain.Monster;
-using mudz.Core.Model.Domain;
+using Mudz.Common.Domain;
+using Mudz.Common.Domain.GameEngine;
+using Mudz.Common.Domain.Inventory;
+using Mudz.Common.Domain.Monster;
+using Mudz.Core.Model.Domain;
 
-namespace mudz.Core.Domain.Monster
+namespace Mudz.Core.Domain.Monster
 {
     [Serializable]
     public abstract class BaseMonster : BaseActor, IMonster
