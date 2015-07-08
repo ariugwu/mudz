@@ -7,8 +7,8 @@
     <ProjectGuid>{DE454258-C04F-4210-93F8-24C20F82610F}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>mudz.Server</RootNamespace>
-    <AssemblyName>mudz.Server</AssemblyName>
+    <RootNamespace>Mudz.Server</RootNamespace>
+    <AssemblyName>Mudz.Server</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

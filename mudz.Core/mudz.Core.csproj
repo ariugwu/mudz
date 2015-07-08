@@ -7,8 +7,8 @@
     <ProjectGuid>{A0253F43-6889-42C9-9FFE-238C92864EDE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>mudz.Core</RootNamespace>
-    <AssemblyName>mudz.Core</AssemblyName>
+    <RootNamespace>Mudz.Core</RootNamespace>
+    <AssemblyName>Mudz.Core</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

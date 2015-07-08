@@ -7,8 +7,8 @@
     <ProjectGuid>{026F1C60-6CFF-401E-84E3-3D4920C6635D}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>mudz.Cli</RootNamespace>
-    <AssemblyName>mudz.Cli</AssemblyName>
+    <RootNamespace>Mudz.Cli</RootNamespace>
+    <AssemblyName>Mudz.Cli</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
