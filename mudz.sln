@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mudz.Cli", "mudz.Cli\mudz.Cli.csproj", "{026F1C60-6CFF-401E-84E3-3D4920C6635D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mudz.Cli", "mudz.Cli\Mudz.Cli.csproj", "{026F1C60-6CFF-401E-84E3-3D4920C6635D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mudz.Core", "mudz.Core\mudz.Core.csproj", "{A0253F43-6889-42C9-9FFE-238C92864EDE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mudz.Core", "mudz.Core\Mudz.Core.csproj", "{A0253F43-6889-42C9-9FFE-238C92864EDE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mudz.Server", "mudz.Server\mudz.Server.csproj", "{DE454258-C04F-4210-93F8-24C20F82610F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mudz.Server", "mudz.Server\Mudz.Server.csproj", "{DE454258-C04F-4210-93F8-24C20F82610F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mudz.Common", "mudz.Common\mudz.Common.csproj", "{DC295436-7628-4228-844A-E24123444DE5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mudz.Common", "mudz.Common\Mudz.Common.csproj", "{DC295436-7628-4228-844A-E24123444DE5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{01D3D06C-3F8D-4D4F-8917-36E3FEDB3243}"
 EndProject
@@ -18,9 +18,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{728F514A-64B2-4DC8-8C33-0CBC11DD0047}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		Brainstorm.md = Brainstorm.md
+		README.md = README.md
 	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Proxy", "Proxy", "{D714CAA1-EE68-42D5-B50E-31E4204BEC1C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,7 +51,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{026F1C60-6CFF-401E-84E3-3D4920C6635D} = {01D3D06C-3F8D-4D4F-8917-36E3FEDB3243}
 		{A0253F43-6889-42C9-9FFE-238C92864EDE} = {2B04557C-0A61-4E09-8568-D20691C8A51E}
-		{DE454258-C04F-4210-93F8-24C20F82610F} = {D714CAA1-EE68-42D5-B50E-31E4204BEC1C}
+		{DE454258-C04F-4210-93F8-24C20F82610F} = {01D3D06C-3F8D-4D4F-8917-36E3FEDB3243}
 		{DC295436-7628-4228-844A-E24123444DE5} = {2B04557C-0A61-4E09-8568-D20691C8A51E}
 	EndGlobalSection
 EndGlobal

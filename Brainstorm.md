@@ -6,7 +6,7 @@ Influence:
 - Trade Wars
 
 Players:
-- Turn based: Turns will be called 'Stamia' and depend on your level and attributes.
+- Turn based: Turns will be called 'Stamina' and depend on your level and attributes.
 - Actions (requiring turns): Fight, Repair, Heal, Negotiate. How much stamia is required changes per class.
 - Actions (turn free): Move, Get, Look, Say
 

@@ -1,4 +1,4 @@
-# mudz
+# Mudz
 Game we're making with the skills we cover in the live stream (http://www.twitch.tv/ariugwu). Text adventure. Zombie survival. Tribute to MajorMud.
 
 ## Milestones
