@@ -1,10 +1,9 @@
 ﻿using System;
-using Mudz.Common.Domain.GameEngine;
 using Mudz.Common.Domain.Npc;
 
 namespace Mudz.Core.Model.Domain.Npc
 {
-    [Serializable]
+	[Serializable]
     public class ShopKeeper : Core.Domain.Npc.Npc
     {
         public ShopKeeper(string name)

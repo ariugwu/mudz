@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using Mudz.Common.Domain.Environment.Map.Room;
+﻿using Mudz.Common.Domain.Environment.Map.Room;
 
 namespace Mudz.Common.Domain.Environment.Map
 {
-    public class Grid
+	public class Grid
     {
         public int[][] Sheet { get;  set; }
 

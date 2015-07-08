@@ -3,7 +3,7 @@ using Mudz.Common.Domain.Inventory;
 
 namespace Mudz.Common.Domain.Monster
 {
-    public interface IMonster : IActor
+	public interface IMonster : IActor
     {
         IList<IInventoryItem> Inventory { get; set; }
         bool HasItem(IInventoryItem item);
