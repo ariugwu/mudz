@@ -49,37 +49,47 @@ namespace Mudz.Cli.Domain.GameEngine
             // ##################################################
             // Output the monsters
             // ##################################################
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.Write("Targets: ");
-            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            if (monsters.Any())
+            { 
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.Write("Targets: ");
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
 
-            Console.WriteLine(string.Join(",", monsters.Select(x => x.Name)));
+                Console.WriteLine(string.Join(",", monsters.Select(x => x.Name)));
 
-            Console.ResetColor();
+                Console.ResetColor();
+            }
 
             // ##################################################
             // Output the players
             // ##################################################
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write("Also here: ");
+            if (players.Any())
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write("Also here: ");
 
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
-            
-            Console.WriteLine(string.Join(",", players.Select(x => x.Name)));
-            
-            Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+
+                Console.WriteLine(string.Join(",", players.Select(x => x.Name)));
+
+                Console.ResetColor();
+            }
+
 
             // ##################################################
             // Output the inventory
             // ##################################################
-            Console.ForegroundColor = ConsoleColor.Gray;
-            Console.Write("On the ground: ");
+            if (items.Any())
+            {
+                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.Write("On the ground: ");
 
-            Console.ForegroundColor = ConsoleColor.White;
+                Console.ForegroundColor = ConsoleColor.White;
 
-            Console.WriteLine(string.Join(",", items.Select(x => x.Name)));
+                Console.WriteLine(string.Join(",", items.Select(x => x.Name)));
 
-            Console.ResetColor();
+                Console.ResetColor();
+            }
         }
 
         public static void DrawStatusBar(IPlayer player)

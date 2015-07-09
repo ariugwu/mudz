@@ -43,6 +43,11 @@ namespace Mudz.Core.Domain.GameEngine.Handler
 			return HiveMind.Instance.World.Rooms.Containing(player);
         }
 
+        protected RoomContent GetRoomByPlayerName(string playerName)
+        {
+            return HiveMind.Instance.World.Rooms.Containing(playerName);
+        }
+
         protected IPlayer GetPlayerByRoom(RoomContent room, string playerName)
         {
             return room.GameObjects.OfType<IPlayer>().First(x => x.Name.Equals(playerName, StringComparison.InvariantCultureIgnoreCase));

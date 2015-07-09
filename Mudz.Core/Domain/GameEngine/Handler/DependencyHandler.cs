@@ -6,9 +6,9 @@ namespace Mudz.Core.Domain.GameEngine.Handler
     {
         public override ActionContext HandleRequest(ActionContext actionContext)
         {
-            actionContext.Room = GetRoomByPlayerName(actionContext.Player);
+            actionContext.Room = GetRoomByPlayerName(actionContext.GameRequest.PlayerName);
 
-            actionContext.Player = actionContext.Room != null ? GetPlayerByName(actionContext.Room, actionContext.Player) : null; // Either we get the room...meaning we found the player. Or we set the player to null which singles a bad login/auth.
+            actionContext.Player = actionContext.Room != null ? GetPlayerByRoom(actionContext.Room, actionContext.GameRequest.PlayerName) : null; // Either we get the room...meaning we found the player. Or we set the player to null which singles a bad login/auth.
 
             if (actionContext.GameRequest.HasTarget)
             {

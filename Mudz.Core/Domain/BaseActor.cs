@@ -3,7 +3,7 @@ using Mudz.Common.Domain;
 using Mudz.Common.Domain.GameEngine;
 using Mudz.Common.Domain.Inventory;
 
-namespace Mudz.Core.Model.Domain
+namespace Mudz.Core.Domain
 {
     [Serializable]
     public abstract class BaseActor : BaseGameObject, IActor

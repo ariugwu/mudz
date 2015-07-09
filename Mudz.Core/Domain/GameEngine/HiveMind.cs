@@ -81,20 +81,27 @@ namespace Mudz.Core.Domain.GameEngine
                 GameRequest = request,
                 ActionItems = new List<ActionResult>()
             };
-                     
-            var response = new GameResponse();
 
             // Send the action context through the chain of responsibility.
             actionContext = _requestHandler.Process(actionContext);
 
-            // Build our response.
-            response.CurrentAction = actionContext.GameRequest.GameAction;
-            response.ActionItems = actionContext.ActionItems;
-            response.RoomContent = actionContext.Room;
+            // Get a response based on the action context
+            var response = BuildResponseFromContext(actionContext);
 
+            // Build our response.
             ResponseStack.Push(response);
 
             return response;
+        }
+
+        private GameResponse BuildResponseFromContext(ActionContext actionContext)
+        {
+            return new GameResponse()
+            {
+                CurrentAction = actionContext.GameRequest.GameAction,
+                ActionItems = actionContext.ActionItems,
+                RoomContent = actionContext.Room,
+            };
         }
 
         private void SeedWorld()

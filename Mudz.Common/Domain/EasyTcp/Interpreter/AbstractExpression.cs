@@ -7,8 +7,10 @@ namespace Mudz.Common.Domain.EasyTcp.Interpreter
     public abstract class AbstractExpression
     {
         public GameActions GameAction { get; set; }
+        
         public string PlayerName { get; set; }
         public string TargetName { get; set; }
+        public string Command { get; set; }
 
         public bool HasTarget { get; set; }
         public bool HasPlayer { get; set; }

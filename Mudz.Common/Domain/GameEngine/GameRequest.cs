@@ -28,6 +28,7 @@ namespace Mudz.Common.Domain.GameEngine
             _args = ((string)_context).Split(' ');
             if (_args.Length > 2) GameAction = GameActions.None;
             if (_args.Length == 2) HasTarget = true;
+            if (_args.Length >= 1) Command = _args[0];
         }
 
         public override void GetPlayerName()
@@ -41,8 +42,7 @@ namespace Mudz.Common.Domain.GameEngine
 
         public override void GetGameAction()
         {
-            var command = (string)_context;
-            GameAction = GetGameAction(command);
+            GameAction = GetGameAction(Command);
         }
 
         public override void GetTargetName()
