@@ -56,11 +56,11 @@ namespace Mudz.Core.Model.Domain.Inventory
             return 0;
         }
 
-        public ActionResult RecieveGameActionResult(GameActions gameActions, ActionResult actionResult)
+        public ActionResult RecieveGameActionResult(GameActions gameActions, ActionResult actionResult, string playerName)
         {
             return new ActionResult()
             {
-                Message = "Why would an item ever be apart of this?",
+                PlayerMessage = "Why would an item ever be apart of this?",
                 WasSuccessful = false
             };
         }
@@ -71,13 +71,13 @@ namespace Mudz.Core.Model.Domain.Inventory
             switch (actionContext.GameRequest.GameAction)
             {
                 case GameActions.Heal:
-                    return new ActionResult(){ WasSuccessful = false, Message = "Items can't be healed!"};
+                    return new ActionResult() { WasSuccessful = false, PlayerMessage = "Items can't be healed!" };
                 case GameActions.Negotiate:
-                    return new ActionResult() { WasSuccessful = false, Message = "You'd have better luck convincing yourself!" };
+                    return new ActionResult() { WasSuccessful = false, PlayerMessage = "You'd have better luck convincing yourself!" };
                 case GameActions.Repair:
-                    return new ActionResult() { WasSuccessful = false, Message = "How would that work exactly?" };
+                    return new ActionResult() { WasSuccessful = false, PlayerMessage = "How would that work exactly?" };
                 case GameActions.Fight:
-                    return new ActionResult() { WasSuccessful = false, Message = "So like...a heavy bag? Or..." };
+                    return new ActionResult() { WasSuccessful = false, PlayerMessage = "So like...a heavy bag? Or..." };
                 default:
                     throw new NotImplementedException("Game action not supported!");
             }
@@ -85,7 +85,7 @@ namespace Mudz.Core.Model.Domain.Inventory
 
         public virtual ActionResult ProcessItem(ActionContext actionContext, IInventoryItem item)
         {
-            return new ActionResult() { WasSuccessful = false, Message = "Why would you want to do that?" };
+            return new ActionResult() { WasSuccessful = false, PlayerMessage = "Why would you want to do that?" };
         }
 
         public virtual void CheckState()

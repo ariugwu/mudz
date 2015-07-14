@@ -12,7 +12,7 @@ namespace Mudz.Core.Domain.GameEngine.Handler
 
             if (actionContext.Player == null && actionContext.GameRequest.GameAction == GameActions.Login)
             {
-                actionResult.Message = "Sorry. No Player by that name!";
+                actionResult.PlayerMessage = "Sorry. No Player by that name!";
                 actionResult.WasSuccessful = false;
 
                 actionContext.ActionItems.Add(actionResult);
@@ -20,7 +20,7 @@ namespace Mudz.Core.Domain.GameEngine.Handler
             else if (actionContext.Player != null && actionContext.GameRequest.GameAction == GameActions.Login)
             {
                 actionContext.Player.GameObjectState = GameObjectStates.InPlay; // Remember we're using the flyweight pattern so even here we're still making changes to the object in the Hivemind dictionary. This is true until it's returned to the client.
-                actionResult.Message = "Welcome back!";
+                actionResult.PlayerMessage = "Welcome back!";
                 actionResult.WasSuccessful = true;
 
                 actionContext.ActionItems.Add(actionResult);

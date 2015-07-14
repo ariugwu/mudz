@@ -28,7 +28,7 @@ namespace Mudz.Core.Model.Domain.Npc
             throw new System.NotImplementedException();
         }
 
-        public override ActionResult RecieveGameActionResult(GameActions gameAction, ActionResult actionResult)
+        public override ActionResult RecieveGameActionResult(GameActions gameAction, ActionResult actionResult, string playerName)
         {
             throw new NotImplementedException();
         }

@@ -10,7 +10,7 @@ namespace Mudz.Server.Domain.EasyTcp
 {
 	public class ConsoleProcessStrategy : IProcessStrategy
     {
-        public Response ProcessRequest(Request request)
+        public Dictionary<StateObject, Response> ProcessRequest(StateObject thisConnection, List<StateObject> allConnections, Request request)
         {
             var consoleRequest = (ConsoleRequest)request.Payload;
 
@@ -26,16 +26,22 @@ namespace Mudz.Server.Domain.EasyTcp
                 
                 var actionResult = new ActionResult()
                 {
-                    Message = "Whoops! Something went hella wrong. Please try again.",
+                    PlayerMessage = "Whoops! Something went hella wrong. Please try again.",
                     WasSuccessful = false
                 };
 
                 gameResponse.ActionItems.Add(actionResult);
             }
 
+            var broadCastList = new Dictionary<StateObject, Response>();
             var response = new Response() { Payload = gameResponse, Type = typeof(GameResponse) };
 
-            return response;
+            foreach (var c in allConnections)
+            {
+                broadCastList.Add(c, response);
+            }
+
+            return broadCastList;
         }
 
         public GameResponse GetGameReponse(string command, string playerName)

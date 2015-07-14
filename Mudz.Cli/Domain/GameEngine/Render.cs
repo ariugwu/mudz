@@ -104,12 +104,12 @@ namespace Mudz.Cli.Domain.GameEngine
             Console.Clear();
         }
 
-        public static void DisplayCommand(ActionResult actionResult)
+        public static void DisplayCommand(ActionResult actionResult, string formattedMessage)
         {
             if (!actionResult.WasSuccessful)
             {
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
-                ReplaceLine(actionResult.Message);
+                ReplaceLine(formattedMessage);
                 Console.ResetColor();
 
                 return;
@@ -119,33 +119,33 @@ namespace Mudz.Cli.Domain.GameEngine
             {
                 case GameActions.LookAround:
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    ReplaceLine(actionResult.Message);
+                    ReplaceLine(formattedMessage);
                     Console.ResetColor();
                     break;
                 case GameActions.Heal:
                     Console.ForegroundColor = ConsoleColor.Blue;
-                    ReplaceLine(actionResult.Message);
+                    ReplaceLine(formattedMessage);
                     Console.ResetColor();
                     break;
                 case GameActions.Fight:
                     Console.ForegroundColor = ConsoleColor.Red;
-                    ReplaceLine(actionResult.Message);
+                    ReplaceLine(formattedMessage);
                     Console.ResetColor();
                     break;
                 case GameActions.LookAt:
                 case GameActions.Login:
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    ReplaceLine(actionResult.Message);
+                    ReplaceLine(formattedMessage);
                     Console.ResetColor();
                     break;
                 case GameActions.Get:
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    ReplaceLine(actionResult.Message);
+                    ReplaceLine(formattedMessage);
                     Console.ResetColor();
                     break;
                 case GameActions.Die:
                     Console.ForegroundColor = ConsoleColor.Green;
-                    ReplaceLine(actionResult.Message);
+                    ReplaceLine(formattedMessage);
                     Console.ResetColor();
                     break;
                 default:

@@ -85,6 +85,10 @@
       <Project>{dc295436-7628-4228-844a-e24123444de5}</Project>
       <Name>Mudz.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Mudz.Data\Mudz.Data.csproj">
+      <Project>{e3adc0d6-20f8-4972-81be-84dd90d44850}</Project>
+      <Name>Mudz.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

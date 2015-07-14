@@ -8,6 +8,8 @@ namespace Mudz.Common.Domain.GameEngine
     public class GameResponse
     {
         public GameActions CurrentAction { get; set; }
+        public string RequestByPlayerName { get; set; }
+        public string TargetName { get; set; }
         public RoomContent RoomContent { get; set; }
         public List<ActionResult> ActionItems { get; set; }
     }

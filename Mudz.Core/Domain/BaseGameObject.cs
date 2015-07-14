@@ -32,7 +32,7 @@ namespace Mudz.Core.Domain
 
         public bool IsAttainable { get; set; }
 
-        public abstract ActionResult RecieveGameActionResult(GameActions gameAction, ActionResult actionResult);
+        public abstract ActionResult RecieveGameActionResult(GameActions gameAction, ActionResult actionResult, string playerName);
 
         public abstract ActionResult ExecuteAction(ActionContext actionContext);
 
@@ -50,7 +50,7 @@ namespace Mudz.Core.Domain
             return new ActionResult()
             {
                WasSuccessful = false,
-               Message = "Why would you want to do that?"
+               PlayerMessage = "Why would you want to do that?"
             };
         }
     }

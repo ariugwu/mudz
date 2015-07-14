@@ -47,6 +47,7 @@
     <Compile Include="Domain\Environment\Map\Room\RoomCollection.cs" />
     <Compile Include="Domain\Environment\Map\Room\RoomContent.cs" />
     <Compile Include="Domain\Environment\Map\Room\RoomKey.cs" />
+    <Compile Include="Domain\Environment\Map\Room\RoomKeyEqualityComparer.cs" />
     <Compile Include="Domain\GameEngine\ActionContext.cs" />
     <Compile Include="Domain\GameEngine\ActionResult.cs" />
     <Compile Include="Domain\GameEngine\GameActions.cs" />
@@ -61,6 +62,8 @@
     <Compile Include="Domain\Inventory\IInventoryItem.cs" />
     <Compile Include="Domain\Inventory\InventoryAugmentEffect.cs" />
     <Compile Include="Domain\Inventory\InventoryTypes.cs" />
+    <Compile Include="Domain\Localization\TextResource.cs" />
+    <Compile Include="Domain\Localization\TextResourceNames.cs" />
     <Compile Include="Domain\Monster\IMonster.cs" />
     <Compile Include="Domain\Monster\MonsterTypes.cs" />
     <Compile Include="Domain\Npc\INpc.cs" />

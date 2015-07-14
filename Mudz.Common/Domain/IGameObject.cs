@@ -21,7 +21,7 @@ namespace Mudz.Common.Domain
 
         int CalculateGameAction(GameActions gameAction);
 
-        ActionResult RecieveGameActionResult(GameActions gameAction, ActionResult actionResult);
+        ActionResult RecieveGameActionResult(GameActions gameAction, ActionResult actionResult, string playerName);
 
     }
 }

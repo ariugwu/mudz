@@ -101,6 +101,7 @@ namespace Mudz.Core.Domain.GameEngine
                 CurrentAction = actionContext.GameRequest.GameAction,
                 ActionItems = actionContext.ActionItems,
                 RoomContent = actionContext.Room,
+                RequestByPlayerName = actionContext.GameRequest.PlayerName
             };
         }
 

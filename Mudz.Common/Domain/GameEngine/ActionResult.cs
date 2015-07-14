@@ -11,7 +11,9 @@ namespace Mudz.Common.Domain.GameEngine
         }
 
         public GameActions GameAction { get; set; }
-        public string Message { get; set; }
+        public string PlayerMessage { get; set; }
+        public string TargetMessage { get; set; }
+        public string RoomMessage { get; set; }
         public int Amount { get; set; }
         public bool WasSuccessful { get; set; }
         public DateTime Created { get; set; }

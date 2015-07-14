@@ -39,35 +39,52 @@ namespace Mudz.Core.Domain.GameEngine.Handler
             {
                 case GameActions.Fight:
                     actionResult = actionContext.Player.ExecuteAction(actionContext);
-                    actionContext.ActionItems.Add(actionResult);
+                    
                     if (actionResult.WasSuccessful)
                     {
-                        actionContext.ActionItems.Add(actionContext.Target.RecieveGameActionResult(actionContext.GameRequest.GameAction, actionResult));
+                        actionResult = actionContext.Target.RecieveGameActionResult(actionContext.GameRequest.GameAction, actionResult, actionContext.Player.Name);
 
                         if (actionContext.Target.HitPoints <= 0)
                         {
-                            var deathResult = new ActionResult(){ GameAction = GameActions.Die, Message = string.Format("{0} falls to the ground lifeless", actionContext.Target.Name), WasSuccessful = true};
+                            var deathResult = new ActionResult()
+                            {
+                                GameAction = GameActions.Die,
+                                RoomMessage =
+                                    string.Format("{0} falls to the ground lifeless", actionContext.Target.Name),
+                                WasSuccessful = true
+                            };
                             actionContext.ActionItems.Add(deathResult);
+                            actionContext.ActionItems.Add(actionResult);
                         }
+                        else
+                        {
+
+                            actionContext.ActionItems.Add(actionResult);
+                        }
+                    }
+                    else
+                    {
+                        actionContext.ActionItems.Add(actionResult);
                     }
                     break;
                 case GameActions.Heal:
                 case GameActions.Repair:
                 case GameActions.Negotiate:
                     actionResult = actionContext.Player.ExecuteAction(actionContext);
-                    actionContext.ActionItems.Add(actionResult);
                     if (actionResult.WasSuccessful)
                     {
-                        actionContext.ActionItems.Add(actionContext.Target.RecieveGameActionResult(actionContext.GameRequest.GameAction, actionResult));
+                        actionResult = actionContext.Target.RecieveGameActionResult(actionContext.GameRequest.GameAction, actionResult, actionContext.Player.Name);
                     }
+
+                    actionContext.ActionItems.Add(actionResult);
                     break;
                 case GameActions.LookAt:
-                    actionResult.Message = actionContext.Target.Description;
+                    actionResult.PlayerMessage = actionContext.Target.Description;
                     actionResult.WasSuccessful = true;
                     actionContext.ActionItems.Add(actionResult);
                     break;
                 case GameActions.LookAround:
-                    actionResult.Message = String.Format("{0} looks around.", actionContext.Player.Name);
+                    actionResult.RoomMessage = String.Format("{0} looks around.", actionContext.Player.Name);
                     actionResult.WasSuccessful = true;
                     actionContext.ActionItems.Add(actionResult);
                     break;
@@ -86,7 +103,7 @@ namespace Mudz.Core.Domain.GameEngine.Handler
                     actionContext.ActionItems.Add(actionResult);
                     break;
                 case GameActions.None:
-                    actionResult.Message = "Sorry, no command matched your request.";
+                    actionResult.PlayerMessage = "Sorry, no command matched your request.";
                     actionResult.WasSuccessful = false;
                     actionContext.ActionItems.Add(actionResult);
                     break;

@@ -7,6 +7,7 @@ using Mudz.Cli.Domain.Player;
 using Mudz.Common.Domain;
 using Mudz.Common.Domain.GameEngine;
 using Mudz.Common.Domain.Player;
+using Mudz.Common.Domain.Environment.Map.Room;
 
 namespace Mudz.Cli.Domain.EasyTcp
 {
@@ -18,38 +19,76 @@ namespace Mudz.Cli.Domain.EasyTcp
 
             if (gameResponse.RoomContent != null) // If we have room content then we have a player
             {
-                LoadPlayerFromGameResponse(gameResponse); // Load the one we got back.
-
-                if (gameResponse.CurrentAction == GameActions.Login ||
-                    gameResponse.CurrentAction == GameActions.LookAround)
+                if (IsRequestor(gameResponse))
                 {
-                    GameEngine.Render.ClearScreen();
-                    GameEngine.Render.DrawRoom(gameResponse.RoomContent);
+                    LoadPlayerFromGameResponse(gameResponse); // Load the one we got back.
+
+                    if ((gameResponse.CurrentAction == GameActions.Login ||
+                        gameResponse.CurrentAction == GameActions.LookAround))
+                    {
+                        GameEngine.Render.ClearScreen();
+                        GameEngine.Render.DrawRoom(gameResponse.RoomContent);
+                    } 
                 }
 
-                DisplayActionItems(gameResponse.ActionItems);
+                DisplayActionItems(gameResponse,gameResponse.ActionItems);
 
-                GameEngine.Render.DrawStatusBar(PlayerOne.Instance);
+                if (PlayerOne.Instance != null)
+                {
+                    GameEngine.Render.DrawStatusBar(PlayerOne.Instance);
+                }
             }
             else
             {
                 PlayerOne.Instance = null; // clear the player on a failed login
-                DisplayActionItems(gameResponse.ActionItems); // Login failed and we should have a message.
+                DisplayActionItems(gameResponse,gameResponse.ActionItems); // Login failed and we should have a message.
             } 
         }
 
-        public void LoadPlayerFromGameResponse(GameResponse gameResponse)
+        private void LoadPlayerFromGameResponse(GameResponse gameResponse)
         {
             PlayerOne.Instance = gameResponse.RoomContent.GameObjects.Where(x => x.GameObjectType == GameObjectTypes.Player && x.GameObjectState.ToString() == GameObjectStates.InPlay.ToString())
         .Select(x => (IPlayer)x).FirstOrDefault(x => x.Name.Equals(PlayerOne.Instance.Name, StringComparison.InvariantCultureIgnoreCase));
+            PlayerOne.CurrenLocation = gameResponse.RoomContent.RoomKey;
         }
 
-        public void DisplayActionItems(List<ActionResult> actionItems)
+        private void DisplayActionItems(GameResponse gameResponse, List<ActionResult> actionItems)
         {
             foreach (var ar in actionItems)
             {
-                GameEngine.Render.DisplayCommand(ar);
+                var message = DecideMessage(gameResponse, ar);
+                GameEngine.Render.DisplayCommand(ar, message);
             }
+        }
+
+        private string DecideMessage(GameResponse gameResponse, ActionResult actionResult)
+        {
+            if (PlayerOne.Instance == null) return String.Empty; // Likely a login screen that's getting the message but can ignore it.
+
+            var roomEq = new RoomKeyEqualityComparer();
+
+            if (IsRequestor(gameResponse) && roomEq.Equals(gameResponse.RoomContent.RoomKey, PlayerOne.CurrenLocation))
+            {
+                return actionResult.PlayerMessage;
+            }
+
+            if (!IsRequestor(gameResponse) && roomEq.Equals(gameResponse.RoomContent.RoomKey, PlayerOne.CurrenLocation))
+            {
+                return actionResult.RoomMessage;
+            }
+
+            if (!String.IsNullOrEmpty(gameResponse.TargetName) &&
+                PlayerOne.Instance.Name.Equals(gameResponse.TargetName, StringComparison.InvariantCultureIgnoreCase))
+            {
+                return actionResult.TargetMessage;
+            }
+
+            return "What?";
+        }
+
+        private bool IsRequestor(GameResponse gameResponse)
+        {
+            return PlayerOne.Instance != null && gameResponse.RequestByPlayerName.Equals(PlayerOne.Instance.Name, StringComparison.InvariantCultureIgnoreCase);
         }
     }
 }

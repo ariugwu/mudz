@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Linq;
 using Mudz.Common.Domain;
 using Mudz.Common.Domain.GameEngine;
 using Mudz.Common.Domain.Inventory;
+using Mudz.Common.Domain.Localization;
+using Mudz.Data.Domain.Localization;
 
 namespace Mudz.Core.Domain
 {
@@ -78,7 +81,8 @@ namespace Mudz.Core.Domain
             return new ActionResult()
             {
                 WasSuccessful = false,
-                Message = String.Format("{0} begins to move and then collapses!", this.Name),
+                RoomMessage = String.Format(TextResourceRepository.TextResourceLookUpByCulture("en-us")[TextResourceNames.CannotRespondRoomMessage], this.Name),
+                PlayerMessage = TextResourceRepository.TextResourceLookUpByCulture("en-us")[TextResourceNames.CannotRespondPlayerMessage]
             };
         }
 
@@ -87,7 +91,8 @@ namespace Mudz.Core.Domain
             return new ActionResult()
             {
                 WasSuccessful = false,
-                Message = String.Format("{0} does not have enough stamina (turns) to complete this action!", this.Name),
+                RoomMessage = String.Format("{0} does not have enough stamina (turns) to complete this action!", this.Name),
+                PlayerMessage = "You do not have enough stamia (turns) to complete this action!"
             };
 
         }
@@ -107,22 +112,26 @@ namespace Mudz.Core.Domain
                 case GameActions.Fight:
                     amount = this.CalculateGameAction(actionContext.GameRequest.GameAction);
                     actionResult.WasSuccessful = true;
-                    actionResult.Message = String.Format("{0} attacks for {1} damage!", this.Name, amount);
+                    actionResult.RoomMessage = String.Format("{0} attacks {1} for {2} damage!", this.Name, actionContext.Target.Name, amount);
+                    actionResult.PlayerMessage = String.Format("You attack {0} for {1} damage!", actionContext.Target.Name, amount);
                     actionResult.Amount = amount;
                     return actionResult;
                 case GameActions.Repair:
                     amount = this.CalculateGameAction(actionContext.GameRequest.GameAction);
-                    actionResult.Message = String.Format("{0} repairs for {1} hit points!", this.Name, amount);
+                    actionResult.RoomMessage = String.Format("{0} repairs {1} for {2} hit points!", this.Name, actionContext.Target.Name, amount);
+                    actionResult.PlayerMessage = String.Format("You repair {0} for {1} hit points!", actionContext.Target.Name, amount);
                     actionResult.Amount = amount;
                     return actionResult;
                 case GameActions.Negotiate:
                     amount = this.CalculateGameAction(actionContext.GameRequest.GameAction);
-                    actionResult.Message = String.Format("{0} negotiates for points!", this.Name, amount);
+                    actionResult.RoomMessage = String.Format("{0} negotiates with {1} for {2} points!", this.Name, actionContext.Target.Name, amount);
+                    actionResult.PlayerMessage = String.Format("You negotiate with {0} for {1} points!", actionContext.Target.Name, amount);
                     actionResult.Amount = amount;
                     return actionResult;
                 case GameActions.Heal:
                     amount = this.CalculateGameAction(actionContext.GameRequest.GameAction);
-                    actionResult.Message = String.Format("{0} heals {1} for {2} damage!", actionContext.Player.Name, actionContext.Target.Name, amount);
+                    actionResult.RoomMessage = String.Format("{0} heals {1} for {2} damage!", actionContext.Player.Name, actionContext.Target.Name, amount);
+                    actionResult.PlayerMessage = String.Format("You heal {0} for {1} damage!", actionContext.Target.Name, amount);
                     actionResult.Amount = amount;
                     return actionResult;
                 default:
@@ -130,33 +139,31 @@ namespace Mudz.Core.Domain
             }
         }
 
-        public override ActionResult RecieveGameActionResult(GameActions gameAction, ActionResult actionResult)
+        public override ActionResult RecieveGameActionResult(GameActions gameAction, ActionResult actionResult, string playerName)
         {
-            var returnResult = new ActionResult();
-
             switch (gameAction)
             {
                 case GameActions.Fight:
                     TakeDamage(actionResult.Amount);
-                    returnResult.WasSuccessful = true;
-                    returnResult.Message = String.Format("{0} attacks you for {1} damage!", "[Need context!]", actionResult.Amount);
-                    returnResult.Amount = actionResult.Amount;
-                    return returnResult;
+                    actionResult.WasSuccessful = true;
+                    actionResult.TargetMessage = String.Format("{0} attacks you for {1} damage!", playerName, actionResult.Amount);
+                    actionResult.Amount = actionResult.Amount;
+                    return actionResult;
                 case GameActions.Repair:
-                    returnResult.WasSuccessful = false;
-                    returnResult.Message = String.Format("{0} tries to wrap you in duct tape but you wiggle free!", "[Need context!]");
-                    return returnResult;
+                    actionResult.WasSuccessful = false;
+                    actionResult.TargetMessage = String.Format("{0} tries to wrap you in duct tape but you wiggle free!", playerName);
+                    return actionResult;
                 case GameActions.Negotiate:
-                    returnResult.WasSuccessful = true;
-                    returnResult.Message = String.Format("{0} negotiates with you for {1} points!", "[Need context!]", actionResult.Amount);
-                    returnResult.Amount = actionResult.Amount;
-                    return returnResult;
+                    actionResult.WasSuccessful = true;
+                    actionResult.TargetMessage = String.Format("{0} negotiates with you for {1} points!", playerName, actionResult.Amount);
+                    actionResult.Amount = actionResult.Amount;
+                    return actionResult;
                 case GameActions.Heal:
                     RestoreHealth(actionResult.Amount);
-                    returnResult.WasSuccessful = true;
-                    returnResult.Message = String.Format("{0} heals you for {1} damage!", "[Need context!]", actionResult.Amount);
-                    returnResult.Amount = actionResult.Amount;
-                    return returnResult;
+                    actionResult.WasSuccessful = true;
+                    actionResult.TargetMessage = String.Format("{0} heals you for {1} damage!", playerName, actionResult.Amount);
+                    actionResult.Amount = actionResult.Amount;
+                    return actionResult;
                 default:
                     throw new NotImplementedException("This action has not been implemented");
             }
@@ -173,7 +180,8 @@ namespace Mudz.Core.Domain
             return new ActionResult()
             {
                 WasSuccessful = true,
-                Message = String.Format("{0} takes {1} and quickly hides it away.", this.Name, item.Name)
+                RoomMessage = String.Format("{0} takes {1} and quickly hides it away.", this.Name, item.Name),
+                PlayerMessage = String.Format("You take {0} and quickly hides it away.", item.Name)
             };
         }
 
