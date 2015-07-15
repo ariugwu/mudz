@@ -22,9 +22,29 @@ namespace Mudz.Data.Domain.Localization
             resources.Add(new TextResource() { TextResourceName = TextResourceNames.NotEnoughStaminaTargetMessage, Culture = "en-us", Content = "" });
 
             //* Fight
-            resources.Add(new TextResource() { TextResourceName = TextResourceNames.FightRoomMessage, Culture = "en-us", Content = "" });
-            resources.Add(new TextResource() { TextResourceName = TextResourceNames.FightPlayerMessage, Culture = "en-us", Content = "" });
+            resources.Add(new TextResource() { TextResourceName = TextResourceNames.FightRoomMessage, Culture = "en-us", Content = "{0} attacks {1} for {2} damage!" });
+            resources.Add(new TextResource() { TextResourceName = TextResourceNames.FightPlayerMessage, Culture = "en-us", Content = "You attack {0} for {1} damage!" });
             resources.Add(new TextResource() { TextResourceName = TextResourceNames.FightTargetMessage, Culture = "en-us", Content = "" });
+
+            //* Heal
+            resources.Add(new TextResource() { TextResourceName = TextResourceNames.HealRoomMessage, Culture = "en-us", Content = "" });
+            resources.Add(new TextResource() { TextResourceName = TextResourceNames.HealPlayerMessage, Culture = "en-us", Content = "" });
+            resources.Add(new TextResource() { TextResourceName = TextResourceNames.HealTargetMessage, Culture = "en-us", Content = "" });
+
+            //* Repair
+            resources.Add(new TextResource() { TextResourceName = TextResourceNames.RepairRoomMessage, Culture = "en-us", Content = "" });
+            resources.Add(new TextResource() { TextResourceName = TextResourceNames.RepairPlayerMessage, Culture = "en-us", Content = "" });
+            resources.Add(new TextResource() { TextResourceName = TextResourceNames.RepairTargetMessage, Culture = "en-us", Content = "" });
+
+            //* Negotiate
+            resources.Add(new TextResource() { TextResourceName = TextResourceNames.NegotiateRoomMessage, Culture = "en-us", Content = "" });
+            resources.Add(new TextResource() { TextResourceName = TextResourceNames.NotEnoughStaminaPlayerMessage, Culture = "en-us", Content = "" });
+            resources.Add(new TextResource() { TextResourceName = TextResourceNames.NegotiateTargetMessage, Culture = "en-us", Content = "" });
+
+            //* Welcome
+            resources.Add(new TextResource() { TextResourceName = TextResourceNames.WelcomeRoomMessage, Culture = "en-us", Content = "{0} has entered the game!" });
+            resources.Add(new TextResource() { TextResourceName = TextResourceNames.WelcomePlayerMessage, Culture = "en-us", Content = "Welcome back {0}!" });
+            resources.Add(new TextResource() { TextResourceName = TextResourceNames.WelcomeTargetMessage, Culture = "en-us", Content = "" });
 
             ////* 
             //resources.Add(new TextResource() { TextResourceName = TextResourceNames., Culture = "en-us", Content = "" });
@@ -36,7 +56,7 @@ namespace Mudz.Data.Domain.Localization
 
         public static Dictionary<TextResourceNames, string> TextResourceLookUpByCulture(string culture)
         {
-            return GetResourcesByCulture(culture).ToList().ToDictionary(x => x.TextResourceName, x => x.Content);
+            return GetResourcesByCulture(culture).ToDictionary(x => x.TextResourceName, x => x.Content);
         }
 
         public static IEnumerable<TextResource> GetResourcesByCulture(string culture)

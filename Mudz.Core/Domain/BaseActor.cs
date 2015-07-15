@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Mudz.Common.Domain;
 using Mudz.Common.Domain.GameEngine;
 using Mudz.Common.Domain.Inventory;
@@ -112,8 +111,8 @@ namespace Mudz.Core.Domain
                 case GameActions.Fight:
                     amount = this.CalculateGameAction(actionContext.GameRequest.GameAction);
                     actionResult.WasSuccessful = true;
-                    actionResult.RoomMessage = String.Format("{0} attacks {1} for {2} damage!", this.Name, actionContext.Target.Name, amount);
-                    actionResult.PlayerMessage = String.Format("You attack {0} for {1} damage!", actionContext.Target.Name, amount);
+                    actionResult.RoomMessage = String.Format(TextResourceRepository.TextResourceLookUpByCulture("en-us")[TextResourceNames.FightRoomMessage], this.Name, actionContext.Target.Name, amount);
+                    actionResult.PlayerMessage = String.Format(TextResourceRepository.TextResourceLookUpByCulture("en-us")[TextResourceNames.FightPlayerMessage], actionContext.Target.Name, amount);
                     actionResult.Amount = amount;
                     return actionResult;
                 case GameActions.Repair:

@@ -44,6 +44,8 @@ namespace Mudz.Core.Domain.GameEngine.Handler
                     {
                         actionResult = actionContext.Target.RecieveGameActionResult(actionContext.GameRequest.GameAction, actionResult, actionContext.Player.Name);
 
+                        actionContext.ActionItems.Add(actionResult);
+
                         if (actionContext.Target.HitPoints <= 0)
                         {
                             var deathResult = new ActionResult()
@@ -54,12 +56,6 @@ namespace Mudz.Core.Domain.GameEngine.Handler
                                 WasSuccessful = true
                             };
                             actionContext.ActionItems.Add(deathResult);
-                            actionContext.ActionItems.Add(actionResult);
-                        }
-                        else
-                        {
-
-                            actionContext.ActionItems.Add(actionResult);
                         }
                     }
                     else
