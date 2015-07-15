@@ -49,7 +49,7 @@ namespace Mudz.Cli.Domain.EasyTcp
         {
             PlayerOne.Instance = gameResponse.RoomContent.GameObjects.Where(x => x.GameObjectType == GameObjectTypes.Player && x.GameObjectState.ToString() == GameObjectStates.InPlay.ToString())
         .Select(x => (IPlayer)x).FirstOrDefault(x => x.Name.Equals(PlayerOne.Instance.Name, StringComparison.InvariantCultureIgnoreCase));
-            PlayerOne.CurrenLocation = gameResponse.RoomContent.RoomKey;
+            PlayerOne.CurrentLocation = gameResponse.RoomContent.RoomKey;
         }
 
         private void DisplayActionItems(GameResponse gameResponse, List<ActionResult> actionItems)
@@ -67,12 +67,12 @@ namespace Mudz.Cli.Domain.EasyTcp
 
             var roomEq = new RoomKeyEqualityComparer();
 
-            if (IsRequestor(gameResponse) && roomEq.Equals(gameResponse.RoomContent.RoomKey, PlayerOne.CurrenLocation))
+            if (IsRequestor(gameResponse) && roomEq.Equals(gameResponse.RoomContent.RoomKey, PlayerOne.CurrentLocation))
             {
                 return actionResult.PlayerMessage;
             }
 
-            if (!IsRequestor(gameResponse) && roomEq.Equals(gameResponse.RoomContent.RoomKey, PlayerOne.CurrenLocation))
+            if (!IsRequestor(gameResponse) && roomEq.Equals(gameResponse.RoomContent.RoomKey, PlayerOne.CurrentLocation))
             {
                 return actionResult.RoomMessage;
             }
