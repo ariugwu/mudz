@@ -49,7 +49,7 @@ namespace Mudz.Cli.Domain.EasyTcp
         {
             PlayerOne.Instance = gameResponse.RoomContent.GameObjects.Where(x => x.GameObjectType == GameObjectTypes.Player && x.GameObjectState.ToString() == GameObjectStates.InPlay.ToString())
         .Select(x => (IPlayer)x).FirstOrDefault(x => x.Name.Equals(PlayerOne.Instance.Name, StringComparison.InvariantCultureIgnoreCase));
-            PlayerOne.CurrenLocation = gameResponse.RoomContent.RoomKey;
+            PlayerOne.CurrentLocation = gameResponse.RoomContent.RoomKey;
         }
 
         private void DisplayActionItems(GameResponse gameResponse, List<ActionResult> actionItems)
@@ -63,21 +63,21 @@ namespace Mudz.Cli.Domain.EasyTcp
 
         private string DecideMessage(GameResponse gameResponse, ActionResult actionResult)
         {
-            if (PlayerOne.Instance == null) return String.Empty; // Likely a login screen that's getting the message but can ignore it.
+            if (PlayerOne.Instance == null) return string.Empty; // Likely a login screen that's getting the message but can ignore it.
 
             var roomEq = new RoomKeyEqualityComparer();
 
-            if (IsRequestor(gameResponse) && roomEq.Equals(gameResponse.RoomContent.RoomKey, PlayerOne.CurrenLocation))
+            if (IsRequestor(gameResponse) && roomEq.Equals(gameResponse.RoomContent.RoomKey, PlayerOne.CurrentLocation))
             {
                 return actionResult.PlayerMessage;
             }
 
-            if (!IsRequestor(gameResponse) && roomEq.Equals(gameResponse.RoomContent.RoomKey, PlayerOne.CurrenLocation))
+            if (!IsRequestor(gameResponse) && roomEq.Equals(gameResponse.RoomContent.RoomKey, PlayerOne.CurrentLocation))
             {
                 return actionResult.RoomMessage;
             }
 
-            if (!String.IsNullOrEmpty(gameResponse.TargetName) &&
+            if (!string.IsNullOrEmpty(gameResponse.TargetName) &&
                 PlayerOne.Instance.Name.Equals(gameResponse.TargetName, StringComparison.InvariantCultureIgnoreCase))
             {
                 return actionResult.TargetMessage;

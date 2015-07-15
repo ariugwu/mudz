@@ -16,7 +16,7 @@ namespace Mudz.Core.Domain
         {
             get
             {
-                return String.Format("You are looking at {0}. {1}. Health: {2}.", Name, GetDescription(), HitPoints);
+                return string.Format("You are looking at {0}. {1}. Health: {2}.", Name, GetDescription(), HitPoints);
             }
         }
 

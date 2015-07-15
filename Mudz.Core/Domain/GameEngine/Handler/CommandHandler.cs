@@ -84,7 +84,7 @@ namespace Mudz.Core.Domain.GameEngine.Handler
                     actionContext.ActionItems.Add(actionResult);
                     break;
                 case GameActions.LookAround:
-                    actionResult.RoomMessage = String.Format("{0} looks around.", actionContext.Player.Name);
+                    actionResult.RoomMessage = string.Format("{0} looks around.", actionContext.Player.Name);
                     actionResult.WasSuccessful = true;
                     actionContext.ActionItems.Add(actionResult);
                     break;

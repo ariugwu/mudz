@@ -73,7 +73,7 @@ namespace Mudz.Core.Domain.GameEngine.Handler
             return new ActionResult()
             {
                 WasSuccessful = false,
-                PlayerMessage = String.Format("Sorry, {0} is out of play!", gameObject.Name)
+                PlayerMessage = string.Format("Sorry, {0} is out of play!", gameObject.Name)
             };
         }
 
@@ -82,7 +82,7 @@ namespace Mudz.Core.Domain.GameEngine.Handler
             return new ActionResult()
             {
                 WasSuccessful = false,
-                PlayerMessage = String.Format("Sorry, there doesn't seem to be '{0}' here.", gameObject.Name)
+                PlayerMessage = string.Format("Sorry, there doesn't seem to be '{0}' here.", gameObject.Name)
             };
         }
 
@@ -91,7 +91,7 @@ namespace Mudz.Core.Domain.GameEngine.Handler
             return new ActionResult()
             {
                 WasSuccessful = false,
-                PlayerMessage = String.Format("That doesn't make any sense. '{0}' is not a valid target for this command.", gameObject.Name)
+                PlayerMessage = string.Format("That doesn't make any sense. '{0}' is not a valid target for this command.", gameObject.Name)
             };
         }
 

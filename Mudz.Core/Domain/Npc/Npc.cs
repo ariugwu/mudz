@@ -2,11 +2,10 @@
 using Mudz.Common.Domain;
 using Mudz.Common.Domain.GameEngine;
 using Mudz.Common.Domain.Npc;
-using Mudz.Core.Model.Domain;
 
 namespace Mudz.Core.Domain.Npc
 {
-    [Serializable]
+	[Serializable]
     public abstract class Npc : BaseGameObject, INpc
     {
         protected Npc(string name)
