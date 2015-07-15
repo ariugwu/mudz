@@ -4,11 +4,10 @@ using Mudz.Common.Domain;
 using Mudz.Common.Domain.GameEngine;
 using Mudz.Common.Domain.Inventory;
 using Mudz.Common.Domain.Monster;
-using Mudz.Core.Model.Domain;
 
 namespace Mudz.Core.Domain.Monster
 {
-    [Serializable]
+	[Serializable]
     public abstract class BaseMonster : BaseActor, IMonster
     {
         protected BaseMonster()

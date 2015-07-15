@@ -7,12 +7,11 @@ using Mudz.Common.Domain.Inventory;
 using Mudz.Common.Domain.Player;
 using Mudz.Common.Domain.Player.Inventory;
 using Mudz.Core.Domain.Player.Inventory.Item.Weapon;
-using Mudz.Core.Model.Domain;
 using Mudz.Core.Model.Domain.Player.Class;
 
 namespace Mudz.Core.Domain.Player
 {
-    [Serializable]
+	[Serializable]
     public sealed class Player : BaseActor, IPlayer
     {
         public Player(string name, ActorGenderTypes gender, PlayerTypes playerType, IPlayerActionStrategy actionStrategy)

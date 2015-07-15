@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Mudz.Common.Domain;
 using Mudz.Common.Domain.GameEngine;
 using Mudz.Common.Domain.Inventory;
@@ -8,7 +7,7 @@ using Mudz.Data.Domain.Localization;
 
 namespace Mudz.Core.Domain
 {
-    [Serializable]
+	[Serializable]
     public abstract class BaseActor : BaseGameObject, IActor
     {
         #region Game Engine
