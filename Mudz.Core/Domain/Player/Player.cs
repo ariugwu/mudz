@@ -92,7 +92,7 @@ namespace Mudz.Core.Domain.Player
         public override string GetDescription()
         {
             var physique = (this.Strength > 100) ? "Appears strongly built." : "Has a normal build";
-            var desc = String.Format("{0}. {1}.", physique, _actionStrategy.GetClassDescription());
+            var desc = string.Format("{0}. {1}.", physique, _actionStrategy.GetClassDescription());
             return desc;
         }
 

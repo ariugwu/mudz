@@ -63,7 +63,7 @@ namespace Mudz.Cli.Domain.EasyTcp
 
         private string DecideMessage(GameResponse gameResponse, ActionResult actionResult)
         {
-            if (PlayerOne.Instance == null) return String.Empty; // Likely a login screen that's getting the message but can ignore it.
+            if (PlayerOne.Instance == null) return string.Empty; // Likely a login screen that's getting the message but can ignore it.
 
             var roomEq = new RoomKeyEqualityComparer();
 
@@ -77,7 +77,7 @@ namespace Mudz.Cli.Domain.EasyTcp
                 return actionResult.RoomMessage;
             }
 
-            if (!String.IsNullOrEmpty(gameResponse.TargetName) &&
+            if (!string.IsNullOrEmpty(gameResponse.TargetName) &&
                 PlayerOne.Instance.Name.Equals(gameResponse.TargetName, StringComparison.InvariantCultureIgnoreCase))
             {
                 return actionResult.TargetMessage;
