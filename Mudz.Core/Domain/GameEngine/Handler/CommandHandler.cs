@@ -2,6 +2,7 @@
 using Mudz.Common.Domain;
 using Mudz.Common.Domain.GameEngine;
 using Mudz.Common.Domain.Inventory;
+using Mudz.Data.Domain.Localization;
 
 namespace Mudz.Core.Domain.GameEngine.Handler
 {
@@ -52,7 +53,7 @@ namespace Mudz.Core.Domain.GameEngine.Handler
                             {
                                 GameAction = GameActions.Die,
                                 RoomMessage =
-                                    string.Format("{0} falls to the ground lifeless", actionContext.Target.Name),
+                                    string.Format(TextResourceRepository.TextResourceLookUpByCulture("en-us")[TextResourceNames.DeathRoomMessage], actionContext.Target.Name),
                                 WasSuccessful = true
                             };
                             actionContext.ActionItems.Add(deathResult);

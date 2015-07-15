@@ -39,14 +39,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Localization\Model\TextResource.cs" />
+    <Compile Include="Domain\Localization\TextResourceNames.cs" />
     <Compile Include="Domain\Localization\TextResourceRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\mudz.Common\Mudz.Common.csproj">
-      <Project>{dc295436-7628-4228-844a-e24123444de5}</Project>
-      <Name>Mudz.Common</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

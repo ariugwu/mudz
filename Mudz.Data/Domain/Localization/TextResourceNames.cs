@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Mudz.Common.Domain.Localization
+namespace Mudz.Data.Domain.Localization
 {
     [Serializable]
     public enum TextResourceNames
@@ -32,5 +32,11 @@ namespace Mudz.Common.Domain.Localization
         WelcomeRoomMessage,
         WelcomePlayerMessage,
         WelcomeTargetMessage,
+        GetItemRoomMessage,
+        GetItemPlayerMessage,
+        GetItemTargetMessage,
+        DeathRoomMessage,
+        DeathPlayerMessage,
+        DeathTargetMessage
     }
 }

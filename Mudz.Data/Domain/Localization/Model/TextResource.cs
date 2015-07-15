@@ -1,4 +1,4 @@
-﻿namespace Mudz.Common.Domain.Localization
+﻿namespace Mudz.Data.Domain.Localization.Model
 {
     public class TextResource
     {

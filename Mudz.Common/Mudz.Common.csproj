@@ -62,8 +62,6 @@
     <Compile Include="Domain\Inventory\IInventoryItem.cs" />
     <Compile Include="Domain\Inventory\InventoryAugmentEffect.cs" />
     <Compile Include="Domain\Inventory\InventoryTypes.cs" />
-    <Compile Include="Domain\Localization\TextResource.cs" />
-    <Compile Include="Domain\Localization\TextResourceNames.cs" />
     <Compile Include="Domain\Monster\IMonster.cs" />
     <Compile Include="Domain\Monster\MonsterTypes.cs" />
     <Compile Include="Domain\Npc\INpc.cs" />
@@ -81,7 +79,15 @@
     <Compile Include="EqualityComparisonHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Domain\Localization\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Mudz.Data\Mudz.Data.csproj">
+      <Project>{e3adc0d6-20f8-4972-81be-84dd90d44850}</Project>
+      <Name>Mudz.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

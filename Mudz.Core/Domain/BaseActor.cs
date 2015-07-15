@@ -2,7 +2,6 @@
 using Mudz.Common.Domain;
 using Mudz.Common.Domain.GameEngine;
 using Mudz.Common.Domain.Inventory;
-using Mudz.Common.Domain.Localization;
 using Mudz.Data.Domain.Localization;
 
 namespace Mudz.Core.Domain
@@ -90,8 +89,8 @@ namespace Mudz.Core.Domain
             return new ActionResult()
             {
                 WasSuccessful = false,
-                RoomMessage = string.Format("{0} does not have enough stamina (turns) to complete this action!", this.Name),
-                PlayerMessage = "You do not have enough stamia (turns) to complete this action!"
+                RoomMessage = string.Format(TextResourceRepository.TextResourceLookUpByCulture("en-us")[TextResourceNames.NotEnoughStaminaRoomMessage], this.Name),
+                PlayerMessage = TextResourceRepository.TextResourceLookUpByCulture("en-us")[TextResourceNames.NotEnoughStaminaPlayerMessage]
             };
 
         }
@@ -106,36 +105,10 @@ namespace Mudz.Core.Domain
             var actionResult = new ActionResult();
             int amount = 0;
 
-            switch (actionContext.GameRequest.GameAction)
-            {
-                case GameActions.Fight:
-                    amount = this.CalculateGameAction(actionContext.GameRequest.GameAction);
-                    actionResult.WasSuccessful = true;
-                    actionResult.RoomMessage = string.Format("{0} attacks {1} for {2} damage!", this.Name, actionContext.Target.Name, amount);
-                    actionResult.PlayerMessage = string.Format("You attack {0} for {1} damage!", actionContext.Target.Name, amount);
-                    actionResult.Amount = amount;
-                    return actionResult;
-                case GameActions.Repair:
-                    amount = this.CalculateGameAction(actionContext.GameRequest.GameAction);
-                    actionResult.RoomMessage = string.Format("{0} repairs {1} for {2} hit points!", this.Name, actionContext.Target.Name, amount);
-                    actionResult.PlayerMessage = string.Format("You repair {0} for {1} hit points!", actionContext.Target.Name, amount);
-                    actionResult.Amount = amount;
-                    return actionResult;
-                case GameActions.Negotiate:
-                    amount = this.CalculateGameAction(actionContext.GameRequest.GameAction);
-                    actionResult.RoomMessage = string.Format("{0} negotiates with {1} for {2} points!", this.Name, actionContext.Target.Name, amount);
-                    actionResult.PlayerMessage = string.Format("You negotiate with {0} for {1} points!", actionContext.Target.Name, amount);
-                    actionResult.Amount = amount;
-                    return actionResult;
-                case GameActions.Heal:
-                    amount = this.CalculateGameAction(actionContext.GameRequest.GameAction);
-                    actionResult.RoomMessage = string.Format("{0} heals {1} for {2} damage!", actionContext.Player.Name, actionContext.Target.Name, amount);
-                    actionResult.PlayerMessage = string.Format("You heal {0} for {1} damage!", actionContext.Target.Name, amount);
-                    actionResult.Amount = amount;
-                    return actionResult;
-                default:
-                    throw new NotImplementedException("This action has not been implemented");
-            }
+            amount = this.CalculateGameAction(actionContext.GameRequest.GameAction);
+            actionResult.FillResult(actionContext, amount);
+
+            return actionResult;
         }
 
         public override ActionResult RecieveGameActionResult(GameActions gameAction, ActionResult actionResult, string playerName)
@@ -145,22 +118,22 @@ namespace Mudz.Core.Domain
                 case GameActions.Fight:
                     TakeDamage(actionResult.Amount);
                     actionResult.WasSuccessful = true;
-                    actionResult.TargetMessage = string.Format("{0} attacks you for {1} damage!", playerName, actionResult.Amount);
+                    actionResult.TargetMessage = string.Format(TextResourceRepository.TextResourceLookUpByCulture("en-us")[TextResourceNames.FightTargetMessage], playerName, actionResult.Amount);
                     actionResult.Amount = actionResult.Amount;
                     return actionResult;
                 case GameActions.Repair:
                     actionResult.WasSuccessful = false;
-                    actionResult.TargetMessage = string.Format("{0} tries to wrap you in duct tape but you wiggle free!", playerName);
+                    actionResult.TargetMessage = string.Format(TextResourceRepository.TextResourceLookUpByCulture("en-us")[TextResourceNames.RepairTargetMessage], playerName);
                     return actionResult;
                 case GameActions.Negotiate:
                     actionResult.WasSuccessful = true;
-                    actionResult.TargetMessage = string.Format("{0} negotiates with you for {1} points!", playerName, actionResult.Amount);
+                    actionResult.TargetMessage = string.Format(TextResourceRepository.TextResourceLookUpByCulture("en-us")[TextResourceNames.NegotiateTargetMessage], playerName, actionResult.Amount);
                     actionResult.Amount = actionResult.Amount;
                     return actionResult;
                 case GameActions.Heal:
                     RestoreHealth(actionResult.Amount);
                     actionResult.WasSuccessful = true;
-                    actionResult.TargetMessage = string.Format("{0} heals you for {1} damage!", playerName, actionResult.Amount);
+                    actionResult.TargetMessage = string.Format(TextResourceRepository.TextResourceLookUpByCulture("en-us")[TextResourceNames.HealTargetMessage], playerName, actionResult.Amount);
                     actionResult.Amount = actionResult.Amount;
                     return actionResult;
                 default:
@@ -179,8 +152,8 @@ namespace Mudz.Core.Domain
             return new ActionResult()
             {
                 WasSuccessful = true,
-                RoomMessage = string.Format("{0} takes {1} and quickly hides it away.", this.Name, item.Name),
-                PlayerMessage = string.Format("You take {0} and quickly hides it away.", item.Name)
+                RoomMessage = string.Format(TextResourceRepository.TextResourceLookUpByCulture("en-us")[TextResourceNames.GetItemRoomMessage], this.Name, item.Name),
+                PlayerMessage = string.Format(TextResourceRepository.TextResourceLookUpByCulture("en-us")[TextResourceNames.GetItemPlayerMessage], item.Name)
             };
         }
 
