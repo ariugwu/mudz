@@ -157,7 +157,7 @@ namespace Mudz.Cli.Domain.GameEngine
         private static void ReplaceLine(string str)
         {
                 Console.SetCursorPosition(0, Console.CursorTop); // Move to the start of the line.
-                Console.Write(new String(' ', Console.BufferWidth - 1)); // Replace with nothing.
+                Console.Write(new string(' ', Console.BufferWidth - 1)); // Replace with nothing.
                 Console.SetCursorPosition(0, Console.CursorTop); // Move to the start of the line.
                 Console.WriteLine(str); // Replace line
         }
@@ -165,7 +165,7 @@ namespace Mudz.Cli.Domain.GameEngine
         public static void ClearPreviousLine()
         {
             Console.SetCursorPosition(0, Console.CursorTop - 1);
-            Console.Write(new String(' ', Console.BufferWidth - 1)); // Replace with nothing.
+            Console.Write(new string(' ', Console.BufferWidth - 1)); // Replace with nothing.
             Console.SetCursorPosition(0, Console.CursorTop); // Move to the start of the line.
         }
         #endregion

@@ -7,12 +7,11 @@ using Mudz.Common.Domain.Inventory;
 using Mudz.Common.Domain.Player;
 using Mudz.Common.Domain.Player.Inventory;
 using Mudz.Core.Domain.Player.Inventory.Item.Weapon;
-using Mudz.Core.Model.Domain;
 using Mudz.Core.Model.Domain.Player.Class;
 
 namespace Mudz.Core.Domain.Player
 {
-    [Serializable]
+	[Serializable]
     public sealed class Player : BaseActor, IPlayer
     {
         public Player(string name, ActorGenderTypes gender, PlayerTypes playerType, IPlayerActionStrategy actionStrategy)
@@ -93,7 +92,7 @@ namespace Mudz.Core.Domain.Player
         public override string GetDescription()
         {
             var physique = (this.Strength > 100) ? "Appears strongly built." : "Has a normal build";
-            var desc = String.Format("{0}. {1}.", physique, _actionStrategy.GetClassDescription());
+            var desc = string.Format("{0}. {1}.", physique, _actionStrategy.GetClassDescription());
             return desc;
         }
 
