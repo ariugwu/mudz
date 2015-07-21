@@ -1,5 +1,4 @@
 ﻿using System;
-using Mudz.Data.Domain.Localization;
 
 namespace Mudz.Common.Domain.GameEngine
 {
@@ -21,9 +20,13 @@ namespace Mudz.Common.Domain.GameEngine
 
         public void FillResult(ActionContext actionContext, int amount)
         {
+            var playerMessage = new Localization.Template.PlayerMessage();
+            var roomMessage = new Localization.Template.RoomMessage();
+            var targetMessage = new Localization.Template.TargetMessage();
+
             this.WasSuccessful = true;
-            this.RoomMessage = string.Format(TextResourceRepository.TextResourceLookUpByCulture("en-us")[TextResourceNames.FightRoomMessage], actionContext.Player.Name, actionContext.Target.Name, amount);
-            this.PlayerMessage = string.Format(TextResourceRepository.TextResourceLookUpByCulture("en-us")[TextResourceNames.FightPlayerMessage], actionContext.Target.Name, amount);
+            this.RoomMessage = roomMessage.GetResource(actionContext, amount);
+            this.PlayerMessage = playerMessage.GetResource(actionContext, amount);
             this.Amount = amount;
         }
     }

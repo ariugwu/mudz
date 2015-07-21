@@ -62,6 +62,10 @@
     <Compile Include="Domain\Inventory\IInventoryItem.cs" />
     <Compile Include="Domain\Inventory\InventoryAugmentEffect.cs" />
     <Compile Include="Domain\Inventory\InventoryTypes.cs" />
+    <Compile Include="Domain\Localization\Template\GameMessage.cs" />
+    <Compile Include="Domain\Localization\Template\PlayerMessage.cs" />
+    <Compile Include="Domain\Localization\Template\RoomMessage.cs" />
+    <Compile Include="Domain\Localization\Template\TargetMessage.cs" />
     <Compile Include="Domain\Monster\IMonster.cs" />
     <Compile Include="Domain\Monster\MonsterTypes.cs" />
     <Compile Include="Domain\Npc\INpc.cs" />
@@ -79,9 +83,7 @@
     <Compile Include="EqualityComparisonHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Domain\Localization\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Mudz.Data\Mudz.Data.csproj">
       <Project>{e3adc0d6-20f8-4972-81be-84dd90d44850}</Project>

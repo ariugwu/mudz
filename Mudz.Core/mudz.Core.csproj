@@ -73,8 +73,6 @@
     <Compile Include="Domain\Player\Player.cs" />
     <Compile Include="Domain\Player\PlayerFactory.cs" />
     <Compile Include="Domain\Player\Class\Politician.cs" />
-    <Compile Include="Domain\TextResources\Action.cs" />
-    <Compile Include="Domain\TextResources\Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
