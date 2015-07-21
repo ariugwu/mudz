@@ -41,16 +41,27 @@ _I'll do my best to mark which commits line up with which code katas (from the t
 ### Second 'Semester ###
 #### Phase III - First things first: Build a TCP Server and Client to start playing our game with other people.
 * Singleton _(Creational)_: Since we have tcp sockets and connections flying around we want to make sure that our game engine is only created once.
-* [[Video(s)]]:
-* **Commit:** https://github.com/ariugwu/mudz/tree/e033c4ffe156cf8bc33bd35688ab5bfa7824cc27
-* Decorator Pattern _(Structural Pattern)_: Organize the various things that can impact actions and attributes for our Actors and have them be applied in a uniform way. For example: A _drunk_ player of type _medic_ who tries to _heal_ will need to have all three things factor into how well they peform that action.
+  * [[Video(s)]]:
+  * **Commit:** https://github.com/ariugwu/mudz/tree/e033c4ffe156cf8bc33bd35688ab5bfa7824cc27
 * Chain of Responsibility _(Behavorial Pattern)_:
+  * [[Video(s)]]:
+  * **Commit:**
+* Interpreter Revisit _(Behavioral Pattern)_:
+  * [[Video(s)]]:
+  * **Commit:** 
+* Adapter Revisit _(Structural)_:
+  * [[Video(s)]]:
+  * **Commit:**
+* Template  _(Behavorial Pattern)_:
+  * [[Video(s)]]:
+  * **Commit:**
 
 #### Phase IV - *(TBD)* The game engine is the god of our world and will enforce all of our laws.
 * CQRS Pattern: We have a lot going on and while we've done a bit to structure our commands we might want to make things a bit more formal.
 * Event Sourcing: 
 * Observer _(Behavorial Pattern)_:
 * Proxy _()_:
+* Decorator Pattern _(Structural Pattern)_: Organize the various things that can impact actions and attributes for our Actors and have them be applied in a uniform way. For example: A _drunk_ player of type _medic_ who tries to _heal_ will need to have all three things factor into how well they peform that action.
 
 ### Summer School ###
 
