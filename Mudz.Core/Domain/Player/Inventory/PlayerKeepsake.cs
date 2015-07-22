@@ -1,5 +1,5 @@
 ﻿using System;
-using Mudz.Common.Domain.Inventory;
+using Mudz.Data.Domain.Inventory;
 
 namespace Mudz.Core.Domain.Player.Inventory
 {

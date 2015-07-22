@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Mudz.Common.Domain.Inventory;
-using Mudz.Common.Domain.Player;
+using Mudz.Data.Domain.Inventory;
+using Mudz.Data.Domain.Player;
 
 namespace Mudz.Core.Domain.Player.Inventory.Item.Wearable
 {

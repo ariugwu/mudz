@@ -4,10 +4,10 @@ using System.Linq;
 using easyTcp.Common.Model;
 using easyTcp.Common.Model.Client.Render;
 using Mudz.Cli.Domain.Player;
-using Mudz.Common.Domain;
-using Mudz.Common.Domain.GameEngine;
-using Mudz.Common.Domain.Player;
-using Mudz.Common.Domain.Environment.Map.Room;
+using Mudz.Data.Domain;
+using Mudz.Data.Domain.Environment.Model;
+using Mudz.Data.Domain.GameEngine;
+using Mudz.Data.Domain.Player;
 
 namespace Mudz.Cli.Domain.EasyTcp
 {

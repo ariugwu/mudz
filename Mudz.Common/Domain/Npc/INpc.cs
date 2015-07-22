@@ -1,4 +1,6 @@
-﻿namespace Mudz.Common.Domain.Npc
+﻿using Mudz.Data.Domain;
+
+namespace Mudz.Common.Domain.Npc
 {
     public interface INpc : IGameObject
     {

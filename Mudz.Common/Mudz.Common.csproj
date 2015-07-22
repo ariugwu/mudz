@@ -39,47 +39,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Domain\ActorGenderTypes.cs" />
-    <Compile Include="Domain\ActorStates.cs" />
-    <Compile Include="Domain\EasyTcp\ConsoleRequest.cs" />
-    <Compile Include="Domain\EasyTcp\Interpreter\AbstractExpression.cs" />
-    <Compile Include="Domain\Environment\Map\Grid.cs" />
-    <Compile Include="Domain\Environment\Map\Room\RoomCollection.cs" />
-    <Compile Include="Domain\Environment\Map\Room\RoomContent.cs" />
-    <Compile Include="Domain\Environment\Map\Room\RoomKey.cs" />
-    <Compile Include="Domain\Environment\Map\Room\RoomKeyEqualityComparer.cs" />
-    <Compile Include="Domain\GameEngine\ActionContext.cs" />
-    <Compile Include="Domain\GameEngine\ActionResult.cs" />
-    <Compile Include="Domain\GameEngine\GameActions.cs" />
-    <Compile Include="Domain\GameEngine\GameEvent.cs" />
-    <Compile Include="Domain\GameEngine\GameRequest.cs" />
-    <Compile Include="Domain\GameEngine\GameResponse.cs" />
-    <Compile Include="Domain\GameEngine\IGameCommand.cs" />
-    <Compile Include="Domain\GameObjectStates.cs" />
-    <Compile Include="Domain\GameObjectTypes.cs" />
-    <Compile Include="Domain\IActor.cs" />
-    <Compile Include="Domain\IGameObject.cs" />
-    <Compile Include="Domain\Inventory\IInventoryItem.cs" />
-    <Compile Include="Domain\Inventory\InventoryAugmentEffect.cs" />
-    <Compile Include="Domain\Inventory\InventoryTypes.cs" />
-    <Compile Include="Domain\Localization\Template\GameMessage.cs" />
-    <Compile Include="Domain\Localization\Template\PlayerMessage.cs" />
-    <Compile Include="Domain\Localization\Template\RoomMessage.cs" />
-    <Compile Include="Domain\Localization\Template\TargetMessage.cs" />
     <Compile Include="Domain\Monster\IMonster.cs" />
     <Compile Include="Domain\Monster\MonsterTypes.cs" />
     <Compile Include="Domain\Npc\INpc.cs" />
     <Compile Include="Domain\Npc\NpcTypes.cs" />
-    <Compile Include="Domain\Player\Inventory\IPlayerInventoryItem.cs" />
-    <Compile Include="Domain\Player\Inventory\IPlayerKeepsake.cs" />
-    <Compile Include="Domain\Player\Inventory\IPlayerWeapon.cs" />
-    <Compile Include="Domain\Player\Inventory\IPlayerWearable.cs" />
-    <Compile Include="Domain\Player\IPlayer.cs" />
     <Compile Include="Domain\Player\IPlayerActionStrategy.cs" />
-    <Compile Include="Domain\Player\PlayerAnatomy.cs" />
-    <Compile Include="Domain\Player\PlayerEqualityComparer.cs" />
-    <Compile Include="Domain\Player\PlayerTypes.cs" />
-    <Compile Include="Domain\Singleton.cs" />
     <Compile Include="EqualityComparisonHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

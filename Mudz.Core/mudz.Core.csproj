@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Domain\BaseGameObject.cs" />
     <Compile Include="Domain\BaseActor.cs" />
+    <Compile Include="Domain\GameEngine\Extensions\ActionResultExtension.cs" />
     <Compile Include="Domain\GameEngine\Handler\BaseHandler.cs" />
     <Compile Include="Domain\GameEngine\Handler\CommandHandler.cs" />
     <Compile Include="Domain\GameEngine\Handler\DependencyHandler.cs" />

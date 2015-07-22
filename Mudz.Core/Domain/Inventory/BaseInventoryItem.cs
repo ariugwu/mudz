@@ -1,9 +1,9 @@
 ﻿using System;
-using Mudz.Common.Domain;
-using Mudz.Common.Domain.GameEngine;
-using Mudz.Common.Domain.Inventory;
+using Mudz.Data.Domain;
+using Mudz.Data.Domain.GameEngine;
+using Mudz.Data.Domain.Inventory;
 
-namespace Mudz.Core.Model.Domain.Inventory
+namespace Mudz.Core.Domain.Inventory
 {
     [Serializable]
     public abstract class BaseInventoryItem : IInventoryItem

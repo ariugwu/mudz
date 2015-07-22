@@ -1,4 +1,4 @@
-﻿using Mudz.Common.Domain.GameEngine;
+﻿using Mudz.Data.Domain.GameEngine;
 
 namespace Mudz.Core.Domain.GameEngine.Handler
 {

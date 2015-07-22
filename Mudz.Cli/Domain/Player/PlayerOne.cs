@@ -1,5 +1,6 @@
-﻿using Mudz.Common.Domain.Environment.Map.Room;
-using Mudz.Common.Domain.Player;
+﻿
+using Mudz.Data.Domain.Environment.Model;
+using Mudz.Data.Domain.Player;
 
 namespace Mudz.Cli.Domain.Player
 {

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using easyTcp.Common.Model;
 using easyTcp.Common.Model.Server;
-using Mudz.Common.Domain.EasyTcp;
-using Mudz.Common.Domain.GameEngine;
 using Mudz.Core.Domain.GameEngine;
+using Mudz.Data.Domain.EasyTcp;
+using Mudz.Data.Domain.GameEngine;
 
 namespace Mudz.Server.Domain.EasyTcp
 {

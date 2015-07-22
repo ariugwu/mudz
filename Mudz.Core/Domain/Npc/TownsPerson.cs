@@ -1,6 +1,6 @@
 ﻿using System;
-using Mudz.Common.Domain.GameEngine;
 using Mudz.Common.Domain.Npc;
+using Mudz.Data.Domain.GameEngine;
 
 namespace Mudz.Core.Model.Domain.Npc
 {

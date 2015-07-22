@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Mudz.Common.Domain;
 using Mudz.Common.Domain.Player;
+using Mudz.Core.Domain.Player.Class;
 using Mudz.Core.Model.Domain.Player.Class;
+using Mudz.Data.Domain;
+using Mudz.Data.Domain.Player;
 
 namespace Mudz.Core.Domain.Player
 {

@@ -1,11 +1,7 @@
 ﻿using System.Collections.Generic;
-using Mudz.Common.Domain;
-using Mudz.Common.Domain.Environment.Map;
-using Mudz.Common.Domain.Environment.Map.Room;
-using Mudz.Common.Domain.GameEngine;
+using System.Linq;
 using Mudz.Common.Domain.Monster;
 using Mudz.Common.Domain.Npc;
-using Mudz.Common.Domain.Player;
 using Mudz.Core.Domain.GameEngine.Handler;
 using Mudz.Core.Domain.Monster;
 using Mudz.Core.Domain.Npc;
@@ -13,6 +9,11 @@ using Mudz.Core.Domain.Player;
 using Mudz.Core.Domain.Player.Inventory.Item.Keepsake;
 using Mudz.Core.Domain.Player.Inventory.Item.Weapon;
 using Mudz.Core.Domain.Player.Inventory.Item.Wearable;
+using Mudz.Data.Domain;
+using Mudz.Data.Domain.Environment.Model;
+using Mudz.Data.Domain.GameEngine;
+using Mudz.Data.Domain.Localization.Template;
+using Mudz.Data.Domain.Player;
 
 namespace Mudz.Core.Domain.GameEngine
 {
@@ -32,11 +33,19 @@ namespace Mudz.Core.Domain.GameEngine
             commandHandler.SetSuccessor(finalizeHandler);
 
             _requestHandler = dependencyHandler;
+
         }
 
         private HiveMind()
         {
+            PlayerMessage = new PlayerMessage();
+            TargetMessage = new TargetMessage();
+            RoomMessage = new RoomMessage();
         }
+
+        public GameMessage PlayerMessage { get; set; }
+        public GameMessage TargetMessage { get; set; }
+        public GameMessage RoomMessage { get; set; }
 
         private static BaseHandler _requestHandler;
 
@@ -72,6 +81,8 @@ namespace Mudz.Core.Domain.GameEngine
 
                 return _world;
             }
+
+            set { _world = value; }
         }
 
         public GameResponse Execute(GameRequest request)
@@ -107,16 +118,9 @@ namespace Mudz.Core.Domain.GameEngine
 
         private void SeedWorld()
         {
-            var roomKey = new RoomKey(1, 1);
+            World = Data.Domain.Environment.EnvironmentRepository.GetSeedGrid();
 
-            World.Rooms.Add(roomKey, new RoomContent(roomKey) { GameObjects = new List<IGameObject>() });
-
-            var room = World.Rooms[roomKey];
-
-            room.Title =
-                "Test Chamber";
-            room.Description =
-                "The room is white with ripples of color rising up from a grey floor to form walls. When you focus on the color it seems to fade. You think you hear voices coming from the other side of the opaque walls but can't be certain.";
+            var room = World.Rooms.First().Value;
 
             room.GameObjects.Add(PlayerFactory.Create("Gary", ActorGenderTypes.Male, PlayerTypes.Carpenter));
             room.GameObjects.Add(PlayerFactory.Create("Beth", ActorGenderTypes.Female, PlayerTypes.ArmyVet));

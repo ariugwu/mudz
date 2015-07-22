@@ -1,8 +1,8 @@
 ﻿using easyTcp.Common.Model;
 using easyTcp.Common.Model.Client.Parse;
 using Mudz.Cli.Domain.Player;
-using Mudz.Common.Domain;
-using Mudz.Common.Domain.EasyTcp;
+using Mudz.Data.Domain;
+using Mudz.Data.Domain.EasyTcp;
 
 namespace Mudz.Cli.Domain.EasyTcp
 {

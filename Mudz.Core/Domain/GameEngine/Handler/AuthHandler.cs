@@ -1,6 +1,6 @@
 ﻿using System;
-using Mudz.Common.Domain;
-using Mudz.Common.Domain.GameEngine;
+using Mudz.Data.Domain;
+using Mudz.Data.Domain.GameEngine;
 
 namespace Mudz.Core.Domain.GameEngine.Handler
 {

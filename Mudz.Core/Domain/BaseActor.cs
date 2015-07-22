@@ -1,7 +1,8 @@
 ﻿using System;
-using Mudz.Common.Domain;
-using Mudz.Common.Domain.GameEngine;
-using Mudz.Common.Domain.Inventory;
+using Mudz.Core.Domain.GameEngine.Extensions;
+using Mudz.Data.Domain;
+using Mudz.Data.Domain.GameEngine;
+using Mudz.Data.Domain.Inventory;
 using Mudz.Data.Domain.Localization;
 
 namespace Mudz.Core.Domain

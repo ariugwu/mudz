@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Mudz.Common.Domain;
-using Mudz.Common.Domain.GameEngine;
-using Mudz.Common.Domain.Inventory;
 using Mudz.Common.Domain.Player;
-using Mudz.Common.Domain.Player.Inventory;
 using Mudz.Core.Domain.Player.Inventory.Item.Weapon;
 using Mudz.Core.Model.Domain.Player.Class;
+using Mudz.Data.Domain;
+using Mudz.Data.Domain.GameEngine;
+using Mudz.Data.Domain.Inventory;
+using Mudz.Data.Domain.Player;
+using Mudz.Data.Domain.Player.Inventory;
 
 namespace Mudz.Core.Domain.Player
 {

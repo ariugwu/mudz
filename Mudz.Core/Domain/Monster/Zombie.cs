@@ -1,7 +1,8 @@
 ﻿using System;
 using Mudz.Common.Domain;
-using Mudz.Common.Domain.Inventory;
 using Mudz.Common.Domain.Monster;
+using Mudz.Data.Domain;
+using Mudz.Data.Domain.Inventory;
 
 namespace Mudz.Core.Domain.Monster
 {

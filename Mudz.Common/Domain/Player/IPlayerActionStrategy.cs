@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using Mudz.Common.Domain.GameEngine;
+using Mudz.Data.Domain;
+using Mudz.Data.Domain.GameEngine;
 
 namespace Mudz.Common.Domain.Player
 {

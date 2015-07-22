@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Mudz.Common.Domain;
-using Mudz.Common.Domain.GameEngine;
 using Mudz.Common.Domain.Player;
+using Mudz.Data.Domain;
+using Mudz.Data.Domain.GameEngine;
 
-namespace Mudz.Core.Model.Domain.Player.Class
+namespace Mudz.Core.Domain.Player.Class
 {
     [Serializable]
     public class Carpenter : IPlayerActionStrategy

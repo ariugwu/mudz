@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using Mudz.Common.Domain.Inventory;
+using Mudz.Data.Domain;
+using Mudz.Data.Domain.Inventory;
 
 namespace Mudz.Common.Domain.Monster
 {
