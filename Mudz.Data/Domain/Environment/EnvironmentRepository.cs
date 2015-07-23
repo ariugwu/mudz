@@ -7,7 +7,11 @@ namespace Mudz.Data.Domain.Environment
     {
         public static Grid GetSeedGrid()
         {
-            var grid = new Grid();
+            var grid = new Grid()
+                {
+                    Rooms = new RoomCollection(),
+                    Sheet = new int[10][]
+                };
 
             var roomKey = new RoomKey(1, 1);
 

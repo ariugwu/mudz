@@ -71,12 +71,6 @@ namespace Mudz.Core.Domain.GameEngine
             {
                 if (_world != null) return _world;
 
-                _world = new Grid()
-                {
-                    Rooms = new RoomCollection(),
-                    Sheet = new int[10][]
-                };
-
                 SeedWorld();
 
                 return _world;
