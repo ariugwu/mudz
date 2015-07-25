@@ -1,17 +1,18 @@
 ﻿using System;
-using Mudz.Data.Domain;
+using Mudz.Common.Domain;
+using Mudz.Common.Domain.GameEngine;
+using Mudz.Common.Domain.Inventory;
 using Mudz.Data.Domain.GameEngine;
-using Mudz.Data.Domain.Inventory;
 using Mudz.Data.Domain.Localization;
 
 namespace Mudz.Core.Domain.GameEngine.Handler
 {
     public class CommandHandler : BaseHandler
     {
-        public override ActionContext HandleRequest(ActionContext actionContext)
+        public override IActionContext HandleRequest(IActionContext actionContext)
         {
 
-            if (actionContext.GameRequest.GameAction == GameActions.Login)
+            if (actionContext.GameRequest.GameAction == GameAction.Login)
             {
                 return actionContext;
             }
@@ -34,11 +35,11 @@ namespace Mudz.Core.Domain.GameEngine.Handler
                 return actionContext;
             }
 
-            var actionResult = new ActionResult() { GameAction = actionContext.GameRequest.GameAction };
+            IActionResult actionResult = new ActionResult() { GameAction = actionContext.GameRequest.GameAction };
 
             switch (actionContext.GameRequest.GameAction)
             {
-                case GameActions.Fight:
+                case GameAction.Fight:
                     actionResult = actionContext.Player.ExecuteAction(actionContext);
                     
                     if (actionResult.WasSuccessful)
@@ -51,9 +52,10 @@ namespace Mudz.Core.Domain.GameEngine.Handler
                         {
                             var deathResult = new ActionResult()
                             {
-                                GameAction = GameActions.Die,
+                                GameAction = GameAction.Die,
                                 RoomMessage =
                                     string.Format(TextResourceRepository.TextResourceLookUpByCulture("en-us")[TextResourceNames.DeathRoomMessage], actionContext.Target.Name),
+                                PlayerMessage = string.Format(TextResourceRepository.TextResourceLookUpByCulture("en-us")[TextResourceNames.DeathPlayerMessage], actionContext.Target.Name),
                                 WasSuccessful = true
                             };
                             actionContext.ActionItems.Add(deathResult);
@@ -64,9 +66,9 @@ namespace Mudz.Core.Domain.GameEngine.Handler
                         actionContext.ActionItems.Add(actionResult);
                     }
                     break;
-                case GameActions.Heal:
-                case GameActions.Repair:
-                case GameActions.Negotiate:
+                case GameAction.Heal:
+                case GameAction.Repair:
+                case GameAction.Negotiate:
                     actionResult = actionContext.Player.ExecuteAction(actionContext);
                     if (actionResult.WasSuccessful)
                     {
@@ -75,18 +77,18 @@ namespace Mudz.Core.Domain.GameEngine.Handler
 
                     actionContext.ActionItems.Add(actionResult);
                     break;
-                case GameActions.LookAt:
+                case GameAction.LookAt:
                     actionResult.PlayerMessage = actionContext.Target.Description;
                     actionResult.WasSuccessful = true;
                     actionContext.ActionItems.Add(actionResult);
                     break;
-                case GameActions.LookAround:
+                case GameAction.LookAround:
                     actionResult.RoomMessage = string.Format("{0} looks around.", actionContext.Player.Name);
                     actionResult.WasSuccessful = true;
                     actionContext.ActionItems.Add(actionResult);
                     break;
-                case GameActions.Get:
-                    if (actionContext.Target.GameObjectType != GameObjectTypes.InventoryItem)
+                case GameAction.Get:
+                    if (actionContext.Target.GameObjectType != GameObjectType.InventoryItem)
                     {
                         actionResult = InvalidTargetResponse(actionContext.Target);
                         actionContext.ActionItems.Add(actionResult);
@@ -99,7 +101,7 @@ namespace Mudz.Core.Domain.GameEngine.Handler
                     if (actionResult.WasSuccessful) actionContext.Room.GameObjects.Remove(item);
                     actionContext.ActionItems.Add(actionResult);
                     break;
-                case GameActions.None:
+                case GameAction.None:
                     actionResult.PlayerMessage = "Sorry, no command matched your request.";
                     actionResult.WasSuccessful = false;
                     actionContext.ActionItems.Add(actionResult);

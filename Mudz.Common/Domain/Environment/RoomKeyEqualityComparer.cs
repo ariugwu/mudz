@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 
-namespace Mudz.Data.Domain.Environment.Model
+namespace Mudz.Common.Domain.Environment
 {
-    public sealed class RoomKeyEqualityComparer : IEqualityComparer<RoomKey>
+    public sealed class RoomKeyEqualityComparer : IEqualityComparer<IRoomKey>
     {
-        public bool Equals(RoomKey x, RoomKey y)
+        public bool Equals(IRoomKey x, IRoomKey y)
         {
             return x.X.Equals(y.X) && x.Y.Equals(y.Y);
         }
 
-        public int GetHashCode(RoomKey obj)
+        public int GetHashCode(IRoomKey obj)
         {
 			unchecked
 			{

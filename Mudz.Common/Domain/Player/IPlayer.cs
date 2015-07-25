@@ -1,6 +1,7 @@
-﻿using Mudz.Data.Domain.Player.Inventory;
+﻿using Mudz.Common.Domain.Player.Inventory;
+using Mudz.Data.Domain.Player.Inventory;
 
-namespace Mudz.Data.Domain.Player
+namespace Mudz.Common.Domain.Player
 {
     public interface IPlayer: IGameObject
     {
@@ -20,7 +21,7 @@ namespace Mudz.Data.Domain.Player
 
         void EquipWearable(IPlayerWearable wearable);
 
-        void SetState(ActorStates actorState);
+        void SetState(ActorState actorState);
 
     }
 }

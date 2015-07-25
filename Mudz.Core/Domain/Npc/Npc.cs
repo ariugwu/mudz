@@ -1,7 +1,7 @@
 ﻿using System;
 using Mudz.Common.Domain;
+using Mudz.Common.Domain.GameEngine;
 using Mudz.Common.Domain.Npc;
-using Mudz.Data.Domain;
 using Mudz.Data.Domain.GameEngine;
 
 namespace Mudz.Core.Domain.Npc
@@ -12,7 +12,7 @@ namespace Mudz.Core.Domain.Npc
         protected Npc(string name)
         {
             Name = name;
-            GameObjectType = GameObjectTypes.Npc;
+            GameObjectType = GameObjectType.Npc;
             HitPoints = 100;
         }
 
@@ -41,19 +41,19 @@ namespace Mudz.Core.Domain.Npc
 
         #region Default Actions
 
-        public override int CalculateGameAction(GameActions gameAction)
+        public override int CalculateGameAction(GameAction gameAction)
         {
             return 0;
         }
 
-        public override ActionResult RecieveGameActionResult(GameActions gameAction, ActionResult actionResult, string playerName)
+        public override IActionResult RecieveGameActionResult(GameAction gameAction, IActionResult actionResult, string playerName)
         {
             throw new NotImplementedException();
         }
 
         #endregion
 
-        public override ActionResult ExecuteAction(ActionContext actionContext)
+        public override IActionResult ExecuteAction(IActionContext actionContext)
         {
             throw new NotImplementedException();
         }

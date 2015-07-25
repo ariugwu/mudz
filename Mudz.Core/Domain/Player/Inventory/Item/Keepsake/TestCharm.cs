@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Mudz.Data.Domain.Inventory;
+using Mudz.Common.Domain.Inventory;
 
 namespace Mudz.Core.Domain.Player.Inventory.Item.Keepsake
 {

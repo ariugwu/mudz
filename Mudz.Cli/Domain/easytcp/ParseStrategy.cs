@@ -1,7 +1,7 @@
 ﻿using easyTcp.Common.Model;
 using easyTcp.Common.Model.Client.Parse;
 using Mudz.Cli.Domain.Player;
-using Mudz.Data.Domain;
+using Mudz.Common.Domain;
 using Mudz.Data.Domain.EasyTcp;
 
 namespace Mudz.Cli.Domain.EasyTcp
@@ -10,7 +10,7 @@ namespace Mudz.Cli.Domain.EasyTcp
     {
         public string CommandPrompt()
         {
-            if (PlayerOne.Instance == null || PlayerOne.Instance.GameObjectState == GameObjectStates.OutOfPlay)
+            if (PlayerOne.Instance == null || PlayerOne.Instance.GameObjectState == GameObjectState.OutOfPlay)
             {
                 System.Console.WriteLine("Please type your name to login: ");
                 System.Console.Write("> ");
@@ -26,7 +26,7 @@ namespace Mudz.Cli.Domain.EasyTcp
 
             if (PlayerOne.Instance == null)
             {
-                PlayerOne.Instance = new Core.Domain.Player.Player(){ Name = command, GameObjectState = GameObjectStates.OutOfPlay};
+                PlayerOne.Instance = new Core.Domain.Player.Player(){ Name = command, GameObjectState = GameObjectState.OutOfPlay};
 
                 consoleRequest = new ConsoleRequest() { Command = command, PlayerName = null };
                 return new Request() { Payload = consoleRequest, Type = typeof(ConsoleRequest) };

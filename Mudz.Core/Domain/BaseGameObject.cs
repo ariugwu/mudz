@@ -1,8 +1,8 @@
 ﻿using System;
 using Mudz.Common.Domain;
-using Mudz.Data.Domain;
+using Mudz.Common.Domain.GameEngine;
+using Mudz.Common.Domain.Inventory;
 using Mudz.Data.Domain.GameEngine;
-using Mudz.Data.Domain.Inventory;
 
 namespace Mudz.Core.Domain
 {
@@ -25,19 +25,19 @@ namespace Mudz.Core.Domain
 
         public int HitPoints { get; set; }
 
-        public GameObjectTypes GameObjectType { get; set; }
+        public GameObjectType GameObjectType { get; set; }
 
-        public GameObjectStates GameObjectState { get; set; }
+        public GameObjectState GameObjectState { get; set; }
 
         public bool IsDestructible { get; private set; }
 
         public bool IsAttainable { get; set; }
 
-        public abstract ActionResult RecieveGameActionResult(GameActions gameAction, ActionResult actionResult, string playerName);
+        public abstract IActionResult RecieveGameActionResult(GameAction gameAction, IActionResult actionResult, string playerName);
 
-        public abstract ActionResult ExecuteAction(ActionContext actionContext);
+        public abstract IActionResult ExecuteAction(IActionContext actionContext);
 
-        public abstract int CalculateGameAction(GameActions gameAction);
+        public abstract int CalculateGameAction(GameAction gameAction);
 
         public abstract void CheckState();
 
@@ -46,7 +46,7 @@ namespace Mudz.Core.Domain
             return "There is nothing to see here.";
         }
 
-        public virtual ActionResult ProcessItem(ActionContext actionContext, IInventoryItem item)
+        public virtual IActionResult ProcessItem(IActionContext actionContext, IInventoryItem item)
         {
             return new ActionResult()
             {

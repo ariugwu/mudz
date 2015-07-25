@@ -1,12 +1,12 @@
-﻿using Mudz.Data.Domain.GameEngine;
+﻿using Mudz.Common.Domain.GameEngine;
 
 namespace Mudz.Core.Domain.GameEngine.Handler
 {
     public class FinalizeHandler : BaseHandler
     {
-        public override ActionContext HandleRequest(ActionContext actionContext)
+        public override IActionContext HandleRequest(IActionContext actionContext)
         {
-            if (actionContext.GameRequest.GameAction == GameActions.Login) return actionContext;
+            if (actionContext.GameRequest.GameAction == GameAction.Login) return actionContext;
 
             actionContext.Player.CheckState();
 

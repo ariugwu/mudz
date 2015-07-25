@@ -1,9 +1,10 @@
 ﻿using System;
+using Mudz.Common.Domain.Environment;
 
 namespace Mudz.Data.Domain.Environment.Model
 {
     [Serializable]
-    public class RoomKey
+    public class RoomKey : IRoomKey
     {
         public RoomKey(int x, int y)
         {

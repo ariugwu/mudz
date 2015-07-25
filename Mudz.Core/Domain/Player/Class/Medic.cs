@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Mudz.Common.Domain;
+using Mudz.Common.Domain.GameEngine;
 using Mudz.Common.Domain.Player;
 using Mudz.Data.Domain;
 using Mudz.Data.Domain.GameEngine;
@@ -10,15 +11,15 @@ namespace Mudz.Core.Model.Domain.Player.Class
     [Serializable]
     public class Medic : IPlayerActionStrategy
     {
-        private Dictionary<GameActions, int> _actionStaminaCostMap = new Dictionary<GameActions, int>()
+        private Dictionary<GameAction, int> _actionStaminaCostMap = new Dictionary<GameAction, int>()
         {
-            {GameActions.Fight, 3},
-            {GameActions.Heal, 1},
-            {GameActions.Repair, 2},
-            {GameActions.Negotiate, 2}
+            {GameAction.Fight, 3},
+            {GameAction.Heal, 1},
+            {GameAction.Repair, 2},
+            {GameAction.Negotiate, 2}
         };
 
-        public Dictionary<GameActions, int> ActionStaminaCostMap
+        public Dictionary<GameAction, int> ActionStaminaCostMap
         {
             get { return _actionStaminaCostMap; }
         } 
@@ -37,25 +38,25 @@ namespace Mudz.Core.Model.Domain.Player.Class
 
         public int Attack(IActor actor)
         {
-            AdjustStamina(actor, ActionStaminaCostMap[GameActions.Fight]);
+            AdjustStamina(actor, ActionStaminaCostMap[GameAction.Fight]);
             return 5;
         }
 
         public int Heal(IActor actor)
         {
-            AdjustStamina(actor, ActionStaminaCostMap[GameActions.Heal]);
+            AdjustStamina(actor, ActionStaminaCostMap[GameAction.Heal]);
             return 20;
         }
 
         public int Repair(IActor actor)
         {
-            AdjustStamina(actor, ActionStaminaCostMap[GameActions.Repair]);
+            AdjustStamina(actor, ActionStaminaCostMap[GameAction.Repair]);
             return 6;
         }
 
         public int Negotiate(IActor actor)
         {
-            AdjustStamina(actor, ActionStaminaCostMap[GameActions.Negotiate]);
+            AdjustStamina(actor, ActionStaminaCostMap[GameAction.Negotiate]);
             return 10;
         }
 

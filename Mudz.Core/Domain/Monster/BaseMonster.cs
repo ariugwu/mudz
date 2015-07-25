@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Mudz.Common.Domain;
+using Mudz.Common.Domain.GameEngine;
+using Mudz.Common.Domain.Inventory;
 using Mudz.Common.Domain.Monster;
 using Mudz.Data.Domain;
 using Mudz.Data.Domain.GameEngine;
-using Mudz.Data.Domain.Inventory;
 
 namespace Mudz.Core.Domain.Monster
 {
@@ -13,7 +14,7 @@ namespace Mudz.Core.Domain.Monster
     {
         protected BaseMonster()
         {
-            GameObjectType = GameObjectTypes.Monster;
+            GameObjectType = GameObjectType.Monster;
         }
 
         private double _dropRate = 0.10;
@@ -30,12 +31,12 @@ namespace Mudz.Core.Domain.Monster
             HitPoints = HitPoints + health;
         }
 
-        public override int GetStaminaCostByActionType(GameActions gameAction)
+        public override int GetStaminaCostByActionType(GameAction gameAction)
         {
             throw new System.NotImplementedException("No monster should ever call this.");
         }
 
-        public override int CalculateGameAction(GameActions gameAction)
+        public override int CalculateGameAction(GameAction gameAction)
         {
             return 10;
         }

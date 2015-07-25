@@ -1,8 +1,8 @@
-﻿namespace Mudz.Data.Domain
+﻿namespace Mudz.Common.Domain
 {
     public interface IActor : IGameObject
     {
-        ActorGenderTypes Gender  { get; set; }
+        ActorGenderType Gender  { get; set; }
 
         int Health { get; set; }
         int Stamina { get; set; }

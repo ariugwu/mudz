@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Mudz.Data.Domain.Player
+namespace Mudz.Common.Domain.Player
 {
 	public sealed class PlayerEqualityComparer : Singleton<PlayerEqualityComparer>, IEqualityComparer<IPlayer>
 	{	

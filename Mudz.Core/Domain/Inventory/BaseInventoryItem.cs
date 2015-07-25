@@ -1,16 +1,23 @@
 ﻿using System;
-using Mudz.Data.Domain;
+using Mudz.Common.Domain;
+using Mudz.Common.Domain.GameEngine;
+using Mudz.Common.Domain.Inventory;
 using Mudz.Data.Domain.GameEngine;
-using Mudz.Data.Domain.Inventory;
 
 namespace Mudz.Core.Domain.Inventory
 {
     [Serializable]
     public abstract class BaseInventoryItem : IInventoryItem
     {
+
+        protected BaseInventoryItem()
+        {
+            GameObjectKey = Guid.NewGuid();
+        }
+
         public Guid GameObjectKey { get; set; }
 
-        public abstract InventoryTypes InventoryType { get; }
+        public abstract InventoryType InventoryType { get; }
 
         public string Name { get; set; }
 
@@ -20,9 +27,9 @@ namespace Mudz.Core.Domain.Inventory
 
         public int HitPoints { get; set; }
 
-        public GameObjectTypes GameObjectType { get { return GameObjectTypes.InventoryItem; } }
+        public GameObjectType GameObjectType { get { return GameObjectType.InventoryItem; } }
 
-        public GameObjectStates GameObjectState { get; set; }
+        public GameObjectState GameObjectState { get; set; }
 
         public abstract bool IsDestructible { get; }
 
@@ -51,12 +58,12 @@ namespace Mudz.Core.Domain.Inventory
 
         #endregion
 
-        public int CalculateGameAction(GameActions gameAction)
+        public int CalculateGameAction(GameAction gameAction)
         {
             return 0;
         }
 
-        public ActionResult RecieveGameActionResult(GameActions gameActions, ActionResult actionResult, string playerName)
+        public IActionResult RecieveGameActionResult(GameAction gameAction, IActionResult actionResult, string playerName)
         {
             return new ActionResult()
             {
@@ -65,25 +72,25 @@ namespace Mudz.Core.Domain.Inventory
             };
         }
 
-        public virtual ActionResult ExecuteAction(ActionContext actionContext)
+        public virtual IActionResult ExecuteAction(IActionContext actionContext)
         {
 
             switch (actionContext.GameRequest.GameAction)
             {
-                case GameActions.Heal:
+                case GameAction.Heal:
                     return new ActionResult() { WasSuccessful = false, PlayerMessage = "Items can't be healed!" };
-                case GameActions.Negotiate:
+                case GameAction.Negotiate:
                     return new ActionResult() { WasSuccessful = false, PlayerMessage = "You'd have better luck convincing yourself!" };
-                case GameActions.Repair:
+                case GameAction.Repair:
                     return new ActionResult() { WasSuccessful = false, PlayerMessage = "How would that work exactly?" };
-                case GameActions.Fight:
+                case GameAction.Fight:
                     return new ActionResult() { WasSuccessful = false, PlayerMessage = "So like...a heavy bag? Or..." };
                 default:
                     throw new NotImplementedException("Game action not supported!");
             }
         }
 
-        public virtual ActionResult ProcessItem(ActionContext actionContext, IInventoryItem item)
+        public virtual IActionResult ProcessItem(IActionContext actionContext, IInventoryItem item)
         {
             return new ActionResult() { WasSuccessful = false, PlayerMessage = "Why would you want to do that?" };
         }

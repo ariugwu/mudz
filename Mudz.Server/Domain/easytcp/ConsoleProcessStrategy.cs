@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using easyTcp.Common.Model;
 using easyTcp.Common.Model.Server;
+using Mudz.Common.Domain.GameEngine;
 using Mudz.Core.Domain.GameEngine;
 using Mudz.Data.Domain.EasyTcp;
 using Mudz.Data.Domain.GameEngine;
@@ -22,7 +23,7 @@ namespace Mudz.Server.Domain.EasyTcp
             }
             catch (Exception)
             {
-                gameResponse = new GameResponse(){ActionItems = new List<ActionResult>()};
+                gameResponse = new GameResponse(){ActionItems = new List<IActionResult>()};
                 
                 var actionResult = new ActionResult()
                 {

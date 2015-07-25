@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using Mudz.Data.Domain.Inventory;
+using Mudz.Common.Domain.Inventory;
 
-namespace Mudz.Data.Domain.Player.Inventory
+namespace Mudz.Common.Domain.Player.Inventory
 {
     public interface IPlayerInventoryItem
     {
-        InventoryTypes InventoryType { get; }
+        InventoryType InventoryType { get; }
 
         bool IsDestructible { get; }
 

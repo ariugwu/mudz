@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using Mudz.Data.Domain.Environment.Model;
+using Mudz.Common.Domain.Environment;
+using Mudz.Common.Domain.GameEngine;
 
 namespace Mudz.Data.Domain.GameEngine
 {
     [Serializable]
-    public class GameResponse
+    public class GameResponse : IGameResponse
     {
-        public GameActions CurrentAction { get; set; }
+        public GameAction CurrentAction { get; set; }
         public string RequestByPlayerName { get; set; }
         public string TargetName { get; set; }
-        public RoomContent RoomContent { get; set; }
-        public List<ActionResult> ActionItems { get; set; }
+        public IRoomContent RoomContent { get; set; }
+        public List<IActionResult> ActionItems { get; set; }
     }
 }

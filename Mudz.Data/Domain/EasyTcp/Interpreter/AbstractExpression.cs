@@ -1,4 +1,5 @@
 ﻿using System;
+using Mudz.Common.Domain.GameEngine;
 using Mudz.Data.Domain.GameEngine;
 
 namespace Mudz.Data.Domain.EasyTcp.Interpreter
@@ -6,7 +7,7 @@ namespace Mudz.Data.Domain.EasyTcp.Interpreter
     [Serializable]
     public abstract class AbstractExpression
     {
-        public GameActions GameAction { get; set; }
+        public GameAction GameAction { get; set; }
         
         public string PlayerName { get; set; }
         public string TargetName { get; set; }
@@ -23,12 +24,12 @@ namespace Mudz.Data.Domain.EasyTcp.Interpreter
 
             EvaluateContext();
 
-            if (GameAction == GameActions.None)
+            if (GameAction == GameAction.None)
             {
                 return;
             }
 
-            if (GameAction != GameActions.Login)
+            if (GameAction != GameAction.Login)
             {
                 GetGameAction();
             }

@@ -1,4 +1,4 @@
-﻿namespace Mudz.Data.Domain.Player
+﻿namespace Mudz.Common.Domain.Player
 {
     public enum PlayerTypes
     {

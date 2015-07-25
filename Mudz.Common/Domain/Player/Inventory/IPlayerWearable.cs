@@ -1,4 +1,4 @@
-﻿namespace Mudz.Data.Domain.Player.Inventory
+﻿namespace Mudz.Common.Domain.Player.Inventory
 {
 	public interface IPlayerWearable : IPlayerInventoryItem
     {

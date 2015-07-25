@@ -1,5 +1,6 @@
 ﻿using System;
-using Mudz.Data.Domain.Inventory;
+using Mudz.Common.Domain.Inventory;
+using Mudz.Common.Domain.Player;
 using Mudz.Data.Domain.Player;
 
 namespace Mudz.Core.Domain.Player.Inventory
@@ -7,7 +8,7 @@ namespace Mudz.Core.Domain.Player.Inventory
     [Serializable]
     public abstract class PlayerWearable : PlayerInventoryItem
     {
-        public override InventoryTypes InventoryType { get { return InventoryTypes.PlayerWearable; } }
+        public override InventoryType InventoryType { get { return InventoryType.PlayerWearable; } }
         public abstract PlayerAnatomy Anatomy { get; }
     }
 }

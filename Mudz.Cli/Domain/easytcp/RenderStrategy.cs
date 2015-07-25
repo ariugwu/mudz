@@ -4,10 +4,11 @@ using System.Linq;
 using easyTcp.Common.Model;
 using easyTcp.Common.Model.Client.Render;
 using Mudz.Cli.Domain.Player;
-using Mudz.Data.Domain;
-using Mudz.Data.Domain.Environment.Model;
+using Mudz.Common.Domain;
+using Mudz.Common.Domain.Environment;
+using Mudz.Common.Domain.GameEngine;
+using Mudz.Common.Domain.Player;
 using Mudz.Data.Domain.GameEngine;
-using Mudz.Data.Domain.Player;
 
 namespace Mudz.Cli.Domain.EasyTcp
 {
@@ -23,8 +24,8 @@ namespace Mudz.Cli.Domain.EasyTcp
                 {
                     LoadPlayerFromGameResponse(gameResponse); // Load the one we got back.
 
-                    if ((gameResponse.CurrentAction == GameActions.Login ||
-                        gameResponse.CurrentAction == GameActions.LookAround))
+                    if ((gameResponse.CurrentAction == GameAction.Login ||
+                        gameResponse.CurrentAction == GameAction.LookAround))
                     {
                         GameEngine.Render.ClearScreen();
                         GameEngine.Render.DrawRoom(gameResponse.RoomContent);
@@ -45,14 +46,14 @@ namespace Mudz.Cli.Domain.EasyTcp
             } 
         }
 
-        private void LoadPlayerFromGameResponse(GameResponse gameResponse)
+        private void LoadPlayerFromGameResponse(IGameResponse gameResponse)
         {
-            PlayerOne.Instance = gameResponse.RoomContent.GameObjects.Where(x => x.GameObjectType == GameObjectTypes.Player && x.GameObjectState.ToString() == GameObjectStates.InPlay.ToString())
+            PlayerOne.Instance = gameResponse.RoomContent.GameObjects.Where(x => x.GameObjectType == GameObjectType.Player && x.GameObjectState.ToString() == GameObjectState.InPlay.ToString())
         .Select(x => (IPlayer)x).FirstOrDefault(x => x.Name.Equals(PlayerOne.Instance.Name, StringComparison.InvariantCultureIgnoreCase));
             PlayerOne.CurrentLocation = gameResponse.RoomContent.RoomKey;
         }
 
-        private void DisplayActionItems(GameResponse gameResponse, List<ActionResult> actionItems)
+        private void DisplayActionItems(IGameResponse gameResponse, List<IActionResult> actionItems)
         {
             foreach (var ar in actionItems)
             {
@@ -61,7 +62,7 @@ namespace Mudz.Cli.Domain.EasyTcp
             }
         }
 
-        private string DecideMessage(GameResponse gameResponse, ActionResult actionResult)
+        private string DecideMessage(IGameResponse gameResponse, IActionResult actionResult)
         {
             if (PlayerOne.Instance == null) return string.Empty; // Likely a login screen that's getting the message but can ignore it.
 
@@ -69,7 +70,7 @@ namespace Mudz.Cli.Domain.EasyTcp
 
             if (IsRequestor(gameResponse) && roomEq.Equals(gameResponse.RoomContent.RoomKey, PlayerOne.CurrentLocation))
             {
-                return actionResult.PlayerMessage;
+                return actionResult.PlayerMessage; //If the player message is null then default to the room message.
             }
 
             if (!IsRequestor(gameResponse) && roomEq.Equals(gameResponse.RoomContent.RoomKey, PlayerOne.CurrentLocation))
@@ -83,10 +84,10 @@ namespace Mudz.Cli.Domain.EasyTcp
                 return actionResult.TargetMessage;
             }
 
-            return "What?";
+            throw new NotImplementedException("The DecideMessage method in your RenderStrategy threw some nonsense.");
         }
 
-        private bool IsRequestor(GameResponse gameResponse)
+        private bool IsRequestor(IGameResponse gameResponse)
         {
             return PlayerOne.Instance != null && gameResponse.RequestByPlayerName.Equals(PlayerOne.Instance.Name, StringComparison.InvariantCultureIgnoreCase);
         }

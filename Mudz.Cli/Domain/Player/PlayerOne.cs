@@ -1,15 +1,15 @@
 ﻿
-using Mudz.Data.Domain.Environment.Model;
-using Mudz.Data.Domain.Player;
+using Mudz.Common.Domain.Environment;
+using Mudz.Common.Domain.Player;
 
 namespace Mudz.Cli.Domain.Player
 {
 	public static class PlayerOne
     {
         private static IPlayer _instance = null;
-        private static RoomKey _roomKey = null;
+        private static IRoomKey _roomKey = null;
 
-        public static RoomKey CurrentLocation
+        public static IRoomKey CurrentLocation
         {
             get{return _roomKey;}
             set { _roomKey = value; }

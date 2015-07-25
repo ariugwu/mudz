@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Mudz.Common.Domain.Environment;
 
 namespace Mudz.Data.Domain.Environment.Model
 {
@@ -10,6 +6,6 @@ namespace Mudz.Data.Domain.Environment.Model
     {
         public int[][] Sheet { get; set; }
 
-        public RoomCollection Rooms { get; set; }
+        public IRoomCollection Rooms { get; set; }
     }
 }

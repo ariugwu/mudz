@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Mudz.Common.Domain;
+using Mudz.Common.Domain.GameEngine;
 using Mudz.Common.Domain.Monster;
 using Mudz.Common.Domain.Npc;
+using Mudz.Common.Domain.Player;
 using Mudz.Core.Domain.GameEngine.Handler;
 using Mudz.Core.Domain.Monster;
 using Mudz.Core.Domain.Npc;
@@ -61,7 +64,7 @@ namespace Mudz.Core.Domain.GameEngine
             get { return _responseStack ?? (_responseStack = new Stack<GameResponse>()); }
         }
 
-        public ActionContext ActionContext { get; set; }
+        public IActionContext ActionContext { get; set; }
 
         private Grid _world;
 
@@ -81,17 +84,17 @@ namespace Mudz.Core.Domain.GameEngine
 
         public GameResponse Execute(GameRequest request)
         {
-            var actionContext = new ActionContext
+            ActionContext = new ActionContext
             {
                 GameRequest = request,
-                ActionItems = new List<ActionResult>()
+                ActionItems = new List<IActionResult>()
             };
 
-            // Send the action context through the chain of responsibility.
-            actionContext = _requestHandler.Process(actionContext);
+            // Send the action context through the chain of responsibility. NOTE: We don't need to do a 'var thing = thisReturnsThing(thing)' we are intriniscally passing by reference here.
+            _requestHandler.Process(ActionContext);
 
             // Get a response based on the action context
-            var response = BuildResponseFromContext(actionContext);
+            var response = BuildResponseFromContext(ActionContext);
 
             // Build our response.
             ResponseStack.Push(response);
@@ -99,7 +102,7 @@ namespace Mudz.Core.Domain.GameEngine
             return response;
         }
 
-        private GameResponse BuildResponseFromContext(ActionContext actionContext)
+        private GameResponse BuildResponseFromContext(IActionContext actionContext)
         {
             return new GameResponse()
             {
@@ -116,8 +119,8 @@ namespace Mudz.Core.Domain.GameEngine
 
             var room = World.Rooms.First().Value;
 
-            room.GameObjects.Add(PlayerFactory.Create("Gary", ActorGenderTypes.Male, PlayerTypes.Carpenter));
-            room.GameObjects.Add(PlayerFactory.Create("Beth", ActorGenderTypes.Female, PlayerTypes.ArmyVet));
+            room.GameObjects.Add(PlayerFactory.Create("Gary", ActorGenderType.Male, PlayerTypes.Carpenter));
+            room.GameObjects.Add(PlayerFactory.Create("Beth", ActorGenderType.Female, PlayerTypes.ArmyVet));
             room.GameObjects.Add(NpcFactory.Create("Morgan", NpcTypes.TownsPerson));
             room.GameObjects.Add(NpcFactory.Create("SlowDraw", NpcTypes.Deputy));
             room.GameObjects.Add(MonsterFactory.Create(MonsterTypes.Zombie));

@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -39,21 +40,44 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\ActorGenderType.cs" />
+    <Compile Include="Domain\ActorState.cs" />
+    <Compile Include="Domain\Environment\IRoomCollection.cs" />
+    <Compile Include="Domain\Environment\IRoomContent.cs" />
+    <Compile Include="Domain\Environment\IRoomKey.cs" />
+    <Compile Include="Domain\Environment\RoomKeyEqualityComparer.cs" />
+    <Compile Include="Domain\GameEngine\GameAction.cs" />
+    <Compile Include="Domain\GameEngine\IActionContext.cs" />
+    <Compile Include="Domain\GameEngine\IActionResult.cs" />
+    <Compile Include="Domain\GameEngine\IGameCommand.cs" />
+    <Compile Include="Domain\GameEngine\IGameEvent.cs" />
+    <Compile Include="Domain\GameEngine\IGameRequest.cs" />
+    <Compile Include="Domain\GameEngine\IGameResponse.cs" />
+    <Compile Include="Domain\GameObjectState.cs" />
+    <Compile Include="Domain\GameObjectType.cs" />
+    <Compile Include="Domain\IActor.cs" />
+    <Compile Include="Domain\IGameObject.cs" />
+    <Compile Include="Domain\Inventory\IInventoryItem.cs" />
+    <Compile Include="Domain\Inventory\InventoryAugmentEffect.cs" />
+    <Compile Include="Domain\Inventory\InventoryType.cs" />
     <Compile Include="Domain\Monster\IMonster.cs" />
     <Compile Include="Domain\Monster\MonsterTypes.cs" />
     <Compile Include="Domain\Npc\INpc.cs" />
     <Compile Include="Domain\Npc\NpcTypes.cs" />
+    <Compile Include="Domain\Player\Inventory\IPlayerInventoryItem.cs" />
+    <Compile Include="Domain\Player\Inventory\IPlayerKeepsake.cs" />
+    <Compile Include="Domain\Player\Inventory\IPlayerWeapon.cs" />
+    <Compile Include="Domain\Player\Inventory\IPlayerWearable.cs" />
+    <Compile Include="Domain\Player\IPlayer.cs" />
     <Compile Include="Domain\Player\IPlayerActionStrategy.cs" />
+    <Compile Include="Domain\Player\PlayerAnatomy.cs" />
+    <Compile Include="Domain\Player\PlayerEqualityComparer.cs" />
+    <Compile Include="Domain\Player\PlayerTypes.cs" />
+    <Compile Include="Domain\Singleton.cs" />
     <Compile Include="EqualityComparisonHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <ProjectReference Include="..\Mudz.Data\Mudz.Data.csproj">
-      <Project>{e3adc0d6-20f8-4972-81be-84dd90d44850}</Project>
-      <Name>Mudz.Data</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

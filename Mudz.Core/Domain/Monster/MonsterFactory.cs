@@ -14,7 +14,7 @@ namespace Mudz.Core.Domain.Monster
             switch (monsterType)
             {
                 case MonsterTypes.Zombie:
-                    return new Zombie(){ HitPoints = 100, GameObjectKey = gameObjectKey, GameObjectState = GameObjectStates.InPlay};
+                    return new Zombie(){ HitPoints = 100, GameObjectKey = gameObjectKey, GameObjectState = GameObjectState.InPlay};
                 default:
                     throw new NotImplementedException("Sorry this type is not supported!");
             }

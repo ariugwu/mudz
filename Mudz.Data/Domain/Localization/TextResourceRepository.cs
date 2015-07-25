@@ -53,8 +53,8 @@ namespace Mudz.Data.Domain.Localization
 
             //* Death
             yield return new TextResource() { TextResourceName = TextResourceNames.DeathRoomMessage, Culture = "en-us", Content = "{0} falls to the ground lifeless." };
-            yield return new TextResource() { TextResourceName = TextResourceNames.DeathPlayerMessage, Culture = "en-us", Content = "You fall to the ground lifeless." };
-            yield return new TextResource() { TextResourceName = TextResourceNames.DeathTargetMessage, Culture = "en-us", Content = "" };
+            yield return new TextResource() { TextResourceName = TextResourceNames.DeathPlayerMessage, Culture = "en-us", Content = "{0} falls to the ground lifeless." };
+            yield return new TextResource() { TextResourceName = TextResourceNames.DeathTargetMessage, Culture = "en-us", Content = "You fall to the ground lifeless." };
 
             //* Look Around
             yield return new TextResource() { TextResourceName = TextResourceNames.LookAroundRoomMessage, Culture = "en-us", Content = "" };

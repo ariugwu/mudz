@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -39,7 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Domain\ActorStates.cs" />
     <Compile Include="Domain\EasyTcp\ConsoleRequest.cs" />
     <Compile Include="Domain\EasyTcp\Interpreter\AbstractExpression.cs" />
     <Compile Include="Domain\Environment\EnvironmentRepository.cs" />
@@ -47,21 +47,11 @@
     <Compile Include="Domain\Environment\Model\RoomCollection.cs" />
     <Compile Include="Domain\Environment\Model\RoomContent.cs" />
     <Compile Include="Domain\Environment\Model\RoomKey.cs" />
-    <Compile Include="Domain\Environment\Model\RoomKeyEqualityComparer.cs" />
     <Compile Include="Domain\GameEngine\ActionContext.cs" />
     <Compile Include="Domain\GameEngine\ActionResult.cs" />
-    <Compile Include="Domain\GameEngine\GameActions.cs" />
     <Compile Include="Domain\GameEngine\GameEvent.cs" />
     <Compile Include="Domain\GameEngine\GameRequest.cs" />
     <Compile Include="Domain\GameEngine\GameResponse.cs" />
-    <Compile Include="Domain\GameEngine\IGameCommand.cs" />
-    <Compile Include="Domain\GameObjectStates.cs" />
-    <Compile Include="Domain\GameObjectTypes.cs" />
-    <Compile Include="Domain\IActor.cs" />
-    <Compile Include="Domain\IGameObject.cs" />
-    <Compile Include="Domain\Inventory\IInventoryItem.cs" />
-    <Compile Include="Domain\Inventory\InventoryAugmentEffect.cs" />
-    <Compile Include="Domain\Inventory\InventoryTypes.cs" />
     <Compile Include="Domain\Localization\Model\TextResource.cs" />
     <Compile Include="Domain\Localization\Template\GameMessage.cs" />
     <Compile Include="Domain\Localization\Template\PlayerMessage.cs" />
@@ -69,20 +59,17 @@
     <Compile Include="Domain\Localization\Template\TargetMessage.cs" />
     <Compile Include="Domain\Localization\TextResourceNames.cs" />
     <Compile Include="Domain\Localization\TextResourceRepository.cs" />
-    <Compile Include="Domain\ActorGenderTypes.cs" />
-    <Compile Include="Domain\Player\Inventory\IPlayerInventoryItem.cs" />
-    <Compile Include="Domain\Player\Inventory\IPlayerKeepsake.cs" />
-    <Compile Include="Domain\Player\Inventory\IPlayerWeapon.cs" />
-    <Compile Include="Domain\Player\Inventory\IPlayerWearable.cs" />
-    <Compile Include="Domain\Player\IPlayer.cs" />
-    <Compile Include="Domain\Player\PlayerAnatomy.cs" />
-    <Compile Include="Domain\Player\PlayerEqualityComparer.cs" />
-    <Compile Include="Domain\Player\PlayerTypes.cs" />
-    <Compile Include="Domain\Singleton.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Domain\Inventory\" />
     <Folder Include="Domain\Player\Model\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\mudz.Common\Mudz.Common.csproj">
+      <Project>{dc295436-7628-4228-844a-e24123444de5}</Project>
+      <Name>Mudz.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

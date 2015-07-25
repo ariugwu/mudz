@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Mudz.Data.Domain
+namespace Mudz.Common.Domain
 {
 	public class Singleton<T> where T : new()
 	{

@@ -1,10 +1,12 @@
 ﻿using Mudz.Common;
 using System;
 using System.Linq;
-using Mudz.Data.Domain;
+using Mudz.Common.Domain;
+using Mudz.Common.Domain.Environment;
+using Mudz.Common.Domain.GameEngine;
+using Mudz.Common.Domain.Player;
 using Mudz.Data.Domain.Environment.Model;
 using Mudz.Data.Domain.GameEngine;
-using Mudz.Data.Domain.Player;
 
 namespace Mudz.Core.Domain.GameEngine.Handler
 {
@@ -17,15 +19,15 @@ namespace Mudz.Core.Domain.GameEngine.Handler
             this.Successor = successor;
         }
 
-        public abstract ActionContext HandleRequest(ActionContext actionContext);
+        public abstract IActionContext HandleRequest(IActionContext actionContext);
 
-        public ActionContext Process(ActionContext actionContext)
+        public IActionContext Process(IActionContext actionContext)
         {
             // Do whatever internal logic is required. Each Call should also fire "PassToSuccessor" as it's final call.
             return HandleRequest(actionContext);
         }
 
-        public ActionContext PassToSucessor(ActionContext actionContext)
+        public IActionContext PassToSucessor(IActionContext actionContext)
         {
             // If there is a Successor set then fire that. Otherwise return the game response.
             return this.Successor != null ? this.Successor.HandleRequest(actionContext) : actionContext;
@@ -38,37 +40,37 @@ namespace Mudz.Core.Domain.GameEngine.Handler
 			return (room != null) ? room.GameObjects.OfType<IPlayer>().FirstMatching(player, PlayerEqualityComparer.Instance) : null;
 		}
 
-        protected RoomContent GetRoomByPlayerName(IPlayer player)
+        protected IRoomContent GetRoomByPlayerName(IPlayer player)
         {
 			return HiveMind.Instance.World.Rooms.Containing(player);
         }
 
-        protected RoomContent GetRoomByPlayerName(string playerName)
+        protected IRoomContent GetRoomByPlayerName(string playerName)
         {
             return HiveMind.Instance.World.Rooms.Containing(playerName);
         }
 
-        protected IPlayer GetPlayerByRoom(RoomContent room, string playerName)
+        protected IPlayer GetPlayerByRoom(IRoomContent room, string playerName)
         {
             return room.GameObjects.OfType<IPlayer>().First(x => x.Name.Equals(playerName, StringComparison.InvariantCultureIgnoreCase));
         }
 
         protected bool IsOutOfPlay(IGameObject gameObject)
         {
-            return (gameObject.GameObjectState == GameObjectStates.OutOfPlay);
+            return (gameObject.GameObjectState == GameObjectState.OutOfPlay);
         }
 
-        protected bool IsTargetPresent(RoomKey roomKey, IGameObject gameObject)
+        protected bool IsTargetPresent(IRoomKey roomKey, IGameObject gameObject)
         {
             return HiveMind.Instance.World.Rooms[roomKey].GameObjects.Exists(x => x.GameObjectKey == gameObject.GameObjectKey);
         }
 
-        protected IGameObject GetTarget(RoomContent room, string targetName)
+        protected IGameObject GetTarget(IRoomContent room, string targetName)
         {
             return room.GameObjects.First(x => x.Name.Trim().Equals(targetName, StringComparison.InvariantCultureIgnoreCase));
         }
 
-        protected ActionResult OutOfPlayResult(IGameObject gameObject)
+        protected IActionResult OutOfPlayResult(IGameObject gameObject)
         {
             return new ActionResult()
             {
@@ -77,7 +79,7 @@ namespace Mudz.Core.Domain.GameEngine.Handler
             };
         }
 
-        protected ActionResult NoTargetResponse(IGameObject gameObject)
+        protected IActionResult NoTargetResponse(IGameObject gameObject)
         {
             return new ActionResult()
             {
@@ -86,7 +88,7 @@ namespace Mudz.Core.Domain.GameEngine.Handler
             };
         }
 
-        protected ActionResult InvalidTargetResponse(IGameObject gameObject)
+        protected IActionResult InvalidTargetResponse(IGameObject gameObject)
         {
             return new ActionResult()
             {

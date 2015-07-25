@@ -1,6 +1,6 @@
-﻿namespace Mudz.Data.Domain.GameEngine
+﻿namespace Mudz.Common.Domain.GameEngine
 {
-    public enum GameActions
+    public enum GameAction
     {
         Fight,
         Heal,

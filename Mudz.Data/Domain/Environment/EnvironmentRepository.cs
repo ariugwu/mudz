@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Mudz.Common.Domain;
 using Mudz.Data.Domain.Environment.Model;
 
 namespace Mudz.Data.Domain.Environment

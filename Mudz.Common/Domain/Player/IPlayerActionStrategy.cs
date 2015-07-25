@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
-using Mudz.Data.Domain;
-using Mudz.Data.Domain.GameEngine;
+using Mudz.Common.Domain.GameEngine;
 
 namespace Mudz.Common.Domain.Player
 {
@@ -8,7 +7,7 @@ namespace Mudz.Common.Domain.Player
     {
         void SetStats(IActor actor);
 
-        Dictionary<GameActions, int> ActionStaminaCostMap { get; }
+        Dictionary<GameAction, int> ActionStaminaCostMap { get; }
 
         int Repair(IActor actor);
         int Negotiate(IActor actor);

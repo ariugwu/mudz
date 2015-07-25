@@ -1,8 +1,9 @@
 ﻿using System;
+using Mudz.Common.Domain;
+using Mudz.Common.Domain.GameEngine;
+using Mudz.Common.Domain.Inventory;
 using Mudz.Core.Domain.GameEngine.Extensions;
-using Mudz.Data.Domain;
 using Mudz.Data.Domain.GameEngine;
-using Mudz.Data.Domain.Inventory;
 using Mudz.Data.Domain.Localization;
 
 namespace Mudz.Core.Domain
@@ -18,8 +19,8 @@ namespace Mudz.Core.Domain
 
         #region Actor Stats
 
-        public abstract ActorGenderTypes Gender { get; set; }
-        public ActorStates ActorState { get; set; }
+        public abstract ActorGenderType Gender { get; set; }
+        public ActorState ActorState { get; set; }
 
         public int Health { get; set; }
         public int Strength { get; set; }
@@ -42,8 +43,8 @@ namespace Mudz.Core.Domain
         {
             if (!IsAlive())
             {
-                this.GameObjectState = GameObjectStates.OutOfPlay;
-                this.ActorState = ActorStates.Dead;
+                this.GameObjectState = GameObjectState.OutOfPlay;
+                this.ActorState = ActorState.Dead;
             }
         }
 
@@ -51,7 +52,7 @@ namespace Mudz.Core.Domain
         {
             if (IsExhausted())
             {
-                this.ActorState = ActorStates.Exhausted;
+                this.ActorState = ActorState.Exhausted;
             }
         }
 
@@ -60,7 +61,7 @@ namespace Mudz.Core.Domain
             return this.Stamina <= 0;
         }
 
-        private bool HasEnoughStaminaForAction(GameActions gameAction)
+        private bool HasEnoughStaminaForAction(GameAction gameAction)
         {
             return this.Stamina >= GetStaminaCostByActionType(gameAction);
         }
@@ -72,10 +73,10 @@ namespace Mudz.Core.Domain
 
         private bool IsDisabled()
         {
-            return ActorState == ActorStates.Disabled;
+            return ActorState == ActorState.Disabled;
         }
 
-        private ActionResult CannotRespond(ActionContext actionContext)
+        private IActionResult CannotRespond(IActionContext actionContext)
         {
             return new ActionResult()
             {
@@ -85,7 +86,7 @@ namespace Mudz.Core.Domain
             };
         }
 
-        private ActionResult NotEnoughStamina(ActionContext actionContext)
+        private IActionResult NotEnoughStamina(IActionContext actionContext)
         {
             return new ActionResult()
             {
@@ -96,14 +97,14 @@ namespace Mudz.Core.Domain
 
         }
 
-        public abstract int GetStaminaCostByActionType(GameActions gameAction);
+        public abstract int GetStaminaCostByActionType(GameAction gameAction);
 
-        public override ActionResult ExecuteAction(ActionContext actionContext)
+        public override IActionResult ExecuteAction(IActionContext actionContext)
         {
             if (IsExhausted() || IsDisabled()) return CannotRespond(actionContext);
             if (!HasEnoughStaminaForAction(actionContext.GameRequest.GameAction)) return NotEnoughStamina(actionContext);
 
-            var actionResult = new ActionResult();
+            var actionResult = new ActionResult() { GameAction = actionContext.GameRequest.GameAction };
             int amount = 0;
 
             amount = this.CalculateGameAction(actionContext.GameRequest.GameAction);
@@ -112,26 +113,26 @@ namespace Mudz.Core.Domain
             return actionResult;
         }
 
-        public override ActionResult RecieveGameActionResult(GameActions gameAction, ActionResult actionResult, string playerName)
+        public override IActionResult RecieveGameActionResult(GameAction gameAction, IActionResult actionResult, string playerName)
         {
             switch (gameAction)
             {
-                case GameActions.Fight:
+                case GameAction.Fight:
                     TakeDamage(actionResult.Amount);
                     actionResult.WasSuccessful = true;
                     actionResult.TargetMessage = string.Format(TextResourceRepository.TextResourceLookUpByCulture("en-us")[TextResourceNames.FightTargetMessage], playerName, actionResult.Amount);
                     actionResult.Amount = actionResult.Amount;
                     return actionResult;
-                case GameActions.Repair:
+                case GameAction.Repair:
                     actionResult.WasSuccessful = false;
                     actionResult.TargetMessage = string.Format(TextResourceRepository.TextResourceLookUpByCulture("en-us")[TextResourceNames.RepairTargetMessage], playerName);
                     return actionResult;
-                case GameActions.Negotiate:
+                case GameAction.Negotiate:
                     actionResult.WasSuccessful = true;
                     actionResult.TargetMessage = string.Format(TextResourceRepository.TextResourceLookUpByCulture("en-us")[TextResourceNames.NegotiateTargetMessage], playerName, actionResult.Amount);
                     actionResult.Amount = actionResult.Amount;
                     return actionResult;
-                case GameActions.Heal:
+                case GameAction.Heal:
                     RestoreHealth(actionResult.Amount);
                     actionResult.WasSuccessful = true;
                     actionResult.TargetMessage = string.Format(TextResourceRepository.TextResourceLookUpByCulture("en-us")[TextResourceNames.HealTargetMessage], playerName, actionResult.Amount);
@@ -146,7 +147,7 @@ namespace Mudz.Core.Domain
 
         public abstract void RestoreHealth(int health);
 
-        public override ActionResult ProcessItem(ActionContext actionContext, IInventoryItem item)
+        public override IActionResult ProcessItem(IActionContext actionContext, IInventoryItem item)
         {
             AcceptItem(item);
 

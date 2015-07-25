@@ -1,10 +1,10 @@
-﻿using Mudz.Data.Domain.GameEngine;
+﻿using Mudz.Common.Domain.GameEngine;
 
 namespace Mudz.Core.Domain.GameEngine.Handler
 {
     public class DependencyHandler : BaseHandler
     {
-        public override ActionContext HandleRequest(ActionContext actionContext)
+        public override IActionContext HandleRequest(IActionContext actionContext)
         {
             actionContext.Room = GetRoomByPlayerName(actionContext.GameRequest.PlayerName);
 

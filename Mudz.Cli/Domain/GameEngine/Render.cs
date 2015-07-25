@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using Mudz.Cli.Domain.Player;
+using Mudz.Common.Domain;
+using Mudz.Common.Domain.Environment;
+using Mudz.Common.Domain.GameEngine;
+using Mudz.Common.Domain.Inventory;
 using Mudz.Common.Domain.Monster;
-using Mudz.Data.Domain;
-using Mudz.Data.Domain.Environment.Model;
-using Mudz.Data.Domain.GameEngine;
-using Mudz.Data.Domain.Inventory;
-using Mudz.Data.Domain.Player;
+using Mudz.Common.Domain.Player;
 
 namespace Mudz.Cli.Domain.GameEngine
 {
     public static class Render
     {
-        public static void DrawRoom(RoomContent roomContent)
+        public static void DrawRoom(IRoomContent roomContent)
         {
             // ##################################################
             // Output the title and description
@@ -28,13 +28,13 @@ namespace Mudz.Cli.Domain.GameEngine
             // Find all players and monsters
             // ##################################################
             List<IPlayer> players = 
-                roomContent.GameObjects.Where(x => x.GameObjectType == GameObjectTypes.Player && x.GameObjectState.ToString() == GameObjectStates.InPlay.ToString())
+                roomContent.GameObjects.Where(x => x.GameObjectType == GameObjectType.Player && x.GameObjectState.ToString() == GameObjectState.InPlay.ToString())
                     .Where(x => x.Name != PlayerOne.Instance.Name)
                     .Select(x => (IPlayer)x)
                     .ToList();
 
             List<IMonster> monsters =
-                roomContent.GameObjects.Where(x => x.GameObjectType == GameObjectTypes.Monster && x.GameObjectState.ToString() == GameObjectStates.InPlay.ToString())
+                roomContent.GameObjects.Where(x => x.GameObjectType == GameObjectType.Monster && x.GameObjectState.ToString() == GameObjectState.InPlay.ToString())
                     .Select(x => (IMonster) x)
                     .ToList();
 
@@ -42,7 +42,7 @@ namespace Mudz.Cli.Domain.GameEngine
             // Find all inventory
             // ##################################################
             List<IInventoryItem> items =
-                roomContent.GameObjects.Where(x => x.GameObjectType == GameObjectTypes.InventoryItem)
+                roomContent.GameObjects.Where(x => x.GameObjectType == GameObjectType.InventoryItem)
                     .Select(x => (IInventoryItem) x)
                     .ToList();
 
@@ -104,8 +104,10 @@ namespace Mudz.Cli.Domain.GameEngine
             Console.Clear();
         }
 
-        public static void DisplayCommand(ActionResult actionResult, string formattedMessage)
+        public static void DisplayCommand(IActionResult actionResult, string formattedMessage)
         {
+            if (string.IsNullOrEmpty(formattedMessage)) return;
+
             if (!actionResult.WasSuccessful)
             {
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
@@ -117,33 +119,33 @@ namespace Mudz.Cli.Domain.GameEngine
 
             switch (actionResult.GameAction)
             {
-                case GameActions.LookAround:
+                case GameAction.LookAround:
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     ReplaceLine(formattedMessage);
                     Console.ResetColor();
                     break;
-                case GameActions.Heal:
+                case GameAction.Heal:
                     Console.ForegroundColor = ConsoleColor.Blue;
                     ReplaceLine(formattedMessage);
                     Console.ResetColor();
                     break;
-                case GameActions.Fight:
+                case GameAction.Fight:
                     Console.ForegroundColor = ConsoleColor.Red;
                     ReplaceLine(formattedMessage);
                     Console.ResetColor();
                     break;
-                case GameActions.LookAt:
-                case GameActions.Login:
+                case GameAction.LookAt:
+                case GameAction.Login:
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     ReplaceLine(formattedMessage);
                     Console.ResetColor();
                     break;
-                case GameActions.Get:
+                case GameAction.Get:
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     ReplaceLine(formattedMessage);
                     Console.ResetColor();
                     break;
-                case GameActions.Die:
+                case GameAction.Die:
                     Console.ForegroundColor = ConsoleColor.Green;
                     ReplaceLine(formattedMessage);
                     Console.ResetColor();

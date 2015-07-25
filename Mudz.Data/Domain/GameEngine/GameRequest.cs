@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using Mudz.Common.Domain.GameEngine;
 using Mudz.Data.Domain.EasyTcp.Interpreter;
 
 namespace Mudz.Data.Domain.GameEngine
 {
     [Serializable]
-    public class GameRequest : AbstractExpression
+    public class GameRequest : AbstractExpression, IGameRequest
     {
 
         public GameRequest(string playerName)
         {
             if (playerName == null)
             {
-                GameAction = GameActions.Login;
+                GameAction = GameAction.Login;
             }
             else
             {
@@ -26,14 +27,14 @@ namespace Mudz.Data.Domain.GameEngine
         public override void EvaluateContext()
         {
             _args = ((string)_context).Split(' ');
-            if (_args.Length > 2) GameAction = GameActions.None;
+            if (_args.Length > 2) GameAction = GameAction.None;
             if (_args.Length == 2) HasTarget = true;
             if (_args.Length >= 1) Command = _args[0];
         }
 
         public override void GetPlayerName()
         {
-            if (GameAction == GameActions.Login)
+            if (GameAction == GameAction.Login)
             {
                 PlayerName = _args[0];
                 HasPlayer = true;
@@ -50,25 +51,25 @@ namespace Mudz.Data.Domain.GameEngine
             TargetName = _args[1];
         }
 
-        private GameActions GetGameAction(string command)
+        public GameAction GetGameAction(string command)
         {
             command = command.Trim().ToLower();
 
-            return (_commandActionMap.ContainsKey(command)) ? _commandActionMap[command] : GameActions.None;
+            return (_commandActionMap.ContainsKey(command)) ? _commandActionMap[command] : GameAction.None;
         }
 
-        private Dictionary<string, GameActions> _commandActionMap = new Dictionary<string, GameActions>()
+        private Dictionary<string, GameAction> _commandActionMap = new Dictionary<string, GameAction>()
         {
-            {"fight", GameActions.Fight},
-            {"attack", GameActions.Fight},
-            {"negotiate", GameActions.Negotiate},
-            {"repair", GameActions.Repair},
-            {"heal", GameActions.Heal},
-            {"look", GameActions.LookAround},
-            {"inspect", GameActions.LookAt},
-            {"none", GameActions.None},
-            {"get", GameActions.Get},
-            {"login", GameActions.Login}
+            {"fight", GameAction.Fight},
+            {"attack", GameAction.Fight},
+            {"negotiate", GameAction.Negotiate},
+            {"repair", GameAction.Repair},
+            {"heal", GameAction.Heal},
+            {"look", GameAction.LookAround},
+            {"inspect", GameAction.LookAt},
+            {"none", GameAction.None},
+            {"get", GameAction.Get},
+            {"login", GameAction.Login}
         };
     }
 }

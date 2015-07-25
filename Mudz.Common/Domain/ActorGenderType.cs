@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace Mudz.Data.Domain
+namespace Mudz.Common.Domain
 {
     [Serializable]
-    public enum ActorGenderTypes
+    public enum ActorGenderType
     {
         Male,
         Female,

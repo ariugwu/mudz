@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
-using Mudz.Data.Domain.GameEngine;
+using Mudz.Common.Domain.GameEngine;
 
 namespace Mudz.Data.Domain.Localization.Template
 {
     public abstract class GameMessage
     {
-        public abstract string ParseResourceKey(ActionContext actionContext);
+        public abstract string ParseResourceKey(IActionContext actionContext);
 
         /// <summary>
         /// The Format message assumes that the format string is in a particular parameter order.
@@ -15,9 +15,9 @@ namespace Mudz.Data.Domain.Localization.Template
         /// <param name="amount"></param>
         /// <param name="formatString"></param>
         /// <returns>The appropriate formatted text resource</returns>
-        public abstract string FormatMessage(ActionContext actionContext, int amount, string formatString);
+        public abstract string FormatMessage(IActionContext actionContext, int amount, string formatString);
 
-        public string GetResource(ActionContext actionContext, int amount)
+        public string GetResource(IActionContext actionContext, int amount)
         {
             // Parse the key: FightRoomMessage
             var textResourceNameAsString = ParseResourceKey(actionContext);
