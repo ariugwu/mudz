@@ -29,12 +29,13 @@ namespace Mudz.Cli.Domain.EasyTcp
                     {
                         GameEngine.Render.ClearScreen();
                         GameEngine.Render.DrawRoom(gameResponse.RoomContent);
+                        GameEngine.Render.DrawStatusBar(PlayerOne.Instance);
                     } 
                 }
 
-                DisplayActionItems(gameResponse,gameResponse.ActionItems);
+                bool outputDisplayed = DisplayActionItems(gameResponse,gameResponse.ActionItems);
 
-                if (PlayerOne.Instance != null)
+                if (PlayerOne.Instance != null && outputDisplayed)
                 {
                     GameEngine.Render.DrawStatusBar(PlayerOne.Instance);
                 }
@@ -53,13 +54,19 @@ namespace Mudz.Cli.Domain.EasyTcp
             PlayerOne.CurrentLocation = gameResponse.RoomContent.RoomKey;
         }
 
-        private void DisplayActionItems(IGameResponse gameResponse, List<IActionResult> actionItems)
+        private bool DisplayActionItems(IGameResponse gameResponse, List<IActionResult> actionItems)
         {
+            var outPutDisplayed = false; // if we display output then we want to redraw the status bar
+
             foreach (var ar in actionItems)
             {
                 var message = DecideMessage(gameResponse, ar);
                 GameEngine.Render.DisplayCommand(ar, message);
+
+                outPutDisplayed = (!string.IsNullOrEmpty(message));
             }
+
+            return outPutDisplayed;
         }
 
         private string DecideMessage(IGameResponse gameResponse, IActionResult actionResult)

@@ -3,7 +3,7 @@
 namespace Mudz.Data.Domain.Localization
 {
     [Serializable]
-    public enum TextResourceNames
+    public enum TextResourceName
     {
         CannotRespondRoomMessage = 1,
         CannotRespondPlayerMessage,
@@ -37,6 +37,12 @@ namespace Mudz.Data.Domain.Localization
         GetItemTargetMessage,
         DeathRoomMessage,
         DeathPlayerMessage,
-        DeathTargetMessage
+        DeathTargetMessage,
+        InventoryRoomMessage,
+        InventoryPlayerMessage,
+        InventoryTargetMessage,
+        EquipItemRoomMessage,
+        EquipItemPlayerMessage,
+        EquipItemTargetMessage
     }
 }

@@ -17,10 +17,6 @@ namespace Mudz.Common.Domain.Player
 
         void RemoveInventoryItem(int index);
 
-        void EquipWeapon(IPlayerWeapon weapon);
-
-        void EquipWearable(IPlayerWearable wearable);
-
         void SetState(ActorState actorState);
 
     }

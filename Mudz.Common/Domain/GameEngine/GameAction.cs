@@ -11,6 +11,8 @@
         None,
         Get,
         Login,
-        Die
+        Death,
+        SeeInventory,
+        EquipItem
     }
 }

@@ -12,7 +12,7 @@ using Mudz.Data.Domain.Player.Inventory;
 
 namespace Mudz.Core.Domain.Player
 {
-	[Serializable]
+    [Serializable]
     public sealed class Player : BaseActor, IPlayer
     {
         public Player(string name, ActorGenderType gender, PlayerTypes playerType, IPlayerActionStrategy actionStrategy)
@@ -21,7 +21,7 @@ namespace Mudz.Core.Domain.Player
             Gender = gender;
             PlayerType = playerType;
             GameObjectType = GameObjectType.Player;
-            
+
             GameObjectState = GameObjectState.OutOfPlay;
             ActorState = ActorState.Alive;
 
@@ -34,9 +34,10 @@ namespace Mudz.Core.Domain.Player
             Weapon = new Fists();
         }
 
-        public Player() : this("", ActorGenderType.Wat, PlayerTypes.ArmyVet, new ArmyVet())
+        public Player()
+            : this("", ActorGenderType.Wat, PlayerTypes.ArmyVet, new ArmyVet())
         {
-            
+
         }
 
         private IPlayerActionStrategy _actionStrategy;
@@ -75,12 +76,12 @@ namespace Mudz.Core.Domain.Player
             Inventory.RemoveAt(index);
         }
 
-        public void EquipWeapon(IPlayerWeapon weapon)
+        public override void EquipWeapon(IPlayerWeapon weapon)
         {
             Weapon = weapon;
         }
 
-        public void EquipWearable(IPlayerWearable wearable)
+        public override void EquipWearable(IPlayerWearable wearable)
         {
             Outfit[wearable.Anatomy] = wearable;
         }
@@ -137,12 +138,12 @@ namespace Mudz.Core.Domain.Player
 
         public override void TakeDamage(int dmg)
         {
-            _actionStrategy.TakeDamage(this,dmg);
+            _actionStrategy.TakeDamage(this, dmg);
         }
 
         public override void RestoreHealth(int health)
         {
             _actionStrategy.RestoreHealth(this, health);
         }
-	}
+    }
 }

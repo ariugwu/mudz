@@ -4,9 +4,9 @@ namespace Mudz.Data.Domain.Localization.Template
 {
     public class TargetMessage : GameMessage
     {
-        public override string ParseResourceKey(IActionContext actionContext)
+        public override string ParseResourceKey(GameAction gameAction)
         {
-            return string.Format("{0}TargetMessage", actionContext.GameRequest.GameAction.ToString());
+            return string.Format("{0}TargetMessage", gameAction.ToString());
         }
 
         public override string FormatMessage(IActionContext actionContext, int amount, string formatString)

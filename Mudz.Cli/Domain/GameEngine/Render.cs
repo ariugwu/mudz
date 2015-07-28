@@ -136,16 +136,19 @@ namespace Mudz.Cli.Domain.GameEngine
                     break;
                 case GameAction.LookAt:
                 case GameAction.Login:
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    ReplaceLine(formattedMessage);
-                    Console.ResetColor();
-                    break;
                 case GameAction.Get:
+                case GameAction.EquipItem:
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     ReplaceLine(formattedMessage);
                     Console.ResetColor();
                     break;
-                case GameAction.Die:
+                case GameAction.SeeInventory:
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    ReplaceLine(formattedMessage);
+                    ReplaceLine("TODO: Loop through items!");
+                    Console.ResetColor();
+                    break;
+                case GameAction.Death:
                     Console.ForegroundColor = ConsoleColor.Green;
                     ReplaceLine(formattedMessage);
                     Console.ResetColor();

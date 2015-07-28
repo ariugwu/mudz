@@ -1,6 +1,5 @@
 ﻿using System;
 using Mudz.Common.Domain.GameEngine;
-using Mudz.Data.Domain.GameEngine;
 
 namespace Mudz.Data.Domain.EasyTcp.Interpreter
 {

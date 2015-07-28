@@ -3,7 +3,7 @@
     public class TextResource
     {
         public string Culture { get; set; }
-        public TextResourceNames TextResourceName { get; set; }
+        public TextResourceName TextResourceName { get; set; }
         public string Content { get; set; }
     }
 }

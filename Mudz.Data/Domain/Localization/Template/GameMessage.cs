@@ -6,7 +6,7 @@ namespace Mudz.Data.Domain.Localization.Template
 {
     public abstract class GameMessage
     {
-        public abstract string ParseResourceKey(IActionContext actionContext);
+        public abstract string ParseResourceKey(GameAction gameAction);
 
         /// <summary>
         /// The Format message assumes that the format string is in a particular parameter order.
@@ -17,12 +17,13 @@ namespace Mudz.Data.Domain.Localization.Template
         /// <returns>The appropriate formatted text resource</returns>
         public abstract string FormatMessage(IActionContext actionContext, int amount, string formatString);
 
+
         public string GetResource(IActionContext actionContext, int amount)
         {
             // Parse the key: FightRoomMessage
-            var textResourceNameAsString = ParseResourceKey(actionContext);
+            var textResourceNameAsString = ParseResourceKey(actionContext.GameRequest.GameAction);
 
-            // Get the format string: "{0} sends a room message";
+            // Get the format string. i.e "{0} sends a room message";
             var formatString = TextResourceRepository.GetResources()
                     .First(
                         x =>

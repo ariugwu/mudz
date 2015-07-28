@@ -57,7 +57,7 @@
     <Compile Include="Domain\Localization\Template\PlayerMessage.cs" />
     <Compile Include="Domain\Localization\Template\RoomMessage.cs" />
     <Compile Include="Domain\Localization\Template\TargetMessage.cs" />
-    <Compile Include="Domain\Localization\TextResourceNames.cs" />
+    <Compile Include="Domain\Localization\TextResourceName.cs" />
     <Compile Include="Domain\Localization\TextResourceRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -9,6 +9,7 @@ namespace Mudz.Data.Domain.GameEngine
         public ActionResult()
         {
             Created = DateTime.Now;
+            WasSuccessful = true;
         }
 
         public GameAction GameAction { get; set; }

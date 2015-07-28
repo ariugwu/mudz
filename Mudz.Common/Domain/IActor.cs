@@ -1,4 +1,7 @@
-﻿namespace Mudz.Common.Domain
+﻿using Mudz.Common.Domain.Player.Inventory;
+using Mudz.Data.Domain.Player.Inventory;
+
+namespace Mudz.Common.Domain
 {
     public interface IActor : IGameObject
     {
@@ -16,5 +19,9 @@
         int Endurance { get; set; }
 
         string GetDescription();
+
+        void EquipWeapon(IPlayerWeapon weapon);
+
+        void EquipWearable(IPlayerWearable wearable);
     }
 }

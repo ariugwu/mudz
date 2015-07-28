@@ -69,7 +69,9 @@ namespace Mudz.Data.Domain.GameEngine
             {"inspect", GameAction.LookAt},
             {"none", GameAction.None},
             {"get", GameAction.Get},
-            {"login", GameAction.Login}
+            {"login", GameAction.Login},
+            {"inventory", GameAction.SeeInventory},
+            {"equip", GameAction.EquipItem}
         };
     }
 }

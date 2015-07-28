@@ -2,7 +2,9 @@
 using Mudz.Common.Domain;
 using Mudz.Common.Domain.Inventory;
 using Mudz.Common.Domain.Monster;
+using Mudz.Common.Domain.Player.Inventory;
 using Mudz.Data.Domain;
+using Mudz.Data.Domain.Player.Inventory;
 
 namespace Mudz.Core.Domain.Monster
 {
@@ -26,6 +28,16 @@ namespace Mudz.Core.Domain.Monster
         public override void AcceptItem(IInventoryItem item)
         {
             throw new System.NotImplementedException();
+        }
+
+        public override void EquipWeapon(IPlayerWeapon weapon)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void EquipWearable(IPlayerWearable wearable)
+        {
+            throw new NotImplementedException();
         }
 
         public override string GetDescription()
