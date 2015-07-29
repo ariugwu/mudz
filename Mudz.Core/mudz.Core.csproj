@@ -44,10 +44,12 @@
     <Compile Include="Domain\BaseActor.cs" />
     <Compile Include="Domain\GameEngine\Extensions\ActionResultExtension.cs" />
     <Compile Include="Domain\GameEngine\Handler\BaseHandler.cs" />
-    <Compile Include="Domain\GameEngine\Handler\CommandHandler.cs" />
+    <Compile Include="Domain\GameEngine\Handler\NoTargetCommandHandler.cs" />
+    <Compile Include="Domain\GameEngine\Handler\TargetCommandHandler.cs" />
     <Compile Include="Domain\GameEngine\Handler\DependencyHandler.cs" />
     <Compile Include="Domain\GameEngine\Handler\FinalizeHandler.cs" />
     <Compile Include="Domain\GameEngine\Handler\AuthHandler.cs" />
+    <Compile Include="Domain\GameEngine\Handler\ItemCommandHandler.cs" />
     <Compile Include="Domain\GameEngine\HiveMind.cs" />
     <Compile Include="Domain\Monster\BaseMonster.cs" />
     <Compile Include="Domain\Monster\MonsterFactory.cs" />

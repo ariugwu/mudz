@@ -62,9 +62,9 @@ namespace Mudz.Data.Domain.Localization
             yield return new TextResource() { TextResourceName = TextResourceName.LookAroundTargetMessage, Culture = "en-us", Content = "{0} looks around." };
 
             //* See inventory
-            yield return new TextResource() { TextResourceName = TextResourceName.InventoryRoomMessage, Culture = "en-us", Content = string.Empty };
-            yield return new TextResource() { TextResourceName = TextResourceName.InventoryPlayerMessage, Culture = "en-us", Content = string.Empty };
-            yield return new TextResource() { TextResourceName = TextResourceName.InventoryTargetMessage, Culture = "en-us", Content = string.Empty };
+            yield return new TextResource() { TextResourceName = TextResourceName.SeeInventoryRoomMessage, Culture = "en-us", Content = "{0} searches through a small bag looking for something." };
+            yield return new TextResource() { TextResourceName = TextResourceName.SeeInventoryPlayerMessage, Culture = "en-us", Content = "You search your belongings and find: {0}" };
+            yield return new TextResource() { TextResourceName = TextResourceName.SeeInventoryTargetMessage, Culture = "en-us", Content = string.Empty };
 
             //* Equip Item
             yield return new TextResource() { TextResourceName = TextResourceName.EquipItemRoomMessage, Culture = "en-us", Content = "{0} equips {1}!" };

@@ -12,11 +12,9 @@ using Mudz.Core.Domain.Player;
 using Mudz.Core.Domain.Player.Inventory.Item.Keepsake;
 using Mudz.Core.Domain.Player.Inventory.Item.Weapon;
 using Mudz.Core.Domain.Player.Inventory.Item.Wearable;
-using Mudz.Data.Domain;
 using Mudz.Data.Domain.Environment.Model;
 using Mudz.Data.Domain.GameEngine;
 using Mudz.Data.Domain.Localization.Template;
-using Mudz.Data.Domain.Player;
 
 namespace Mudz.Core.Domain.GameEngine
 {
@@ -28,12 +26,16 @@ namespace Mudz.Core.Domain.GameEngine
         {
             var dependencyHandler = new DependencyHandler();
             var authHandler = new AuthHandler();
-            var commandHandler = new CommandHandler();
+            var noTargetCommandHandler = new NoTargetCommandHandler();
+            var targetCommandHandler = new TargetCommandHandler();
+            var itemCommandHandler = new ItemCommandHandler();
             var finalizeHandler = new FinalizeHandler();
 
             dependencyHandler.SetSuccessor(authHandler);
-            authHandler.SetSuccessor(commandHandler);
-            commandHandler.SetSuccessor(finalizeHandler);
+            authHandler.SetSuccessor(noTargetCommandHandler);
+            noTargetCommandHandler.SetSuccessor(itemCommandHandler);
+            itemCommandHandler.SetSuccessor(targetCommandHandler);
+            targetCommandHandler.SetSuccessor(finalizeHandler);
 
             _requestHandler = dependencyHandler;
 

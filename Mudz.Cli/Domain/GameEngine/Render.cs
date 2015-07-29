@@ -13,8 +13,24 @@ namespace Mudz.Cli.Domain.GameEngine
 {
     public static class Render
     {
+        private static Dictionary<GameAction, ConsoleColor> _displayCommandMap = new Dictionary<GameAction, ConsoleColor>
+            {           
+                { GameAction.Death, ConsoleColor.Green},       
+                { GameAction.EquipItem, ConsoleColor.Yellow},
+                { GameAction.Get, ConsoleColor.DarkYellow},
+                { GameAction.Heal, ConsoleColor.Blue},
+                { GameAction.LookAt, ConsoleColor.Yellow},
+                { GameAction.LookAround, ConsoleColor.Yellow},
+                { GameAction.Login, ConsoleColor.Yellow},
+                { GameAction.Negotiate, ConsoleColor.DarkCyan},
+                { GameAction.None, ConsoleColor.Gray},
+                { GameAction.Repair, ConsoleColor.Magenta},
+                { GameAction.Fight, ConsoleColor.Red}
+            };
+
         public static void DrawRoom(IRoomContent roomContent)
         {
+
             // ##################################################
             // Output the title and description
             // ##################################################
@@ -27,7 +43,7 @@ namespace Mudz.Cli.Domain.GameEngine
             // ##################################################
             // Find all players and monsters
             // ##################################################
-            List<IPlayer> players = 
+            List<IPlayer> players =
                 roomContent.GameObjects.Where(x => x.GameObjectType == GameObjectType.Player && x.GameObjectState.ToString() == GameObjectState.InPlay.ToString())
                     .Where(x => x.Name != PlayerOne.Instance.Name)
                     .Select(x => (IPlayer)x)
@@ -35,7 +51,7 @@ namespace Mudz.Cli.Domain.GameEngine
 
             List<IMonster> monsters =
                 roomContent.GameObjects.Where(x => x.GameObjectType == GameObjectType.Monster && x.GameObjectState.ToString() == GameObjectState.InPlay.ToString())
-                    .Select(x => (IMonster) x)
+                    .Select(x => (IMonster)x)
                     .ToList();
 
             // ##################################################
@@ -43,14 +59,14 @@ namespace Mudz.Cli.Domain.GameEngine
             // ##################################################
             List<IInventoryItem> items =
                 roomContent.GameObjects.Where(x => x.GameObjectType == GameObjectType.InventoryItem)
-                    .Select(x => (IInventoryItem) x)
+                    .Select(x => (IInventoryItem)x)
                     .ToList();
 
             // ##################################################
             // Output the monsters
             // ##################################################
             if (monsters.Any())
-            { 
+            {
                 Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.Write("Targets: ");
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
@@ -117,54 +133,18 @@ namespace Mudz.Cli.Domain.GameEngine
                 return;
             }
 
-            switch (actionResult.GameAction)
-            {
-                case GameAction.LookAround:
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    ReplaceLine(formattedMessage);
-                    Console.ResetColor();
-                    break;
-                case GameAction.Heal:
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    ReplaceLine(formattedMessage);
-                    Console.ResetColor();
-                    break;
-                case GameAction.Fight:
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    ReplaceLine(formattedMessage);
-                    Console.ResetColor();
-                    break;
-                case GameAction.LookAt:
-                case GameAction.Login:
-                case GameAction.Get:
-                case GameAction.EquipItem:
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    ReplaceLine(formattedMessage);
-                    Console.ResetColor();
-                    break;
-                case GameAction.SeeInventory:
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    ReplaceLine(formattedMessage);
-                    ReplaceLine("TODO: Loop through items!");
-                    Console.ResetColor();
-                    break;
-                case GameAction.Death:
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    ReplaceLine(formattedMessage);
-                    Console.ResetColor();
-                    break;
-                default:
-                    throw new NotImplementedException();
-            }
+            Console.ForegroundColor = _displayCommandMap[actionResult.GameAction];
+            ReplaceLine(formattedMessage);
+            Console.ResetColor();
         }
 
         #region Helper(s)
         private static void ReplaceLine(string str)
         {
-                Console.SetCursorPosition(0, Console.CursorTop); // Move to the start of the line.
-                Console.Write(new string(' ', Console.BufferWidth - 1)); // Replace with nothing.
-                Console.SetCursorPosition(0, Console.CursorTop); // Move to the start of the line.
-                Console.WriteLine(str); // Replace line
+            Console.SetCursorPosition(0, Console.CursorTop); // Move to the start of the line.
+            Console.Write(new string(' ', Console.BufferWidth - 1)); // Replace with nothing.
+            Console.SetCursorPosition(0, Console.CursorTop); // Move to the start of the line.
+            Console.WriteLine(str); // Replace line
         }
 
         public static void ClearPreviousLine()

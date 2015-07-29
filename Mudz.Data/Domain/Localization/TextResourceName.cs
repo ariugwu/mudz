@@ -38,9 +38,9 @@ namespace Mudz.Data.Domain.Localization
         DeathRoomMessage,
         DeathPlayerMessage,
         DeathTargetMessage,
-        InventoryRoomMessage,
-        InventoryPlayerMessage,
-        InventoryTargetMessage,
+        SeeInventoryRoomMessage,
+        SeeInventoryPlayerMessage,
+        SeeInventoryTargetMessage,
         EquipItemRoomMessage,
         EquipItemPlayerMessage,
         EquipItemTargetMessage

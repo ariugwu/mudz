@@ -10,7 +10,7 @@ using Mudz.Data.Domain.Player.Inventory;
 
 namespace Mudz.Core.Domain
 {
-	[Serializable]
+    [Serializable]
     public abstract class BaseActor : BaseGameObject, IActor
     {
         #region Game Engine
@@ -33,7 +33,7 @@ namespace Mudz.Core.Domain
         public int Charm { get; set; }
         public int Endurance { get; set; }
 
-	    #endregion
+        #endregion
 
         public override void CheckState()
         {
@@ -152,13 +152,16 @@ namespace Mudz.Core.Domain
         public override IActionResult ProcessItem(IActionContext actionContext, IInventoryItem item)
         {
 
-            if (item.InventoryType.Equals(InventoryType.PlayerWeapon))
+            if (actionContext.GameRequest.GameAction.Equals(GameAction.EquipItem))
             {
-                EquipWeapon((IPlayerWeapon)item);
-            }
-            else if (item.InventoryType.Equals(InventoryType.PlayerWearable))
-            {
-                EquipWearable((IPlayerWearable) item);
+                if (item.InventoryType.Equals(InventoryType.PlayerWeapon))
+                {
+                    EquipWeapon((IPlayerWeapon)item);
+                }
+                else if (item.InventoryType.Equals(InventoryType.PlayerWearable))
+                {
+                    EquipWearable((IPlayerWearable)item);
+                }
             }
             else
             {
@@ -167,11 +170,12 @@ namespace Mudz.Core.Domain
             }
 
             return new ActionResult()
-            {
-                WasSuccessful = true,
-                RoomMessage = string.Format(TextResourceRepository.TextResourceLookUpByCulture("en-us")[TextResourceName.GetItemRoomMessage], this.Name, item.Name),
-                PlayerMessage = string.Format(TextResourceRepository.TextResourceLookUpByCulture("en-us")[TextResourceName.GetItemPlayerMessage], item.Name)
-            };
+        {
+            GameAction = actionContext.GameRequest.GameAction,
+            WasSuccessful = true,
+            RoomMessage = string.Format(TextResourceRepository.TextResourceLookUpByCulture("en-us")[TextResourceName.GetItemRoomMessage], this.Name, item.Name),
+            PlayerMessage = string.Format(TextResourceRepository.TextResourceLookUpByCulture("en-us")[TextResourceName.GetItemPlayerMessage], item.Name)
+        };
         }
 
         public abstract void AcceptItem(IInventoryItem item);

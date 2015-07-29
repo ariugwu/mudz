@@ -1,16 +1,29 @@
 ﻿using System;
+using System.Linq;
 using Mudz.Common.Domain;
 using Mudz.Common.Domain.GameEngine;
-using Mudz.Common.Domain.Inventory;
 using Mudz.Core.Domain.GameEngine.Extensions;
 using Mudz.Data.Domain.GameEngine;
+using Mudz.Data.Domain.Localization;
 
 namespace Mudz.Core.Domain.GameEngine.Handler
 {
-    public class CommandHandler : BaseHandler
+    public class TargetCommandHandler : BaseHandler
     {
         public override IActionContext HandleRequest(IActionContext actionContext)
         {
+
+            if (!actionContext.GameRequest.HasTarget ||
+                (
+                !actionContext.Target.GameObjectType.Equals(GameObjectType.Monster) && 
+                !actionContext.Target.GameObjectType.Equals(GameObjectType.Player) &&
+                !actionContext.Target.GameObjectType.Equals(GameObjectType.Npc)
+                )
+                )
+            {
+                return actionContext;
+            }
+
             if (actionContext.GameRequest.GameAction == GameAction.Login)
             {
                 return actionContext;
@@ -34,14 +47,13 @@ namespace Mudz.Core.Domain.GameEngine.Handler
                 return actionContext;
             }
 
-            IActionResult actionResult = new ActionResult() { GameAction = actionContext.GameRequest.GameAction };
-            IInventoryItem item;
+            IActionResult actionResult = new ActionResult { GameAction = actionContext.GameRequest.GameAction };
 
             switch (actionContext.GameRequest.GameAction)
             {
                 case GameAction.Fight:
                     actionResult = actionContext.Player.ExecuteAction(actionContext);
-                    
+
                     if (actionResult.WasSuccessful)
                     {
                         actionResult = actionContext.Target.RecieveGameActionResult(actionContext.GameRequest.GameAction, actionResult, actionContext.Player.Name);
@@ -71,37 +83,6 @@ namespace Mudz.Core.Domain.GameEngine.Handler
                         actionResult = actionContext.Target.RecieveGameActionResult(actionContext.GameRequest.GameAction, actionResult, actionContext.Player.Name);
                     }
 
-                    actionContext.ActionItems.Add(actionResult);
-                    break;
-                case GameAction.LookAt:
-                    actionResult.PlayerMessage = actionContext.Target.Description;
-                    actionContext.ActionItems.Add(actionResult);
-                    break;
-                case GameAction.LookAround:
-                    actionResult.Fill(actionContext, 0);
-                    actionContext.ActionItems.Add(actionResult);
-                    break;
-                case GameAction.Get:
-                    if (actionContext.Target.GameObjectType != GameObjectType.InventoryItem)
-                    {
-                        actionResult = InvalidTargetResponse(actionContext.Target);
-                        actionContext.ActionItems.Add(actionResult);
-                        break;
-                    }
-
-                    item = (IInventoryItem)(actionContext.Room.GetGameObject(actionContext.Target.GameObjectKey));
-                    actionResult = actionContext.Player.ProcessItem(actionContext, item);
-
-                    if (actionResult.WasSuccessful) actionContext.Room.GameObjects.Remove(item);
-                    actionResult.GameAction = actionContext.GameRequest.GameAction;
-                    actionContext.ActionItems.Add(actionResult);
-                    break;
-                case GameAction.SeeInventory:
-                    actionResult.Fill(actionContext, 0);
-                    break;
-                case GameAction.EquipItem:
-                    item = (IInventoryItem)(actionContext.Room.GetGameObject(actionContext.Target.GameObjectKey));
-                    actionResult = actionContext.Player.ProcessItem(actionContext, item);
                     actionContext.ActionItems.Add(actionResult);
                     break;
                 case GameAction.None:
